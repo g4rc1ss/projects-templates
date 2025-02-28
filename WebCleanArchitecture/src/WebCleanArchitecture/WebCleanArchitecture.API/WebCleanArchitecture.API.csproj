@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="9.0.2" />
+	</ItemGroup>
+	
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\WebCleanArchitecture.Interfaces\WebCleanArchitecture.Interfaces.csproj" />
+	  <ProjectReference Include="..\WebCleanArchitecture.Application\WebCleanArchitecture.Application.csproj" />
+	  <ProjectReference Include="..\WebCleanArchitecture.Infraestructure\WebCleanArchitecture.Infraestructure.csproj" />
+	  <ProjectReference Include="..\WebCleanArchitecture.Shared\WebCleanArchitecture.Shared.csproj" />
+	</ItemGroup>
+	
+	
+	<ItemGroup>
+	  <PackageVersion Update="Microsoft.AspNetCore.DataProtection.Extensions" Version="9.0.2" />
+	</ItemGroup>
+</Project>
