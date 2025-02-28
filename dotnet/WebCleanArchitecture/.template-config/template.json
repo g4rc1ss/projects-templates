@@ -1,15 +1,31 @@
 {
   "$schema": "http://json.schemastore.org/webcleanarchitecture",
   "author": "Asier",
-  "classifications": [
-    "architecture"
-  ],
   "identity": "clean-architecture",
   "name": "Arquitectura limpia web",
   "shortName": "WebCleanArchitecture",
   "sourceName": "WebCleanArchitecture",
-  "language": "C#",
   "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net8.0"
+        },
+        {
+          "choice": "net9.0"
+        }
+      ],
+      "defaultValue": "net9.0"
+    }
+  },
   "sources": [
     {
       "modifiers": [
