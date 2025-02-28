@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Asier",
+    "classifications": ["Arquitectura dotnet"],
+    "identity": "web-complete-clean-architecture",
+    "name": "Arquitectura Web de dotnet con Vertical Slicing",
+    "shortName": "completedWebArchitecture",
+    "sourceName": "Template",
+    "preferNameDirectory": true
+  }
+  
