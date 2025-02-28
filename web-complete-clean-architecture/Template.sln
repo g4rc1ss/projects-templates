@@ -36,9 +36,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostWebApi.Test", "test\HostWebApi.Test\HostWebApi.Test.csproj", "{FA76E637-B837-4E5D-969A-4BD08E94FD00}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{5074454F-D196-4EDD-B6A9-5A0597F6E59B}"
-	ProjectSection(SolutionItems) = preProject
-		Directory.Packages.props = Directory.Packages.props
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
