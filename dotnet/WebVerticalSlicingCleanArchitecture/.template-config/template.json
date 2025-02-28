@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "architecture"
+  ],
+  "identity": "web-vertical-slicing-architecture",
+  "name": "Vertical Slicing Web Architecture",
+  "description": "Arquitectura limpia con separacion de funcionalidades por Vertical Slicing",
+  "shortName": "VerticalSlicingCleanArchitecture",
+  "sourceName": "Template",
+  "language": "C#",
+  "preferNameDirectory": true
+}
