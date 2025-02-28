@@ -7,8 +7,20 @@
   "identity": "web-vertical-slicing-architecture",
   "name": "Vertical Slicing Web Architecture",
   "description": "Arquitectura limpia con separacion de funcionalidades por Vertical Slicing",
-  "shortName": "VerticalSlicingCleanArchitecture",
+  "shortName": "WebVerticalSlicingCleanArchitecture",
   "sourceName": "Template",
   "language": "C#",
-  "preferNameDirectory": true
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/*template*",
+            "**/*idea"
+          ]
+        }
+      ]
+    }
+  ]
 }

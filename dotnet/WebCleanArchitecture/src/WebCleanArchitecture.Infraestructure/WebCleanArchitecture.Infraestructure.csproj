@@ -8,15 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.2" />
     <PackageReference Include="Riok.Mapperly" Version="4.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infraestructure.Events\Infraestructure.Events.csproj" />
-    <ProjectReference Include="..\WebCleanArchitecture.Interfaces\WebCleanArchitecture.Interfaces.csproj" />
     <ProjectReference Include="..\WebCleanArchitecture.Domain\WebCleanArchitecture.Domain.csproj" />
-    <ProjectReference Include="..\..\Infraestructure.Database\Infraestructure.Database.csproj" />
   </ItemGroup>
 
   <ItemGroup>

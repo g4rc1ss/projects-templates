@@ -4,10 +4,22 @@
   "classifications": [
     "architecture"
   ],
-  "identity": "web-complete-clean-architecture",
-  "name": "Arquitectura Web de dotnet con Vertical Slicing",
-  "shortName": "completedWebArchitecture",
+  "identity": "clean-architecture",
+  "name": "Arquitectura limpia web",
+  "shortName": "WebCleanArchitecture",
   "sourceName": "WebCleanArchitecture",
   "language": "C#",
-  "preferNameDirectory": true
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/*template*",
+            "**/*idea"
+          ]
+        }
+      ]
+    }
+  ]
 }

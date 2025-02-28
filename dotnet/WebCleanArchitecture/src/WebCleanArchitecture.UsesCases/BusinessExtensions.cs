@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace WebCleanArchitecture.Application;
+namespace WebCleanArchitecture.UsesCases;
 
 public static class BusinessExtensions
 {

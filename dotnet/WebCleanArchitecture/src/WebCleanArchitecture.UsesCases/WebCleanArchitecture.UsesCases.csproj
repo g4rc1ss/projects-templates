@@ -13,7 +13,6 @@
   
   <ItemGroup>
     <ProjectReference Include="..\WebCleanArchitecture.Domain\WebCleanArchitecture.Domain.csproj" />
-    <ProjectReference Include="..\WebCleanArchitecture.Interfaces\WebCleanArchitecture.Interfaces.csproj" />
   </ItemGroup>
   
   <ItemGroup>

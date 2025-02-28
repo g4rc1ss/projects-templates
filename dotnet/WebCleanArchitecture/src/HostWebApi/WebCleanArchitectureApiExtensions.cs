@@ -1,10 +1,8 @@
-﻿using WebCleanArchitecture.Application;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.DataProtection;
+using WebCleanArchitecture.UsesCases;
 using WebCleanArchitecture.Infraestructure;
 
-namespace WebCleanArchitecture.API;
+namespace HostWebApi;
 
 public static class WebCleanArchitectureApiExtensions
 {

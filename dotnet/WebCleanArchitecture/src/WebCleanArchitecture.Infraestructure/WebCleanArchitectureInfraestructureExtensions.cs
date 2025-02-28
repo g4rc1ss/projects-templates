@@ -1,5 +1,4 @@
 ﻿using Infraestructure.Database;
-using Infraestructure.Events;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
@@ -17,5 +16,14 @@ public static class WebCleanArchitectureInfraestructureExtensions
 
     private static void AddRepositoryServices(this IServiceCollection services)
     {
+    }
+
+    private static void AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
+    {
+    }
+
+    private static void AddEventsServices(this IServiceCollection services)
+    {
+        services.AddMediatR(typeof(WebCleanArchitectureInfraestructureExtensions).Assembly);
     }
 }

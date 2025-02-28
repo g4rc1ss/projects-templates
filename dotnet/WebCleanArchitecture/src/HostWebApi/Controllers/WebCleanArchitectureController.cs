@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
-namespace WebCleanArchitecture.API.Controllers;
+namespace HostWebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
