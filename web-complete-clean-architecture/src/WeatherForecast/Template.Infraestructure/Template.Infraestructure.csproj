@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Infraestructure.MySqlEntityFramework</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Riok.Mapperly" Version="3.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infraestructure.Events\Infraestructure.Events.csproj" />
+    <ProjectReference Include="..\Template.Interfaces\Template.Interfaces.csproj" />
+    <ProjectReference Include="..\Template.Domain\Template.Domain.csproj" />
+    <ProjectReference Include="..\..\Infraestructure.Database\Infraestructure.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageVersion Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.2" />
+    <PackageVersion Update="Riok.Mapperly" Version="4.1.1" />
+  </ItemGroup>
+
+</Project>
