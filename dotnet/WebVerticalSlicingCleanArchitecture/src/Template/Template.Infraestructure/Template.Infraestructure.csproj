@@ -13,10 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infraestructure.Events\Infraestructure.Events.csproj" />
-    <ProjectReference Include="..\Template.Interfaces\Template.Interfaces.csproj" />
-    <ProjectReference Include="..\Template.Domain\Template.Domain.csproj" />
-    <ProjectReference Include="..\..\Infraestructure.Database\Infraestructure.Database.csproj" />
+    <ProjectReference Include="..\..\Infraestructure\Infraestructure.csproj" />
+    <ProjectReference Include="..\Template.Application\Template.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

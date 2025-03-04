@@ -1,5 +1,4 @@
-﻿using Infraestructure.Database;
-using Infraestructure.Events;
+﻿using Infraestructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;

@@ -1,6 +1,5 @@
-﻿using System.Diagnostics;
-using System.Threading.RateLimiting;
-using HostWebApi.Extensions;
+﻿using HostWebApi.Extensions;
+using System.Diagnostics;
 using Template.API;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -39,6 +38,9 @@ Debug.WriteLine(app.Configuration["AppName"]!);
 
 await app.RunAsync();
 
-public partial class Program
+namespace HostWebApi
 {
+    public partial class Program
+    {
+    }
 }

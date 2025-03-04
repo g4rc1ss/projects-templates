@@ -1,4 +1,4 @@
-namespace Template.Shared;
+namespace Template.API.Models;
 
 public class Request
 {

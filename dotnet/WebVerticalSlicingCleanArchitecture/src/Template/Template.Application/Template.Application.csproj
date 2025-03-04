@@ -13,7 +13,6 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Template.Domain\Template.Domain.csproj" />
-    <ProjectReference Include="..\Template.Interfaces\Template.Interfaces.csproj" />
   </ItemGroup>
   
   <ItemGroup>
