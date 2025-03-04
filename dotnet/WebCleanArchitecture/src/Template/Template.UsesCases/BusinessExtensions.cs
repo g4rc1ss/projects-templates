@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Template.Application;
+namespace Template.UsesCases;
 
 public static class BusinessExtensions
 {

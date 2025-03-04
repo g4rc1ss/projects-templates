@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infraestructure\Infraestructure.csproj" />
-    <ProjectReference Include="..\Template.Application\Template.Application.csproj" />
+    <ProjectReference Include="..\Template.UsesCases\Template.UsesCases.csproj" />
   </ItemGroup>
 
   <ItemGroup>

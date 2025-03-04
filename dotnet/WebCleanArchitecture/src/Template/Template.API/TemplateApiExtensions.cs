@@ -1,8 +1,8 @@
-﻿using Template.Application;
-using Microsoft.AspNetCore.DataProtection;
+﻿using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Template.Infraestructure;
+using Template.UsesCases;
 
 namespace Template.API;
 
