@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "architecture"
+  ],
+  "identity": "functionality-structure",
+  "name": "Estructura de funcionalidad de Vertical Slicing",
+  "description": "Estructura para agregar una funcionalidad nueva",
+  "shortName": "FunctionalityStructure",
+  "sourceName": "Template",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net8.0"
+        },
+        {
+          "choice": "net9.0"
+        }
+      ],
+      "defaultValue": "net9.0"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/[Bb]in/**",
+            "**/[Oo]bj/**",
+            "**/*template.config/**/*",
+            "**/*.filelist",
+            "**/*.user",
+            "**/*idea"
+          ]
+        }
+      ]
+    }
+  ]
+}
