@@ -22,9 +22,6 @@
       "datatype": "choice",
       "choices": [
         {
-          "choice": "net8.0"
-        },
-        {
           "choice": "net9.0"
         }
       ],
