@@ -38,7 +38,7 @@
           "exclude": [
             "**/[Bb]in/**",
             "**/[Oo]bj/**",
-            "**/*template.config/**/*",
+            "**/*template-config/**/*",
             "**/*.filelist",
             "**/*.user",
             "**/*idea"
