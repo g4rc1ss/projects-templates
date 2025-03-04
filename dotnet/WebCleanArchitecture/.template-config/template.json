@@ -16,6 +16,11 @@
     "type": "project"
   },
   "symbols": {
+    "includesln": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false"
+    },
     "Framework": {
       "type": "parameter",
       "description": "The target framework for the project.",
@@ -35,8 +40,18 @@
     {
       "modifiers": [
         {
+          "condition": "(!includesln)",
           "exclude": [
-            "**/*template*",
+            "*.sln"
+          ]
+        },
+        {
+          "exclude": [
+            "**/[Bb]in/**",
+            "**/[Oo]bj/**",
+            "**/*template.config/**/*",
+            "**/*.filelist",
+            "**/*.user",
             "**/*idea"
           ]
         }
