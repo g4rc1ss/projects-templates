@@ -1,10 +1,15 @@
 {
-  "$schema": "http://json.schemastore.org/webcleanarchitecture",
+  "$schema": "http://json.schemastore.org/template",
   "author": "Asier",
-  "identity": "clean-architecture",
-  "name": "Arquitectura limpia web",
+  "classifications": [
+    "architecture"
+  ],
+  "identity": "web-vertical-slicing-architecture",
+  "name": "Vertical Slicing Web Architecture",
+  "description": "Arquitectura limpia con separacion de funcionalidades por Vertical Slicing",
   "shortName": "WebCleanArchitecture",
-  "sourceName": "WebCleanArchitecture",
+  "sourceName": "Template",
+  "language": "C#",
   "preferNameDirectory": true,
   "tags": {
     "language": "C#",

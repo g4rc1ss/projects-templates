@@ -8,6 +8,10 @@
     </PropertyGroup>
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApi Production' "/>
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApi Stagging' "/>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Template\Template.API\Template.API.csproj"/>
+    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Serilog" Version="4.2.0"/>
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0"/>
@@ -17,9 +21,5 @@
       <Content Include="..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\WebCleanArchitecture.UsesCases\WebCleanArchitecture.UsesCases.csproj" />
-      <ProjectReference Include="..\WebCleanArchitecture.Infraestructure\WebCleanArchitecture.Infraestructure.csproj" />
     </ItemGroup>
 </Project>

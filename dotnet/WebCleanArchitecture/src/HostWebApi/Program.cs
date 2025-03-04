@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
-using HostWebApi;
-using HostWebApi.Extensions;
+﻿using HostWebApi.Extensions;
+using System.Diagnostics;
+using Template.API;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +14,7 @@ builder.Services.AddProblemDetails();
 
 
 builder.Services.AddControllers()
-    .AddApplicationPart(typeof(WebCleanArchitectureApiExtensions).Assembly);
+    .AddApplicationPart(typeof(TemplateApiExtensions).Assembly);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -38,6 +38,9 @@ Debug.WriteLine(app.Configuration["AppName"]!);
 
 await app.RunAsync();
 
-public partial class Program
+namespace HostWebApi
 {
+    public partial class Program
+    {
+    }
 }
