@@ -1,7 +1,7 @@
-﻿using Infraestructure;
+﻿using Infraestructure.Database;
+using Infraestructure.Events;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MediatR;
 
 namespace Template.Infraestructure;
 
