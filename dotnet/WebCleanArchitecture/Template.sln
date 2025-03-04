@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DB6FD3CC-239
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.Domain", "src\Template\Template.Domain\Template.Domain.csproj", "{B3080AFF-365E-439D-97BA-8A3E92B3F872}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.UsesCases", "src\Template\Template.UsesCases\Template.UsesCases.csproj", "{DD7F484E-7233-40A0-BBFA-F9BBF7BABC79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.Application", "src\Template\Template.Application\Template.Application.csproj", "{DD7F484E-7233-40A0-BBFA-F9BBF7BABC79}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostWebApi", "src\HostWebApi\HostWebApi.csproj", "{50AFDF73-735C-48DD-B197-415C0B9992FA}"
 EndProject

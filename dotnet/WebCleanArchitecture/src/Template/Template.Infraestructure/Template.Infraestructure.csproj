@@ -14,12 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infraestructure\Infraestructure.csproj" />
-    <ProjectReference Include="..\Template.UsesCases\Template.UsesCases.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageVersion Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.2" />
-    <PackageVersion Update="Riok.Mapperly" Version="4.1.1" />
+    <ProjectReference Include="..\Template.Application\Template.Application.csproj" />
   </ItemGroup>
 
 </Project>

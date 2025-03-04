@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Template.Infraestructure;
-using Template.UsesCases;
+using Template.Application;
 
 namespace Template.API;
 
