@@ -1,4 +1,4 @@
-namespace HostWebApi.Test.Configuration
+namespace HostTestConfiguration
 {
     public class Ids
     {

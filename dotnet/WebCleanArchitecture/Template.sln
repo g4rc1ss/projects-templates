@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{217D2AD2-8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Application.UnitTest", "src\Template\Template.Application.UnitTest\Template.Application.UnitTest.csproj", "{0899C938-188D-42B3-91FF-29E7A911A274}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostWebApi.Test", "test\HostWebApi.Test\HostWebApi.Test.csproj", "{FA76E637-B837-4E5D-969A-4BD08E94FD00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostTestConfiguration", "test\HostTestConfiguration\HostTestConfiguration.csproj", "{FA76E637-B837-4E5D-969A-4BD08E94FD00}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{5074454F-D196-4EDD-B6A9-5A0597F6E59B}"
 	ProjectSection(SolutionItems) = preProject
@@ -37,6 +37,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Events", "src\Infraestructure.Events\Infraestructure.Events.csproj", "{DB292C4B-9944-4567-A0C3-E63258350CCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Infraestructure.Test", "src\Template\Template.Infraestructure.Test\Template.Infraestructure.Test.csproj", "{E723DEAC-6219-4949-A9E1-72D70CE8AF11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.API.Test", "src\Template\Template.API.Test\Template.API.Test.csproj", "{4DE59280-CC08-4163-865E-77783DB361BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +90,10 @@ Global
 		{E723DEAC-6219-4949-A9E1-72D70CE8AF11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E723DEAC-6219-4949-A9E1-72D70CE8AF11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E723DEAC-6219-4949-A9E1-72D70CE8AF11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE59280-CC08-4163-865E-77783DB361BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE59280-CC08-4163-865E-77783DB361BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE59280-CC08-4163-865E-77783DB361BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE59280-CC08-4163-865E-77783DB361BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +112,7 @@ Global
 		{F48BFAB1-B7E4-48A4-9A6F-BC516DAF30A3} = {DB6FD3CC-2392-4383-A768-778E9AA19E22}
 		{DB292C4B-9944-4567-A0C3-E63258350CCE} = {DB6FD3CC-2392-4383-A768-778E9AA19E22}
 		{E723DEAC-6219-4949-A9E1-72D70CE8AF11} = {F25F989B-F75C-4284-91CF-8E07E08913AC}
+		{4DE59280-CC08-4163-865E-77783DB361BB} = {F25F989B-F75C-4284-91CF-8E07E08913AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9910F84-F791-4753-8A02-193B05CB3472}

@@ -1,6 +1,7 @@
+using HostWebApi;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace HostWebApi.Test.Configuration;
+namespace HostTestConfiguration;
 
 internal class WebApplicationFactoryHost : WebApplicationFactory<Program>
 {

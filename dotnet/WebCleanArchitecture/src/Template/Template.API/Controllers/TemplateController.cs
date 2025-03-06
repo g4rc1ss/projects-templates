@@ -5,7 +5,7 @@ namespace Template.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TemplatePruebaController(ILogger<TemplatePruebaController> logger)
+public class TemplateController(ILogger<TemplateController> logger)
     : Controller
 {
     [HttpGet("")]
