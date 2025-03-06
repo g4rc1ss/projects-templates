@@ -1,9 +1,16 @@
+using HostWebApi.Test.Configuration;
+
 namespace HostWebApi.Test;
 
-public class UnitTest1
+[Collection(Ids.IDENTIFICADOR_WEB_HOST)]
+public class UnitTest1(WebHostTestConfig fixture)
 {
     [Fact]
-    public void Test1()
+    public async Task Test1()
     {
+        string response = await fixture.Client.GetStringAsync("api/template");
+        
+        Assert.NotNull(response);
+        Assert.NotEmpty(response);
     }
 }

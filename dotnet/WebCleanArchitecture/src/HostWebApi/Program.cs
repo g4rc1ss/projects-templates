@@ -1,4 +1,6 @@
-﻿using HostWebApi.Extensions;
+﻿using HostWebApi.Configurations;
+using HostWebApi.Extensions;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using System.Diagnostics;
 using Template.API;
 
@@ -13,7 +15,8 @@ builder.Services.InicializarConfiguracionApp(builder.Configuration);
 builder.Services.AddProblemDetails();
 
 
-builder.Services.AddControllers()
+builder.Services.AddControllers(options =>
+        options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer())))
     .AddApplicationPart(typeof(TemplateApiExtensions).Assembly);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

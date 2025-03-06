@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 namespace Template.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class TemplateController(ILogger<TemplateController> logger)
+[Route("api/[controller]")]
+public class TemplatePruebaController(ILogger<TemplatePruebaController> logger)
     : Controller
 {
     [HttpGet("")]
