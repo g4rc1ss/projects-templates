@@ -1,4 +1,4 @@
-namespace Template.UnitTest;
+namespace Template.Application.UnitTest;
 
 public class UnitTest1
 {
