@@ -10,13 +10,14 @@ public static class HostBuilderExtensions
         hostBuilder.UseSerilog((context, loggerConfiguration) =>
         {
             loggerConfiguration
-                .MinimumLevel.Information()
-                .Enrich.WithProperty("Application", "HostWebApi")
+                .MinimumLevel.Warning()
+                .Enrich.WithProperty("Application", "Template")
                 .WriteTo.Console(LogEventLevel.Warning);
 
             if (context.HostingEnvironment.IsDevelopment())
             {
-                loggerConfiguration.WriteTo.Console(LogEventLevel.Debug);
+                // Verbose by default
+                loggerConfiguration.WriteTo.Console();
             }
         });
     }

@@ -11,8 +11,12 @@ builder.Services.AddMetricsAndTraces(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddHttpClient();
-builder.Services.InicializarConfiguracionApp(builder.Configuration);
 builder.Services.AddProblemDetails();
+builder.Services.AddOptions();
+builder.Services.ConfigureDataProtectionProvider(builder.Configuration);
+
+
+builder.Services.InitTemplate(builder.Configuration);
 
 
 builder.Services.AddControllers(options =>
