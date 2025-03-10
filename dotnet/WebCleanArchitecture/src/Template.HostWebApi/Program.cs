@@ -2,7 +2,6 @@
 using Template.HostWebApi.Extensions;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using System.Diagnostics;
-using Template.API;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -10,18 +9,12 @@ builder.Host.AddLoggerConfiguration(builder.Configuration);
 builder.Services.AddMetricsAndTraces(builder.Configuration);
 
 // Add services to the container.
-builder.Services.AddHttpClient();
-builder.Services.AddProblemDetails();
-builder.Services.AddOptions();
-builder.Services.ConfigureDataProtectionProvider(builder.Configuration);
-
-
-builder.Services.InitTemplate(builder.Configuration);
-
+builder.InitTemplateHostConfig();
 
 builder.Services.AddControllers(options =>
-        options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer())))
-    .AddApplicationPart(typeof(TemplateApiExtensions).Assembly);
+        options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer()))
+    ) //.AddApplicationPart(typeof(ApiExtensions).Assembly)
+    ;
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -37,6 +30,8 @@ if (!app.Environment.IsProduction())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

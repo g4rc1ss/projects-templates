@@ -9,8 +9,6 @@ public static class TemplateInfraestructureExtensions
 {
     public static void AddDataAccessService(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDatabaseConfig(configuration);
-        services.AddEventsServices();
         services.AddRepositoryServices();
     }
 
