@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace HostWebApi.Configurations;
+namespace Template.HostWebApi.Configurations;
 
 public partial class KebabCaseTransformer : IOutboundParameterTransformer
 {

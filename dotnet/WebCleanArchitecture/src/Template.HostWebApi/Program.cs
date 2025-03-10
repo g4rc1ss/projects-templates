@@ -1,5 +1,5 @@
-﻿using HostWebApi.Configurations;
-using HostWebApi.Extensions;
+﻿using Template.HostWebApi.Configurations;
+using Template.HostWebApi.Extensions;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using System.Diagnostics;
 using Template.API;
@@ -45,7 +45,7 @@ Debug.WriteLine(app.Configuration["AppName"]!);
 
 await app.RunAsync();
 
-namespace HostWebApi
+namespace Template.HostWebApi
 {
     public partial class Program
     {

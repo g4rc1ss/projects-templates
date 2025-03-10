@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\HostWebApi\HostWebApi.csproj" />
+      <ProjectReference Include="..\..\src\Template.HostWebApi\Template.HostWebApi.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using Serilog.Events;
 
-namespace HostWebApi.Extensions;
+namespace Template.HostWebApi.Extensions;
 
 public static class HostBuilderExtensions
 {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.DataProtection;
 
-namespace HostWebApi.Extensions;
+namespace Template.HostWebApi.Extensions;
 
 internal static class DataProtection
 {

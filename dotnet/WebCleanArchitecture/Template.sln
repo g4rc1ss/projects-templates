@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.Domain", "src\Temp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.Application", "src\Template\Template.Application\Template.Application.csproj", "{DD7F484E-7233-40A0-BBFA-F9BBF7BABC79}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostWebApi", "src\HostWebApi\HostWebApi.csproj", "{50AFDF73-735C-48DD-B197-415C0B9992FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.HostWebApi", "src\Template.HostWebApi\Template.HostWebApi.csproj", "{50AFDF73-735C-48DD-B197-415C0B9992FA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Infraestructure", "src\Template\Template.Infraestructure\Template.Infraestructure.csproj", "{E1EB2965-839C-47C0-86B0-E9F4A0C7F32E}"
 EndProject

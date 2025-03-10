@@ -1,4 +1,4 @@
-using HostWebApi;
+using Template.HostWebApi;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace HostTestConfiguration;
