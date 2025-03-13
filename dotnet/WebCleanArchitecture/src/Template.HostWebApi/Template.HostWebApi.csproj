@@ -5,11 +5,15 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>c19fd3a0-d814-473c-972e-bda92a964eac</UserSecretsId>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApi Production' "/>
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApi Stagging' "/>
-    
+
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3"/>
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.6.1"/>
+        
         <PackageReference Include="Serilog" Version="4.2.0"/>
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0"/>
         <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.1.1"/>
@@ -27,8 +31,8 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
-      <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj" />
-      <ProjectReference Include="..\Template\Template.API\Template.API.csproj" />
+        <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj"/>
+        <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj"/>
+        <ProjectReference Include="..\Template\Template.API\Template.API.csproj"/>
     </ItemGroup>
 </Project>

@@ -12,6 +12,7 @@ internal static class ServiceExtensions
 
         builder.Services.AddHttpClient();
 
+        builder.Services.AddAuthenticationProtocol(builder.Configuration);
         builder.Services.ConfigureDataProtectionProvider(builder.Configuration);
 
         builder.Services.AddDatabaseConfig(builder.Configuration);

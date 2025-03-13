@@ -1,7 +1,9 @@
 ﻿using Template.HostWebApi.Configurations;
 using Template.HostWebApi.Extensions;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Shared;
 using System.Diagnostics;
+using System.Security.Claims;
 using Template.API;
 using Template.HostWebApi.FilterControllers;
 using Template.HostWebApi.OpenAPI;
