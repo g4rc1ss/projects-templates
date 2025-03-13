@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "HostWebApi": {
+    "Template.HostWebApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

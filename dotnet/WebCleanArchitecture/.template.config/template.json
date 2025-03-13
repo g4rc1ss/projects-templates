@@ -21,8 +21,9 @@
       "datatype": "bool",
       "defaultValue": "false"
     },
-    "functionalidad": {
+    "funcionalidad": {
       "type": "parameter",
+      "fileRename": "Functionality",
       "description": "Nombre de la funcionalidad",
       "datatype": "text",
       "isRequired": true,
