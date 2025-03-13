@@ -41,17 +41,24 @@ public static class HostBuilderExtensions
     private static void AddOtelExporter<TBuilder>(this TBuilder builder)
         where TBuilder : IHostApplicationBuilder
     {
-        string? otelConnectionString = builder.Configuration
-            .GetConnectionString("OpenTelemetry");
+        bool useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
 
-        if (string.IsNullOrWhiteSpace(otelConnectionString))
+        if (useOtlpExporter)
         {
-            builder.Services.AddOpenTelemetry()
-                .UseOtlpExporter();
-            return;
+            builder.Services.AddOpenTelemetry().UseOtlpExporter();
         }
 
-        builder.Services.AddOpenTelemetry()
-            .UseOtlpExporter(OtlpExportProtocol.Grpc, new Uri(otelConnectionString));
+        if (!string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString("OpenTelemetry")))
+        {
+            builder.Services.AddOpenTelemetry()
+                .UseOtlpExporter(OtlpExportProtocol.Grpc,
+                    new Uri(builder.Configuration.GetConnectionString("OpenTelemetry")!));
+        }
+
+        // To Enable on Azure Monitor(requires Azure.Monitor.OpenTelemetry.AspNetCore package)
+        // string? insightsConnection = builder.Configuration
+        //     .GetConnectionString("Insights");
+        // builder.Services.AddOpenTelemetry()
+        //     .UseAzureMonitor();
     }
 }
