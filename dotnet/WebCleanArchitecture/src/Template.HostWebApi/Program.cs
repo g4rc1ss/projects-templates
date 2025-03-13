@@ -24,7 +24,7 @@ builder.Services.AddControllers(options =>
 {
     options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer()));
     options.Filters.Add<ResultResponseFilter>();
-}).AddApplicationPart(typeof(TemplateApiExtensions).Assembly);
+}).AddApplicationPart(typeof(FunctionalityApiExtensions).Assembly);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();

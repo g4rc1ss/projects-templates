@@ -8,7 +8,7 @@
   "name": "Estructura de funcionalidad de Vertical Slicing",
   "description": "Estructura para agregar una funcionalidad nueva",
   "shortName": "FunctionalityStructure",
-  "sourceName": "Template",
+  "sourceName": "Functionality",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {

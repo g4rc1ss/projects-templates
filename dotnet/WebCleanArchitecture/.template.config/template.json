@@ -24,7 +24,7 @@
     "functionalidad": {
       "type": "parameter",
       "description": "Nombre de la funcionalidad",
-      "datatype": "string",
+      "datatype": "text",
       "isRequired": true,
       "replaces": "Functionality"
     },

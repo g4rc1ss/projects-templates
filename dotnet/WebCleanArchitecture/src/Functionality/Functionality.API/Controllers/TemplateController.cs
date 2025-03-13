@@ -5,12 +5,12 @@ namespace Functionality.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TemplateController(ILogger<TemplateController> logger)
+public class FunctionalityController(ILogger<FunctionalityController> logger)
     : Controller
 {
     [HttpGet("")]
     public IActionResult Get()
     {
-        return Ok("Template");
+        return Ok();
     }
 }
