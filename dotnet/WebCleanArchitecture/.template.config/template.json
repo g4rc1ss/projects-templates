@@ -21,6 +21,13 @@
       "datatype": "bool",
       "defaultValue": "false"
     },
+    "functionalidad": {
+      "type": "parameter",
+      "description": "Nombre de la funcionalidad",
+      "datatype": "string",
+      "isRequired": true,
+      "replaces": "Functionality"
+    },
     "Framework": {
       "type": "parameter",
       "description": "The target framework for the project.",
@@ -49,8 +56,7 @@
             "**/*template.config/**/*",
             "**/*.filelist",
             "**/*.user",
-            "**/*idea",
-            "**/Template/**"
+            "**/*idea"
           ]
         }
       ]

@@ -5,23 +5,23 @@ VisualStudioVersion = 17.0.31808.319
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DB6FD3CC-2392-4383-A768-778E9AA19E22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.Domain", "src\Template\Template.Domain\Template.Domain.csproj", "{B3080AFF-365E-439D-97BA-8A3E92B3F872}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functionality.Domain", "src\Functionality\Functionality.Domain\Functionality.Domain.csproj", "{B3080AFF-365E-439D-97BA-8A3E92B3F872}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.Application", "src\Template\Template.Application\Template.Application.csproj", "{DD7F484E-7233-40A0-BBFA-F9BBF7BABC79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functionality.Application", "src\Functionality\Functionality.Application\Functionality.Application.csproj", "{DD7F484E-7233-40A0-BBFA-F9BBF7BABC79}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.HostWebApi", "src\Template.HostWebApi\Template.HostWebApi.csproj", "{50AFDF73-735C-48DD-B197-415C0B9992FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Infraestructure", "src\Template\Template.Infraestructure\Template.Infraestructure.csproj", "{E1EB2965-839C-47C0-86B0-E9F4A0C7F32E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functionality.Infraestructure", "src\Functionality\Functionality.Infraestructure\Functionality.Infraestructure.csproj", "{E1EB2965-839C-47C0-86B0-E9F4A0C7F32E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{D2A8EC22-05EF-44FB-9E06-9FA8B9788AC4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functionality", "Functionality", "{D2A8EC22-05EF-44FB-9E06-9FA8B9788AC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.API", "src\Template\Template.API\Template.API.csproj", "{1126222A-E6C9-4FAA-9DDD-BA6B7672FC1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functionality.API", "src\Functionality\Functionality.API\Functionality.API.csproj", "{1126222A-E6C9-4FAA-9DDD-BA6B7672FC1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F25F989B-F75C-4284-91CF-8E07E08913AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{217D2AD2-889B-438D-A898-08BA601811C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Application.UnitTest", "src\Template\Template.Application.UnitTest\Template.Application.UnitTest.csproj", "{0899C938-188D-42B3-91FF-29E7A911A274}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functionality.Application.UnitTest", "src\Functionality\Functionality.Application.UnitTest\Functionality.Application.UnitTest.csproj", "{0899C938-188D-42B3-91FF-29E7A911A274}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.HostWebApi.Tests", "test\Template.HostWebApi.Tests\Template.HostWebApi.Tests.csproj", "{FA76E637-B837-4E5D-969A-4BD08E94FD00}"
 EndProject
@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Database", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Events", "src\Infraestructure.Events\Infraestructure.Events.csproj", "{DB292C4B-9944-4567-A0C3-E63258350CCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Infraestructure.Test", "src\Template\Template.Infraestructure.Test\Template.Infraestructure.Test.csproj", "{E723DEAC-6219-4949-A9E1-72D70CE8AF11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functionality.Infraestructure.Test", "src\Functionality\Functionality.Infraestructure.Test\Functionality.Infraestructure.Test.csproj", "{E723DEAC-6219-4949-A9E1-72D70CE8AF11}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Architecture.Tests", "test\Template.Architecture.Tests\Template.Architecture.Tests.csproj", "{C4C850CD-4E09-4E25-A340-8DC8F21FCDBE}"
 EndProject

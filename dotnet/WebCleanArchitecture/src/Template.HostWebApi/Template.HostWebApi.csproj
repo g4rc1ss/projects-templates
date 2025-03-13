@@ -33,6 +33,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj"/>
         <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj"/>
-        <ProjectReference Include="..\Template\Template.API\Template.API.csproj"/>
+        <ProjectReference Include="..\Template\Functionality.API\Functionality.API.csproj" />
     </ItemGroup>
 </Project>
