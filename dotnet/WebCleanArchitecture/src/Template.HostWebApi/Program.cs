@@ -14,8 +14,7 @@ builder.WebHost.ConfigureKestrel(options => options.Limits.MaxRequestBodySize = 
 
 builder.Configuration.AddUserSecrets<Program>();
 
-builder.Host.AddLoggerConfiguration(builder.Configuration);
-builder.AddMetricsAndTraces();
+builder.ConfigureOpenTelemetry();
 
 // Add services to the container.
 builder.InitTemplateHostConfig();

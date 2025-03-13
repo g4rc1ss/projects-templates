@@ -1,4 +1,5 @@
-﻿using OpenTelemetry.Exporter;
+﻿using OpenTelemetry;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -8,42 +9,20 @@ namespace Template.HostWebApi.Extensions;
 
 public static class HostBuilderExtensions
 {
-    internal static void AddLoggerConfiguration(this IHostBuilder hostBuilder, IConfiguration configuration)
+    internal static void ConfigureOpenTelemetry<TBuilder>(this TBuilder builder)
+        where TBuilder : IHostApplicationBuilder
     {
-        hostBuilder.UseSerilog((context, loggerConfiguration) =>
-        {
-            loggerConfiguration
-                .MinimumLevel.Warning()
-                .Enrich.WithProperty("Application", configuration["AppName"]!)
-                .WriteTo.OpenTelemetry(options =>
-                {
-                    options.Endpoint = configuration.GetConnectionString("OpenTelemetry");
-                });
-
-            if (!context.HostingEnvironment.IsProduction())
-            {
-                loggerConfiguration
-                    .MinimumLevel.Debug()
-                    .WriteTo.Console();
-            }
-        });
-    }
-
-    internal static void AddMetricsAndTraces(this WebApplicationBuilder builder)
-    {
-        string? otelConnectionString = builder.Configuration
-            .GetConnectionString("OpenTelemetry");
-        if (string.IsNullOrWhiteSpace(otelConnectionString)
-            && builder.Environment.EnvironmentName.ToLower() == "local")
-        {
-            return;
-        }
-        
-        ArgumentNullException.ThrowIfNull(otelConnectionString);
-        
         builder.Services.AddOpenTelemetry()
             .ConfigureResource(resource =>
                 resource.AddService(builder.Configuration["AppName"]!))
+            .WithMetrics(metric =>
+            {
+                metric.AddMeter(builder.Configuration["AppName"]!);
+                metric.AddAspNetCoreInstrumentation();
+                metric.AddRuntimeInstrumentation();
+                metric.AddHttpClientInstrumentation();
+                metric.AddProcessInstrumentation();
+            })
             .WithTracing(trace =>
             {
                 trace.AddAspNetCoreInstrumentation();
@@ -54,22 +33,25 @@ public static class HostBuilderExtensions
                 //     // Guardamos las consultas generadas por EF
                 //     options.SetDbStatementForText = true;
                 // });
-                trace.AddOtlpExporter(
-                    exporter => exporter.Endpoint = new Uri(otelConnectionString));
-            })
-            .WithMetrics(metric =>
-            {
-                metric.AddMeter(builder.Configuration["AppName"]!);
-                metric.AddAspNetCoreInstrumentation();
-                metric.AddRuntimeInstrumentation();
-                metric.AddHttpClientInstrumentation();
-                metric.AddProcessInstrumentation();
-
-                metric.AddOtlpExporter(exporter =>
-                {
-                    exporter.Endpoint = new Uri(otelConnectionString);
-                    exporter.Protocol = OtlpExportProtocol.Grpc;
-                });
             });
+
+        builder.AddOtelExporter();
+    }
+
+    private static void AddOtelExporter<TBuilder>(this TBuilder builder)
+        where TBuilder : IHostApplicationBuilder
+    {
+        string? otelConnectionString = builder.Configuration
+            .GetConnectionString("OpenTelemetry");
+
+        if (string.IsNullOrWhiteSpace(otelConnectionString))
+        {
+            builder.Services.AddOpenTelemetry()
+                .UseOtlpExporter();
+            return;
+        }
+
+        builder.Services.AddOpenTelemetry()
+            .UseOtlpExporter(OtlpExportProtocol.Grpc, new Uri(otelConnectionString));
     }
 }
