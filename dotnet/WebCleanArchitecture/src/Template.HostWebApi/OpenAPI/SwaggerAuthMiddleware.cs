@@ -7,11 +7,14 @@ public class SwaggerAuthMiddleware(RequestDelegate next, IConfiguration configur
 {
     public async Task Invoke(HttpContext context)
     {
-        if (context.Request.Path.StartsWithSegments("/swagger"))
-        {
-            string userNameValue = "a";
-            string passwordValue = "a";
+        IConfigurationSection swaggerAuth = configuration.GetSection("SwaggerAuth");
+        string? userNameValue = swaggerAuth["Username"];
+        string? passwordValue = swaggerAuth["Password"];
 
+        if (context.Request.Path.StartsWithSegments("/swagger")
+            && !string.IsNullOrWhiteSpace(userNameValue)
+            && !string.IsNullOrWhiteSpace(passwordValue))
+        {
             string? authHeaderValue = context.Request.Headers["Authorization"];
             if (authHeaderValue is not null && authHeaderValue.StartsWith("Basic "))
             {

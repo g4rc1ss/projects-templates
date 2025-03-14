@@ -12,9 +12,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options => options.Limits.MaxRequestBodySize = 5 * 1024 * 1024);
 
-builder.Configuration.AddUserSecrets<Program>();
-
-builder.ConfigureOpenTelemetry();
+builder.Configuration.AddUserSecrets<Program>()
+    .AddEnvironmentVariables();
 
 // Add services to the container.
 builder.InitTemplateHostConfig();
@@ -44,9 +43,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHealthChecks("/health");
 app.MapControllers();
-
-Debug.WriteLine(app.Configuration["AppName"]!);
 
 await app.RunAsync();
 

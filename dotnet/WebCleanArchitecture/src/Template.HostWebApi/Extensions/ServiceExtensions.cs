@@ -7,9 +7,11 @@ internal static class ServiceExtensions
 {
     internal static void InitTemplateHostConfig(this WebApplicationBuilder builder)
     {
+        builder.AddHealthChecks();
         builder.Services.AddProblemDetails();
         builder.Services.AddOptions();
 
+        builder.ConfigureOpenTelemetry();
         builder.Services.AddHttpClient();
 
         builder.Services.AddAuthenticationProtocol(builder.Configuration);

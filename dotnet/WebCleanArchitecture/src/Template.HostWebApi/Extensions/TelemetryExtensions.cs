@@ -1,41 +1,53 @@
 ﻿using OpenTelemetry;
-using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using Serilog;
 
 namespace Template.HostWebApi.Extensions;
 
-public static class HostBuilderExtensions
+public static class TelemetryExtensions
 {
     internal static void ConfigureOpenTelemetry<TBuilder>(this TBuilder builder)
         where TBuilder : IHostApplicationBuilder
     {
+        if (!builder.Environment.IsProduction())
+        {
+            builder.AddDeveloperOpenTelemetry();
+        }
+
+        builder.Logging.AddOpenTelemetry(logging =>
+        {
+            logging.IncludeScopes = true;
+            logging.IncludeFormattedMessage = true;
+        });
+
         builder.Services.AddOpenTelemetry()
             .ConfigureResource(resource =>
                 resource.AddService(builder.Configuration["AppName"]!))
-            .WithMetrics(metric =>
-            {
-                metric.AddMeter(builder.Configuration["AppName"]!);
-                metric.AddAspNetCoreInstrumentation();
-                metric.AddRuntimeInstrumentation();
-                metric.AddHttpClientInstrumentation();
-                metric.AddProcessInstrumentation();
-            })
-            .WithTracing(trace =>
-            {
-                trace.AddAspNetCoreInstrumentation();
-                trace.AddHttpClientInstrumentation();
-                // trace.AddSource(nameof(IDistributedCache));
-                // trace.AddEntityFrameworkCoreInstrumentation(options =>
+            .WithMetrics(metric => metric.AddMeter(builder.Configuration["AppName"]!)
+                .AddAspNetCoreInstrumentation()
+                .AddRuntimeInstrumentation()
+                .AddHttpClientInstrumentation()
+                .AddProcessInstrumentation()
+            )
+            .WithTracing(trace => trace.AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                // .AddSource(nameof(IDistributedCache))
+                // .AddEntityFrameworkCoreInstrumentation(options =>
                 // {
                 //     // Guardamos las consultas generadas por EF
                 //     options.SetDbStatementForText = true;
-                // });
-            });
+                // })
+            );
 
         builder.AddOtelExporter();
+    }
+
+    private static void AddDeveloperOpenTelemetry(this IHostApplicationBuilder builder)
+    {
+        builder.Services.AddOpenTelemetry()
+            .WithTracing(trace => { })
+            .WithMetrics(metric => { });
     }
 
     private static void AddOtelExporter<TBuilder>(this TBuilder builder)

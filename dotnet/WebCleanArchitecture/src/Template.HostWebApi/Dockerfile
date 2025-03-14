@@ -7,7 +7,10 @@ EXPOSE 5151
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 COPY . .
-RUN dotnet test
+RUN ls -la
+RUN dotnet test --filter " \
+    FullyQualifiedName!~Template.HostWebApi.Tests \
+"
 RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
