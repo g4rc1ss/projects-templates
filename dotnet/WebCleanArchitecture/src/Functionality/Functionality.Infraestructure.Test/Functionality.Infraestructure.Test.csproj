@@ -4,24 +4,31 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector" Version="6.0.0"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
-        <PackageReference Include="xunit" Version="2.5.3"/>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3"/>
+        <PackageReference Include="Aspire.Hosting.Testing" Version="9.1.0"/>
+        <PackageReference Include="coverlet.collector" Version="6.0.2"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0"/>
+        <PackageReference Include="xunit" Version="2.9.2"/>
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2"/>
+
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.1.0"/>
+
     </ItemGroup>
 
     <ItemGroup>
+        <Using Include="System.Net"/>
+        <Using Include="Microsoft.Extensions.DependencyInjection"/>
+        <Using Include="Aspire.Hosting.ApplicationModel"/>
+        <Using Include="Aspire.Hosting.Testing"/>
         <Using Include="Xunit"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Functionality.Infraestructure\Functionality.Infraestructure.csproj" />
+        <ProjectReference Include="..\..\Template.AspireHost\Template.AspireHost.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -10,6 +10,7 @@ COPY . .
 RUN ls -la
 RUN dotnet test --filter " \
     FullyQualifiedName!~Template.HostWebApi.Tests \
+    FullyQualifiedName!~Functionality.Infraestructure.Test \
 "
 RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build
 
