@@ -286,13 +286,28 @@ dotnet_style_qualification_for_event = false:silent
 
 
 # Analisys on build
-dotnet_diagnostic.IDE1006.severity = error
-dotnet_diagnostic.IDE0055.severity = error
 
+# Naming rules
+dotnet_diagnostic.IDE1006.severity = error
+
+# Formatting rule
+dotnet_diagnostic.IDE0055.severity = silent
+
+# Remove unnecessary using directives
 dotnet_diagnostic.IDE0005.severity = error
+
+# 'var' preferences
 dotnet_diagnostic.IDE0007.severity = error
 dotnet_diagnostic.IDE0008.severity = error
+
+# Use 'is null' check
 dotnet_diagnostic.IDE0041.severity = error
+
+# Use 'nameof'
 dotnet_diagnostic.IDE0280.severity = error
+
+# Namespace does not match folder structure
 dotnet_diagnostic.IDE0130.severity = error
-dotnet_diagnostic.CS1591.severity = none
+
+# Missing XML comment for publicly visible type or member 'Type_or_Member'
+dotnet_diagnostic.CS1591.severity = suggestion
