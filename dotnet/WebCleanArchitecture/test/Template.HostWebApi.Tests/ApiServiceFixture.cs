@@ -7,7 +7,7 @@ public sealed class ApiServiceFixture : IAsyncLifetime
 {
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
 
-    public DistributedApplication? Application { get; private set; }
+    public required DistributedApplication Application { get; set; }
 
     public async Task InitializeAsync()
     {

@@ -1,5 +1,6 @@
 using System.Reflection;
 using Template.HostWebApi;
+using ArgumentNullException = System.ArgumentNullException;
 
 namespace Template.Architecture.Tests;
 
@@ -23,7 +24,7 @@ public class ApplicationContractTests
         while (queue.Any())
         {
             Assembly assembly = queue.Dequeue();
-            visited.Add(assembly.FullName);
+            visited.Add(assembly.FullName ?? throw new ArgumentNullException());
 
             AssemblyName[] references = assembly.GetReferencedAssemblies();
             foreach (AssemblyName reference in references)

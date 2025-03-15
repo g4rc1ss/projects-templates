@@ -6,7 +6,7 @@ public class Result
     public bool IsSuccess { get; }
     public Error Error { get; }
 
-    protected Result(object data, bool isSuccess, Error error)
+    protected Result(object? data, bool isSuccess, Error error)
         : this(isSuccess, error)
     {
         ArgumentNullException.ThrowIfNull(data);
@@ -35,9 +35,10 @@ public class Result
     public static Result<T> Failure<T>(Error error) => new(default, false, error);
 }
 
-public class Result<T>(T data, bool isSuccess, Error error) : Result(data, isSuccess, error)
+public class Result<T>(T? data, bool isSuccess, Error error)
+    : Result(data, isSuccess, error)
 {
-    public new T Data
+    public new T? Data
     {
         get
         {

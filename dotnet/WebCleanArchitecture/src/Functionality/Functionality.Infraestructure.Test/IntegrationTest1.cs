@@ -9,8 +9,9 @@ public class IntegrationTest1(
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
 
     [Fact]
-    public async Task GetWebResourceRootReturnsOkStatusCode()
+    public Task GetWebResourceRootReturnsOkStatusCode()
     {
-        IHostEnvironment? environment = infra.Application.Services.GetService<IHostEnvironment>();
+        IHostEnvironment? environment = infra.Application?.Services.GetService<IHostEnvironment>();
+        return Task.CompletedTask;
     }
 }

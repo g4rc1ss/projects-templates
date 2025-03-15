@@ -1,6 +1,4 @@
 using Aspire.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace Functionality.Infraestructure.Test;
 
@@ -8,7 +6,7 @@ public sealed class InfraestructureFixture : IAsyncLifetime
 {
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
 
-    public DistributedApplication? Application { get; private set; }
+    public required DistributedApplication Application { get; set; }
 
     public async Task InitializeAsync()
     {

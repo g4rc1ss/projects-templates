@@ -8,9 +8,13 @@ namespace Functionality.API.Controllers;
 public class FunctionalityController(ILogger<FunctionalityController> logger)
     : Controller
 {
-    [HttpGet("")]
+    [HttpGet]
     public IActionResult Get()
     {
+        if (HttpContext.ToString() is null)
+        {
+        }
+
         return Ok();
     }
 }
