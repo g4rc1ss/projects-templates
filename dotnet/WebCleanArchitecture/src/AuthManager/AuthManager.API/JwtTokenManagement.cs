@@ -51,12 +51,24 @@ public class JwtTokenManagement(
 
     public string Refresh(string accessToken)
     {
-        JwtSecurityToken? token = new JwtSecurityTokenHandler()
-            .ReadJwtToken(accessToken);
+        SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(jwtOptions.Value.Key));
+        TokenValidationParameters validationParameters = new()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = false,
+            ValidateIssuerSigningKey = true,
+            RequireExpirationTime = true,
+            ValidIssuer = jwtOptions.Value.Issuer,
+            ValidAudience = jwtOptions.Value.Audience,
+            IssuerSigningKey = key
+        };
+        JwtSecurityTokenHandler? tokenHandler = new();
+        tokenHandler.ValidateToken(accessToken, validationParameters, out SecurityToken validatedToken);
 
-        SigningCredentials credentials = new(
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Value.Key)),
-            SecurityAlgorithms.HmacSha256Signature);
+        JwtSecurityToken? token = tokenHandler.ReadJwtToken(accessToken);
+
+        SigningCredentials credentials = new(key, SecurityAlgorithms.HmacSha256Signature);
 
         JwtSecurityToken securityToken = new(
             issuer: jwtOptions.Value.Issuer,
