@@ -21,6 +21,12 @@
       "datatype": "bool",
       "defaultValue": "false"
     },
+    "includeAuthManager": {
+      "type": "parameter",
+      "description": "Incluir gestor de auth con JWT",
+      "datatype": "bool",
+      "defaultValue": "false"
+    },
     "funcionalidad": {
       "type": "parameter",
       "fileRename": "Functionality",
@@ -48,6 +54,12 @@
           "condition": "(!includesln)",
           "exclude": [
             "*.sln"
+          ]
+        },
+        {
+          "condition": "(!includeAuthManager)",
+          "exclude": [
+            "**/AuthManager/**/*"
           ]
         },
         {

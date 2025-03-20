@@ -1,7 +1,6 @@
-﻿using Template.HostWebApi.Configurations;
+﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Template.HostWebApi.Configurations;
 using Template.HostWebApi.Extensions;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using Functionality.API;
 using Template.HostWebApi.FilterControllers;
 using Template.HostWebApi.OpenAPI;
 
@@ -19,7 +18,7 @@ builder.Services.AddControllers(options =>
 {
     options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer()));
     options.Filters.Add<ResultResponseFilter>();
-}).AddApplicationPart(typeof(FunctionalityApiExtensions).Assembly);
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();

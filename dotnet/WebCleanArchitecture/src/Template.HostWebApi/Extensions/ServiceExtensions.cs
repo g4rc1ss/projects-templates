@@ -1,3 +1,4 @@
+using Functionality.API;
 using Infraestructure.Database;
 using Infraestructure.Events;
 
@@ -20,11 +21,11 @@ internal static class ServiceExtensions
         builder.Services.AddDatabaseConfig(builder.Configuration);
         builder.Services.AddEventsServices(builder.Configuration);
 
-        InitializeFunctionalities(builder.Services, builder.Configuration);
+        InitializeFunctionalities(builder);
     }
 
-    private static void InitializeFunctionalities(this IServiceCollection services, IConfiguration configuration)
+    private static void InitializeFunctionalities(this WebApplicationBuilder builder)
     {
-        // services.Init(builder.Configuration);
+        builder.InitFunctionality();
     }
 }
