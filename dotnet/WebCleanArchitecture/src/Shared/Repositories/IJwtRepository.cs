@@ -1,4 +1,4 @@
-namespace AuthManager.Infraestructure.Repositories;
+namespace Shared.Repositories;
 
 public interface IJwtRepository
 {

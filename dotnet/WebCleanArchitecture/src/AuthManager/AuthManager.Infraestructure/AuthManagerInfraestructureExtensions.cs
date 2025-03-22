@@ -1,7 +1,6 @@
 ﻿using AuthManager.Domain.InfraestructureContracts;
 using AuthManager.Infraestructure.Repositories;
 using AuthManager.Infraestructure.Repositories.Identity;
-using Infraestructure.Database.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,10 +14,8 @@ public static class AuthManagerInfraestructureExtensions
         services.AddScoped<IUserManager, UserManager>();
         services.AddScoped<IPasswordManager, PasswordManager>();
         services.AddScoped<IEmailManager, EmailManager>();
+        services.AddScoped<IUserInfo, UserInfo>();
         services.AddScoped<ITotpManager, TotpManager>();
         services.AddScoped<IRoleManager, RoleManager>();
-
-
-        services.AddScoped<IUserInfo, UserInfo>();
     }
 }

@@ -33,7 +33,7 @@
           "description": "SQL Server"
         }
       ],
-      "defaultValue": "sqlserver",
+      "defaultValue": "postgresql",
       "description": "The database type to use."
     },
     "UsePostgreSQL": {
@@ -48,11 +48,33 @@
       "type": "computed",
       "value": "(Database == \"sqlserver\")"
     },
-    "includeAuthManager": {
+    "Authentication": {
       "type": "parameter",
-      "description": "Incluir gestor de auth con JWT",
-      "datatype": "bool",
-      "defaultValue": "false"
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "jwt",
+          "description": "JWT"
+        },
+        {
+          "choice": "identity",
+          "description": "Identity"
+        }
+      ],
+      "defaultValue": "none",
+      "description": "Tipo de auth para usar"
+    },
+    "UseIdentity": {
+      "type": "computed",
+      "value": "(Authentication == \"identity\")"
+    },
+    "UseJWT": {
+      "type": "computed",
+      "value": "(Authentication == \"jwt\")"
     },
     "funcionalidad": {
       "type": "parameter",
@@ -78,12 +100,22 @@
     {
       "modifiers": [
         {
-          "condition": "(!includeAuthManager)",
-          "exclude": [
+          "condition": "(UseJWT)",
+          "include": [
             "**/AuthManager/**/*"
+          ],
+          "rename": {
+            "src/Infraestructure.AuthManagerDB" : "src/Infraestructure.Database"
+          }
+        },
+        {
+          "condition": "(UseIdentity)",
+          "include": [
+
           ]
         },
         {
+          "source": "./",
           "exclude": [
             "**/[Bb]in/**",
             "**/[Oo]bj/**",
@@ -91,6 +123,7 @@
             "**/*.filelist",
             "**/*.user",
             "**/*idea",
+            "**/AuthManager/**/*",
             "*.sln"
           ]
         }

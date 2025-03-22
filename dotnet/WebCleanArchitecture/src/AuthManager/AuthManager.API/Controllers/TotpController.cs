@@ -1,8 +1,6 @@
-using AuthManager.Domain;
 using AuthManager.Domain.BusinessObjects;
 using AuthManager.Domain.ErrorsCode;
 using AuthManager.Domain.InfraestructureContracts;
-using AuthManager.Infraestructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;

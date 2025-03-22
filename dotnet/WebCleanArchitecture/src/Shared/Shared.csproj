@@ -8,6 +8,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Functionality\Functionality.Domain\Functionality.Domain.csproj" />
+        <!--#if (includeAuthManager)-->
+        <ProjectReference Include="..\AuthManager\AuthManager.Domain\AuthManager.Domain.csproj"/>
+        <!--#endif-->
+
     </ItemGroup>
 
 </Project>

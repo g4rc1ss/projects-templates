@@ -2,7 +2,6 @@
 using AuthManager.API.Models;
 using AuthManager.API.Models.LoginModels;
 using AuthManager.Application.UsesCases.LoginCase;
-using AuthManager.Infraestructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shared;

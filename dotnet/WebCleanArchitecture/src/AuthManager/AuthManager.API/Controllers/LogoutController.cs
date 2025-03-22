@@ -1,8 +1,7 @@
-﻿using AuthManager.Domain;
-using AuthManager.Infraestructure;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shared;
 using System.Security.Claims;
 
 namespace AuthManager.API.Controllers;

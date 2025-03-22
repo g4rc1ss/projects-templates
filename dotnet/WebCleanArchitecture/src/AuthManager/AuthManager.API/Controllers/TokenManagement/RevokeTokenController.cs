@@ -1,9 +1,8 @@
 using AuthManager.API.Models.JwtTokenModels;
-using AuthManager.Domain;
-using AuthManager.Infraestructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shared;
 
 namespace AuthManager.API.Controllers.TokenManagement;
 

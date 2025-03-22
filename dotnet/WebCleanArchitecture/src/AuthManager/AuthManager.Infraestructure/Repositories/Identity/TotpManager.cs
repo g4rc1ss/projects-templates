@@ -1,6 +1,5 @@
 using AuthManager.Domain.InfraestructureContracts;
-using Infraestructure.Database.Entities;
-using Infraestructure.Database.Repository;
+using Infraestructure.AuthManagerDB.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace AuthManager.Infraestructure.Repositories.Identity;

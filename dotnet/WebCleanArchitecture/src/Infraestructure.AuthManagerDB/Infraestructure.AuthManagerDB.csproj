@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!--#if (UsePostgreSQL)-->
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
+        <!--#endif-->
+
+        <!--#if (UseSqlServer)-->
+        <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*"/>
+        <!--#endif-->
+
+        <!--#if (UseMySQL)-->
+        <PackageReference Include="Aspire.MySqlConnector" Version="*"/>
+        <!--#endif-->
+
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*"/>
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="*"/>
+    </ItemGroup>
+
+</Project>

@@ -1,8 +1,7 @@
 using AuthManager.Domain.BusinessObjects;
 using AuthManager.Domain.InfraestructureContracts;
 using AuthManager.Infraestructure.Mappers;
-using Infraestructure.Database.Entities;
-using Infraestructure.Database.Repository;
+using Infraestructure.AuthManagerDB.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace AuthManager.Infraestructure.Repositories.Identity;
@@ -16,7 +15,7 @@ public class UserManager(
     {
         ArgumentNullException.ThrowIfNull(userId);
 
-        UserEntity? user = await userInfo.GetByIdAsync(userId);
+        UserEntity? user = await userInfo.GetUserByIdAsync(userId);
 
         return user?.ToUserData();
     }
