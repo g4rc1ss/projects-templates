@@ -27,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{507445
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		Directory.Build.props = Directory.Build.props
+		.template.config\template.json = .template.config\template.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{484C7F99-8AAA-4574-9225-D4956DEB7724}"
@@ -56,6 +57,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthManager.Infraestructure", "src\AuthManager\AuthManager.Infraestructure\AuthManager.Infraestructure.csproj", "{DDFE4649-EE4E-45B7-8D29-6EFAC3D91B4B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthManager.Infraestructure.Test", "src\AuthManager\AuthManager.Infraestructure.Test\AuthManager.Infraestructure.Test.csproj", "{E7E31B16-E045-4323-B1BC-64A510C4051F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.IdentityDatabase", "src\AuthManager\Infraestructure.IdentityDatabase\Infraestructure.IdentityDatabase.csproj", "{DAD9A80E-851E-4683-ADFF-D1EFB4207C89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -139,6 +142,10 @@ Global
 		{E7E31B16-E045-4323-B1BC-64A510C4051F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7E31B16-E045-4323-B1BC-64A510C4051F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7E31B16-E045-4323-B1BC-64A510C4051F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD9A80E-851E-4683-ADFF-D1EFB4207C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD9A80E-851E-4683-ADFF-D1EFB4207C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD9A80E-851E-4683-ADFF-D1EFB4207C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD9A80E-851E-4683-ADFF-D1EFB4207C89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -166,6 +173,7 @@ Global
 		{E5785F9B-5F2D-48EC-ABB8-E5D8AABD4187} = {47A5DE72-8162-427F-AFEC-234239FCF604}
 		{DDFE4649-EE4E-45B7-8D29-6EFAC3D91B4B} = {47A5DE72-8162-427F-AFEC-234239FCF604}
 		{E7E31B16-E045-4323-B1BC-64A510C4051F} = {47A5DE72-8162-427F-AFEC-234239FCF604}
+		{DAD9A80E-851E-4683-ADFF-D1EFB4207C89} = {47A5DE72-8162-427F-AFEC-234239FCF604}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9910F84-F791-4753-8A02-193B05CB3472}

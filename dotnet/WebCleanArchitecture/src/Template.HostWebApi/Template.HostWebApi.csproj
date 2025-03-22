@@ -24,6 +24,9 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
+        <!--#if (includeAuthManager)-->
+        <ProjectReference Include="..\AuthManager\AuthManager.API\AuthManager.API.csproj" />
+        <!--#endif-->
         <ProjectReference Include="..\Functionality\Functionality.API\Functionality.API.csproj"/>
         <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj"/>
         <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj"/>

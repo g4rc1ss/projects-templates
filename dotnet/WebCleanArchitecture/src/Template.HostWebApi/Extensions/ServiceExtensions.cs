@@ -1,3 +1,6 @@
+#if (includeAuthManager)
+using AuthManager.API;
+#endif
 using Functionality.API;
 using Infraestructure.Database;
 using Infraestructure.Events;
@@ -27,5 +30,8 @@ internal static class ServiceExtensions
     private static void InitializeFunctionalities(this WebApplicationBuilder builder)
     {
         builder.InitFunctionality();
+#if (includeAuthManager)
+        builder.InitAuthManager();
+#endif
     }
 }

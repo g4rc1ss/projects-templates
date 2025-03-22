@@ -16,10 +16,37 @@
     "type": "project"
   },
   "symbols": {
-    "includesln": {
+    "Database": {
       "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "false"
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "postgresql",
+          "description": "PostgreSQL"
+        },
+        {
+          "choice": "mysql",
+          "description": "MySQL"
+        },
+        {
+          "choice": "sqlserver",
+          "description": "SQL Server"
+        }
+      ],
+      "defaultValue": "sqlserver",
+      "description": "The database type to use."
+    },
+    "UsePostgreSQL": {
+      "type": "computed",
+      "value": "(Database == \"postgresql\")"
+    },
+    "UseMySQL": {
+      "type": "computed",
+      "value": "(Database == \"mysql\")"
+    },
+    "UseSQLServer": {
+      "type": "computed",
+      "value": "(Database == \"sqlserver\")"
     },
     "includeAuthManager": {
       "type": "parameter",
@@ -51,12 +78,6 @@
     {
       "modifiers": [
         {
-          "condition": "(!includesln)",
-          "exclude": [
-            "*.sln"
-          ]
-        },
-        {
           "condition": "(!includeAuthManager)",
           "exclude": [
             "**/AuthManager/**/*"
@@ -69,7 +90,8 @@
             "**/*template.config/**/*",
             "**/*.filelist",
             "**/*.user",
-            "**/*idea"
+            "**/*idea",
+            "*.sln"
           ]
         }
       ]
