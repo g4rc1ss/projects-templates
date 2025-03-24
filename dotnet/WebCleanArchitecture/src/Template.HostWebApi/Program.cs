@@ -3,6 +3,7 @@ using Template.HostWebApi.Configurations;
 using Template.HostWebApi.Extensions;
 using Template.HostWebApi.FilterControllers;
 using Template.HostWebApi.OpenAPI;
+using Template.HostWebApi.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,10 @@ builder.Services.AddControllers(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();
+
+#if (!DatabaseNone)
+builder.Services.AddHostedService<MigrationHostedService>();
+#endif
 
 WebApplication app = builder.Build();
 

@@ -21,6 +21,10 @@
       "datatype": "choice",
       "choices": [
         {
+          "choice": "none",
+          "description": "None"
+        },
+        {
           "choice": "postgresql",
           "description": "PostgreSQL"
         },
@@ -35,6 +39,10 @@
       ],
       "defaultValue": "postgresql",
       "description": "The database type to use."
+    },
+    "DatabaseNone": {
+      "type": "computed",
+      "value": "Database == \"none\")"
     },
     "UsePostgres": {
       "type": "computed",
@@ -76,6 +84,10 @@
       "type": "computed",
       "value": "(Authentication == \"jwt\")"
     },
+    "AuthNone": {
+      "type": "computed",
+      "value": "(Authentication == \"none\")"
+    },
     "funcionalidad": {
       "type": "parameter",
       "fileRename": "Functionality",
@@ -111,11 +123,12 @@
       ],
       "modifiers": [
         {
-          "condition": "(!UseJwt && !UseIdentity)",
+          "condition": "(AuthNone)",
           "exclude": [
             "**/AuthManager/**/*",
             "src/Infraestructure.Database/Entities/*",
-            "src/Infraestructure.Database/EntityConfiguration/*"
+            "src/Infraestructure.Database/EntityConfiguration/*",
+            "src/Template.HostWebApi/appsettings.JWT.json"
           ]
         },
         {
@@ -127,6 +140,23 @@
           "rename": {
             "src/Template.HostWebApi/appsettings.JWT.json": "src/Template.HostWebApi/appsettings.json"
           }
+        },
+        {
+          "condition": "(UseJwt || UseIdentity)",
+          "exclude": [
+            "src/Template.HostWebApi/appsettings.json"
+          ],
+          "rename": {
+            "src/Template.HostWebApi/appsettings.JWT.json": "src/Template.HostWebApi/appsettings.json"
+          }
+        },
+        {
+          "condition": "(DatabaseNone)",
+          "exclude": [
+            "src/Infraestructure.Database/EntityConfiguration/*",
+            "src/Infraestructure.Database/DatabaseContext",
+            "src/Template.HostWebApi/Services/MigrationHostedService.cs"
+          ]
         }
       ]
     }
