@@ -1,4 +1,4 @@
-using AuthManager.Domain.InfraestructureContracts;
+using AuthManager.Application.Contracts.InfraestructureContracts;
 using Infraestructure.Database;
 using Infraestructure.Database.Entities;
 #if (UseJwt || UseIdentity)

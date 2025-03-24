@@ -1,6 +1,6 @@
+using AuthManager.Application.Contracts.InfraestructureContracts;
 using AuthManager.Domain.BusinessObjects;
 using AuthManager.Domain.ErrorsCode;
-using AuthManager.Domain.InfraestructureContracts;
 using Microsoft.Extensions.Logging;
 using Shared;
 

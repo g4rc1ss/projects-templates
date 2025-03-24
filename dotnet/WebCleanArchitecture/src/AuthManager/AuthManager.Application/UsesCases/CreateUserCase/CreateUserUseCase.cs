@@ -1,5 +1,5 @@
+using AuthManager.Application.Contracts.InfraestructureContracts;
 using AuthManager.Domain.ErrorsCode;
-using AuthManager.Domain.InfraestructureContracts;
 using Shared;
 
 namespace AuthManager.Application.UsesCases.CreateUserCase;

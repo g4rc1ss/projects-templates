@@ -1,4 +1,4 @@
-﻿using AuthManager.Domain.InfraestructureContracts;
+﻿using AuthManager.Application.Contracts.InfraestructureContracts;
 using AuthManager.Infraestructure.Repositories;
 using AuthManager.Infraestructure.Repositories.Identity;
 using Microsoft.Extensions.Configuration;

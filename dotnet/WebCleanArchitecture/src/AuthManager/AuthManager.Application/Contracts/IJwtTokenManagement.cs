@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace Shared;
+namespace AuthManager.Application.Contracts;
 
 public interface IJwtTokenManagement
 {

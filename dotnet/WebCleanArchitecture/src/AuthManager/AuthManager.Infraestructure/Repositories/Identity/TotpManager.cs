@@ -1,4 +1,4 @@
-using AuthManager.Domain.InfraestructureContracts;
+using AuthManager.Application.Contracts.InfraestructureContracts;
 using Infraestructure.Database.Entities;
 #if (UseIdentity)
 using Microsoft.AspNetCore.Identity;

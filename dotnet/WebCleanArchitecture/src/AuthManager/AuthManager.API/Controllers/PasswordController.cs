@@ -1,7 +1,9 @@
 using AuthManager.API.Models.PasswordModels;
+using AuthManager.Application.Contracts;
+using AuthManager.Application.Contracts.InfraestructureContracts;
+using AuthManager.Domain;
 using AuthManager.Domain.BusinessObjects;
 using AuthManager.Domain.ErrorsCode;
-using AuthManager.Domain.InfraestructureContracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;

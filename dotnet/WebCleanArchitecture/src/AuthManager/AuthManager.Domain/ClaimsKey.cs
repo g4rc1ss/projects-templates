@@ -1,4 +1,4 @@
-namespace Shared;
+namespace AuthManager.Domain;
 
 public class ClaimsKey
 {

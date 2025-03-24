@@ -1,6 +1,6 @@
 using AuthManager.Domain.BusinessObjects;
 
-namespace AuthManager.Domain.InfraestructureContracts;
+namespace AuthManager.Application.Contracts.InfraestructureContracts;
 
 public interface IUserManager
 {

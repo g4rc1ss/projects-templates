@@ -1,5 +1,5 @@
+using AuthManager.Application.Contracts.InfraestructureContracts;
 using AuthManager.Domain.BusinessObjects;
-using AuthManager.Domain.InfraestructureContracts;
 using Infraestructure.Database.Entities;
 #if (UseIdentity)
 using AuthManager.Infraestructure.Mappers;

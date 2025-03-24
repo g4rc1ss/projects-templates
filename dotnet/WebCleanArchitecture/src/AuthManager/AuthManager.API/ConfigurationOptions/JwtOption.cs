@@ -1,4 +1,4 @@
-namespace Shared.ConfigurationOptions;
+namespace AuthManager.API.ConfigurationOptions;
 
 public record JwtOption
 {

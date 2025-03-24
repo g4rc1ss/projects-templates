@@ -1,4 +1,4 @@
-using AuthManager.Domain.InfraestructureContracts;
+using AuthManager.Application.Contracts.InfraestructureContracts;
 
 namespace AuthManager.Infraestructure.Repositories.Identity;
 
