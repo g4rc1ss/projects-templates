@@ -35,8 +35,15 @@
         <!--#if (UseJwt || UseIdentity)-->
         <ProjectReference Include="..\AuthManager\AuthManager.API\AuthManager.API.csproj"/>
         <!--#endif-->
-        <ProjectReference Include="..\Functionality\Functionality.API\Functionality.API.csproj"/>
+
+        <!--#if (!DatabaseNone)-->
         <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj"/>
+        <!--#endif-->
+
+        <!--#if (!EventBusNone)-->
         <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj"/>
+        <!--#endif-->
+
+        <ProjectReference Include="..\Shared\Shared.csproj"/>
     </ItemGroup>
 </Project>

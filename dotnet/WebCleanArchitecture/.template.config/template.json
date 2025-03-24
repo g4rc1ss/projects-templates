@@ -56,6 +56,10 @@
       "type": "computed",
       "value": "(Database == \"sqlserver\")"
     },
+    "DatabaseNone": {
+      "type": "computed",
+      "value": "(Database == 'none')"
+    },
     "Authentication": {
       "type": "parameter",
       "datatype": "choice",
@@ -88,14 +92,85 @@
       "type": "computed",
       "value": "(Authentication == \"none\")"
     },
-    "funcionalidad": {
+
+    "Cache": {
       "type": "parameter",
-      "fileRename": "Functionality",
-      "description": "Nombre de la funcionalidad",
-      "datatype": "text",
-      "isRequired": true,
-      "replaces": "Functionality"
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "memorycache",
+          "description": "Memory"
+        },
+        {
+          "choice": "Redis",
+          "description": "redis"
+        },
+        {
+          "choice": "Garnet",
+          "description": "garnet"
+        }
+      ],
+      "defaultValue": "memorycache",
+      "description": "Cache a usar"
     },
+    "UseMemoryCache": {
+      "type": "computed",
+      "value": "(Cache == \"memorycache\")"
+    },
+    "UseRedis": {
+      "type": "computed",
+      "value": "(Cache == \"redis\")"
+    },
+    "UseGarnet": {
+      "type": "computed",
+      "value": "(Cache == \"garnet\")"
+    },
+
+    "EventBus": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "memoryevents",
+          "description": "Memory"
+        },
+        {
+          "choice": "Azure Service Bus",
+          "description": "azureservicebus"
+        },
+        {
+          "choice": "RabbitMQ",
+          "description": "rabbit"
+        }
+      ],
+      "defaultValue": "memoryevents",
+      "description": "Event bus to use"
+    },
+    "UseMemoryEvents": {
+      "type": "computed",
+      "value": "(EventBus == \"memoryevents\")"
+    },
+    "UseAzServiceBus": {
+      "type": "computed",
+      "value": "(EventBus == \"azureservicebus\")"
+    },
+    "UseRabbitMQ": {
+      "type": "computed",
+      "value": "(EventBus == \"rabbit\")"
+    },
+    "EventBusNone":{
+      "type": "computed",
+      "value": "(EventBus == 'none')"
+    },
+
     "Framework": {
       "type": "parameter",
       "description": "The target framework for the project.",
@@ -119,7 +194,8 @@
         "**/*.filelist",
         "**/*.user",
         "**/*idea",
-        "*.sln"
+        "*.sln",
+        "**/Functionality/**/*"
       ],
       "modifiers": [
         {
@@ -128,7 +204,8 @@
             "**/AuthManager/**/*",
             "src/Infraestructure.Database/Entities/*",
             "src/Infraestructure.Database/EntityConfiguration/*",
-            "src/Template.HostWebApi/appsettings.JWT.json"
+            "src/Template.HostWebApi/appsettings.JWT.json",
+            "src/Infraestructure.Events/SignUpEmailHandler/*"
           ]
         },
         {
@@ -156,6 +233,18 @@
             "src/Infraestructure.Database/EntityConfiguration/*",
             "src/Infraestructure.Database/DatabaseContext.cs",
             "src/Template.HostWebApi/Services/MigrationHostedService.cs"
+          ]
+        },
+        {
+          "condition": "DatabaseNone",
+          "exclude": [
+            "**/Infraestructure.Database/**/*"
+          ]
+        },
+        {
+          "condition": "EventBusNone",
+          "exclude": [
+            "**/Infraestructure.Events/**/*"
           ]
         }
       ]

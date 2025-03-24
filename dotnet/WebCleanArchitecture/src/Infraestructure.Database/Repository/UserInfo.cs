@@ -3,24 +3,24 @@ using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 #endif
 
-namespace AuthManager.Infraestructure.Repositories.Identity;
+namespace Infraestructure.Database.Repository;
 
-internal class UserInfo(
+public class UserInfo(
 
 #if (UseIdentity)
     UserManager<UserEntity> userManager
 #endif
 ) : IUserInfo
 {
-    public UserEntity? User { get; set; }
+    public UserEntity? Entity { get; set; }
 
-    public async Task<UserEntity?> GetUserByIdAsync(string userId)
+    public async Task<UserEntity?> GetByIdAsync(string userId)
     {
         ArgumentNullException.ThrowIfNull(userId);
 
-        if (User is not null)
+        if (Entity is not null)
         {
-            return User;
+            return Entity;
         }
 #if (UseIdentity)
         return await userManager.FindByIdAsync(userId);
@@ -33,9 +33,9 @@ internal class UserInfo(
     {
         ArgumentNullException.ThrowIfNull(userName);
 
-        if (User is not null)
+        if (Entity is not null)
         {
-            return User;
+            return Entity;
         }
 #if (UseIdentity)
         return await userManager.FindByNameAsync(userName);
@@ -45,8 +45,7 @@ internal class UserInfo(
     }
 }
 
-public interface IUserInfo
+public interface IUserInfo : IRepository<UserEntity>
 {
-    Task<UserEntity?> GetUserByIdAsync(string userId);
     Task<UserEntity?> GetUserByUserNameAsync(string userName);
 }

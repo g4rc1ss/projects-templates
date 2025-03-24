@@ -1,5 +1,6 @@
 using AuthManager.Application.Contracts.InfraestructureContracts;
 using Infraestructure.Database.Entities;
+using Infraestructure.Database.Repository;
 #if (UseIdentity)
 using Microsoft.AspNetCore.Identity;
 #endif

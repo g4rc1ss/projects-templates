@@ -1,6 +1,7 @@
 ﻿using AuthManager.Application.Contracts.InfraestructureContracts;
 using AuthManager.Infraestructure.Repositories;
 using AuthManager.Infraestructure.Repositories.Identity;
+using Infraestructure.Database.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

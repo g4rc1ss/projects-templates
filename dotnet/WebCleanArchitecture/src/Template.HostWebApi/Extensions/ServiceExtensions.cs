@@ -1,9 +1,12 @@
 #if (UseJwt || UseIdentity)
 using AuthManager.API;
 #endif
-using Functionality.API;
+#if (!DatabaseNone)
 using Infraestructure.Database;
+#endif
+#if (!EventBusNone)
 using Infraestructure.Events;
+#endif
 
 namespace Template.HostWebApi.Extensions;
 
@@ -21,15 +24,17 @@ internal static class ServiceExtensions
         builder.Services.AddAuthenticationProtocol(builder.Configuration);
         builder.Services.ConfigureDataProtectionProvider(builder.Configuration);
 
+#if (!DatabaseNone)
         builder.AddDatabaseConfig();
+#endif
+#if (!EventBusNone)
         builder.Services.AddEventsServices(builder.Configuration);
-
+#endif
         InitializeFunctionalities(builder);
     }
 
     private static void InitializeFunctionalities(this WebApplicationBuilder builder)
     {
-        builder.InitFunctionality();
 #if (UseJwt || UseIdentity)
         builder.InitAuthManager();
 #endif
