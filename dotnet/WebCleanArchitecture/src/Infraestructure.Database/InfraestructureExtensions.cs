@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+#if (UsePostgres)
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+#endif
 using Microsoft.Extensions.Hosting;
 
 namespace Infraestructure.Database;
@@ -12,6 +14,7 @@ public static class InfraestructureDatabaseExtensions
         string? connectionString = builder.Configuration.GetConnectionString(nameof(DatabaseContext));
         ArgumentNullException.ThrowIfNull(connectionString);
 
+#if (UsePostgres)
         builder.Services.AddDbContextPool<DatabaseContext>(builder =>
             builder.UseNpgsql(connectionString)
         );
@@ -19,5 +22,6 @@ public static class InfraestructureDatabaseExtensions
         builder.Services.AddDbContextFactory<DatabaseContext>(builder =>
             builder.UseNpgsql(connectionString)
         );
+#endif
     }
 }
