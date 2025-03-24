@@ -92,7 +92,6 @@
       "type": "computed",
       "value": "(Authentication == \"none\")"
     },
-
     "Cache": {
       "type": "parameter",
       "datatype": "choice",
@@ -129,7 +128,6 @@
       "type": "computed",
       "value": "(Cache == \"garnet\")"
     },
-
     "EventBus": {
       "type": "parameter",
       "datatype": "choice",
@@ -166,11 +164,10 @@
       "type": "computed",
       "value": "(EventBus == \"rabbit\")"
     },
-    "EventBusNone":{
+    "EventBusNone": {
       "type": "computed",
       "value": "(EventBus == 'none')"
     },
-
     "Framework": {
       "type": "parameter",
       "description": "The target framework for the project.",
@@ -249,6 +246,26 @@
           ]
         }
       ]
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "src/Infraestructure.Database/Infraestructure.Database.csproj"
+    }
+  ],
+  "postActions": [
+    {
+      "description": "Add projects to solution",
+      "manualInstructions": [
+        {
+          "text": "Add generated project to solution manually."
+        }
+      ],
+      "args": {
+        "solutionFolder": "src"
+      },
+      "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
+      "continueOnError": true
     }
   ]
 }
