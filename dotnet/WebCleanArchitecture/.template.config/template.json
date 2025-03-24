@@ -36,7 +36,7 @@
       "defaultValue": "postgresql",
       "description": "The database type to use."
     },
-    "UsePostgreSQL": {
+    "UsePostgres": {
       "type": "computed",
       "value": "(Database == \"postgresql\")"
     },
