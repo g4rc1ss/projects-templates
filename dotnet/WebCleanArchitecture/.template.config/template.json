@@ -40,9 +40,9 @@
       "defaultValue": "postgresql",
       "description": "The database type to use."
     },
-    "DatabaseNone": {
+    "SqlDatabase": {
       "type": "computed",
-      "value": "(Database == \"none\")"
+      "value": "(UsePostgres || UseSqlServer || UseMySQL)"
     },
     "UsePostgres": {
       "type": "computed",
@@ -52,7 +52,7 @@
       "type": "computed",
       "value": "(Database == \"mysql\")"
     },
-    "UseSQLServer": {
+    "UseSqlServer": {
       "type": "computed",
       "value": "(Database == \"sqlserver\")"
     },
@@ -151,10 +151,10 @@
           }
         },
         {
-          "condition": "(DatabaseNone)",
+          "condition": "(!SqlDatabase)",
           "exclude": [
             "src/Infraestructure.Database/EntityConfiguration/*",
-            "src/Infraestructure.Database/DatabaseContext",
+            "src/Infraestructure.Database/DatabaseContext.cs",
             "src/Template.HostWebApi/Services/MigrationHostedService.cs"
           ]
         }

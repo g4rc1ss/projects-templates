@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿#if (SqlDatabase)
+using Microsoft.Extensions.Configuration;
+#endif
 #if (UsePostgres)
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +13,10 @@ public static class InfraestructureDatabaseExtensions
 {
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
+#if (SqlDatabase)
         string? connectionString = builder.Configuration.GetConnectionString(nameof(DatabaseContext));
         ArgumentNullException.ThrowIfNull(connectionString);
-
+#endif
 #if (UsePostgres)
         builder.Services.AddDbContextPool<DatabaseContext>(builder =>
             builder.UseNpgsql(connectionString)

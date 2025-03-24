@@ -1,7 +1,7 @@
 using AuthManager.Application.Contracts.InfraestructureContracts;
-using Infraestructure.Database;
 using Infraestructure.Database.Entities;
-#if (UseJwt || UseIdentity)
+#if ((UseJwt || UseIdentity) && SqlDatabase)
+using Infraestructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 #endif
@@ -9,7 +9,10 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 namespace AuthManager.Infraestructure.Repositories;
 
 public class JwtRepository(
+
+#if ((UseJwt || UseIdentity) && SqlDatabase)
     DatabaseContext dbContext
+#endif
 ) : IJwtRepository
 {
     public async Task<bool> RemoveTokenByIdsAsync(int userId, string refreshTokenId)
@@ -19,7 +22,7 @@ public class JwtRepository(
             UserId = userId,
             Id = refreshTokenId
         };
-#if (UseJwt || UseIdentity)
+#if ((UseJwt || UseIdentity) && SqlDatabase)
         dbContext.UserJwtTokens.Remove(jwtEntity);
         return (await dbContext.SaveChangesAsync()) > 0;
 #else
@@ -34,7 +37,7 @@ public class JwtRepository(
             UserId = userId,
             ExpirationUtc = expiration,
         };
-#if (UseJwt || UseIdentity)
+#if ((UseJwt || UseIdentity) && SqlDatabase)
         EntityEntry<UserJwtTokensEntity> entity = await dbContext.UserJwtTokens
             .AddAsync(refreshTokenEntity);
         await dbContext.SaveChangesAsync();
@@ -47,7 +50,7 @@ public class JwtRepository(
 
     public async Task<DateTime> GetTokenExpirationAsync(string refreshTokenId)
     {
-#if (UseJwt || UseIdentity)
+#if ((UseJwt || UseIdentity) && SqlDatabase)
         UserJwtTokensEntity refreshTokens = await dbContext.UserJwtTokens
             .SingleAsync(x => x.Id == refreshTokenId);
 
@@ -59,7 +62,7 @@ public class JwtRepository(
 
     public async Task<IEnumerable<JwtTokenData>> GetAllTokensByUserId(int userId)
     {
-#if (UseJwt || UseIdentity)
+#if ((UseJwt || UseIdentity) && SqlDatabase)
         List<UserJwtTokensEntity> tokenList = await dbContext.UserJwtTokens
             .Where(x => x.UserId == userId && x.ExpirationUtc >= DateTime.UtcNow)
             .ToListAsync();

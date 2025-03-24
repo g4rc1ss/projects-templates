@@ -9,7 +9,6 @@ public class Result
     protected Result(object? data, bool isSuccess, Error error)
         : this(isSuccess, error)
     {
-        ArgumentNullException.ThrowIfNull(data);
         Data = data;
     }
 
@@ -35,10 +34,9 @@ public class Result
     public static Result<T> Failure<T>(Error error) => new(default, false, error);
 }
 
-public class Result<T>(T? data, bool isSuccess, Error error)
-    : Result(data, isSuccess, error)
+public class Result<T>(T data, bool isSuccess, Error error) : Result(data, isSuccess, error)
 {
-    public new T? Data
+    public new T Data
     {
         get
         {
@@ -48,6 +46,8 @@ public class Result<T>(T? data, bool isSuccess, Error error)
 
     public static implicit operator Result<T>(T? data) =>
         data is not null ? Success(data) : Failure<T>(Error.NullValue);
+
+    public static implicit operator Result<T>(Error error) => Failure<T>(error);
 }
 
 public record Error(string Code, string Message)

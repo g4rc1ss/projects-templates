@@ -3,7 +3,9 @@ using Template.HostWebApi.Configurations;
 using Template.HostWebApi.Extensions;
 using Template.HostWebApi.FilterControllers;
 using Template.HostWebApi.OpenAPI;
+#if (SqlDatabase)
 using Template.HostWebApi.Services;
+#endif
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +26,7 @@ builder.Services.AddControllers(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();
 
-#if (!DatabaseNone)
+#if (SqlDatabase)
 builder.Services.AddHostedService<MigrationHostedService>();
 #endif
 

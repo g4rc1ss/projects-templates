@@ -1,7 +1,3 @@
-#if (UseIdentity)
-using AuthManager.Domain.BusinessObjects;
-using Infraestructure.Database.Entities;
-#endif
 using AuthManager.Domain.BusinessObjects;
 using Infraestructure.Database.Entities;
 using Riok.Mapperly.Abstractions;

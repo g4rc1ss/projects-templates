@@ -19,7 +19,7 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
-        <!--#if (!DatabaseNone)-->
+        <!--#if (SqlDatabase)-->
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
