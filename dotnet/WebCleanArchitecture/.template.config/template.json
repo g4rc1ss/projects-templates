@@ -42,7 +42,7 @@
     },
     "DatabaseNone": {
       "type": "computed",
-      "value": "Database == \"none\")"
+      "value": "(Database == \"none\")"
     },
     "UsePostgres": {
       "type": "computed",

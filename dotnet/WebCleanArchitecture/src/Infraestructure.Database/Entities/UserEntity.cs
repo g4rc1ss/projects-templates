@@ -9,6 +9,10 @@ public class UserEntity
     : IdentityUser<int>
 #endif
 {
+#if (!UseIdentity)
+    public int Id { get; set; }
+#endif
+
 #if (UseIdentity || UseJwt)
     // Navigation
     public IEnumerable<UserJwtTokensEntity> JwtUserTokens { get; set; }
