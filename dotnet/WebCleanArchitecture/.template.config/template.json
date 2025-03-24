@@ -203,6 +203,7 @@
           "exclude": [
             "**/AuthManager/**/*",
             "src/Infraestructure.Database/Entities/*",
+            "src/Infraestructure.Database/Repository/UserInfo.cs",
             "src/Infraestructure.Database/EntityConfiguration/*",
             "src/Template.HostWebApi/appsettings.JWT.json",
             "src/Infraestructure.Events/SignUpEmailHandler/*"

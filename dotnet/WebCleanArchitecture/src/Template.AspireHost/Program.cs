@@ -12,12 +12,29 @@ IResourceBuilder<PostgresDatabaseResource> postgres = builder
     .WithLifetime(ContainerLifetime.Session)
     .AddDatabase("PostgresDB", "Template");
 #endif
-#if (UsePostgres)
-builder.AddProject<Template_HostWebApi>("Template")
-    .WithReference(postgres, "DatabaseContext")
-    .WaitFor(postgres);
-#else
-builder.AddProject<Template_HostWebApi>("Template");
+
+#if (UseRedis)
+IResourceBuilder<RedisResource> redis = builder.AddRedis("Cache");
 #endif
 
+#if (UseGarnet)
+IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
+#endif
+
+
+builder.AddProject<Template_HostWebApi>("Template")
+#if (UsePostgres)
+    .WithReference(postgres, "DatabaseContext")
+    .WaitFor(postgres)
+#endif
+#if (UseRedis)
+    .WithReference(redis)
+    .WaitFor(redis)
+#endif
+
+#if (UseGarnet)
+    .WithReference(garnet)
+    .WaitFor(garnet)
+#endif
+    ;
 builder.Build().Run();

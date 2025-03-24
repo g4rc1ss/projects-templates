@@ -16,7 +16,14 @@
         <!--#if (UsePostgres)-->
         <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*"/>
         <!--#endif-->
-        
+        <!--#if (UseRedis)-->
+        <PackageReference Include="Aspire.Hosting.Redis" Version="*" />
+        <!--#endif-->
+
+        <!--#if (UseGarnet)-->
+        <PackageReference Include="Aspire.Hosting.Garnet" Version="*" />
+        <!--#endif-->
+
     </ItemGroup>
 
     <ItemGroup>

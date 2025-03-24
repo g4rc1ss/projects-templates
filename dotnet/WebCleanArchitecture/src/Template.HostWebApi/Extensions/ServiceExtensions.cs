@@ -30,6 +30,12 @@ internal static class ServiceExtensions
 #if (!EventBusNone)
         builder.Services.AddEventsServices(builder.Configuration);
 #endif
+#if (UseMemoryCache)
+        builder.Services.AddDistributedMemoryCache();
+#elif (UseRedis || UseGarnet)
+        builder.AddRedisDistributedCache("Cache");
+#endif
+
         InitializeFunctionalities(builder);
     }
 

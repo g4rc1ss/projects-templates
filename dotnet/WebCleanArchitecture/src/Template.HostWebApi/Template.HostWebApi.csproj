@@ -19,6 +19,9 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
+        <!--#if (UseRedis || UseGarnet)-->
+        <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*"/>
+        <!--#endif-->
         <!--#if (SqlDatabase)-->
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*">
             <PrivateAssets>all</PrivateAssets>
