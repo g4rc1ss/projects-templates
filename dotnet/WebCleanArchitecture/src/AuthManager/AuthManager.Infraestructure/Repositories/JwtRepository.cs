@@ -2,6 +2,7 @@ using AuthManager.Domain.InfraestructureContracts;
 using Infraestructure.Database;
 using Infraestructure.Database.Entities;
 #if (UseJwt || UseIdentity)
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 #endif
 

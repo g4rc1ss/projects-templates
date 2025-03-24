@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Functionality\Functionality.Domain\Functionality.Domain.csproj" />
-        <!--#if (includeAuthManager)-->
+        <!--#if (UseIdentity || UseJwt)-->
         <ProjectReference Include="..\AuthManager\AuthManager.Domain\AuthManager.Domain.csproj"/>
         <!--#endif-->
 

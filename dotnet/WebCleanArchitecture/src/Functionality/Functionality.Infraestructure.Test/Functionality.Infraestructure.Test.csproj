@@ -9,13 +9,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.Testing" Version="9.1.0"/>
-        <PackageReference Include="coverlet.collector" Version="6.0.2"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0"/>
-        <PackageReference Include="xunit" Version="2.9.2"/>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2"/>
+        <PackageReference Include="Aspire.Hosting.Testing" Version="*"/>
+        <PackageReference Include="coverlet.collector" Version="*"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*"/>
+        <PackageReference Include="xunit" Version="*"/>
+        <PackageReference Include="xunit.runner.visualstudio" Version="*"/>
 
-        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.1.0"/>
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*"/>
 
     </ItemGroup>
 

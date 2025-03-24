@@ -9,7 +9,7 @@ public static class InfraestructureDatabaseExtensions
 {
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
-        string? connectionString = builder.Configuration.GetConnectionString("RedNeuronalSqlDatabase");
+        string? connectionString = builder.Configuration.GetConnectionString(nameof(DatabaseContext));
         ArgumentNullException.ThrowIfNull(connectionString);
 
         builder.Services.AddDbContextPool<DatabaseContext>(builder =>

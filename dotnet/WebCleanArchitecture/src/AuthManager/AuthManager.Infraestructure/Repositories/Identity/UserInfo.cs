@@ -1,10 +1,15 @@
 using Infraestructure.Database.Entities;
+#if (UseIdentity)
 using Microsoft.AspNetCore.Identity;
+#endif
 
 namespace AuthManager.Infraestructure.Repositories.Identity;
 
 internal class UserInfo(
+
+#if (UseIdentity)
     UserManager<UserEntity> userManager
+#endif
 ) : IUserInfo
 {
     public UserEntity? User { get; set; }
@@ -17,8 +22,11 @@ internal class UserInfo(
         {
             return User;
         }
-
+#if (UseIdentity)
         return await userManager.FindByIdAsync(userId);
+#else
+        throw new NotImplementedException();
+#endif
     }
 
     public async Task<UserEntity?> GetUserByUserNameAsync(string userName)
@@ -29,8 +37,11 @@ internal class UserInfo(
         {
             return User;
         }
-
+#if (UseIdentity)
         return await userManager.FindByNameAsync(userName);
+#else
+        throw new NotImplementedException();
+#endif
     }
 }
 

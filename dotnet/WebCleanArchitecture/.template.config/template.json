@@ -98,6 +98,17 @@
   },
   "sources": [
     {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea",
+        "*.sln"
+      ],
       "modifiers": [
         {
           "condition": "(!UseJwt && !UseIdentity)",
@@ -110,20 +121,12 @@
         {
           "condition": "(UseJwt)",
           "exclude": [
-            "src/Infraestructure.Database/Entities/RoleEntity"
-          ]
-        },
-        {
-          "source": "./",
-          "exclude": [
-            "**/[Bb]in/**",
-            "**/[Oo]bj/**",
-            "**/*template.config/**/*",
-            "**/*.filelist",
-            "**/*.user",
-            "**/*idea",
-            "*.sln"
-          ]
+            "src/Infraestructure.Database/Entities/RoleEntity.cs",
+            "src/Template.HostWebApi/appsettings.json"
+          ],
+          "rename": {
+            "src/Template.HostWebApi/appsettings.JWT.json": "src/Template.HostWebApi/appsettings.json"
+          }
         }
       ]
     }
