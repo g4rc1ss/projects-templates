@@ -1,23 +1,30 @@
 using AuthManager.Domain.BusinessObjects;
 using AuthManager.Domain.InfraestructureContracts;
+using Infraestructure.Database.Entities;
+#if (UseIdentity)
 using AuthManager.Infraestructure.Mappers;
-using Infraestructure.AuthManagerDB.Entities;
 using Microsoft.AspNetCore.Identity;
+#endif
 
 namespace AuthManager.Infraestructure.Repositories.Identity;
 
 public class UserManager(
-    IUserInfo userInfo,
-    UserManager<UserEntity> userManager
+#if (UseIdentity)
+    UserManager<UserEntity> userManager,
+#endif
+    IUserInfo userInfo
 ) : IUserManager
 {
     public async Task<UserData?> GetUserByIdAsync(string userId)
     {
         ArgumentNullException.ThrowIfNull(userId);
-
         UserEntity? user = await userInfo.GetUserByIdAsync(userId);
 
+#if (UseIdentity)
         return user?.ToUserData();
+#else
+        throw new NotImplementedException();
+#endif
     }
 
     public async Task<UserData?> GetUserByUserNameAsync(string userName)
@@ -25,8 +32,11 @@ public class UserManager(
         ArgumentNullException.ThrowIfNull(userName);
 
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-
+#if (UseIdentity)
         return user?.ToUserData();
+#else
+        throw new NotImplementedException();
+#endif
     }
 
     public async Task<bool> UserExistsAsync(string userName)
@@ -40,16 +50,23 @@ public class UserManager(
 
     public Task<IList<string>> GetUserRolesAsync(int userId)
     {
+#if (UseIdentity)
         UserEntity? entity = new() { Id = userId };
         return userManager.GetRolesAsync(entity);
+#else
+        throw new NotImplementedException();
+#endif
     }
 
     public async Task<bool> IsLockedAsync(string userName)
     {
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
 
-
+#if (UseIdentity)
         return await userManager.IsLockedOutAsync(user);
+#else
+        throw new NotImplementedException();
+#endif
     }
 
     public async Task<bool> CreateAsync(string userName, string password, string email)
@@ -58,14 +75,17 @@ public class UserManager(
         ArgumentNullException.ThrowIfNull(password);
         ArgumentNullException.ThrowIfNull(email);
 
+#if (UseIdentity)
         UserEntity user = new()
         {
             UserName = userName,
             Email = email
         };
-
         IdentityResult result = await userManager.CreateAsync(user, password);
 
         return result.Succeeded;
+#else
+        throw new NotImplementedException();
+#endif
     }
 }

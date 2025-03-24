@@ -1,4 +1,4 @@
-namespace Infraestructure.AuthManagerDB.Entities;
+namespace Infraestructure.Database.Entities;
 
 public class UserJwtTokensEntity
 {

@@ -21,7 +21,7 @@ internal static class ServiceExtensions
         builder.Services.AddAuthenticationProtocol(builder.Configuration);
         builder.Services.ConfigureDataProtectionProvider(builder.Configuration);
 
-        builder.Services.AddDatabaseConfig(builder.Configuration);
+        builder.AddDatabaseConfig();
         builder.Services.AddEventsServices(builder.Configuration);
 
         InitializeFunctionalities(builder);

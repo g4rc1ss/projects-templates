@@ -58,8 +58,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthManager.Infraestructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthManager.Infraestructure.Test", "src\AuthManager\AuthManager.Infraestructure.Test\AuthManager.Infraestructure.Test.csproj", "{ECFC439F-53CE-43B3-B570-A55F1106B384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.AuthManagerDB", "src\Infraestructure.AuthManagerDB\Infraestructure.AuthManagerDB.csproj", "{228F01FA-7A54-4A0D-974A-A28AFB5F525B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,10 +140,6 @@ Global
 		{ECFC439F-53CE-43B3-B570-A55F1106B384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECFC439F-53CE-43B3-B570-A55F1106B384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECFC439F-53CE-43B3-B570-A55F1106B384}.Release|Any CPU.Build.0 = Release|Any CPU
-		{228F01FA-7A54-4A0D-974A-A28AFB5F525B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{228F01FA-7A54-4A0D-974A-A28AFB5F525B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{228F01FA-7A54-4A0D-974A-A28AFB5F525B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{228F01FA-7A54-4A0D-974A-A28AFB5F525B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -173,7 +167,6 @@ Global
 		{E0E15E91-A0FB-4DBB-A455-81F7A844C874} = {47A5DE72-8162-427F-AFEC-234239FCF604}
 		{E2A48605-65FC-4169-A502-E330F769DDDA} = {47A5DE72-8162-427F-AFEC-234239FCF604}
 		{ECFC439F-53CE-43B3-B570-A55F1106B384} = {47A5DE72-8162-427F-AFEC-234239FCF604}
-		{228F01FA-7A54-4A0D-974A-A28AFB5F525B} = {DB6FD3CC-2392-4383-A768-778E9AA19E22}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9910F84-F791-4753-8A02-193B05CB3472}

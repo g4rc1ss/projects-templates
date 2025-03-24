@@ -72,7 +72,7 @@
       "type": "computed",
       "value": "(Authentication == \"identity\")"
     },
-    "UseJWT": {
+    "UseJwt": {
       "type": "computed",
       "value": "(Authentication == \"jwt\")"
     },
@@ -100,18 +100,17 @@
     {
       "modifiers": [
         {
-          "condition": "(UseJWT)",
-          "include": [
-            "**/AuthManager/**/*"
-          ],
-          "rename": {
-            "src/Infraestructure.AuthManagerDB" : "src/Infraestructure.Database"
-          }
+          "condition": "(!UseJwt && !UseIdentity)",
+          "exclude": [
+            "**/AuthManager/**/*",
+            "src/Infraestructure.Database/Entities/*",
+            "src/Infraestructure.Database/EntityConfiguration/*"
+          ]
         },
         {
-          "condition": "(UseIdentity)",
-          "include": [
-
+          "condition": "(UseJwt)",
+          "exclude": [
+            "src/Infraestructure.Database/Entities/RoleEntity"
           ]
         },
         {
@@ -123,7 +122,6 @@
             "**/*.filelist",
             "**/*.user",
             "**/*idea",
-            "**/AuthManager/**/*",
             "*.sln"
           ]
         }

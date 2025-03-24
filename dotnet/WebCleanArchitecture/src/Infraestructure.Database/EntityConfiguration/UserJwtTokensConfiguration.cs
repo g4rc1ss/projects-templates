@@ -1,8 +1,8 @@
-using Infraestructure.AuthManagerDB.Entities;
+using Infraestructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infraestructure.AuthManagerDB.EntityConfiguration;
+namespace Infraestructure.Database.EntityConfiguration;
 
 public class UserJwtTokensConfiguration : IEntityTypeConfiguration<UserJwtTokensEntity>
 {
@@ -16,10 +16,12 @@ public class UserJwtTokensConfiguration : IEntityTypeConfiguration<UserJwtTokens
         builder.Property(x => x.ExpirationUtc)
             .IsRequired();
 
+#if (UseIdentity)
         // Relation 1:N con Users
         builder.HasOne<UserEntity>(x => x.User)
             .WithMany(x => x.JwtUserTokens)
             .HasForeignKey(x => x.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+#endif
     }
 }

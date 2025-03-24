@@ -1,4 +1,4 @@
-using Infraestructure.AuthManagerDB.Entities;
+using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace AuthManager.Infraestructure.Repositories.Identity;

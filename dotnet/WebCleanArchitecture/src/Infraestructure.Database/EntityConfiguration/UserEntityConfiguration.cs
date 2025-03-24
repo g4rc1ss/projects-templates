@@ -1,8 +1,8 @@
-using Infraestructure.AuthManagerDB.Entities;
+using Infraestructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infraestructure.AuthManagerDB.EntityConfiguration;
+namespace Infraestructure.Database.EntityConfiguration;
 
 public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
 {
