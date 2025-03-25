@@ -22,7 +22,7 @@ public static class FunctionalityApiExtensions
 #endif
 
         builder.Services.AddBusinessServices();
-        builder.Services.AddDataAccessService(builder.Configuration);
+        builder.AddDataAccessService();
     }
 
     public static void MapFunctionalityGrpcServices(this IEndpointRouteBuilder routeBuilder)

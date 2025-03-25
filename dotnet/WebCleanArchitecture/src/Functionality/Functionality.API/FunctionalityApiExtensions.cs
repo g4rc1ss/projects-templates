@@ -13,6 +13,6 @@ public static class FunctionalityApiExtensions
             .AddApplicationPart(typeof(FunctionalityApiExtensions).Assembly);
 
         builder.Services.AddBusinessServices();
-        builder.Services.AddDataAccessService(builder.Configuration);
+        builder.AddDataAccessService();
     }
 }

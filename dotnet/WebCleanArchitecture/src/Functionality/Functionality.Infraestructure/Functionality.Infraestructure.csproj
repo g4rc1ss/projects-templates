@@ -8,12 +8,11 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="*"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*" />
         <PackageReference Include="Riok.Mapperly" Version="*"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Infraestructure.Database\Infraestructure.Database.csproj"/>
-        <ProjectReference Include="..\..\Infraestructure.Events\Infraestructure.Events.csproj"/>
         <ProjectReference Include="..\Functionality.Application\Functionality.Application.csproj"/>
     </ItemGroup>
 
