@@ -31,12 +31,13 @@ public static class TelemetryExtensions
             )
             .WithTracing(trace => trace.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
-                // .AddSource(nameof(IDistributedCache))
-                // .AddEntityFrameworkCoreInstrumentation(options =>
-                // {
-                //     // Guardamos las consultas generadas por EF
-                //     options.SetDbStatementForText = true;
-                // })
+#if (SqlDatabase)
+                    .AddEntityFrameworkCoreInstrumentation(options =>
+                    {
+                        // Guardamos las consultas generadas por EF
+                        options.SetDbStatementForText = true;
+                    })
+#endif
             );
 
         builder.AddOtelExporter();

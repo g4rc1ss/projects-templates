@@ -13,7 +13,7 @@
         <!--#if (SqlDatabase)-->
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
         <!--#endif-->
-        <!--#if (UseSqlServer)-->
+        <!--#if (UseSqlServer || UseAzureSql)-->
         <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*"/>
         <!--#endif-->
 

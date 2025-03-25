@@ -42,7 +42,7 @@
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer)"
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql)"
     },
     "UsePostgres": {
       "type": "computed",
@@ -202,27 +202,22 @@
             "src/Infraestructure.Database/Entities/*",
             "src/Infraestructure.Database/Repository/UserInfo.cs",
             "src/Infraestructure.Database/EntityConfiguration/*",
-            "src/Template.HostWebApi/appsettings.JWT.json",
             "src/Infraestructure.Events/SignUpEmailEvent/*"
           ]
         },
         {
           "condition": "(UseJwt)",
           "exclude": [
-            "src/Infraestructure.Database/Entities/RoleEntity.cs",
-            "src/Template.HostWebApi/appsettings.json"
+            "src/Infraestructure.Database/Entities/RoleEntity.cs"
           ],
           "rename": {
-            "src/Template.HostWebApi/appsettings.JWT.json": "src/Template.HostWebApi/appsettings.json"
           }
         },
         {
           "condition": "(UseJwt || UseIdentity)",
           "exclude": [
-            "src/Template.HostWebApi/appsettings.json"
           ],
           "rename": {
-            "src/Template.HostWebApi/appsettings.JWT.json": "src/Template.HostWebApi/appsettings.json"
           }
         },
         {

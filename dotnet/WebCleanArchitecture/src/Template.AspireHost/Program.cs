@@ -14,7 +14,7 @@ IResourceBuilder<PostgresDatabaseResource> postgres = builder
     .WithDataVolume("postgresVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
     .AddDatabase("PostgresDB", "Template");
-#elif (UseSqlServer)
+#elif (UseSqlServer || UseAzureSql)
 IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder
     .AddSqlServer("SQLServer")
     .WithDataVolume("SqlServerVM", isReadOnly: false)
@@ -45,7 +45,7 @@ IResourceBuilder<ProjectResource> project = builder.AddProject<Template_HostWebA
 #if (UsePostgres)
     project.WithReference(postgres, "DatabaseContext");
     project.WaitFor(postgres);
-#elif (UseSqlServer)
+#elif (UseSqlServer || UseAzureSql)
     project.WithReference(sqlServer, "DatabaseContext");
     project.WaitFor(sqlServer);
 #endif
