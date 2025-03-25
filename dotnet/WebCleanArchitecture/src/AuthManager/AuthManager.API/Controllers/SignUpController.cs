@@ -1,8 +1,8 @@
 using AuthManager.API.Mapper;
 using AuthManager.API.Models.SignUpModels;
 using AuthManager.Application.UsesCases.CreateUserCase;
-using Infraestructure.Events.SignUpEmailHandler;
-using MediatR;
+using Infraestructure.Events;
+using Infraestructure.Events.SignUpEmailEvent;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shared;
@@ -15,7 +15,7 @@ namespace AuthManager.API.Controllers;
 public class SignUpController(
     ILogger<SignUpController> logger,
     ICreateUserUseCase createUser,
-    IMediator mediator
+    IEventNotificator eventNotificator
 ) : Controller
 {
     [HttpPost]
@@ -35,7 +35,7 @@ public class SignUpController(
             Token = result.Data,
         }, Request.Scheme);
 
-        await mediator.Publish(new ConfirmEmailRequest(request.Email, url));
+        await eventNotificator.PublishAsync(new ConfirmEmailRequest(request.Email, url), cancellationToken);
 
         return Ok();
     }

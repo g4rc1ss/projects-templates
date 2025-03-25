@@ -244,6 +244,12 @@
           "exclude": [
             "**/Infraestructure.Events/**/*"
           ]
+        },
+        {
+          "condition": "!UseMemoryEvents",
+          "exclude": [
+            "src/Infraestructure.Events/Handlers/*"
+          ]
         }
       ]
     }
