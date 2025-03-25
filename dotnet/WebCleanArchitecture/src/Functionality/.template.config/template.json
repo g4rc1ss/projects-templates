@@ -54,13 +54,13 @@
       ],
       "modifiers": [
         {
-          "condition": "UseApi",
+          "condition": "UseApi && !UseGrpc",
           "exclude": [
             "**/Functionality.Grpc/**/*"
           ]
         },
         {
-          "condition": "UseGrpc",
+          "condition": "UseGrpc && !UseApi",
           "exclude": [
             "**/Functionality.API/**/*"
           ]

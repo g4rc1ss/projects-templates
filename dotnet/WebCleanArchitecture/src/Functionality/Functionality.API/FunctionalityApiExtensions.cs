@@ -7,7 +7,7 @@ namespace Functionality.API;
 
 public static class FunctionalityApiExtensions
 {
-    public static void InitFunctionality(this WebApplicationBuilder builder)
+    public static void InitFunctionalityApi(this WebApplicationBuilder builder)
     {
         builder.Services.AddControllers()
             .AddApplicationPart(typeof(FunctionalityApiExtensions).Assembly);

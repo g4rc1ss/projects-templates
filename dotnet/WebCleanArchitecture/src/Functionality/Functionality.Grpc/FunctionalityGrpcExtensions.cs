@@ -8,7 +8,7 @@ namespace Functionality.Grpc;
 
 public static class FunctionalityGrpcExtensions
 {
-    public static void InitFunctionality(this WebApplicationBuilder builder)
+    public static void InitFunctionalityGrpc(this WebApplicationBuilder builder)
     {
         builder.Services.AddBusinessServices();
         builder.AddDataAccessService();
