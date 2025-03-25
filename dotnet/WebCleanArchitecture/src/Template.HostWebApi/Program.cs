@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
+﻿#if (UseApi)
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Template.HostWebApi.Configurations;
-using Template.HostWebApi.Extensions;
 using Template.HostWebApi.FilterControllers;
 using Template.HostWebApi.OpenAPI;
+#endif
+using Template.HostWebApi.Extensions;
 #if (SqlDatabase)
 using Template.HostWebApi.Services;
 #endif
@@ -17,6 +19,11 @@ builder.Configuration.AddUserSecrets<Program>()
 // Add services to the container.
 builder.InitTemplateHostConfig();
 
+#if (UseGrp)
+builder.Services.AddGrpc();
+#endif
+
+#if (UseApi)
 builder.Services.AddControllers(options =>
 {
     options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer()));
@@ -25,6 +32,7 @@ builder.Services.AddControllers(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();
+#endif
 
 #if (SqlDatabase)
 builder.Services.AddHostedService<MigrationHostedService>();
@@ -32,6 +40,7 @@ builder.Services.AddHostedService<MigrationHostedService>();
 
 WebApplication app = builder.Build();
 
+#if (UseApi)
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
 if (!app.Environment.IsProduction())
@@ -45,9 +54,12 @@ if (!app.Environment.IsProduction())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+#endif
 
 app.MapHealthChecks("/health");
+#if (UseApi)
 app.MapControllers();
+#endif
 
 await app.RunAsync();
 
