@@ -29,6 +29,10 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <!--#endif-->
+        <!--#if (UseGrpc)-->
+        <PackageReference Include="Grpc.AspNetCore" Version="*"/>
+        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="*"/>
+        <!--#endif-->
     </ItemGroup>
     <ItemGroup>
         <Content Include="..\..\.dockerignore">

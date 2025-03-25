@@ -19,6 +19,10 @@ builder.Configuration.AddUserSecrets<Program>()
 // Add services to the container.
 builder.InitTemplateHostConfig();
 
+#if (UseGrpc)
+builder.Services.AddGrpc();
+#endif
+
 #if (UseApi)
 builder.Services.AddControllers(options =>
 {
@@ -39,14 +43,18 @@ WebApplication app = builder.Build();
 #if (UseApi)
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
+#endif
 if (!app.Environment.IsProduction())
 {
+#if (UseApi)
     app.UseDeveloperExceptionPage();
     app.UseMiddleware<SwaggerAuthMiddleware>();
     app.UseSwagger();
     app.UseSwaggerUI();
+#endif
 }
 
+#if (UseApi)
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
