@@ -14,6 +14,12 @@ IResourceBuilder<PostgresDatabaseResource> postgres = builder
     .WithDataVolume("postgresVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
     .AddDatabase("PostgresDB", "Template");
+#elif (UseSqlServer)
+IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder
+    .AddSqlServer("SQLServer")
+    .WithDataVolume("SqlServerVM", isReadOnly: false)
+    .WithLifetime(ContainerLifetime.Session)
+    .AddDatabase("TemplateDatabase", "Template");
 #endif
 
 #if (UseAzServiceBus)
@@ -39,6 +45,9 @@ IResourceBuilder<ProjectResource> project = builder.AddProject<Template_HostWebA
 #if (UsePostgres)
     project.WithReference(postgres, "DatabaseContext");
     project.WaitFor(postgres);
+#elif (UseSqlServer)
+    project.WithReference(sqlServer, "DatabaseContext");
+    project.WaitFor(sqlServer);
 #endif
 #if (UseRedis)
     project.WithReference(redis);

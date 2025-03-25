@@ -31,6 +31,9 @@
         <!--#if (UseRabbitMQ)-->
         <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="*"/>
         <!--#endif-->
+        <!--#if (UseSqlServer)-->
+        <PackageReference Include="Aspire.Hosting.SqlServer" Version="*"/>
+        <!--#endif-->
     </ItemGroup>
 
     <ItemGroup>

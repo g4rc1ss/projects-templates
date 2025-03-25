@@ -1,7 +1,5 @@
 ﻿#if (SqlDatabase)
 using Microsoft.Extensions.Configuration;
-#endif
-#if (UsePostgres)
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 #endif
@@ -16,15 +14,27 @@ public static class InfraestructureDatabaseExtensions
 #if (SqlDatabase)
         string? connectionString = builder.Configuration.GetConnectionString(nameof(DatabaseContext));
         ArgumentNullException.ThrowIfNull(connectionString);
-#endif
-#if (UsePostgres)
         builder.Services.AddDbContextPool<DatabaseContext>(builder =>
-            builder.UseNpgsql(connectionString)
-        );
+        {
+#if (UsePostgres)
+            builder.UseNpgsql(connectionString);
+#elif (UseSqlServer)
+            builder.UseSqlServer(connectionString);
+#elif (UseAzureSql)
+            builder.UseAzureSql(connectionString);
+#endif
+        });
 
         builder.Services.AddDbContextFactory<DatabaseContext>(builder =>
-            builder.UseNpgsql(connectionString)
-        );
+        {
+#if (UsePostgres)
+            builder.UseNpgsql(connectionString);
+#elif (UseSqlServer)
+            builder.UseSqlServer(connectionString);
+#elif (UseAzureSql)
+            builder.UseAzureSql(connectionString);
+#endif
+        });
 #endif
     }
 }

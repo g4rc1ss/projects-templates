@@ -29,8 +29,8 @@
           "description": "PostgreSQL"
         },
         {
-          "choice": "mysql",
-          "description": "MySQL"
+          "choice": "azuresql",
+          "description": "Azure SQL"
         },
         {
           "choice": "sqlserver",
@@ -42,19 +42,19 @@
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseMySQL)"
+      "value": "(UsePostgres || UseSqlServer)"
     },
     "UsePostgres": {
       "type": "computed",
       "value": "(Database == \"postgresql\")"
     },
-    "UseMySQL": {
-      "type": "computed",
-      "value": "(Database == \"mysql\")"
-    },
     "UseSqlServer": {
       "type": "computed",
       "value": "(Database == \"sqlserver\")"
+    },
+    "UseAzureSql": {
+      "type": "computed",
+      "value": "(Database == 'azuresql')"
     },
     "DatabaseNone": {
       "type": "computed",
