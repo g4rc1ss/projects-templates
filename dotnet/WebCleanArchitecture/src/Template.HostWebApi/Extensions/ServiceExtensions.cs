@@ -28,7 +28,7 @@ internal static class ServiceExtensions
         builder.AddDatabaseConfig();
 #endif
 #if (!EventBusNone)
-        builder.Services.AddEventsServices(builder.Configuration);
+        builder.AddEventsServices();
 #endif
 #if (UseMemoryCache)
         builder.Services.AddDistributedMemoryCache();

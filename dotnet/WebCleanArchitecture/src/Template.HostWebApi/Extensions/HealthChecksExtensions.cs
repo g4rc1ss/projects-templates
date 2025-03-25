@@ -19,12 +19,12 @@ public static class HealthChecksExtensions
 
 #endif
 #if (UseAzServiceBus)
-        string? azureConnection = builder.Configuration.GetConnectionString("AzureServiceBus");
-        healthChecks.AddAzureServiceBusQueue(azureConnection, "serviceBusQueue");
-        healthChecks.AddAzureServiceBusTopic(azureConnection, "serviceBusTopic");
+        // string? azureConnection = builder.Configuration.GetConnectionString("AzureServiceBus");
+        // healthChecks.AddAzureServiceBusQueue(azureConnection, "serviceBusQueue");
+        // healthChecks.AddAzureServiceBusTopic(azureConnection, "serviceBusTopic");
 
 #elif (UseRabbitMQ)
-            healthChecks.AddRabbitMQ()
+            healthChecks.AddRabbitMQ();
 #endif
     }
 }

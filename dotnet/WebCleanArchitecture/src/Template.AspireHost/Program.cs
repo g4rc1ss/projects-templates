@@ -18,8 +18,6 @@ IResourceBuilder<PostgresDatabaseResource> postgres = builder
 
 #if (UseAzServiceBus)
 IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder.AddAzureServiceBus("AzureServiceBus");
-azureServiceBus.AddServiceBusQueue("serviceBusQueue");
-azureServiceBus.AddServiceBusTopic("serviceBusTopic");
 azureServiceBus.RunAsEmulator();
 #elif (UseRabbitMQ)
 IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddRabbitMQ("RabbitMQ")
@@ -37,24 +35,23 @@ IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
 #endif
 
 
-builder.AddProject<Template_HostWebApi>("Template")
+IResourceBuilder<ProjectResource> project = builder.AddProject<Template_HostWebApi>("Template");
 #if (UsePostgres)
-    .WithReference(postgres, "DatabaseContext")
-    .WaitFor(postgres)
+    project.WithReference(postgres, "DatabaseContext");
+    project.WaitFor(postgres);
 #endif
 #if (UseRedis)
-    .WithReference(redis)
-    .WaitFor(redis)
+    project.WithReference(redis);
+    project.WaitFor(redis);
 #elif (UseGarnet)
-    .WithReference(garnet)
-    .WaitFor(garnet)
+    project.WithReference(garnet);
+    project.WaitFor(garnet);
 #endif
 #if (UseAzServiceBus)
-    .WithReference(azureServiceBus)
-    .WaitFor(azureServiceBus)
+    project.WithReference(azureServiceBus);
+    project.WaitFor(azureServiceBus);
 #elif (UseRabbitMQ)
-    .WithReference(rabbitMQ)
-    .WaitFor(rabbitMQ)
+    project.WithReference(rabbitMQ);
+    project.WaitFor(rabbitMQ);
 #endif
-    ;
 builder.Build().Run();
