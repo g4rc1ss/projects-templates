@@ -8,13 +8,19 @@ public static class HealthChecksExtensions
 {
     public static void AddHealthChecks(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddHealthChecks()
+        IHealthChecksBuilder healthChecks = builder.Services.AddHealthChecks();
 #if (UseRedis || UseGarnet)
-            .AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty)
+            healthChecks.AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty);
 #endif
 #if (SqlDatabase)
-            .AddDbContextCheck<DatabaseContext>()
+            healthChecks.AddDbContextCheck<DatabaseContext>();
 #endif
-            ;
+#if (UseAzServiceBus)
+        string? azureConnection = builder.Configuration.GetConnectionString("AzureServiceBus");
+        healthChecks.AddAzureServiceBusQueue(azureConnection, "serviceBusQueue");
+        healthChecks.AddAzureServiceBusTopic(azureConnection, "serviceBusTopic");
+#elif (UseRabbitMQ)
+            healthChecks.AddRabbitMQ()
+#endif
     }
 }

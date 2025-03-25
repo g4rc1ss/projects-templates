@@ -22,7 +22,7 @@ azureServiceBus.AddServiceBusQueue("serviceBusQueue");
 azureServiceBus.AddServiceBusTopic("serviceBusTopic");
 azureServiceBus.RunAsEmulator();
 #elif (UseRabbitMQ)
-IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddRabbitMQ("rabbitMQ")
+IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddRabbitMQ("RabbitMQ")
     .WithDataVolume("rabbitMQVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
     .WithManagementPlugin();
