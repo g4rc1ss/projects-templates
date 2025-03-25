@@ -16,6 +16,30 @@
     "type": "project"
   },
   "symbols": {
+    "Host": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "api",
+          "description": "API"
+        },
+        {
+          "choice": "grpc",
+          "description": "GRPC"
+        }
+      ],
+      "defaultValue": "api",
+      "description": "Host to use"
+    },
+    "UseApi": {
+      "type": "computed",
+      "value": "(Host == 'api')"
+    },
+    "UseGrpc": {
+      "type": "computed",
+      "value": "(Host == 'grpc')"
+    },
     "Framework": {
       "type": "parameter",
       "description": "The target framework for the project.",
@@ -30,15 +54,29 @@
   },
   "sources": [
     {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea",
+        "*.sln",
+        "**/Functionality/**/*"
+      ],
       "modifiers": [
         {
+          "condition": "UseApi",
           "exclude": [
-            "**/[Bb]in/**",
-            "**/[Oo]bj/**",
-            "**/*template-config/**/*",
-            "**/*.filelist",
-            "**/*.user",
-            "**/*idea"
+            "**/Functionality.Grpc/**/*"
+          ]
+        },
+        {
+          "condition": "UseGrpc",
+          "exclude": [
+            "**/Functionality.API/**/*"
           ]
         }
       ]

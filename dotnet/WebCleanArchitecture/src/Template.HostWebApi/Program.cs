@@ -19,10 +19,6 @@ builder.Configuration.AddUserSecrets<Program>()
 // Add services to the container.
 builder.InitTemplateHostConfig();
 
-#if (UseGrp)
-builder.Services.AddGrpc();
-#endif
-
 #if (UseApi)
 builder.Services.AddControllers(options =>
 {
