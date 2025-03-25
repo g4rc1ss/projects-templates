@@ -3,7 +3,7 @@ using Functionality.Grpc.Services;
 using Functionality.Infraestructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-#if (UseApi)
+#if (UseApi || UseGrpc)
 using Microsoft.Extensions.DependencyInjection;
 #endif
 
