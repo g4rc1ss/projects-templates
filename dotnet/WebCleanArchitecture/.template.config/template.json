@@ -16,31 +16,16 @@
     "type": "project"
   },
   "symbols": {
-    "Host": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "api",
-          "description": "API"
-        },
-        {
-          "choice": "grpc",
-          "description": "GRPC"
-        }
-      ],
-      "defaultValue": "api",
-      "description": "Host to use"
-    },
     "UseApi": {
-      "type": "computed",
-      "value": "(Host == 'api')"
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": true
     },
     "UseGrpc": {
-      "type": "computed",
-      "value": "(Host == 'grpc')"
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false
     },
-
     "Database": {
       "type": "parameter",
       "datatype": "choice",

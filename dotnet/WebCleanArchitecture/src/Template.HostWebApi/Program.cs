@@ -21,6 +21,7 @@ builder.InitTemplateHostConfig();
 
 #if (UseGrpc)
 builder.Services.AddGrpc();
+builder.Services.AddGrpcReflection();
 #endif
 
 #if (UseApi)
@@ -51,6 +52,9 @@ if (!app.Environment.IsProduction())
     app.UseMiddleware<SwaggerAuthMiddleware>();
     app.UseSwagger();
     app.UseSwaggerUI();
+#endif
+#if (UseGrpc)
+    app.MapGrpcReflectionService();
 #endif
 }
 
