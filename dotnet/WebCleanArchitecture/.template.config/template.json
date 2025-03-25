@@ -141,12 +141,12 @@
           "description": "Memory"
         },
         {
-          "choice": "Azure Service Bus",
-          "description": "azureservicebus"
+          "choice": "azureservicebus",
+          "description": "Azure Service Bus"
         },
         {
-          "choice": "RabbitMQ",
-          "description": "rabbit"
+          "choice": "rabbit",
+          "description": "RabbitMQ"
         }
       ],
       "defaultValue": "memoryevents",
@@ -158,7 +158,7 @@
     },
     "UseAzServiceBus": {
       "type": "computed",
-      "value": "(EventBus == \"azureservicebus\")"
+      "value": "(EventBus == 'azureservicebus')"
     },
     "UseRabbitMQ": {
       "type": "computed",
@@ -203,7 +203,7 @@
             "src/Infraestructure.Database/Repository/UserInfo.cs",
             "src/Infraestructure.Database/EntityConfiguration/*",
             "src/Template.HostWebApi/appsettings.JWT.json",
-            "src/Infraestructure.Events/SignUpEmailHandler/*"
+            "src/Infraestructure.Events/SignUpEmailEvent/*"
           ]
         },
         {
@@ -252,26 +252,6 @@
           ]
         }
       ]
-    }
-  ],
-  "primaryOutputs": [
-    {
-      "path": "src/Infraestructure.Database/Infraestructure.Database.csproj"
-    }
-  ],
-  "postActions": [
-    {
-      "description": "Add projects to solution",
-      "manualInstructions": [
-        {
-          "text": "Add generated project to solution manually."
-        }
-      ],
-      "args": {
-        "solutionFolder": "src"
-      },
-      "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
-      "continueOnError": true
     }
   ]
 }

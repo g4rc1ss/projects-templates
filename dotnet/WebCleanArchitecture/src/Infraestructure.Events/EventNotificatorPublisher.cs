@@ -25,7 +25,7 @@ public class EventNotificatorPublisher(
     public async Task PublishAsync<TRequest>(TRequest request, CancellationToken cancellationToken = default)
     {
 #if (UseMemoryEvents)
-        return await mediator.Publish(request, cancellationToken);
+        await mediator.Publish(request, cancellationToken);
 #elif (UseAzServiceBus)
         string? queuename = configuration.GetSection("ServiceBusConfig")["QueueName"];
         ServiceBusSender? sender = serviceBusClient.CreateSender(queuename);

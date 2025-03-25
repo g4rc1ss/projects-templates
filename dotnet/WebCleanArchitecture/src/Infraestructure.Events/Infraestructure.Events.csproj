@@ -13,11 +13,11 @@
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="*"/>
         <!--#endif-->
 
-        <!--#if ()-->
+        <!--#if (UseAzServiceBus)-->
         <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" Version="*"/>
         <!--#endif-->
 
-        <!--#if ()-->
+        <!--#if (UseRabbitMQ)-->
         <PackageReference Include="Aspire.RabbitMQ.Client" Version="*"/>
         <!--#endif-->
 

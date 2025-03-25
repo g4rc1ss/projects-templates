@@ -10,7 +10,7 @@ IResourceBuilder<ParameterResource> username = builder.AddParameter("username", 
 IResourceBuilder<ParameterResource> password = builder.AddParameter("password", "123456");
 
 IResourceBuilder<PostgresDatabaseResource> postgres = builder
-    .AddPostgres("PostgresRN", username, password, 5432)
+    .AddPostgres("Postgres", username, password, 5432)
     .WithDataVolume("postgresVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
     .AddDatabase("PostgresDB", "Template");
