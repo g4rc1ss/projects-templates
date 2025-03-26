@@ -64,9 +64,13 @@ app.UseAuthentication();
 app.UseAuthorization();
 #endif
 
-app.MapHealthChecks("/health");
 #if (UseApi)
+app.MapHealthChecks("/health");
 app.MapControllers();
+#endif
+
+#if (UseGrpc)
+app.MapGrpcHealthChecksService();
 #endif
 
 await app.RunAsync();

@@ -31,6 +31,7 @@
         <!--#endif-->
         <!--#if (UseGrpc)-->
         <PackageReference Include="Grpc.AspNetCore" Version="*"/>
+        <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="*" />
         <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="*"/>
         <!--#endif-->
     </ItemGroup>
