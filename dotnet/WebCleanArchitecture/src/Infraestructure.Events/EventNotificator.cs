@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Infraestructure.Events;
 
-public class EventNotificatorPublisher(
+public class EventNotificator(
 #if (UseMemoryEvents)
     IMediator mediator,
 #elif (UseAzServiceBus)

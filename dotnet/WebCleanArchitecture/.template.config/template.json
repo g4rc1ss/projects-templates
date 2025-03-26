@@ -224,8 +224,17 @@
           }
         },
         {
-          "condition": "(UseJwt || UseIdentity)",
+          "condition": "((UseJwt || UseIdentity) && UseGrpc && !UseApi)",
           "exclude": [
+            "**/AuthManager/AuthManager.API/**/*"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "((UseJwt || UseIdentity) && !UseGrpc && UseApi)",
+          "exclude": [
+            "**/AuthManager/AuthManager.GRPC/**/*"
           ],
           "rename": {
           }

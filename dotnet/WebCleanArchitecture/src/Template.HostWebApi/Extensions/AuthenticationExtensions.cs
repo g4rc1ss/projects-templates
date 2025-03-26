@@ -4,8 +4,7 @@ using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 #endif
 #if (UseIdentity || UseJwt)
-using AuthManager.API;
-using AuthManager.API.ConfigurationOptions;
+using Template.HostWebApi.ConfigurationOptions;
 using AuthManager.Application.Contracts;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -20,7 +19,9 @@ public static class AuthenticationExtensions
     {
 #if (UseIdentity || UseJwt)
         services
+#if (UseApi)
             .AddHttpContextAccessor()
+#endif
             .AddAuthorization()
             .AddAuthentication(options =>
             {
@@ -65,6 +66,5 @@ public static class AuthenticationExtensions
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<DatabaseContext>();
 #endif
-
     }
 }

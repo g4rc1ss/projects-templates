@@ -1,22 +1,19 @@
-using AuthManager.API.ConfigurationOptions;
 using AuthManager.Application.Contracts;
 using AuthManager.Application.Contracts.InfraestructureContracts;
 using AuthManager.Domain;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Template.HostWebApi.ConfigurationOptions;
 
-namespace AuthManager.API;
+namespace Template.HostWebApi;
 
 public class JwtTokenManagement(
     ILogger<JwtTokenManagement> logger,
     IJwtRepository jwtRepository,
-    IOptions<JwtOption> jwtOptions,
-    IHttpContextAccessor httpContextAccessor
+    IOptions<JwtOption> jwtOptions
 ) : IJwtTokenManagement
 {
     public string Create(JwtData jwtData)
@@ -81,14 +78,8 @@ public class JwtTokenManagement(
         return new JwtSecurityTokenHandler().WriteToken(securityToken);
     }
 
-    public IEnumerable<Claim> ReadClaims(string accessToken = "")
+    public IEnumerable<Claim> ReadClaims(string accessToken)
     {
-        if (string.IsNullOrWhiteSpace(accessToken))
-        {
-            return httpContextAccessor?.HttpContext?.User?.Claims ??
-                   throw new ArgumentNullException(nameof(accessToken));
-        }
-
         JwtSecurityToken? securityToken = new JwtSecurityTokenHandler()
             .ReadJwtToken(accessToken);
 

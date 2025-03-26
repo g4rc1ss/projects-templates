@@ -23,7 +23,7 @@ public class TotpController(
     [HttpPost("validate/{totpCode}")]
     public async Task<IActionResult> Activate(string totpCode)
     {
-        IEnumerable<Claim> claims = jwtTokenManagement.ReadClaims();
+        IEnumerable<Claim> claims = HttpContext.User.Claims;
         string? userId = claims.FirstOrDefault(x => x.Type == ClaimsKey.UserId)?.Value;
 
         UserData? user = await userManager.GetUserByIdAsync(userId);
@@ -46,7 +46,7 @@ public class TotpController(
     [HttpGet("generate-authenticator-key")]
     public async Task<IActionResult> GenerateAuthenticatorKey()
     {
-        IEnumerable<Claim> claims = jwtTokenManagement.ReadClaims();
+        IEnumerable<Claim> claims = HttpContext.User.Claims;
         string? userId = claims.FirstOrDefault(x => x.Type == ClaimsKey.UserId)?.Value;
 
         UserData? user = await userManager.GetUserByIdAsync(userId);
@@ -63,7 +63,7 @@ public class TotpController(
     [HttpPost("deactivate")]
     public async Task<IActionResult> Deactivate()
     {
-        IEnumerable<Claim> claims = jwtTokenManagement.ReadClaims();
+        IEnumerable<Claim> claims = HttpContext.User.Claims;
         string? userId = claims.FirstOrDefault(x => x.Type == ClaimsKey.UserId)?.Value;
 
         UserData? user = await userManager.GetUserByIdAsync(userId);

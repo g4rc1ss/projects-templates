@@ -1,4 +1,4 @@
-namespace AuthManager.API.ConfigurationOptions;
+namespace Template.HostWebApi.ConfigurationOptions;
 
 public record JwtOption
 {

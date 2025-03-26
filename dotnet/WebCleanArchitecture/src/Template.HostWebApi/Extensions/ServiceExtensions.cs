@@ -1,5 +1,10 @@
 #if (UseJwt || UseIdentity)
+#if (UseApi)
 using AuthManager.API;
+#endif
+#if (UseGrpc)
+using AuthManager.GRPC;
+#endif
 #endif
 #if (!DatabaseNone)
 using Infraestructure.Database;
@@ -42,7 +47,12 @@ internal static class ServiceExtensions
     private static void InitializeFunctionalities(this WebApplicationBuilder builder)
     {
 #if (UseJwt || UseIdentity)
+#if (UseApi)
         builder.InitAuthManager();
+#endif
+#if (UseGrpc)
+        builder.InitFunctionalityGrpc();
+#endif
 #endif
     }
 }
