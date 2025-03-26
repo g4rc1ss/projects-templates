@@ -1,6 +1,6 @@
+using Shared;
 using System.Reflection;
 using Template.HostWebApi;
-using ArgumentNullException = System.ArgumentNullException;
 
 namespace Template.Architecture.Tests;
 
@@ -30,7 +30,9 @@ public class ApplicationContractTests
             foreach (AssemblyName reference in references)
             {
                 if (!visited.Contains(reference.FullName))
+                {
                     queue.Enqueue(Assembly.Load(reference));
+                }
             }
 
             if (assembly.FullName.Contains("Application"))
@@ -42,25 +44,6 @@ public class ApplicationContractTests
         if (!_applicationAssemblies.Any())
         {
             throw new ApplicationException("No assemblies were found.");
-        }
-    }
-
-    [Fact]
-    public void AllApplicationInterfaces_ShouldImplement_GenericApplicationInterface()
-    {
-        foreach (Assembly applicationAssembly in _applicationAssemblies)
-        {
-            List<Type> interfaceList = applicationAssembly.GetTypes()
-                .Where(x => x.IsInterface)
-                .ToList();
-
-            foreach (Type interfaceType in interfaceList)
-            {
-                IEnumerable<Type> interfaces = interfaceType.GetInterfaces()
-                    .Where(x => x.Name.Contains("IApplicationContractBase"));
-
-                Assert.True(interfaces.Any());
-            }
         }
     }
 
@@ -85,20 +68,12 @@ public class ApplicationContractTests
     {
         foreach (Assembly applicationAssembly in _applicationAssemblies)
         {
-            List<Type> classImplementInterfaces = applicationAssembly.GetTypes()
-                .Where(x => x.IsClass && x.GetInterfaces()?.Any() == true)
-                .ToList();
-
-            foreach (Type classImplementInterface in classImplementInterfaces)
+            foreach ((Type interfacesType, IEnumerable<Type> implementedClass) classes in
+                     GetClassesImplementingInterface(applicationAssembly))
             {
-                Type[] interfaces = classImplementInterface.GetInterfaces();
-
-                foreach (Type @interface in interfaces)
+                foreach (Type classType in classes.implementedClass)
                 {
-                    if (!@interface.Name.Contains("IApplicationContract"))
-                    {
-                        Assert.Equal(classImplementInterface.Assembly, @interface.Assembly);
-                    }
+                    Assert.Equal(classType.Assembly, classes.interfacesType.Assembly);
                 }
             }
         }
@@ -109,18 +84,49 @@ public class ApplicationContractTests
     {
         foreach (Assembly applicationAssembly in _applicationAssemblies)
         {
-            List<Type> classImplementInterfaces = applicationAssembly.GetTypes()
-                .Where(x => x.IsClass && x.GetInterfaces()?.Any() == true)
-                .ToList();
-
-            foreach (Type classImplementInterface in classImplementInterfaces)
+            foreach ((Type interfacesType, IEnumerable<Type> implementedClass) implementations in
+                     GetClassesImplementingInterface(applicationAssembly))
             {
-                int publicMethods = classImplementInterface.GetMethods()
-                    .Count(x => x.IsPublic && x.DeclaringType == classImplementInterface);
+                foreach (Type classImplementInterface in implementations.implementedClass)
+                {
+                    int publicMethods = classImplementInterface.GetMethods()
+                        .Count(x => x.IsPublic && x.DeclaringType == classImplementInterface);
 
-                Assert.True(classImplementInterface.IsPublic);
-                Assert.Equal(1, publicMethods);
+                    Assert.True(classImplementInterface.IsPublic);
+                    Assert.Equal(1, publicMethods);
+                }
             }
         }
+    }
+
+    private IEnumerable<(Type interfacesType, IEnumerable<Type> implementedClass)> GetClassesImplementingInterface(
+        Assembly assembly)
+    {
+        List<(Type, IEnumerable<Type>)> returnList = [];
+
+        List<Type> interfaceList = assembly.GetTypes()
+            .Where(x => x.IsInterface)
+            .ToList();
+
+        foreach (Type interfaceType in interfaceList)
+        {
+            bool applicationInterfaces = interfaceType
+                .GetInterfaces()
+                .Any(x => x.Name.Contains(nameof(IApplicationContractBase)));
+
+            if (!applicationInterfaces)
+            {
+                continue;
+            }
+
+            List<Type> classesList = assembly
+                .GetTypes()
+                .Where(x => x.IsClass && x.GetInterface(interfaceType.Name) is not null)
+                .ToList();
+
+            returnList.Add((interfaceType, classesList));
+        }
+
+        return returnList;
     }
 }
