@@ -2,6 +2,7 @@ using AuthManager.Application.Contracts;
 using AuthManager.Application.Contracts.InfraestructureContracts;
 using AuthManager.Domain;
 using AuthManager.Domain.BusinessObjects;
+using AuthManager.Domain.ErrorsCode;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
@@ -23,10 +24,7 @@ public class PasswordService(
         UserData? userData = await userManager.GetUserByIdAsync(userId);
         if (userData is null)
         {
-            // TODO: Devolver codigo de error
-
-            // return NotFound(Result.Failure(new Error(UserManagerErrors.InvalidCredentialsCode,
-            //     UserManagerErrors.InvalidCredentialsDesc)));
+            throw new RpcException(new Status(StatusCode.NotFound, UserManagerErrors.InvalidCredentialsCode));
         }
 
         bool isChanged = await passwordManager.ChangePasswordAsync(userData.UserName,
@@ -34,23 +32,38 @@ public class PasswordService(
             request.NewPassword);
         if (!isChanged)
         {
-            // TODO: Devolver codigo de error
-
-            // return NotFound(Result.Failure(new Error(PasswordManagerErrors.PasswordChangeErrorCode,
-            //     PasswordManagerErrors.PasswordChangeErrorDesc)));
+            throw new RpcException(new Status(StatusCode.NotFound, PasswordManagerErrors.PasswordChangeErrorCode));
         }
 
-        // TODO: Devolver success
         return new ChangePasswordResponse();
     }
 
-    public override Task<ConfirmPasswordResponse> Confirm(ConfirmPasswordRequest request, ServerCallContext context)
+    public override async Task<ConfirmPasswordResponse> Confirm(ConfirmPasswordRequest request,
+        ServerCallContext context)
     {
-        return base.Confirm(request, context);
+        bool isConfirmed =
+            await passwordManager.ConfirmPasswordTokenAsync(request.Username, request.Token, request.Password);
+
+        return isConfirmed
+            ? new ConfirmPasswordResponse()
+            : throw new RpcException(new Status(StatusCode.NotFound, PasswordManagerErrors.PasswordConfirmErrorCode));
     }
 
-    public override Task<ResetPasswordResponse> Reset(ResetPasswordRequest request, ServerCallContext context)
+    public override async Task<ResetPasswordResponse> Reset(ResetPasswordRequest request, ServerCallContext context)
     {
-        return base.Reset(request, context);
+        UserData? userData = await userManager.GetUserByUserNameAsync(request.Username);
+        if (userData is null)
+        {
+            throw new RpcException(new Status(StatusCode.NotFound, UserManagerErrors.InvalidCredentialsCode));
+        }
+
+        string passwordToken = await passwordManager.GetResetTokenAsync(userData.UserName);
+        // string? url = Url.Action("ConfirmEmail", "ConfirmEmail", new
+        // {
+        //     userName = userName,
+        //     Token = passwordToken,
+        // }, Request.Scheme);
+
+        return new ResetPasswordResponse();
     }
 }

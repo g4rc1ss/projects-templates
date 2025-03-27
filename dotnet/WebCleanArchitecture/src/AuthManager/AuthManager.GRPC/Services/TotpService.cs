@@ -3,36 +3,28 @@ using AuthManager.Application.Contracts.InfraestructureContracts;
 using AuthManager.Domain;
 using AuthManager.Domain.BusinessObjects;
 using AuthManager.Domain.ErrorsCode;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Shared;
+using Grpc.Core;
 using System.Security.Claims;
 
-namespace AuthManager.API.Controllers;
+namespace AuthManager.GRPC.Services;
 
-[Authorize]
-[ApiController]
-[Area(nameof(AuthManager))]
-[Route("api/[area]/[controller]")]
-public class TotpController(
+public class TotpService(
     IJwtTokenManagement jwtTokenManagement,
     IUserManager userManager,
     ITotpManager totpManager
-) : Controller
+) : Totp.TotpBase
 {
-    [HttpPost("validate/{totpCode}")]
-    public async Task<IActionResult> Activate(string totpCode)
+    public override async Task<ValidateTotpResponse> Validate(ValidateTotpRequest request, ServerCallContext context)
     {
-        IEnumerable<Claim> claims = HttpContext.User.Claims;
+        IEnumerable<Claim> claims = context.GetHttpContext().User.Claims;
         string? userId = claims.FirstOrDefault(x => x.Type == ClaimsKey.UserId)?.Value;
 
         UserData? user = await userManager.GetUserByIdAsync(userId);
 
-        bool isVerify = await totpManager.VerifyTwoFactorTokenAsync(user.UserName, totpCode);
+        bool isVerify = await totpManager.VerifyTwoFactorTokenAsync(user.UserName, request.TotpCode);
         if (!isVerify)
         {
-            return Unauthorized(Result.Failure(new(UserManagerErrors.TotpVerifyTotpCode,
-                UserManagerErrors.TotpVerifyTotpDesc)));
+            throw new RpcException(new Status(StatusCode.NotFound, UserManagerErrors.TotpVerifyTotpCode));
         }
 
         IEnumerable<string>? recoveryCodes =
@@ -40,34 +32,39 @@ public class TotpController(
 
         await totpManager.SetTwoFactorAsync(user.UserName, true);
 
-        return Ok(string.Join(";", recoveryCodes));
+        return new ValidateTotpResponse
+        {
+            RecoveryCodes = string.Join(";", recoveryCodes),
+        };
     }
 
-    [HttpGet("generate-authenticator-key")]
-    public async Task<IActionResult> GenerateAuthenticatorKey()
+    public override async Task<GenerateAuthKeyResponse> GenerateAuthenticator(GenerateAuthKeyRequest request,
+        ServerCallContext context)
     {
-        IEnumerable<Claim> claims = HttpContext.User.Claims;
+        IEnumerable<Claim> claims = context.GetHttpContext().User.Claims;
         string? userId = claims.FirstOrDefault(x => x.Type == ClaimsKey.UserId)?.Value;
 
         UserData? user = await userManager.GetUserByIdAsync(userId);
         if (user is null)
         {
-            return NotFound();
+            throw new RpcException(new Status(StatusCode.NotFound, UserManagerErrors.InvalidUserCode));
         }
 
         string? key = await totpManager.GetAuthenticatorKeyAsync(user.UserName);
 
-        return Ok(key);
+        return new GenerateAuthKeyResponse
+        {
+            Key = key,
+        };
     }
 
-    [HttpPost("disable")]
-    public async Task<IActionResult> Disable()
+    public override async Task<DisableTotpResponse> Disable(DisableTotpRequest request, ServerCallContext context)
     {
-        IEnumerable<Claim> claims = HttpContext.User.Claims;
+        IEnumerable<Claim> claims = context.GetHttpContext().User.Claims;
         string? userId = claims.FirstOrDefault(x => x.Type == ClaimsKey.UserId)?.Value;
 
         UserData? user = await userManager.GetUserByIdAsync(userId);
         await totpManager.SetTwoFactorAsync(user.UserName, false);
-        return Ok();
+        return new DisableTotpResponse();
     }
 }

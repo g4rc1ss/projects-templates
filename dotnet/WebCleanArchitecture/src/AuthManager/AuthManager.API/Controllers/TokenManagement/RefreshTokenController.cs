@@ -15,8 +15,8 @@ namespace AuthManager.API.Controllers.TokenManagement;
 public class RefreshTokenController(
     ILogger<RefreshTokenController> logger,
     IJwtRepository jwtRepository,
-    IJwtTokenManagement jwtTokenManagement)
-    : Controller
+    IJwtTokenManagement jwtTokenManagement
+) : Controller
 {
     [HttpPut]
     public async Task<IActionResult> Post(JwtRefreshTokenRequest refreshTokenRequest)

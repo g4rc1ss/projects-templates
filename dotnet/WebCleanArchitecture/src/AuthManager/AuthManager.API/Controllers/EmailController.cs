@@ -7,7 +7,7 @@ namespace AuthManager.API.Controllers;
 [ApiController]
 [Area(nameof(AuthManager))]
 [Route("api/[area]/[controller]")]
-public class ConfirmEmailController(
+public class EmailController(
     IUserManager userManager,
     IEmailManager emailManager
 ) : Controller

@@ -20,4 +20,7 @@ public class UserManagerErrors
 
     public const string InvalidRecoveryCodesCode = "User.RecoveryCode.Invalid";
     public const string InvalidRecoveryCodesDesc = "The recovery codes are invalid";
+
+    public const string InvalidUserCode = "User.Invalid";
+    public const string InvalidUserCodeDesc = "User is invalid";
 }

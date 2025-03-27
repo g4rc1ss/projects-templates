@@ -29,7 +29,7 @@ public class SignUpController(
             return NotFound(result);
         }
 
-        string? url = Url.Action("ConfirmEmail", "ConfirmEmail", new
+        string? url = Url.Action("ConfirmEmail", "Email", new
         {
             userName = request.UserName,
             Token = result.Data,

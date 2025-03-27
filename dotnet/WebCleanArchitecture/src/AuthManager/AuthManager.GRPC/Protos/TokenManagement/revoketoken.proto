@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "AuthManager.GRPC";
+
+package AuthManager;
+
+// The greeting service definition.
+service RevokeToken {
+  // Sends a greeting
+  rpc Revoke (RevokeTokenRequest) returns (RevokeTokenResponse);
+}
+
+message RevokeTokenRequest {
+  string tokenId = 1;
+}
+
+message RevokeTokenResponse {
+}

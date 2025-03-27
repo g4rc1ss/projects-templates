@@ -21,8 +21,7 @@ public class LoginService(
         Result<LoginUserData> result = await loginUseCase.ExecuteAsync(loginCredentials);
         if (!result.IsSuccess)
         {
-            // TODO: Ver formas de devolver errores
-            return new LoginResponse();
+            throw new RpcException(new Status(StatusCode.Unauthenticated, result.Error.Code));
         }
 
         string refreshToken = await jwtTokenManagement.CreateRefreshTokenAsync(result.Data.UserId);

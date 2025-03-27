@@ -57,7 +57,7 @@ public class PasswordController(
         }
 
         string passwordToken = await passwordManager.GetResetTokenAsync(userData.UserName);
-        string? url = Url.Action("ConfirmEmail", "ConfirmEmail", new
+        string? url = Url.Action("ConfirmEmail", "Email", new
         {
             userName = userName,
             Token = passwordToken,

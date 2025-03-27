@@ -6,9 +6,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Protobuf Include="Protos\email.proto" GrpcServices="Server"/>
         <Protobuf Include="Protos\login.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\logout.proto" GrpcServices="Server"/>
         <Protobuf Include="Protos\password.proto" GrpcServices="Server"/>
         <Protobuf Include="Protos\signup.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\TokenManagement\refreshtoken.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\TokenManagement\revoketoken.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\TokenManagement\tokenlist.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\totp.proto" GrpcServices="Server"/>
     </ItemGroup>
 
     <ItemGroup>

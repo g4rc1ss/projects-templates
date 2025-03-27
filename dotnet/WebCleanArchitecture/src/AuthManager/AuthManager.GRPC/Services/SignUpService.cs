@@ -20,8 +20,7 @@ public class SignUpService(
         Result<string> result = await createUser.ExecuteAsync(userData, context.CancellationToken);
         if (!result.IsSuccess)
         {
-            // TODO: Ver como devolver codigos de error
-            return new SignUpResponse();
+            throw new RpcException(new Status(StatusCode.NotFound, result.Error.Code));
         }
 
         // string? url = Url.Action("ConfirmEmail", "ConfirmEmail", new
@@ -32,7 +31,6 @@ public class SignUpService(
 
         // await eventNotificator.PublishAsync(new ConfirmEmailRequest(request.Email, url), context.CancellationToken);
 
-        // TODO: Ver como devolver codigos OK
         return new SignUpResponse();
     }
 }

@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "AuthManager.GRPC";
+
+package AuthManager;
+
+// The greeting service definition.
+service Totp {
+  // Sends a greeting
+  rpc Validate (ValidateTotpRequest) returns (ValidateTotpResponse);
+  rpc GenerateAuthenticator (GenerateAuthKeyRequest) returns (GenerateAuthKeyResponse);
+  rpc Disable (DisableTotpRequest) returns (DisableTotpResponse);
+}
+
+message ValidateTotpRequest {
+  string totpCode = 1;
+}
+
+message ValidateTotpResponse {
+  string recoveryCodes = 1;
+}
+
+message GenerateAuthKeyRequest {
+}
+
+message GenerateAuthKeyResponse {
+  string key = 1;
+}
+
+message DisableTotpRequest {
+}
+
+message DisableTotpResponse {
+}

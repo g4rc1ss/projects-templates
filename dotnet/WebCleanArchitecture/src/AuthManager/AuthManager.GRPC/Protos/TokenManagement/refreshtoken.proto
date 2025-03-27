@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "AuthManager.GRPC";
+
+package AuthManager;
+
+service RefreshToken {
+  rpc Refresh (JwtRefreshTokenRequest) returns (JwtRefreshTokenResponse);
+}
+
+message JwtRefreshTokenRequest {
+  string accessToken = 1;
+}
+
+message JwtRefreshTokenResponse {
+  string accessToken = 1;
+}

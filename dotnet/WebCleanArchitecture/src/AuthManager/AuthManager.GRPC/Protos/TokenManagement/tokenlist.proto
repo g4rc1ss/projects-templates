@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "AuthManager.GRPC";
+
+package AuthManager;
+
+service TokenList {
+  rpc GetTokens (GetTokensRequest) returns (GetTokensResponse);
+}
+
+message GetTokensRequest {
+  string username = 1;
+  string token = 2;
+}
+
+message GetTokensResponse {
+  repeated TokenInformation tokenInfo = 1;
+}
+
+message TokenInformation {
+  string tokenId = 1;
+  string expiration = 2;
+}
