@@ -19,7 +19,7 @@ public class RevokeTokenController(
     [HttpDelete]
     public async Task<IActionResult> PostAsync(JwtRevokeTokenRequest revokeTokenRequest)
     {
-        string userId = jwtTokenManagement.ReadClaims().First(x => x.Type == ClaimsKey.UserId).Value;
+        string userId = HttpContext.User.Claims.First(x => x.Type == ClaimsKey.UserId).Value;
         string token = revokeTokenRequest.TokenId;
 
         await jwtTokenManagement.RevokeRefreshTokenAsync(int.Parse(userId), token);

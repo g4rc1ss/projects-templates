@@ -1,5 +1,4 @@
 ﻿using AuthManager.Application;
-using AuthManager.Application.Contracts;
 using AuthManager.Infraestructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +12,6 @@ public static class AuthManagerApiExtensions
         builder.Services.AddControllers()
             .AddApplicationPart(typeof(AuthManagerApiExtensions).Assembly);
 
-        builder.Services.AddScoped<IJwtTokenManagement, JwtTokenManagement>();
         builder.Services.AddBusinessServices();
         builder.Services.AddRepositoryService(builder.Configuration);
     }

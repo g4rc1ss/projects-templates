@@ -60,9 +60,9 @@ if (!app.Environment.IsProduction())
 
 #if (UseApi)
 app.UseHttpsRedirection();
+#endif
 app.UseAuthentication();
 app.UseAuthorization();
-#endif
 
 #if (UseApi)
 app.MapHealthChecks("/health");
@@ -72,6 +72,7 @@ app.MapControllers();
 #if (UseGrpc)
 app.MapGrpcHealthChecksService();
 #endif
+app.MapRouteServices();
 
 await app.RunAsync();
 

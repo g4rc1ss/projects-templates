@@ -31,7 +31,7 @@
         <!--#endif-->
         <!--#if (UseGrpc)-->
         <PackageReference Include="Grpc.AspNetCore" Version="*"/>
-        <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="*" />
+        <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="*"/>
         <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="*"/>
         <!--#endif-->
     </ItemGroup>
@@ -42,7 +42,12 @@
     </ItemGroup>
     <ItemGroup>
         <!--#if (UseJwt || UseIdentity)-->
+        <!--#if (UseApi)-->
         <ProjectReference Include="..\AuthManager\AuthManager.API\AuthManager.API.csproj"/>
+        <!--#endif-->
+        <!--#if (UseGrpc)-->
+        <ProjectReference Include="..\AuthManager\AuthManager.GRPC\AuthManager.GRPC.csproj"/>
+        <!--#endif-->
         <!--#endif-->
 
         <!--#if (!DatabaseNone)-->

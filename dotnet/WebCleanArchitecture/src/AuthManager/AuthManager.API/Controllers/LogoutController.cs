@@ -19,7 +19,7 @@ public class LogoutController(
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        IEnumerable<Claim> claims = jwtTokenManagement.ReadClaims();
+        IEnumerable<Claim> claims = HttpContext.User.Claims;
         string userId = claims.First(x => x.Type == ClaimsKey.UserId).Value;
         string refreshTokenId = claims.First(x => x.Type == ClaimsKey.RefreshToken).Value;
 

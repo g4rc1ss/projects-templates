@@ -24,7 +24,7 @@ public class PasswordController(
     [HttpPost("change")]
     public async Task<IActionResult> ChangePassword(ChangePasswordRequest changePasswordRequest)
     {
-        IEnumerable<Claim> claims = jwtTokenManagement.ReadClaims();
+        IEnumerable<Claim> claims = HttpContext.User.Claims;
         string? userId = claims.FirstOrDefault(x => x.Type == ClaimsKey.UserId)?.Value;
 
         UserData? userData = await userManager.GetUserByIdAsync(userId);
