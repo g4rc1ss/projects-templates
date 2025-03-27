@@ -12,11 +12,12 @@ public static class FunctionalityGrpcExtensions
     {
         builder.Services.AddBusinessServices();
         builder.Services.AddRepositoryService(builder.Configuration);
-
     }
 
     public static void MapFunctionalityGrpcServices(this IEndpointRouteBuilder routeBuilder)
     {
-        routeBuilder.MapGrpcService<GreeterService>();
+        routeBuilder.MapGrpcService<LoginService>();
+        routeBuilder.MapGrpcService<SignUpService>();
+        routeBuilder.MapGrpcService<PasswordService>();
     }
 }
