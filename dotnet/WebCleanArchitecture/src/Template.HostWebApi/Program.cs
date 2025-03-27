@@ -60,9 +60,9 @@ if (!app.Environment.IsProduction())
 
 #if (UseApi)
 app.UseHttpsRedirection();
-#endif
 app.UseAuthentication();
 app.UseAuthorization();
+#endif
 
 #if (UseApi)
 app.MapHealthChecks("/health");
