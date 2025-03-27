@@ -33,6 +33,7 @@
         <PackageReference Include="Grpc.AspNetCore" Version="*"/>
         <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="*"/>
         <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.11.0-beta.2"/>
         <!--#endif-->
     </ItemGroup>
     <ItemGroup>

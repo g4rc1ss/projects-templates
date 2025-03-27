@@ -29,7 +29,11 @@ public static class TelemetryExtensions
                 .AddRuntimeInstrumentation()
                 .AddHttpClientInstrumentation()
             )
-            .WithTracing(trace => trace.AddAspNetCoreInstrumentation()
+            .WithTracing(trace => trace
+                    .AddAspNetCoreInstrumentation()
+#if (UseGrpc)
+                    .AddGrpcClientInstrumentation()
+#endif
                     .AddHttpClientInstrumentation()
 #if (SqlDatabase)
                     .AddEntityFrameworkCoreInstrumentation(options =>
