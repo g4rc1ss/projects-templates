@@ -1,4 +1,4 @@
-#if (UseGrpc)
+#if ((UseIdentity || UseJwt) && UseGrpc)
 using AuthManager.GRPC;
 #endif
 

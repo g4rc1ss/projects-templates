@@ -209,6 +209,7 @@
           "condition": "(AuthNone)",
           "exclude": [
             "**/AuthManager/**/*",
+            "src/Template.HostWebApi/JwtTokenManagement.cs",
             "src/Infraestructure.Database/Entities/*",
             "src/Infraestructure.Database/Repository/UserInfo.cs",
             "src/Infraestructure.Database/EntityConfiguration/*",
