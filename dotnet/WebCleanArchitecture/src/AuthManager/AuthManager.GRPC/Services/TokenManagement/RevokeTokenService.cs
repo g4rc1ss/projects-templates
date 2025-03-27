@@ -1,10 +1,12 @@
 using AuthManager.Application.Contracts;
 using AuthManager.Domain;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 namespace AuthManager.GRPC.Services.TokenManagement;
 
+[Authorize]
 public class RevokeTokenService(
     ILogger<RevokeTokenService> logger,
     IJwtTokenManagement jwtTokenManagement

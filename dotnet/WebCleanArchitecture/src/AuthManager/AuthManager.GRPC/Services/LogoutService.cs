@@ -1,11 +1,13 @@
 using AuthManager.Application.Contracts;
 using AuthManager.Domain;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 
 namespace AuthManager.GRPC.Services;
 
+[Authorize]
 public class LogoutService(
     ILogger<LogoutService> logger,
     IJwtTokenManagement jwtTokenManagement

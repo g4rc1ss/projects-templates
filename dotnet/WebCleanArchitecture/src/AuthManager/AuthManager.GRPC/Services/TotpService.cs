@@ -4,10 +4,12 @@ using AuthManager.Domain;
 using AuthManager.Domain.BusinessObjects;
 using AuthManager.Domain.ErrorsCode;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace AuthManager.GRPC.Services;
 
+[Authorize]
 public class TotpService(
     IJwtTokenManagement jwtTokenManagement,
     IUserManager userManager,
