@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Routing;
 
 namespace CleanArchitecture.Grpc;
 
-public static class FunctionalityGrpcExtensions
+public static class CleanArchitectureGrpcExtensions
 {
-    public static void InitFunctionalityGrpc(this WebApplicationBuilder builder)
+    public static void InitCleanArchitectureGrpc(this WebApplicationBuilder builder)
     {
         builder.Services.AddBusinessServices();
         builder.AddDataAccessService();
     }
 
-    public static void MapFunctionalityGrpcServices(this IEndpointRouteBuilder routeBuilder)
+    public static void MapCleanArchitectureGrpcServices(this IEndpointRouteBuilder routeBuilder)
     {
         routeBuilder.MapGrpcService<GreeterService>();
     }

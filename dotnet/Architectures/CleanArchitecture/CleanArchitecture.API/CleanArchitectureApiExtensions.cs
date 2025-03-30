@@ -5,12 +5,12 @@ using Microsoft.Extensions.Hosting;
 
 namespace CleanArchitecture.API;
 
-public static class FunctionalityApiExtensions
+public static class CleanArchitectureApiExtensions
 {
-    public static void InitFunctionalityApi(this IHostApplicationBuilder builder)
+    public static void InitCleanArchitectureApi(this IHostApplicationBuilder builder)
     {
         builder.Services.AddControllers()
-            .AddApplicationPart(typeof(FunctionalityApiExtensions).Assembly);
+            .AddApplicationPart(typeof(CleanArchitectureApiExtensions).Assembly);
 
         builder.Services.AddBusinessServices();
         builder.AddDataAccessService();

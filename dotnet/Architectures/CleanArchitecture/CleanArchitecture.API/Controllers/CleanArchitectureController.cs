@@ -5,7 +5,7 @@ namespace CleanArchitecture.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class FunctionalityController(ILogger<FunctionalityController> logger)
+public class CleanArchitectureController(ILogger<CleanArchitectureController> logger)
     : Controller
 {
     [HttpGet]

@@ -1,10 +1,10 @@
 {
-  "$schema": "http://json.schemastore.org/template",
+  "$schema": "https://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "architecture"
   ],
-  "identity": "functionality-structure",
+  "identity": "CleanArchitecture-structure",
   "name": "Clean Architecture Structure",
   "description": "Estructura de Clean Architecture",
   "shortName": "CleanArchitecture",

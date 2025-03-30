@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace CleanArchitecture.Infraestructure;
 
-public static class FunctionalityInfraestructureExtensions
+public static class CleanArchitectureInfraestructureExtensions
 {
     public static void AddDataAccessService(this IHostApplicationBuilder builder)
     {
