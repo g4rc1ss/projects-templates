@@ -1,8 +1,7 @@
-using AuthManager.Application.Contracts;
-using AuthManager.Application.Contracts.InfraestructureContracts;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
+using Shared.JWT;
 using System.Globalization;
 
 namespace AuthManager.GRPC.Services.TokenManagement;

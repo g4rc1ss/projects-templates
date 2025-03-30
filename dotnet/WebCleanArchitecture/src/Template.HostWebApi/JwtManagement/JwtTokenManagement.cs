@@ -1,14 +1,12 @@
-using AuthManager.Application.Contracts;
-using AuthManager.Application.Contracts.InfraestructureContracts;
-using AuthManager.Domain;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Shared.JWT;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Template.HostWebApi.ConfigurationOptions;
 
-namespace Template.HostWebApi;
+namespace Template.HostWebApi.JwtManagement;
 
 public class JwtTokenManagement(
     ILogger<JwtTokenManagement> logger,

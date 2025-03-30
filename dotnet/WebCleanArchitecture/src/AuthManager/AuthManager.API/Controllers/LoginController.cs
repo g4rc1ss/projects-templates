@@ -1,11 +1,11 @@
 ﻿using AuthManager.API.Mapper;
 using AuthManager.API.Models;
 using AuthManager.API.Models.LoginModels;
-using AuthManager.Application.Contracts;
 using AuthManager.Application.UsesCases.LoginCase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shared;
+using Shared.JWT;
 using System.Security.Claims;
 
 namespace AuthManager.API.Controllers;

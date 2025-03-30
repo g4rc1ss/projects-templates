@@ -1,5 +1,5 @@
 using Infraestructure.Database.Entities;
-#if (UseIdentity)
+#if (UseCustomIdentity)
 using Microsoft.AspNetCore.Identity;
 #endif
 
@@ -7,7 +7,7 @@ namespace Infraestructure.Database.Repository;
 
 public class UserInfo(
 
-#if (UseIdentity)
+#if (UseCustomIdentity)
     UserManager<UserEntity> userManager
 #endif
 ) : IUserInfo
@@ -22,7 +22,7 @@ public class UserInfo(
         {
             return Entity;
         }
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return await userManager.FindByIdAsync(userId);
 #else
         throw new NotImplementedException();
@@ -37,7 +37,7 @@ public class UserInfo(
         {
             return Entity;
         }
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return await userManager.FindByNameAsync(userName);
 #else
         throw new NotImplementedException();

@@ -1,9 +1,9 @@
-using AuthManager.Application.Contracts;
 using AuthManager.Application.UsesCases.LoginCase;
 using AuthManager.GRPC.Mapper;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using Shared;
+using Shared.JWT;
 using System.Security.Claims;
 
 namespace AuthManager.GRPC.Services;

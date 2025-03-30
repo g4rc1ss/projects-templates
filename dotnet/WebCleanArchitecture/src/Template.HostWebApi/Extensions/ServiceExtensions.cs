@@ -1,4 +1,4 @@
-#if (UseJwt || UseIdentity)
+#if (UseCustomIdentity)
 #if (UseApi)
 using AuthManager.API;
 #endif
@@ -46,7 +46,7 @@ internal static class ServiceExtensions
 
     private static void InitializeFunctionalities(this WebApplicationBuilder builder)
     {
-#if (UseJwt || UseIdentity)
+#if (UseCustomIdentity)
 #if (UseApi)
         builder.InitAuthManager();
 #endif

@@ -1,10 +1,9 @@
-using AuthManager.Application.Contracts;
 using AuthManager.Application.Contracts.InfraestructureContracts;
-using AuthManager.Domain;
 using AuthManager.Domain.BusinessObjects;
 using AuthManager.Domain.ErrorsCode;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
+using Shared.JWT;
 using System.Security.Claims;
 
 namespace AuthManager.GRPC.Services;

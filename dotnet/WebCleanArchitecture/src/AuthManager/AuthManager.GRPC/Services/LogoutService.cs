@@ -1,8 +1,7 @@
-using AuthManager.Application.Contracts;
-using AuthManager.Domain;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
+using Shared.JWT;
 using System.Security.Claims;
 
 namespace AuthManager.GRPC.Services;

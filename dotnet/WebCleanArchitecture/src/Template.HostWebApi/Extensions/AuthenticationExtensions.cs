@@ -1,13 +1,14 @@
-#if (UseIdentity)
+#if (UseCustomIdentity)
 using Infraestructure.Database;
 using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 #endif
-#if (UseIdentity || UseJwt)
-using Template.HostWebApi.ConfigurationOptions;
-using AuthManager.Application.Contracts;
+#if (UseCustomIdentity || UseJwt)
 using Microsoft.IdentityModel.Tokens;
+using Shared.JWT;
 using System.Text;
+using Template.HostWebApi.ConfigurationOptions;
+using Template.HostWebApi.JwtManagement;
 #endif
 
 namespace Template.HostWebApi.Extensions;
@@ -17,7 +18,7 @@ public static class AuthenticationExtensions
     internal static void AddAuthenticationProtocol(this IServiceCollection services,
         IConfiguration configuration)
     {
-#if (UseIdentity || UseJwt)
+#if (UseCustomIdentity || UseJwt)
         services
 #if (UseApi)
             .AddHttpContextAccessor()
@@ -45,10 +46,11 @@ public static class AuthenticationExtensions
                 };
             });
         services.AddScoped<IJwtTokenManagement, JwtTokenManagement>();
+        services.AddScoped<IJwtRepository, JwtRepository>();
         services.Configure<JwtOption>(configuration.GetSection("Jwt"));
 #endif
 
-#if (UseIdentity)
+#if (UseCustomIdentity)
         services.AddIdentityCore<UserEntity>(options =>
             {
                 options.Password.RequireDigit = false;

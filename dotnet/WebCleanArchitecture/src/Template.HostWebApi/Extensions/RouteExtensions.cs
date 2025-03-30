@@ -1,4 +1,4 @@
-#if ((UseIdentity || UseJwt) && UseGrpc)
+#if ((UseCustomIdentity) && UseGrpc)
 using AuthManager.GRPC;
 #endif
 
@@ -8,7 +8,7 @@ public static class RouteExtensions
 {
     internal static void MapRouteServices(this IEndpointRouteBuilder endpoints)
     {
-#if (UseJwt || UseIdentity)
+#if (UseCustomIdentity)
 #if (UseGrpc)
         endpoints.MapFunctionalityGrpcServices();
 #endif

@@ -10,7 +10,7 @@
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApi Stagging' "/>
 
     <ItemGroup>
-        <!--#if (UseJwt || UseIdentity)-->
+        <!--#if (UseJwt || UseCustomIdentity)-->
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="*"/>
         <!--#endif-->
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
@@ -42,7 +42,7 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-        <!--#if (UseJwt || UseIdentity)-->
+        <!--#if (UseCustomIdentity)-->
         <!--#if (UseApi)-->
         <ProjectReference Include="..\AuthManager\AuthManager.API\AuthManager.API.csproj"/>
         <!--#endif-->

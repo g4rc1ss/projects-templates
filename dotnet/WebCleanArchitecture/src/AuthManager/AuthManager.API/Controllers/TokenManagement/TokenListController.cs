@@ -1,10 +1,10 @@
 using AuthManager.API.Models.JwtTokenModels;
-using AuthManager.Application.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using IJwtRepository = AuthManager.Application.Contracts.InfraestructureContracts.IJwtRepository;
-using JwtTokenData = AuthManager.Application.Contracts.InfraestructureContracts.JwtTokenData;
+using Shared.JWT;
+using IJwtRepository = Shared.JWT.IJwtRepository;
+using JwtTokenData = Shared.JWT.JwtTokenData;
 
 namespace AuthManager.API.Controllers.TokenManagement;
 

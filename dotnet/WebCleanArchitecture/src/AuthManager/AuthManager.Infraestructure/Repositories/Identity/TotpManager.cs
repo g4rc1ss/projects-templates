@@ -1,14 +1,14 @@
 using AuthManager.Application.Contracts.InfraestructureContracts;
 using Infraestructure.Database.Entities;
 using Infraestructure.Database.Repository;
-#if (UseIdentity)
+#if (UseCustomIdentity)
 using Microsoft.AspNetCore.Identity;
 #endif
 
 namespace AuthManager.Infraestructure.Repositories.Identity;
 
 public class TotpManager(
-#if (UseIdentity)
+#if (UseCustomIdentity)
     UserManager<UserEntity> userManager,
 #endif
     IUserInfo userInfo
@@ -17,7 +17,7 @@ public class TotpManager(
     public async Task<bool> HasTwoFactorAuth(string userName)
     {
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return await userManager.GetTwoFactorEnabledAsync(user);
 #else
         throw new NotImplementedException();
@@ -32,7 +32,7 @@ public class TotpManager(
         }
 
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return await userManager.VerifyTwoFactorTokenAsync(user, TokenOptions.DefaultAuthenticatorProvider,
             totpCode);
 #else
@@ -43,7 +43,7 @@ public class TotpManager(
     public async Task<bool> VerifyTwoFactorTokenAsync(string userName, string totpCode)
     {
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return await userManager.VerifyTwoFactorTokenAsync(user, TokenOptions.DefaultAuthenticatorProvider, totpCode);
 #else
         throw new NotImplementedException();
@@ -53,7 +53,7 @@ public class TotpManager(
     public async Task<IEnumerable<string>?> GenerateRecoveryCodesAsync(string userName, int numberOfCodes)
     {
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return await userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, numberOfCodes);
 #else
         throw new NotImplementedException();
@@ -63,7 +63,7 @@ public class TotpManager(
     public async Task<bool> SetTwoFactorAsync(string userName, bool enable)
     {
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         IdentityResult result = await userManager.SetTwoFactorEnabledAsync(user, enable);
         return result.Succeeded;
 #else
@@ -74,7 +74,7 @@ public class TotpManager(
     public async Task<string?> GetAuthenticatorKeyAsync(string userName)
     {
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         await userManager.ResetAuthenticatorKeyAsync(user);
         return await userManager.GetAuthenticatorKeyAsync(user);
 #else
@@ -85,7 +85,7 @@ public class TotpManager(
     public async Task<bool> CheckTotpRecoveryCodes(string userName, string recoveryCode)
     {
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         IdentityResult codeResult = await userManager.RedeemTwoFactorRecoveryCodeAsync(user, recoveryCode);
 
         return codeResult.Succeeded;

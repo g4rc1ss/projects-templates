@@ -1,4 +1,4 @@
-namespace AuthManager.Application.Contracts.InfraestructureContracts;
+namespace Shared.JWT;
 
 public interface IJwtRepository
 {

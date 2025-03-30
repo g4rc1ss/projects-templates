@@ -2,7 +2,7 @@ using AuthManager.Application.Contracts.InfraestructureContracts;
 using AuthManager.Domain.BusinessObjects;
 using Infraestructure.Database.Entities;
 using Infraestructure.Database.Repository;
-#if (UseIdentity)
+#if (UseCustomIdentity)
 using AuthManager.Infraestructure.Mappers;
 using Microsoft.AspNetCore.Identity;
 #endif
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 namespace AuthManager.Infraestructure.Repositories.Identity;
 
 public class UserManager(
-#if (UseIdentity)
+#if (UseCustomIdentity)
     UserManager<UserEntity> userManager,
 #endif
     IUserInfo userInfo
@@ -21,7 +21,7 @@ public class UserManager(
         ArgumentNullException.ThrowIfNull(userId);
         UserEntity? user = await userInfo.GetByIdAsync(userId);
 
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return user?.ToUserData();
 #else
         throw new NotImplementedException();
@@ -33,7 +33,7 @@ public class UserManager(
         ArgumentNullException.ThrowIfNull(userName);
 
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return user?.ToUserData();
 #else
         throw new NotImplementedException();
@@ -51,7 +51,7 @@ public class UserManager(
 
     public Task<IList<string>> GetUserRolesAsync(int userId)
     {
-#if (UseIdentity)
+#if (UseCustomIdentity)
         UserEntity? entity = new() { Id = userId };
         return userManager.GetRolesAsync(entity);
 #else
@@ -63,7 +63,7 @@ public class UserManager(
     {
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
 
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return await userManager.IsLockedOutAsync(user);
 #else
         throw new NotImplementedException();
@@ -76,7 +76,7 @@ public class UserManager(
         ArgumentNullException.ThrowIfNull(password);
         ArgumentNullException.ThrowIfNull(email);
 
-#if (UseIdentity)
+#if (UseCustomIdentity)
         UserEntity user = new()
         {
             UserName = userName,

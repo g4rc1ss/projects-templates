@@ -1,5 +1,4 @@
 ﻿using AuthManager.Application.Contracts.InfraestructureContracts;
-using AuthManager.Infraestructure.Repositories;
 using AuthManager.Infraestructure.Repositories.Identity;
 using Infraestructure.Database.Repository;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +10,6 @@ public static class AuthManagerInfraestructureExtensions
 {
     public static void AddRepositoryService(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IJwtRepository, JwtRepository>();
         services.AddScoped<IUserManager, UserManager>();
         services.AddScoped<IPasswordManager, PasswordManager>();
         services.AddScoped<IEmailManager, EmailManager>();

@@ -1,4 +1,4 @@
-namespace AuthManager.Domain;
+namespace Shared.JWT;
 
 public class ClaimsKey
 {

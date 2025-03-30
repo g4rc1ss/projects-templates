@@ -83,24 +83,28 @@
           "description": "JWT"
         },
         {
-          "choice": "identity",
+          "choice": "Identity",
           "description": "Identity"
+        },
+        {
+          "choice": "customIdentity",
+          "description": "Custom Identity"
         }
       ],
       "defaultValue": "none",
       "description": "Tipo de auth para usar"
     },
-    "UseIdentity": {
+    "UseCustomIdentity": {
       "type": "computed",
-      "value": "(Authentication == \"identity\")"
+      "value": "(Authentication == 'customIdentity')"
     },
     "UseJwt": {
       "type": "computed",
-      "value": "(Authentication == \"jwt\")"
+      "value": "(Authentication == 'jwt')"
     },
     "AuthNone": {
       "type": "computed",
-      "value": "(Authentication == \"none\")"
+      "value": "(Authentication == 'none')"
     },
     "Cache": {
       "type": "parameter",
@@ -128,15 +132,15 @@
     },
     "UseMemoryCache": {
       "type": "computed",
-      "value": "(Cache == \"memorycache\")"
+      "value": "(Cache == 'memorycache')"
     },
     "UseRedis": {
       "type": "computed",
-      "value": "(Cache == \"redis\")"
+      "value": "(Cache == 'redis')"
     },
     "UseGarnet": {
       "type": "computed",
-      "value": "(Cache == \"garnet\")"
+      "value": "(Cache == 'garnet')"
     },
     "EventBus": {
       "type": "parameter",
@@ -164,7 +168,7 @@
     },
     "UseMemoryEvents": {
       "type": "computed",
-      "value": "(EventBus == \"memoryevents\")"
+      "value": "(EventBus == 'memoryevents')"
     },
     "UseAzServiceBus": {
       "type": "computed",
@@ -172,7 +176,7 @@
     },
     "UseRabbitMQ": {
       "type": "computed",
-      "value": "(EventBus == \"rabbit\")"
+      "value": "(EventBus == 'rabbit')"
     },
     "EventBusNone": {
       "type": "computed",
@@ -219,13 +223,14 @@
         {
           "condition": "(UseJwt)",
           "exclude": [
+            "**/AuthManager/**/*",
             "src/Infraestructure.Database/Entities/RoleEntity.cs"
           ],
           "rename": {
           }
         },
         {
-          "condition": "((UseJwt || UseIdentity) && UseGrpc && !UseApi)",
+          "condition": "(!UseApi)",
           "exclude": [
             "**/AuthManager/AuthManager.API/**/*"
           ],
@@ -233,7 +238,7 @@
           }
         },
         {
-          "condition": "((UseJwt || UseIdentity) && !UseGrpc && UseApi)",
+          "condition": "(!UseGrpc)",
           "exclude": [
             "**/AuthManager/AuthManager.GRPC/**/*"
           ],

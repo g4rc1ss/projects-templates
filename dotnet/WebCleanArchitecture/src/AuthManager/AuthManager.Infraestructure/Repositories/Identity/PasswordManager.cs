@@ -1,14 +1,14 @@
 using AuthManager.Application.Contracts.InfraestructureContracts;
 using Infraestructure.Database.Entities;
 using Infraestructure.Database.Repository;
-#if (UseIdentity)
+#if (UseCustomIdentity)
 using Microsoft.AspNetCore.Identity;
 #endif
 
 namespace AuthManager.Infraestructure.Repositories.Identity;
 
 public class PasswordManager(
-#if (UseIdentity)
+#if (UseCustomIdentity)
     UserManager<UserEntity> userManager,
 #endif
     IUserInfo userInfo
@@ -20,7 +20,7 @@ public class PasswordManager(
         ArgumentNullException.ThrowIfNull(password);
 
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         bool isCorrect = await userManager.CheckPasswordAsync(user, password);
         if (!isCorrect)
         {
@@ -43,7 +43,7 @@ public class PasswordManager(
     {
         ArgumentNullException.ThrowIfNull(userName);
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         return await userManager.GeneratePasswordResetTokenAsync(user);
 #else
         throw new NotImplementedException();
@@ -54,7 +54,7 @@ public class PasswordManager(
     {
         ArgumentNullException.ThrowIfNull(userName);
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         IdentityResult result = await userManager.ResetPasswordAsync(user, token, password);
 
         return result.Succeeded;
@@ -66,7 +66,7 @@ public class PasswordManager(
     public async Task<bool> ChangePasswordAsync(string userName, string oldPassword, string newPassword)
     {
         UserEntity? user = await userInfo.GetUserByUserNameAsync(userName);
-#if (UseIdentity)
+#if (UseCustomIdentity)
         IdentityResult result = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
         return result.Succeeded;
 #else

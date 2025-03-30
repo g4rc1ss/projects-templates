@@ -1,28 +1,27 @@
-using AuthManager.Application.Contracts.InfraestructureContracts;
+using Shared.JWT;
+#if ((UseJwt || UseCustomIdentity) && SqlDatabase)
 using Infraestructure.Database.Entities;
-#if ((UseJwt || UseIdentity) && SqlDatabase)
 using Infraestructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 #endif
 
-namespace AuthManager.Infraestructure.Repositories;
+namespace Template.HostWebApi.JwtManagement;
 
 public class JwtRepository(
-
-#if ((UseJwt || UseIdentity) && SqlDatabase)
+#if ((UseJwt || UseCustomIdentity) && SqlDatabase)
     DatabaseContext dbContext
 #endif
 ) : IJwtRepository
 {
     public async Task<bool> RemoveTokenByIdsAsync(int userId, string refreshTokenId)
     {
+#if ((UseJwt || UseCustomIdentity) && SqlDatabase)
         UserJwtTokensEntity jwtEntity = new()
         {
             UserId = userId,
             Id = refreshTokenId
         };
-#if ((UseJwt || UseIdentity) && SqlDatabase)
         dbContext.UserJwtTokens.Remove(jwtEntity);
         return (await dbContext.SaveChangesAsync()) > 0;
 #else
@@ -32,12 +31,12 @@ public class JwtRepository(
 
     public async Task<string> CreateTokenAsync(int userId, DateTime expiration)
     {
+#if ((UseJwt || UseCustomIdentity) && SqlDatabase)
         UserJwtTokensEntity refreshTokenEntity = new()
         {
             UserId = userId,
             ExpirationUtc = expiration,
         };
-#if ((UseJwt || UseIdentity) && SqlDatabase)
         EntityEntry<UserJwtTokensEntity> entity = await dbContext.UserJwtTokens
             .AddAsync(refreshTokenEntity);
         await dbContext.SaveChangesAsync();
@@ -50,7 +49,7 @@ public class JwtRepository(
 
     public async Task<DateTime> GetTokenExpirationAsync(string refreshTokenId)
     {
-#if ((UseJwt || UseIdentity) && SqlDatabase)
+#if ((UseJwt || UseCustomIdentity) && SqlDatabase)
         UserJwtTokensEntity refreshTokens = await dbContext.UserJwtTokens
             .SingleAsync(x => x.Id == refreshTokenId);
 
@@ -62,7 +61,7 @@ public class JwtRepository(
 
     public async Task<IEnumerable<JwtTokenData>> GetAllTokensByUserId(int userId)
     {
-#if ((UseJwt || UseIdentity) && SqlDatabase)
+#if ((UseJwt || UseCustomIdentity) && SqlDatabase)
         List<UserJwtTokensEntity> tokenList = await dbContext.UserJwtTokens
             .Where(x => x.UserId == userId && x.ExpirationUtc >= DateTime.UtcNow)
             .ToListAsync();

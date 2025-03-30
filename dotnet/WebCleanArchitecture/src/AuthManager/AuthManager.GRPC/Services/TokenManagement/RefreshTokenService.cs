@@ -1,8 +1,6 @@
-using AuthManager.Application.Contracts;
-using AuthManager.Application.Contracts.InfraestructureContracts;
-using AuthManager.Domain;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
+using Shared.JWT;
 using System.Security.Claims;
 
 namespace AuthManager.GRPC.Services.TokenManagement;
