@@ -1,7 +1,7 @@
-#if (UseJwt || UseCustomIdentity)
+#if (UseJwt || UseCustomIdentity || UseIdentity)
 using Infraestructure.Database.Entities;
 #endif
-#if (UseCustomIdentity)
+#if (UseCustomIdentity || UseIdentity)
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 #endif
@@ -12,7 +12,7 @@ namespace Infraestructure.Database;
 public class DatabaseContext(
     DbContextOptions<DatabaseContext> options
 )
-#if (UseCustomIdentity)
+#if (UseCustomIdentity || UseIdentity)
     : IdentityDbContext<UserEntity, RoleEntity, int>(options)
 #else
     : DbContext(options)
@@ -22,14 +22,14 @@ public class DatabaseContext(
     public DbSet<UserJwtTokensEntity> UserJwtTokens { get; set; }
 #endif
 
-#if (UseCustomIdentity)
+#if (UseCustomIdentity || UseIdentity)
     public override DbSet<UserEntity> Users { get; set; }
 #endif
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-#if (UseCustomIdentity)
+#if (UseCustomIdentity || UseIdentity)
         builder.Entity<UserEntity>().ToTable("Users");
         builder.Entity<RoleEntity>().ToTable("Roles");
         builder.Entity<IdentityRoleClaim<int>>().ToTable("RoleClaims");

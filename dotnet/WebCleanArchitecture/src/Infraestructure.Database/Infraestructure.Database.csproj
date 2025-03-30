@@ -17,7 +17,7 @@
         <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*"/>
         <!--#endif-->
 
-        <!--#if (UseCustomIdentity)-->
+        <!--#if (UseCustomIdentity || UseIdentity)-->
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>
         <!--#endif-->
 

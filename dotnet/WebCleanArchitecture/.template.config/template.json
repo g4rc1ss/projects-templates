@@ -56,11 +56,11 @@
     },
     "UsePostgres": {
       "type": "computed",
-      "value": "(Database == \"postgresql\")"
+      "value": "(Database == 'postgresql')"
     },
     "UseSqlServer": {
       "type": "computed",
-      "value": "(Database == \"sqlserver\")"
+      "value": "(Database == 'sqlserver')"
     },
     "UseAzureSql": {
       "type": "computed",
@@ -83,7 +83,7 @@
           "description": "JWT"
         },
         {
-          "choice": "Identity",
+          "choice": "identity",
           "description": "Identity"
         },
         {
@@ -93,6 +93,10 @@
       ],
       "defaultValue": "none",
       "description": "Tipo de auth para usar"
+    },
+    "UseIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'identity')"
     },
     "UseCustomIdentity": {
       "type": "computed",
@@ -213,11 +217,18 @@
           "condition": "(AuthNone)",
           "exclude": [
             "**/AuthManager/**/*",
-            "src/Template.HostWebApi/JwtTokenManagement.cs",
+            "src/Template.HostWebApi/JwtManagement/*",
             "src/Infraestructure.Database/Entities/*",
             "src/Infraestructure.Database/Repository/UserInfo.cs",
             "src/Infraestructure.Database/EntityConfiguration/*",
             "src/Infraestructure.Events/SignUpEmailEvent/*"
+          ]
+        },
+        {
+          "condition": "(UseIdentity)",
+          "exclude": [
+            "**/AuthManager/**/*",
+            "src/Template.HostWebApi/JwtManagement/*"
           ]
         },
         {

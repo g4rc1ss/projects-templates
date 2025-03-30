@@ -1,3 +1,8 @@
+#if (UseIdentity)
+using Infraestructure.Database;
+using Infraestructure.Database.Entities;
+using Microsoft.AspNetCore.Identity;
+#endif
 #if (UseCustomIdentity)
 using Infraestructure.Database;
 using Infraestructure.Database.Entities;
@@ -48,6 +53,26 @@ public static class AuthenticationExtensions
         services.AddScoped<IJwtTokenManagement, JwtTokenManagement>();
         services.AddScoped<IJwtRepository, JwtRepository>();
         services.Configure<JwtOption>(configuration.GetSection("Jwt"));
+#endif
+
+#if (UseIdentity)
+        services.AddIdentityApiEndpoints<UserEntity>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.User.RequireUniqueEmail = true;
+
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.SignIn.RequireConfirmedEmail = false;
+            })
+            .AddUserManager<UserManager<UserEntity>>()
+            .AddRoles<RoleEntity>()
+            .AddRoleManager<RoleManager<RoleEntity>>()
+            .AddEntityFrameworkStores<DatabaseContext>();
 #endif
 
 #if (UseCustomIdentity)

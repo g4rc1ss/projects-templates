@@ -35,6 +35,9 @@
         <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.11.0-beta.2"/>
         <!--#endif-->
+        <!--#if (UseIdentity)-->
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>
+        <!--#endif-->
     </ItemGroup>
     <ItemGroup>
         <Content Include="..\..\.dockerignore">
