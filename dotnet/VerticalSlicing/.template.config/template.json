@@ -1,0 +1,290 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "architecture"
+  ],
+  "identity": "web-vertical-slicing-architecture",
+  "name": "Vertical Slicing Web Architecture",
+  "description": "Arquitectura base de Vertical Slicing",
+  "shortName": "VerticalSlicing",
+  "sourceName": "Template",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "UseApi": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": true
+    },
+    "UseGrpc": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false
+    },
+    "Database": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "postgresql",
+          "description": "PostgreSQL"
+        },
+        {
+          "choice": "azuresql",
+          "description": "Azure SQL"
+        },
+        {
+          "choice": "sqlserver",
+          "description": "SQL Server"
+        }
+      ],
+      "defaultValue": "postgresql",
+      "description": "The database type to use."
+    },
+    "SqlDatabase": {
+      "type": "computed",
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql)"
+    },
+    "UsePostgres": {
+      "type": "computed",
+      "value": "(Database == 'postgresql')"
+    },
+    "UseSqlServer": {
+      "type": "computed",
+      "value": "(Database == 'sqlserver')"
+    },
+    "UseAzureSql": {
+      "type": "computed",
+      "value": "(Database == 'azuresql')"
+    },
+    "DatabaseNone": {
+      "type": "computed",
+      "value": "(Database == 'none')"
+    },
+    "Authentication": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "jwt",
+          "description": "JWT"
+        },
+        {
+          "choice": "identity",
+          "description": "Identity"
+        },
+        {
+          "choice": "customIdentity",
+          "description": "Custom Identity"
+        }
+      ],
+      "defaultValue": "none",
+      "description": "Tipo de auth para usar"
+    },
+    "UseIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'identity')"
+    },
+    "UseCustomIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'customIdentity')"
+    },
+    "UseJwt": {
+      "type": "computed",
+      "value": "(Authentication == 'jwt')"
+    },
+    "AuthNone": {
+      "type": "computed",
+      "value": "(Authentication == 'none')"
+    },
+    "Cache": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "memorycache",
+          "description": "Memory"
+        },
+        {
+          "choice": "Redis",
+          "description": "redis"
+        },
+        {
+          "choice": "Garnet",
+          "description": "garnet"
+        }
+      ],
+      "defaultValue": "memorycache",
+      "description": "Cache a usar"
+    },
+    "UseMemoryCache": {
+      "type": "computed",
+      "value": "(Cache == 'memorycache')"
+    },
+    "UseRedis": {
+      "type": "computed",
+      "value": "(Cache == 'redis')"
+    },
+    "UseGarnet": {
+      "type": "computed",
+      "value": "(Cache == 'garnet')"
+    },
+    "EventBus": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "memoryevents",
+          "description": "Memory"
+        },
+        {
+          "choice": "azureservicebus",
+          "description": "Azure Service Bus"
+        },
+        {
+          "choice": "rabbit",
+          "description": "RabbitMQ"
+        }
+      ],
+      "defaultValue": "memoryevents",
+      "description": "Event bus to use"
+    },
+    "UseMemoryEvents": {
+      "type": "computed",
+      "value": "(EventBus == 'memoryevents')"
+    },
+    "UseAzServiceBus": {
+      "type": "computed",
+      "value": "(EventBus == 'azureservicebus')"
+    },
+    "UseRabbitMQ": {
+      "type": "computed",
+      "value": "(EventBus == 'rabbit')"
+    },
+    "EventBusNone": {
+      "type": "computed",
+      "value": "(EventBus == 'none')"
+    },
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net9.0"
+        }
+      ],
+      "defaultValue": "net9.0"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea",
+        "*.sln",
+        "**/Functionality/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(AuthNone)",
+          "exclude": [
+            "**/AuthManager/**/*",
+            "src/Template.HostWebApi/JwtManagement/*",
+            "src/Infraestructure.Database/Entities/*",
+            "src/Infraestructure.Database/Repository/UserInfo.cs",
+            "src/Infraestructure.Database/EntityConfiguration/*",
+            "src/Infraestructure.Events/SignUpEmailEvent/*",
+            "src/Shared/JWT/*"
+          ]
+        },
+        {
+          "condition": "(UseIdentity)",
+          "exclude": [
+            "**/AuthManager/**/*",
+            "src/Template.HostWebApi/JwtManagement/*",
+            "src/Shared/JWT/*"
+          ]
+        },
+        {
+          "condition": "(UseJwt)",
+          "exclude": [
+            "**/AuthManager/**/*",
+            "src/Infraestructure.Database/Entities/RoleEntity.cs"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseApi)",
+          "exclude": [
+            "**/AuthManager/AuthManager.API/**/*"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseGrpc)",
+          "exclude": [
+            "**/AuthManager/AuthManager.GRPC/**/*"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!SqlDatabase)",
+          "exclude": [
+            "src/Infraestructure.Database/EntityConfiguration/*",
+            "src/Infraestructure.Database/DatabaseContext.cs",
+            "src/Template.HostWebApi/Services/MigrationHostedService.cs"
+          ]
+        },
+        {
+          "condition": "DatabaseNone",
+          "exclude": [
+            "**/Infraestructure.Database/**/*"
+          ]
+        },
+        {
+          "condition": "EventBusNone",
+          "exclude": [
+            "**/Infraestructure.Events/**/*"
+          ]
+        },
+        {
+          "condition": "!UseMemoryEvents",
+          "exclude": [
+            "src/Infraestructure.Events/Handlers/*"
+          ]
+        }
+      ]
+    }
+  ]
+}
