@@ -5,12 +5,12 @@ using NLayerArchitecture.Infraestructure;
 
 namespace NLayerArchitecture.API;
 
-public static class NLayerArchitectureApiExtensions
+public static class ApiExtensions
 {
     public static void InitNLayerArchitectureApi(this IHostApplicationBuilder builder)
     {
         builder.Services.AddControllers()
-            .AddApplicationPart(typeof(NLayerArchitectureApiExtensions).Assembly);
+            .AddApplicationPart(typeof(ApiExtensions).Assembly);
 
         builder.Services.AddBusinessServices();
         builder.AddDataAccessService();

@@ -6,15 +6,15 @@ using NLayerArchitecture.Infraestructure;
 
 namespace NLayerArchitecture.Grpc;
 
-public static class NLayerArchitectureGrpcExtensions
+public static class GrpcExtensions
 {
-    public static void NLayerArchitectureGrpc(this WebApplicationBuilder builder)
+    public static void InitNLayerArchitecture(this WebApplicationBuilder builder)
     {
         builder.Services.AddBusinessServices();
         builder.AddDataAccessService();
     }
 
-    public static void MapNLayerArchitectureGrpcServices(this IEndpointRouteBuilder routeBuilder)
+    public static void MapNLayerArchitecture(this IEndpointRouteBuilder routeBuilder)
     {
         routeBuilder.MapGrpcService<GreeterService>();
     }

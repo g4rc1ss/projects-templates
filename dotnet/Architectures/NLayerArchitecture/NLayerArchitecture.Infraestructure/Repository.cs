@@ -1,6 +1,7 @@
 namespace NLayerArchitecture.Infraestructure;
 
-public class Repository
+public interface IRepository;
+
+public class Repository : IRepository
 {
-    
 }

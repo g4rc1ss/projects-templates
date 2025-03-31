@@ -19,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "template", "template", "{91
 		CleanArchitecture\.template.config\template.json = CleanArchitecture\.template.config\template.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hexagonal Architecture", "Hexagonal Architecture", "{D4505FF5-BFEF-4D48-8ED5-231FF9CF996E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "N-Layer Architecture", "N-Layer Architecture", "{A9B783FC-8771-4EE7-8282-DB5331DAC239}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{3853F741-0745-405E-86C9-44775E5B4509}"

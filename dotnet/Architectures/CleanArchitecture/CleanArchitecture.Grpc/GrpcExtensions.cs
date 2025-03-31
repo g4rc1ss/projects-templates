@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace CleanArchitecture.Grpc;
 
-public static class CleanArchitectureGrpcExtensions
+public static class GrpcExtensions
 {
     public static void InitCleanArchitectureGrpc(this WebApplicationBuilder builder)
     {
@@ -14,7 +14,7 @@ public static class CleanArchitectureGrpcExtensions
         builder.AddDataAccessService();
     }
 
-    public static void MapCleanArchitectureGrpcServices(this IEndpointRouteBuilder routeBuilder)
+    public static void MapCleanArchitectureGrpc(this IEndpointRouteBuilder routeBuilder)
     {
         routeBuilder.MapGrpcService<GreeterService>();
     }

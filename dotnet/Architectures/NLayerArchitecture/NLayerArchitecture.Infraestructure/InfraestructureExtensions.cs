@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace CleanArchitecture.Infraestructure;
+namespace NLayerArchitecture.Infraestructure;
 
-public static class CleanArchitectureInfraestructureExtensions
+public static class InfraestructureExtensions
 {
     public static void AddDataAccessService(this IHostApplicationBuilder builder)
     {
@@ -12,5 +12,6 @@ public static class CleanArchitectureInfraestructureExtensions
 
     private static void AddRepositoryServices(this IServiceCollection services)
     {
+        services.AddScoped<IRepository, Repository>();
     }
 }
