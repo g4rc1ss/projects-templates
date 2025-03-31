@@ -217,27 +217,27 @@
           "condition": "(AuthNone)",
           "exclude": [
             "**/AuthManager/**/*",
-            "src/Template.HostWebApi/JwtManagement/*",
-            "src/Infraestructure.Database/Entities/*",
-            "src/Infraestructure.Database/Repository/UserInfo.cs",
-            "src/Infraestructure.Database/EntityConfiguration/*",
-            "src/Infraestructure.Events/SignUpEmailEvent/*",
-            "src/Shared/JWT/*"
+            "Template.HostWebApi/JwtManagement/*",
+            "Infraestructure.Database/Entities/*",
+            "Infraestructure.Database/Repository/UserInfo.cs",
+            "Infraestructure.Database/EntityConfiguration/*",
+            "Infraestructure.Events/SignUpEmailEvent/*",
+            "Shared/JWT/*"
           ]
         },
         {
           "condition": "(UseIdentity)",
           "exclude": [
             "**/AuthManager/**/*",
-            "src/Template.HostWebApi/JwtManagement/*",
-            "src/Shared/JWT/*"
+            "Template.HostWebApi/JwtManagement/*",
+            "Shared/JWT/*"
           ]
         },
         {
           "condition": "(UseJwt)",
           "exclude": [
             "**/AuthManager/**/*",
-            "src/Infraestructure.Database/Entities/RoleEntity.cs"
+            "Infraestructure.Database/Entities/RoleEntity.cs"
           ],
           "rename": {
           }
@@ -261,9 +261,9 @@
         {
           "condition": "(!SqlDatabase)",
           "exclude": [
-            "src/Infraestructure.Database/EntityConfiguration/*",
-            "src/Infraestructure.Database/DatabaseContext.cs",
-            "src/Template.HostWebApi/Services/MigrationHostedService.cs"
+            "Infraestructure.Database/EntityConfiguration/*",
+            "Infraestructure.Database/DatabaseContext.cs",
+            "Template.HostWebApi/Services/MigrationHostedService.cs"
           ]
         },
         {
@@ -281,7 +281,7 @@
         {
           "condition": "!UseMemoryEvents",
           "exclude": [
-            "src/Infraestructure.Events/Handlers/*"
+            "Infraestructure.Events/Handlers/*"
           ]
         }
       ]
