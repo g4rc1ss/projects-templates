@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/template",
+  "$schema": "http://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "architecture"
@@ -17,11 +17,13 @@
   },
   "symbols": {
     "UseApi": {
+      "displayName": "API",
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": true
     },
     "UseGrpc": {
+      "displayName": "GRPC",
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": false
@@ -36,15 +38,15 @@
         },
         {
           "choice": "postgresql",
-          "description": "PostgreSQL"
+          "displayName": "PostgreSQL"
         },
         {
           "choice": "azuresql",
-          "description": "Azure SQL"
+          "displayName": "Azure SQL"
         },
         {
           "choice": "sqlserver",
-          "description": "SQL Server"
+          "displayName": "SQL Server"
         }
       ],
       "defaultValue": "postgresql",
@@ -80,15 +82,15 @@
         },
         {
           "choice": "jwt",
-          "description": "JWT"
+          "displayName": "JWT"
         },
         {
           "choice": "identity",
-          "description": "Identity"
+          "displayName": "Microsoft Identity"
         },
         {
           "choice": "customIdentity",
-          "description": "Custom Identity"
+          "displayName": "Custom Identity(Auth Manager)"
         }
       ],
       "defaultValue": "none",
@@ -120,14 +122,17 @@
         },
         {
           "choice": "memorycache",
+          "displayName": "En Memoria",
           "description": "Memory"
         },
         {
           "choice": "Redis",
+          "displayName": "Redis",
           "description": "redis"
         },
         {
           "choice": "Garnet",
+          "displayName": "Garnet",
           "description": "garnet"
         }
       ],
@@ -151,24 +156,23 @@
       "datatype": "choice",
       "choices": [
         {
-          "choice": "none",
-          "description": "None"
+          "choice": "none"
         },
         {
           "choice": "memoryevents",
-          "description": "Memory"
+          "displayName": "En Memoria(Mediatr)"
         },
         {
           "choice": "azureservicebus",
-          "description": "Azure Service Bus"
+          "displayName": "Azure Service Bud"
         },
         {
           "choice": "rabbit",
-          "description": "RabbitMQ"
+          "displayName": "Rabbit MQ"
         }
       ],
-      "defaultValue": "memoryevents",
-      "description": "Event bus to use"
+      "displayName": "Gestión de Eventos",
+      "defaultValue": "memoryevents"
     },
     "UseMemoryEvents": {
       "type": "computed",

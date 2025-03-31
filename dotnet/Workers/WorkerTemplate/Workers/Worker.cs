@@ -1,4 +1,4 @@
-namespace WorkerTemplate;
+namespace WorkerTemplate.Workers;
 
 public class Worker(
     ILogger<Worker> logger

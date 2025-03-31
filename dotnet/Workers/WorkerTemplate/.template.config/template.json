@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/template",
+  "$schema": "http://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "architecture"
@@ -26,6 +26,30 @@
         }
       ],
       "defaultValue": "net9.0"
+    },
+    "RabbitMq": {
+      "type": "parameter",
+      "datatype": "bool",
+      "displayName": "Rabbit MQ Handler",
+      "defaultValue": false
+    },
+    "AzServiceBus": {
+      "type": "parameter",
+      "datatype": "bool",
+      "displayName": "Azure Service Bus Handler",
+      "defaultValue": false
+    },
+    "Mongodb": {
+      "type": "parameter",
+      "datatype": "bool",
+      "displayName": "Mongo Database",
+      "defaultValue": false
+    },
+    "Postgres": {
+      "type": "parameter",
+      "datatype": "bool",
+      "displayName": "Ef core para postgres",
+      "defaultValue": false
     }
   },
   "sources": [
@@ -43,8 +67,15 @@
         "**/CleanArchitecture/**/*"
       ],
       "modifiers": [
-
       ]
+    },
+    {
+      "condition": "(!UseGrpc)",
+      "exclude": [
+        "**/CleanArchitecture.Grpc/**/*"
+      ],
+      "rename": {
+      }
     }
   ]
 }
