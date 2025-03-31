@@ -4,10 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApi Production' "/>
-    <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApi Stagging' "/>
 
     <ItemGroup>
         <!--#if (UseJwt || UseIdentity)-->
@@ -24,10 +21,7 @@
         <!--#endif-->
         <!--#if (SqlDatabase)-->
         <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.11.0-beta.2"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*"/>
         <!--#endif-->
         <!--#if (UseGrpc)-->
         <PackageReference Include="Grpc.AspNetCore" Version="*"/>
@@ -36,11 +30,13 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.11.0-beta.2"/>
         <!--#endif-->
     </ItemGroup>
+
     <ItemGroup>
         <Content Include="..\..\.dockerignore">
             <Link>.dockerignore</Link>
         </Content>
     </ItemGroup>
+
     <ItemGroup>
         <!--#if (UseJwt || UseIdentity)-->
         <!--#if (UseApi)-->
@@ -50,15 +46,12 @@
         <ProjectReference Include="..\AuthManager\AuthManager.GRPC\AuthManager.GRPC.csproj"/>
         <!--#endif-->
         <!--#endif-->
-
         <!--#if (!DatabaseNone)-->
         <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj"/>
         <!--#endif-->
-
         <!--#if (!EventBusNone)-->
         <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj"/>
         <!--#endif-->
-
         <ProjectReference Include="..\Shared\Shared.csproj"/>
     </ItemGroup>
 </Project>
