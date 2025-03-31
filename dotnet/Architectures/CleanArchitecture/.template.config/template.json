@@ -4,8 +4,8 @@
   "classifications": [
     "architecture"
   ],
-  "identity": "CleanArchitecture-structure",
-  "name": "Clean Architecture Structure",
+  "identity": "Clean Architecture",
+  "name": "Architecture Structure",
   "description": "Estructura de Clean Architecture",
   "shortName": "CleanArchitecture",
   "sourceName": "CleanArchitecture",

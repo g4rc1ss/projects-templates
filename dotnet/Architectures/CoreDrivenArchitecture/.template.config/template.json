@@ -4,8 +4,8 @@
   "classifications": [
     "architecture"
   ],
-  "identity": "CoreDrivenArchitecture-structure",
-  "name": "Clean Architecture Structure",
+  "identity": "Core Driven Architecture",
+  "name": "Architecture Structure",
   "description": "Estructura de Core Driven Architecture",
   "shortName": "CoreDrivenArchitecture",
   "sourceName": "CoreDrivenArchitecture",
