@@ -42,6 +42,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{8754A4
 		CoreDrivenArchitecture\.template.config\template.json = CoreDrivenArchitecture\.template.config\template.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{3853F741-0745-405E-86C9-44775E5B4509}"
+	ProjectSection(SolutionItems) = preProject
+		NLayerArchitecture\.template.config\template.json = NLayerArchitecture\.template.config\template.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLayerArchitecture.API", "NLayerArchitecture\NLayerArchitecture.API\NLayerArchitecture.API.csproj", "{85E17D05-3EC2-457E-93E5-680B59647034}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLayerArchitecture.Application", "NLayerArchitecture\NLayerArchitecture.Application\NLayerArchitecture.Application.csproj", "{C9D4F178-2166-48DB-B8AF-F48B5D20BF70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLayerArchitecture.Grpc", "NLayerArchitecture\NLayerArchitecture.Grpc\NLayerArchitecture.Grpc.csproj", "{0D438CD3-7970-4B17-AAB9-D3315A97D346}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLayerArchitecture.Infraestructure", "NLayerArchitecture\NLayerArchitecture.Infraestructure\NLayerArchitecture.Infraestructure.csproj", "{79EA5DB3-B587-4CDD-91BB-F000ADB51BF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +75,11 @@ Global
 		{C427B663-908A-4F44-9AF1-A0C4D413B213} = {4473A75A-6500-4C71-ACDC-A8C78FCF2238}
 		{55C74BD3-B70A-4BE7-A761-36262E925D52} = {4473A75A-6500-4C71-ACDC-A8C78FCF2238}
 		{8754A43A-6A68-4A80-900A-C35F10A4B661} = {4473A75A-6500-4C71-ACDC-A8C78FCF2238}
+		{3853F741-0745-405E-86C9-44775E5B4509} = {A9B783FC-8771-4EE7-8282-DB5331DAC239}
+		{85E17D05-3EC2-457E-93E5-680B59647034} = {A9B783FC-8771-4EE7-8282-DB5331DAC239}
+		{C9D4F178-2166-48DB-B8AF-F48B5D20BF70} = {A9B783FC-8771-4EE7-8282-DB5331DAC239}
+		{0D438CD3-7970-4B17-AAB9-D3315A97D346} = {A9B783FC-8771-4EE7-8282-DB5331DAC239}
+		{79EA5DB3-B587-4CDD-91BB-F000ADB51BF9} = {A9B783FC-8771-4EE7-8282-DB5331DAC239}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{61299FA4-6B2D-4865-AB00-97F765E5D794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -112,5 +130,21 @@ Global
 		{55C74BD3-B70A-4BE7-A761-36262E925D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55C74BD3-B70A-4BE7-A761-36262E925D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55C74BD3-B70A-4BE7-A761-36262E925D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85E17D05-3EC2-457E-93E5-680B59647034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85E17D05-3EC2-457E-93E5-680B59647034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85E17D05-3EC2-457E-93E5-680B59647034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85E17D05-3EC2-457E-93E5-680B59647034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9D4F178-2166-48DB-B8AF-F48B5D20BF70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9D4F178-2166-48DB-B8AF-F48B5D20BF70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9D4F178-2166-48DB-B8AF-F48B5D20BF70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9D4F178-2166-48DB-B8AF-F48B5D20BF70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D438CD3-7970-4B17-AAB9-D3315A97D346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D438CD3-7970-4B17-AAB9-D3315A97D346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D438CD3-7970-4B17-AAB9-D3315A97D346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D438CD3-7970-4B17-AAB9-D3315A97D346}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79EA5DB3-B587-4CDD-91BB-F000ADB51BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79EA5DB3-B587-4CDD-91BB-F000ADB51BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79EA5DB3-B587-4CDD-91BB-F000ADB51BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79EA5DB3-B587-4CDD-91BB-F000ADB51BF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

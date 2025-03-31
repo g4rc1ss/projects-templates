@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "architecture"
+  ],
+  "identity": "N Layer Architecture",
+  "name": "Architecture Structure",
+  "description": "Estructura de N Layer Architecture",
+  "shortName": "NLayerArchitecture",
+  "sourceName": "NLayerArchitecture",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "UseApi": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": true
+    },
+    "UseGrpc": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false
+    },
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net9.0"
+        }
+      ],
+      "defaultValue": "net9.0"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea",
+        "*.sln",
+        "**/CleanArchitecture/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!UseApi)",
+          "exclude": [
+            "**/CleanArchitecture/CleanArchitecture.API/**/*"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseGrpc)",
+          "exclude": [
+            "**/CleanArchitecture/CleanArchitecture.GRPC/**/*"
+          ],
+          "rename": {
+          }
+        }
+      ]
+    }
+  ]
+}

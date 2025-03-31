@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitecture.API.Controllers;
+namespace NLayerArchitecture.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CleanArchitectureController(
-    ILogger<CleanArchitectureController> logger
+public class NLayerArchitectureController(
+    ILogger<NLayerArchitectureController> logger
 ) : Controller
 {
     [HttpGet]
