@@ -13,9 +13,12 @@
         <PackageReference Include="Riok.Mapperly" Version="*"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\CoreDrivenArchitecture.UseCases\CoreDrivenArchitecture.UseCases.csproj"/>
+    </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CleanArchitecture.Infraestructure\CleanArchitecture.Infraestructure.csproj"/>
-        <ProjectReference Include="..\CleanArchitecture.Application\CleanArchitecture.Application.csproj"/>
+        <None Remove="Properties\launchSettings.json"/>
     </ItemGroup>
+
 </Project>

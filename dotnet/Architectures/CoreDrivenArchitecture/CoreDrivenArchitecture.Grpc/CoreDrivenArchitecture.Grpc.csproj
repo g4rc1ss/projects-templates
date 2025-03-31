@@ -6,17 +6,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\vehicles.proto" GrpcServices="Server"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="*"/>
-        <PackageReference Include="Riok.Mapperly" Version="*"/>
-
+        <PackageReference Include="Riok.Mapperly" Version="*" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CleanArchitecture.Infraestructure\CleanArchitecture.Infraestructure.csproj"/>
-        <ProjectReference Include="..\CleanArchitecture.Application\CleanArchitecture.Application.csproj"/>
+      <ProjectReference Include="..\CoreDrivenArchitecture.UseCases\CoreDrivenArchitecture.UseCases.csproj" />
     </ItemGroup>
+
 </Project>
