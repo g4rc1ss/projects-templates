@@ -8,7 +8,7 @@ namespace NLayerArchitecture.Grpc;
 
 public static class NLayerArchitectureGrpcExtensions
 {
-    public static void NLayerArchitectureGrpcGrpc(this WebApplicationBuilder builder)
+    public static void NLayerArchitectureGrpc(this WebApplicationBuilder builder)
     {
         builder.Services.AddBusinessServices();
         builder.AddDataAccessService();

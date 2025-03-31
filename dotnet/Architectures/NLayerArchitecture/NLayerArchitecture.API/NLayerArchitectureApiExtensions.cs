@@ -7,7 +7,7 @@ namespace NLayerArchitecture.API;
 
 public static class NLayerArchitectureApiExtensions
 {
-    public static void InitN_LayerArchitectureApi(this IHostApplicationBuilder builder)
+    public static void InitNLayerArchitectureApi(this IHostApplicationBuilder builder)
     {
         builder.Services.AddControllers()
             .AddApplicationPart(typeof(NLayerArchitectureApiExtensions).Assembly);

@@ -3,7 +3,6 @@ using CoreDrivenArchitecture.API.Models;
 using CoreDrivenArchitecture.DTOs.Vehicles;
 using CoreDrivenArchitecture.UseCases.Vehicles;
 using Microsoft.AspNetCore.Mvc;
-using ROP;
 
 namespace CoreDrivenArchitecture.API.Controllers;
 
@@ -16,7 +15,7 @@ public class VehiclesController(
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
-        Result<VehicleDto> vehicle = await vehicles.GetVehicle.Execute(id);
+        VehicleDto vehicle = await vehicles.GetVehicle.Execute(id);
         return Ok(vehicle);
     }
 

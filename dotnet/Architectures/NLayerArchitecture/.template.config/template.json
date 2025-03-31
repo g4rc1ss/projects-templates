@@ -50,13 +50,13 @@
         "**/*.user",
         "**/*idea",
         "*.sln",
-        "**/CleanArchitecture/**/*"
+        "**/NLayerArchitecture/**/*"
       ],
       "modifiers": [
         {
           "condition": "(!UseApi)",
           "exclude": [
-            "**/CleanArchitecture/CleanArchitecture.API/**/*"
+            "**/NLayerArchitecture.API/**/*"
           ],
           "rename": {
           }
@@ -64,7 +64,7 @@
         {
           "condition": "(!UseGrpc)",
           "exclude": [
-            "**/CleanArchitecture/CleanArchitecture.GRPC/**/*"
+            "**/NLayerArchitecture.Grpc/**/*"
           ],
           "rename": {
           }

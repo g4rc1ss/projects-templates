@@ -7,6 +7,6 @@ public static class BusinessExtensions
 {
     public static void AddBusinessServices(this IServiceCollection services)
     {
-        services.AddScoped<IExample, Example>();
+        services.AddScoped<Example>();
     }
 }

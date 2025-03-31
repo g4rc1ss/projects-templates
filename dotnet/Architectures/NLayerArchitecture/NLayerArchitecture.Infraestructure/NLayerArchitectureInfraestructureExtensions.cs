@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace NLayerArchitecture.Infraestructure;
 
-public static class CleanArchitectureInfraestructureExtensions
+public static class NLayerArchitectureInfraestructureExtensions
 {
     public static void AddDataAccessService(this IHostApplicationBuilder builder)
     {
@@ -12,5 +12,6 @@ public static class CleanArchitectureInfraestructureExtensions
 
     private static void AddRepositoryServices(this IServiceCollection services)
     {
+        services.AddScoped<Repository>();
     }
 }

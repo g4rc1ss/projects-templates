@@ -2,7 +2,6 @@ using CoreDrivenArchitecture.DTOs.Vehicles;
 using CoreDrivenArchitecture.Grpc.Mappers;
 using CoreDrivenArchitecture.UseCases.Vehicles;
 using Grpc.Core;
-using ROP;
 
 namespace CoreDrivenArchitecture.Grpc.Services;
 
@@ -19,12 +18,12 @@ public class VehicleService(
 
     public override async Task<GetVehicleResponse> Get(GetVehicleRequest request, ServerCallContext context)
     {
-        Result<VehicleDto> vehicle = await vehicles.GetVehicle.Execute(request.Id);
-        if (!vehicle.Success)
+        VehicleDto vehicle = await vehicles.GetVehicle.Execute(request.Id);
+        if (vehicle is null)
         {
             throw new RpcException(new Status(StatusCode.NotFound, $"Vehicle with id: {request.Id} not found"));
         }
 
-        return vehicle.Value.ToHostResponse();
+        return vehicle.ToHostResponse();
     }
 }

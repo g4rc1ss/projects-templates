@@ -56,7 +56,7 @@
         {
           "condition": "(!UseApi)",
           "exclude": [
-            "**/CleanArchitecture/CleanArchitecture.API/**/*"
+            "**/CleanArchitecture.API/**/*"
           ],
           "rename": {
           }
@@ -64,7 +64,7 @@
         {
           "condition": "(!UseGrpc)",
           "exclude": [
-            "**/CleanArchitecture/CleanArchitecture.GRPC/**/*"
+            "**/CleanArchitecture.Grpc/**/*"
           ],
           "rename": {
           }

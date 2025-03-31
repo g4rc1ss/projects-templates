@@ -3,7 +3,6 @@ using CoreDrivenArchitecture.Data.Repositories;
 using CoreDrivenArchitecture.DTOs.Vehicles;
 using CoreDrivenArchitecture.UseCases.Vehicles;
 using Moq;
-using ROP;
 
 namespace CoreDrivenArchitecture.UnitTests.UseCases.Vehicles;
 
@@ -33,12 +32,11 @@ public class AddVehicleTests
             .ReturnsAsync(new VehicleEntity() { Id = id, Make = make, Name = name });
 
 
-        Result<VehicleDto> result = await state.Subject
+        VehicleDto result = await state.Subject
             .Execute(new CreateVehicle() { Make = make, Name = name });
 
-        Assert.True(result.Success);
-        Assert.Equal(make, result.Value.Make);
-        Assert.Equal(id, result.Value.Id);
-        Assert.Equal(name, result.Value.Name);
+        Assert.Equal(make, result.Make);
+        Assert.Equal(id, result.Id);
+        Assert.Equal(name, result.Name);
     }
 }

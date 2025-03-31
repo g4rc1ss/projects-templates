@@ -11,8 +11,4 @@
       <ProjectReference Include="..\CoreDrivenArchitecture.DTOs\CoreDrivenArchitecture.DTOs.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Netmentor.ROP" Version="1.4.0" />
-    </ItemGroup>
-
 </Project>
