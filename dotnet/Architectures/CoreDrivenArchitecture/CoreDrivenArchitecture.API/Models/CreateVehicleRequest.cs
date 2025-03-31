@@ -1,4 +1,4 @@
-namespace CoreDrivenArchitecture.DTOs.Vehicles;
+namespace CoreDrivenArchitecture.API.Models;
 
 public class CreateVehicleRequest
 {

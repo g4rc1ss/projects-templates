@@ -1,3 +1,4 @@
+using CoreDrivenArchitecture.API.Models;
 using CoreDrivenArchitecture.DTOs.Vehicles;
 using Riok.Mapperly.Abstractions;
 

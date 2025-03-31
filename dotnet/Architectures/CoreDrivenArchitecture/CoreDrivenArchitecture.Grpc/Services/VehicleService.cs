@@ -6,7 +6,7 @@ using ROP;
 
 namespace CoreDrivenArchitecture.Grpc.Services;
 
-public class VehiclesService(
+public class VehicleService(
     VehiclesUseCases vehicles
 ) : Vehicle.VehicleBase
 {

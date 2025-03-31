@@ -16,6 +16,6 @@ public static class CoreDrivenArchitectureGrpcExtensions
 
     public static void MapCleanArchitectureGrpcServices(this IEndpointRouteBuilder routeBuilder)
     {
-        routeBuilder.MapGrpcService<VehiclesService>();
+        routeBuilder.MapGrpcService<VehicleService>();
     }
 }

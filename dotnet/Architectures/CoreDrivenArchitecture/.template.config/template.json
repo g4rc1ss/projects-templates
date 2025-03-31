@@ -4,11 +4,11 @@
   "classifications": [
     "architecture"
   ],
-  "identity": "CleanArchitecture-structure",
+  "identity": "CoreDrivenArchitecture-structure",
   "name": "Clean Architecture Structure",
-  "description": "Estructura de Clean Architecture",
-  "shortName": "CleanArchitecture",
-  "sourceName": "CleanArchitecture",
+  "description": "Estructura de Core Driven Architecture",
+  "shortName": "CoreDrivenArchitecture",
+  "sourceName": "CoreDrivenArchitecture",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
@@ -50,13 +50,13 @@
         "**/*.user",
         "**/*idea",
         "*.sln",
-        "**/CleanArchitecture/**/*"
+        "**/CoreDrivenArchitecture/**/*"
       ],
       "modifiers": [
         {
           "condition": "(!UseApi)",
           "exclude": [
-            "**/CleanArchitecture/CleanArchitecture.API/**/*"
+            "**/CoreDrivenArchitecture/CoreDrivenArchitecture.API/**/*"
           ],
           "rename": {
           }
@@ -64,7 +64,7 @@
         {
           "condition": "(!UseGrpc)",
           "exclude": [
-            "**/CleanArchitecture/CleanArchitecture.GRPC/**/*"
+            "**/CoreDrivenArchitecture/CoreDrivenArchitecture.GRPC/**/*"
           ],
           "rename": {
           }

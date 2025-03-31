@@ -1,4 +1,5 @@
 ﻿using CoreDrivenArchitecture.API.Mappers;
+using CoreDrivenArchitecture.API.Models;
 using CoreDrivenArchitecture.DTOs.Vehicles;
 using CoreDrivenArchitecture.UseCases.Vehicles;
 using Microsoft.AspNetCore.Mvc;
