@@ -234,6 +234,7 @@
           "exclude": [
             "**/AuthManager/**/*",
             "Template.HostWebApi/JwtManagement/*",
+            "Infraestructure.Events/SignUpEmailEvent/*",
             "Shared/JWT/*"
           ]
         },
