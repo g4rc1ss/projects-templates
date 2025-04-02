@@ -76,39 +76,39 @@
         "*.sln"
       ],
       "modifiers": [
+        {
+          "condition": "(!UseRabbitMQ)",
+          "exclude": [
+            "WorkerTemplate/Workers/RabbitMq/**/*"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseAzServiceBus)",
+          "exclude": [
+            "WorkerTemplate/Workers/AzServiceBus/*"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseMongodb)",
+          "exclude": [
+            "WorkerTemplate/Workers/Mongodb/*"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UsePostgres)",
+          "exclude": [
+            "WorkerTemplate/Workers/Postgres/*"
+          ],
+          "rename": {
+          }
+        }
       ]
-    },
-    {
-      "condition": "(!UseRabbitMQ)",
-      "exclude": [
-        "WorkerTemplate/Workers/RabbitMq/*"
-      ],
-      "rename": {
-      }
-    },
-    {
-      "condition": "(!UseAzServiceBus)",
-      "exclude": [
-        "WorkerTemplate/Workers/AzServiceBus/*"
-      ],
-      "rename": {
-      }
-    },
-    {
-      "condition": "(!UseMongodb)",
-      "exclude": [
-        "WorkerTemplate/Workers/Mongodb/*"
-      ],
-      "rename": {
-      }
-    },
-    {
-      "condition": "(!UsePostgres)",
-      "exclude": [
-        "WorkerTemplate/Workers/Postgres/*"
-      ],
-      "rename": {
-      }
     }
   ]
 }

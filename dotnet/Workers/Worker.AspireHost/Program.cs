@@ -1,3 +1,6 @@
+#if (UseAzServiceBus)
+using Aspire.Hosting.Azure;
+#endif
 using Projects;
 
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
@@ -35,14 +38,17 @@ IResourceBuilder<ProjectResource> project = builder.AddProject<WorkerTemplate>("
     project.WithReference(postgres, "DatabaseContext");
     project.WaitFor(postgres);
 #endif
+
 #if (UseRedis)
     project.WithReference(redis);
     project.WaitFor(redis);
 #endif
+
 #if (UseAzServiceBus)
     project.WithReference(azureServiceBus);
     project.WaitFor(azureServiceBus);
 #endif
+
 #if(UseRabbitMQ)
     project.WithReference(rabbitMQ);
     project.WaitFor(rabbitMQ);
