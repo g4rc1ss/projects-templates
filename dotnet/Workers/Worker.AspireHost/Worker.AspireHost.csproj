@@ -33,4 +33,16 @@
         <ProjectReference Include="..\WorkerTemplate\WorkerTemplate.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <!--#if (UseRabbitMQ)-->
+        <None Update="RabbitMq\rabbitmq.conf">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="RabbitMq\definitions.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <!--#endif-->
+
+    </ItemGroup>
+
 </Project>

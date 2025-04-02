@@ -79,7 +79,8 @@
         {
           "condition": "(!UseRabbitMQ)",
           "exclude": [
-            "WorkerTemplate/Workers/RabbitMq/**/*"
+            "WorkerTemplate/Workers/RabbitMq/**/*",
+            "Worker.AspireHost/RabbitMq/*"
           ],
           "rename": {
           }

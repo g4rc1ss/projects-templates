@@ -24,6 +24,8 @@ azureServiceBus.RunAsEmulator();
 #if (UseRabbitMQ)
 IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddRabbitMQ("RabbitMQ")
     .WithDataVolume("rabbitMQVM", isReadOnly: false)
+    .WithBindMount("./RabbitMq/definitions.json", "/etc/rabbitmq/definitions.json")
+    .WithBindMount("./RabbitMq/rabbitmq.conf", "/etc/rabbitmq/rabbitmq.conf")
     .WithLifetime(ContainerLifetime.Session)
     .WithManagementPlugin();
 #endif
