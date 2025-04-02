@@ -9,5 +9,30 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="*"/>
+
+        <!--#if (UseAzServiceBus)-->
+        <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" Version="*"/>
+        <!--#endif-->
+        <!--#if (UseRedis-->
+        <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*"/>
+        <!--#endif-->
+        <!--#if (UseRabbitMQ)-->
+        <PackageReference Include="Aspire.RabbitMQ.Client" Version="*"/>
+        <!--#endif-->
+        <!--#if (SqlDatabase)-->
+        <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.11.0-beta.2"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
+        <!--#endif-->
+        <!--#if (UsePostgres)-->
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
+        <!--#endif-->
+        <!--#if (UseMongodb)-->
+        <PackageReference Include="Aspire.MongoDB.Driver" Version="*"/>
+        <!--#endif-->
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ServiceDefaults\ServiceDefaults.csproj"/>
     </ItemGroup>
 </Project>

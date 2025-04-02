@@ -6,8 +6,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkerTemplate", "WorkerTem
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "template", "template", "{297D3045-E8B3-4451-8C8A-DB912ED7BE98}"
 	ProjectSection(SolutionItems) = preProject
-		WorkerTemplate\.template.config\template.json = WorkerTemplate\.template.config\template.json
+		.template.config\template.json = .template.config\template.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker.AspireHost", "Worker.AspireHost\Worker.AspireHost.csproj", "{2489D62B-CF88-429B-9D82-B5D9888DBB66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDefaults", "ServiceDefaults\ServiceDefaults.csproj", "{1FFB40E9-0351-4D22-9518-B0DFA98636FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,14 @@ Global
 		{79105421-30DE-438F-A61F-B0239F730781}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79105421-30DE-438F-A61F-B0239F730781}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79105421-30DE-438F-A61F-B0239F730781}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2489D62B-CF88-429B-9D82-B5D9888DBB66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2489D62B-CF88-429B-9D82-B5D9888DBB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2489D62B-CF88-429B-9D82-B5D9888DBB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2489D62B-CF88-429B-9D82-B5D9888DBB66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FFB40E9-0351-4D22-9518-B0DFA98636FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FFB40E9-0351-4D22-9518-B0DFA98636FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FFB40E9-0351-4D22-9518-B0DFA98636FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FFB40E9-0351-4D22-9518-B0DFA98636FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{79105421-30DE-438F-A61F-B0239F730781} = {D184B9B7-3535-4A99-8B82-00D20DBB21C0}

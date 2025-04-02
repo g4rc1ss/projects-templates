@@ -1,4 +1,4 @@
-namespace WorkerTemplate.Workers;
+namespace WorkerTemplate.Workers.RabbitMq;
 
 public class RabbitMqWorker(
     ILogger<RabbitMqWorker> logger
@@ -6,6 +6,6 @@ public class RabbitMqWorker(
 {
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        throw new NotImplementedException();
+        return Task.CompletedTask;
     }
 }
