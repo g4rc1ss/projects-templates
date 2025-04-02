@@ -22,8 +22,12 @@ azureServiceBus.RunAsEmulator();
 #endif
 
 #if (UseRabbitMQ)
-IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddRabbitMQ("RabbitMQ")
-    .WithDataVolume("rabbitMQVM", isReadOnly: false)
+IResourceBuilder<ParameterResource> rabbitUsername = builder.AddParameter("username", "guest");
+IResourceBuilder<ParameterResource> rabbitPassword = builder.AddParameter("password", "ERnyEKvg5mY1ByTDjHyey6");
+
+IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder
+    .AddRabbitMQ("RabbitMQ", rabbitUsername, rabbitPassword)
+    // .WithDataVolume("rabbitMQVM", isReadOnly: false)
     .WithBindMount("./RabbitMq/definitions.json", "/etc/rabbitmq/definitions.json")
     .WithBindMount("./RabbitMq/rabbitmq.conf", "/etc/rabbitmq/rabbitmq.conf")
     .WithLifetime(ContainerLifetime.Session)
