@@ -17,8 +17,9 @@ IResourceBuilder<PostgresDatabaseResource> postgres = builder
 #endif
 
 #if (UseAzServiceBus)
-IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder.AddAzureServiceBus("AzureServiceBus");
-azureServiceBus.RunAsEmulator();
+IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder
+    .AddAzureServiceBus("AzureServiceBus")
+    .RunAsEmulator();
 #endif
 
 #if (UseRabbitMQ)
@@ -71,4 +72,5 @@ project.WithReference(rabbitMQ)
     .WaitFor(rabbitMQ);
 #endif
 
-await builder.Build().RunAsync();
+await builder.Build()
+    .RunAsync();
