@@ -32,26 +32,37 @@ IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddRabbitMQ("RabbitM
 IResourceBuilder<RedisResource> redis = builder.AddRedis("Cache");
 #endif
 
+#if (UseMongodb)
+IResourceBuilder<MongoDBDatabaseResource> mongoDb = builder.AddMongoDB("mongodb")
+    .WithDataVolume("MongoVM", isReadOnly: false)
+    .WithLifetime(ContainerLifetime.Session)
+    .AddDatabase("WorkerTemplate");
+#endif
 
 IResourceBuilder<ProjectResource> project = builder.AddProject<WorkerTemplate>("WorkerTemplate");
 #if (UsePostgres)
-    project.WithReference(postgres, "DatabaseContext");
-    project.WaitFor(postgres);
+project.WithReference(postgres, "DatabaseContext")
+    .WaitFor(postgres);
+#endif
+
+#if (UseMongodb)
+project.WithReference(mongoDb)
+    .WaitFor(mongoDb);
 #endif
 
 #if (UseRedis)
-    project.WithReference(redis);
-    project.WaitFor(redis);
+project.WithReference(redis)
+    .WaitFor(redis);
 #endif
 
 #if (UseAzServiceBus)
-    project.WithReference(azureServiceBus);
-    project.WaitFor(azureServiceBus);
+project.WithReference(azureServiceBus)
+    .WaitFor(azureServiceBus);
 #endif
 
 #if(UseRabbitMQ)
-    project.WithReference(rabbitMQ);
-    project.WaitFor(rabbitMQ);
+project.WithReference(rabbitMQ)
+    .WaitFor(rabbitMQ);
 #endif
 
 await builder.Build().RunAsync();

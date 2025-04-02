@@ -18,18 +18,19 @@
         <!--#if (UseRedis)-->
         <PackageReference Include="Aspire.Hosting.Redis" Version="*"/>
         <!--#endif-->
-
         <!--#if (UseAzServiceBus)-->
         <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="*"/>
         <!--#endif-->
-
+        <!--#if (UseMongodb)-->
+        <PackageReference Include="Aspire.Hosting.MongoDB" Version="*"/>
+        <!--#endif-->
         <!--#if (UseRabbitMQ)-->
         <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="*"/>
         <!--#endif-->
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\WorkerTemplate\WorkerTemplate.csproj" />
+        <ProjectReference Include="..\WorkerTemplate\WorkerTemplate.csproj"/>
     </ItemGroup>
 
 </Project>

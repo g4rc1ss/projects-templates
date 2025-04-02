@@ -1,5 +1,11 @@
 using ServiceDefaults;
 using WorkerTemplate.Workers;
+#if (UseMongodb)
+using WorkerTemplate.Workers.Mongodb;
+#endif
+#if (UsePostgres)
+using WorkerTemplate.Workers.Postgres;
+#endif
 #if (UseRabbitMQ)
 using WorkerTemplate.Workers.RabbitMq;
 #endif
@@ -15,6 +21,12 @@ builder.AddRabbitMq();
 #endif
 #if (UseAzServiceBus)
 builder.AddAzureServiceBus();
+#endif
+#if (UsePostgres)
+builder.AddPostgres();
+#endif
+#if (UseMongodb)
+builder.AddMongodb();
 #endif
 
 builder.AddServiceDefaults();
