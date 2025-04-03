@@ -28,17 +28,15 @@ IResourceBuilder<ParameterResource> rabbitPassword = builder.AddParameter("passw
 
 IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder
     .AddRabbitMQ("RabbitMQ", rabbitUsername, rabbitPassword)
-    // .WithDataVolume("rabbitMQVM", isReadOnly: false)
+    .WithDataVolume("rabbitMQVM", isReadOnly: false)
     .WithBindMount("./RabbitMq/definitions.json", "/etc/rabbitmq/definitions.json")
     .WithBindMount("./RabbitMq/rabbitmq.conf", "/etc/rabbitmq/rabbitmq.conf")
     .WithLifetime(ContainerLifetime.Session)
     .WithManagementPlugin();
 #endif
-
 #if (UseRedis)
 IResourceBuilder<RedisResource> redis = builder.AddRedis("Cache");
 #endif
-
 #if (UseMongodb)
 IResourceBuilder<MongoDBDatabaseResource> mongoDb = builder.AddMongoDB("mongodb")
     .WithDataVolume("MongoVM", isReadOnly: false)
@@ -51,22 +49,18 @@ IResourceBuilder<ProjectResource> project = builder.AddProject<WorkerTemplate>("
 project.WithReference(postgres, "DatabaseContext")
     .WaitFor(postgres);
 #endif
-
 #if (UseMongodb)
 project.WithReference(mongoDb)
     .WaitFor(mongoDb);
 #endif
-
 #if (UseRedis)
 project.WithReference(redis)
     .WaitFor(redis);
 #endif
-
 #if (UseAzServiceBus)
 project.WithReference(azureServiceBus)
     .WaitFor(azureServiceBus);
 #endif
-
 #if(UseRabbitMQ)
 project.WithReference(rabbitMQ)
     .WaitFor(rabbitMQ);

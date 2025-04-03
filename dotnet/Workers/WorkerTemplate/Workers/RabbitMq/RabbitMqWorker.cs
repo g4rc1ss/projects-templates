@@ -10,24 +10,25 @@ public class RabbitMqWorker(
     IConnection connection
 ) : BackgroundService
 {
+    private readonly IModel? _channel = connection.CreateModel();
+
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        using IModel channel = connection.CreateModel();
-        AsyncEventingBasicConsumer receiver = new(channel);
+        ArgumentNullException.ThrowIfNull(_channel);
+
+        EventingBasicConsumer receiver = new(_channel);
         string? queue = configuration.GetSection("RabbitMq")["QueueName"];
 
         receiver.Received += HandleMessage;
-        channel.BasicQos(0, 10, false);
-        channel.BasicConsume(queue, false, receiver);
+        _channel.BasicQos(0, 10, false);
+        _channel.BasicConsume(queue, false, receiver);
 
         return Task.CompletedTask;
     }
 
-    private Task HandleMessage(object ch, BasicDeliverEventArgs eventArgs)
+    private void HandleMessage(object ch, BasicDeliverEventArgs eventArgs)
     {
         string body = Encoding.UTF8.GetString(eventArgs.Body.ToArray());
         logger.LogInformation("El body recibido de rabbit: {MessageBody}", body);
-
-        return Task.CompletedTask;
     }
 }
