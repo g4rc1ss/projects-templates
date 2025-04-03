@@ -1,5 +1,3 @@
-using Azure.Messaging.ServiceBus;
-
 namespace WorkerTemplate.Workers.Postgres;
 
 public class PostgresWorker(
@@ -9,12 +7,6 @@ public class PostgresWorker(
 ) : BackgroundService
 {
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        return Task.CompletedTask;
-    }
-
-
-    private Task ErrorMessageAsync(ProcessErrorEventArgs args)
     {
         return Task.CompletedTask;
     }
