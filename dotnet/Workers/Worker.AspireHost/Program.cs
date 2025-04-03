@@ -38,10 +38,10 @@ IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder
 IResourceBuilder<RedisResource> redis = builder.AddRedis("Cache");
 #endif
 #if (UseMongodb)
-IResourceBuilder<MongoDBDatabaseResource> mongoDb = builder.AddMongoDB("mongodb")
-    .WithDataVolume("MongoVM", isReadOnly: false)
+IResourceBuilder<MongoDBServerResource> mongoDb = builder.AddMongoDB("mongo")
+    // .WithDataVolume("MongoVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
-    .AddDatabase("WorkerTemplate");
+    .WithMongoExpress();
 #endif
 
 IResourceBuilder<ProjectResource> project = builder.AddProject<WorkerTemplate>("WorkerTemplate");

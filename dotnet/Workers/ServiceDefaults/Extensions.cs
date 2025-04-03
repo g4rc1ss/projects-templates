@@ -56,6 +56,18 @@ public static class Extensions
             {
                 tracing.AddSource(builder.Environment.ApplicationName)
                     .AddAspNetCoreInstrumentation()
+#if (UseMongodb)
+                    .AddSource("MongoDatabaseWorker")
+#endif
+#if (UseAzServiceBus)
+                    .AddSource("AzServiceBusWorker")
+#endif
+#if (UsePostgres)
+                    .AddSource("PostgresWorker")
+#endif
+#if (UseRabbitMQ)
+                    .AddSource("RabbitMqWorker")
+#endif
                     // Uncomment the following line to enable gRPC instrumentation (requires the OpenTelemetry.Instrumentation.GrpcNetClient package)
                     //.AddGrpcClientInstrumentation()
                     .AddHttpClientInstrumentation();

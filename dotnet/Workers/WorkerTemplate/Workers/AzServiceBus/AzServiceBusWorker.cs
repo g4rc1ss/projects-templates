@@ -1,4 +1,5 @@
 using Azure.Messaging.ServiceBus;
+using System.Diagnostics;
 
 namespace WorkerTemplate.Workers.AzServiceBus;
 
@@ -9,6 +10,9 @@ public class AzServiceBusWorker(
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        using ActivitySource activitySource = new(nameof(AzServiceBusWorker));
+        activitySource.StartActivity();
+
         await ListenServiceBus();
     }
 

@@ -1,5 +1,6 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System.Diagnostics;
 using System.Text;
 
 namespace WorkerTemplate.Workers.RabbitMq;
@@ -21,14 +22,27 @@ public class RabbitMqWorker(
 
         receiver.Received += HandleMessage;
         _channel.BasicQos(0, 10, false);
-        _channel.BasicConsume(queue, false, receiver);
+        _channel.BasicConsume(queue, true, receiver);
 
         return Task.CompletedTask;
     }
 
     private void HandleMessage(object ch, BasicDeliverEventArgs eventArgs)
     {
+        using ActivitySource activitySource = new(nameof(RabbitMqWorker));
+        activitySource.StartActivity();
+        using Activity? activityProcess = activitySource.CreateActivity("Process message", ActivityKind.Consumer);
+        activityProcess?.Start();
+
         string body = Encoding.UTF8.GetString(eventArgs.Body.ToArray());
         logger.LogInformation("El body recibido de rabbit: {MessageBody}", body);
+
+        activityProcess?.SetStatus(ActivityStatusCode.Ok);
+        activityProcess?.Stop();
+
+        Activity? activityAck = activitySource.CreateActivity("ACK", ActivityKind.Consumer)
+            ?.Start();
+        _channel?.BasicAck(eventArgs.DeliveryTag, false);
+        activityAck?.Stop();
     }
 }

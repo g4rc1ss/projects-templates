@@ -4,7 +4,7 @@ public static class MongodbExtensions
 {
     internal static void AddMongodb(this IHostApplicationBuilder builder)
     {
-        builder.AddMongoDBClient("mongodb");
+        builder.AddMongoDBClient("mongo");
         builder.Services.AddHostedService<MongoDatabaseWorker>();
     }
 }
