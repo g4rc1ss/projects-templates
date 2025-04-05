@@ -1,7 +1,7 @@
 using Infraestructure.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace Template.HostWebApi.Services;
+namespace Template.HostWebApi.HostedServices;
 
 public class MigrationHostedService(
     IServiceProvider serviceProvider

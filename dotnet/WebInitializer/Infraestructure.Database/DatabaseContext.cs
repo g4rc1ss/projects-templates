@@ -9,13 +9,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure.Database;
 
+#if (UseCustomIdentity || UseIdentity)
 public class DatabaseContext(
     DbContextOptions<DatabaseContext> options
-)
-#if (UseCustomIdentity || UseIdentity)
-    : IdentityDbContext<UserEntity, RoleEntity, int>(options)
+) : IdentityDbContext<UserEntity, RoleEntity, int>(options)
 #else
-    : DbContext(options)
+public class DatabaseContext(
+    DbContextOptions<DatabaseContext> options
+) : DbContext(options)
 #endif
 {
 #if (UseJwt || UseCustomIdentity)

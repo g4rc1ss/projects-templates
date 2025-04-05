@@ -268,7 +268,7 @@
           "exclude": [
             "Infraestructure.Database/EntityConfiguration/*",
             "Infraestructure.Database/DatabaseContext.cs",
-            "Template.HostWebApi/Services/MigrationHostedService.cs"
+            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
           ]
         },
         {

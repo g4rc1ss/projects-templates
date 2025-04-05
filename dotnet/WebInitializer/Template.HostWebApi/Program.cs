@@ -6,7 +6,7 @@ using Template.HostWebApi.OpenAPI;
 #endif
 using Template.HostWebApi.Extensions;
 #if (SqlDatabase)
-using Template.HostWebApi.Services;
+using Template.HostWebApi.HostedServices;
 #endif
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
