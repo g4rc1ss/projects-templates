@@ -11,6 +11,7 @@ IResourceBuilder<ParameterResource> password = builder.AddParameter("password", 
 
 IResourceBuilder<PostgresDatabaseResource> postgres = builder
     .AddPostgres("Postgres", username, password, 5432)
+    .WithPgWeb()
     .WithDataVolume("postgresVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
     .AddDatabase("PostgresDB", "WorkerTemplate");
@@ -35,7 +36,9 @@ IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder
     .WithManagementPlugin();
 #endif
 #if (UseRedis)
-IResourceBuilder<RedisResource> redis = builder.AddRedis("Cache");
+IResourceBuilder<RedisResource> redis = builder.AddRedis("Cache")
+    .WithRedisCommander()
+    .WithRedisInsight();
 #endif
 #if (UseMongodb)
 IResourceBuilder<MongoDBServerResource> mongoDb = builder.AddMongoDB("mongo")

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Grpc.AspNetCore" Version="*"/>
+        <PackageReference Include="Riok.Mapperly" Version="*"/>
+
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CustomArchitecture.Infraestructure\CustomArchitecture.Infraestructure.csproj"/>
+        <ProjectReference Include="..\CustomArchitecture.Application\CustomArchitecture.Application.csproj"/>
+    </ItemGroup>
+</Project>
