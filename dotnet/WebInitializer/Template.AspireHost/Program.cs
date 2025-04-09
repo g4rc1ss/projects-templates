@@ -11,6 +11,7 @@ IResourceBuilder<ParameterResource> password = builder.AddParameter("password", 
 
 IResourceBuilder<PostgresDatabaseResource> postgres = builder
     .AddPostgres("Postgres", username, password, 5432)
+    .WithPgWeb()
     .WithDataVolume("postgresVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
     .AddDatabase("PostgresDB", "Template");
@@ -23,8 +24,9 @@ IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder
 #endif
 
 #if (UseAzServiceBus)
-IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder.AddAzureServiceBus("AzureServiceBus");
-azureServiceBus.RunAsEmulator();
+IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder
+    .AddAzureServiceBus("AzureServiceBus")
+    .RunAsEmulator();
 #elif (UseRabbitMQ)
 IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddRabbitMQ("RabbitMQ")
     .WithDataVolume("rabbitMQVM", isReadOnly: false)
@@ -33,34 +35,38 @@ IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddRabbitMQ("RabbitM
 #endif
 
 #if (UseRedis)
-IResourceBuilder<RedisResource> redis = builder.AddRedis("Cache");
+IResourceBuilder<RedisResource> redis = builder
+    .AddRedis("Cache")
+    .WithRedisCommander()
+    .WithRedisInsight();
 #endif
 
 #if (UseGarnet)
-IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
+IResourceBuilder<GarnetResource> garnet = builder
+    .AddGarnet("Cache");
 #endif
-
 
 IResourceBuilder<ProjectResource> project = builder.AddProject<Template_HostWebApi>("Template");
 #if (UsePostgres)
-    project.WithReference(postgres, "DatabaseContext");
-    project.WaitFor(postgres);
+project.WithReference(postgres, "DatabaseContext")
+    .WaitFor(postgres);
 #elif (UseSqlServer || UseAzureSql)
-    project.WithReference(sqlServer, "DatabaseContext");
-    project.WaitFor(sqlServer);
+project.WithReference(sqlServer, "DatabaseContext")
+    .WaitFor(sqlServer);
 #endif
 #if (UseRedis)
-    project.WithReference(redis);
+project.WithReference(redis);
     project.WaitFor(redis);
 #elif (UseGarnet)
-    project.WithReference(garnet);
-    project.WaitFor(garnet);
+project.WithReference(garnet)
+    .WaitFor(garnet);
 #endif
 #if (UseAzServiceBus)
-    project.WithReference(azureServiceBus);
-    project.WaitFor(azureServiceBus);
+project.WithReference(azureServiceBus)
+    .WaitFor(azureServiceBus);
 #elif (UseRabbitMQ)
-    project.WithReference(rabbitMQ);
-    project.WaitFor(rabbitMQ);
+project.WithReference(rabbitMQ)
+    .WaitFor(rabbitMQ);
 #endif
-builder.Build().Run();
+
+await builder.Build().RunAsync();
