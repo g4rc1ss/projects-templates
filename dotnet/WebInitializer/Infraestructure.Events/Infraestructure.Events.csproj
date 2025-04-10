@@ -10,10 +10,6 @@
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*"/>
-        <!--#if (UseMemoryEvents)-->
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="*"/>
-        <!--#endif-->
-
         <!--#if (UseAzServiceBus)-->
         <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" Version="*"/>
         <!--#endif-->

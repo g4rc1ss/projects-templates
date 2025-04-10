@@ -1,5 +1,6 @@
 #if (UseMemoryEvents)
-using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Channels;
 #elif (UseAzServiceBus)
 using Azure.Messaging.ServiceBus;
 using System.Text.Json;
@@ -13,7 +14,7 @@ namespace Infraestructure.Events;
 
 public class EventNotificator(
 #if (UseMemoryEvents)
-    IMediator mediator,
+    IServiceProvider serviceProvider,
 #elif (UseAzServiceBus)
     ServiceBusClient serviceBusClient,
 #elif (UseRabbitMQ)
@@ -25,7 +26,8 @@ public class EventNotificator(
     public async Task PublishAsync<TRequest>(TRequest request, CancellationToken cancellationToken = default)
     {
 #if (UseMemoryEvents)
-        await mediator.Publish(request, cancellationToken);
+        Channel<TRequest> channel = serviceProvider.GetRequiredService<Channel<TRequest>>();
+        await channel.Writer.WriteAsync(request, cancellationToken);
 #elif (UseAzServiceBus)
         string? queuename = configuration.GetSection("ServiceBusConfig")["QueueName"];
         ServiceBusSender? sender = serviceBusClient.CreateSender(queuename);

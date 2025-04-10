@@ -1,13 +1,23 @@
-using MediatR;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System.Threading.Channels;
 
 namespace Infraestructure.Events.Handlers;
 
-public record Request : INotification;
+public record Request;
 
-public class Handler : INotificationHandler<Request>
+public class Handler(
+    ILogger<Handler> logger,
+    Channel<Request> channel
+) : BackgroundService
 {
-    public Task Handle(Request notification, CancellationToken cancellationToken)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        throw new NotImplementedException();
+        while (await channel.Reader.WaitToReadAsync(stoppingToken))
+        {
+            while (channel.Reader.TryRead(out Request? request))
+            {
+            }
+        }
     }
 }

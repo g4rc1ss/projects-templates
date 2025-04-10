@@ -1,5 +1,6 @@
 ﻿#if (UseMemoryEvents)
-using MediatR;
+using Infraestructure.Events.Handlers;
+using System.Threading.Channels;
 #endif
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,8 +12,10 @@ public static class InfraestructureEventsExtensions
     public static void AddEventsServices(this IHostApplicationBuilder builder)
     {
         builder.Services.AddScoped<IEventNotificator, EventNotificator>();
+
 #if (UseMemoryEvents)
-        builder.Services.AddMediatR(typeof(InfraestructureEventsExtensions).Assembly);
+        builder.Services.AddSingleton(Channel.CreateUnbounded<Request>());
+        builder.Services.AddHostedService<Handler>();
 #endif
 #if (UseAzServiceBus)
         builder.AddAzureServiceBusClient("AzureServiceBus");
