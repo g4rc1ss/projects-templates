@@ -2,11 +2,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Infraestructure.Events.Handlers;
 
-public record Request
-    : INotificator;
-
-public class Handler(
-    ILogger<Handler> logger
+public class Handler2(
+    ILogger<Handler2> logger
 ) : IEventConsumer<Request>
 {
     public Task ConsumeAsync(Request request, CancellationToken cancellationToken = default)

@@ -160,11 +160,11 @@
         },
         {
           "choice": "memoryevents",
-          "displayName": "En Memoria(Mediatr)"
+          "displayName": "En Memoria"
         },
         {
           "choice": "azureservicebus",
-          "displayName": "Azure Service Bud"
+          "displayName": "Azure Service Bus"
         },
         {
           "choice": "rabbit",
