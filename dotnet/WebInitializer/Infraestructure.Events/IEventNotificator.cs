@@ -2,13 +2,10 @@ namespace Infraestructure.Events;
 
 public interface IEventNotificator
 {
+#if (UseMemoryEvents)
+    Task PublishAsync<TRequest>(TRequest request, CancellationToken cancellationToken = default)
+        where TRequest : INotificator;
+#else
     Task PublishAsync<TRequest>(TRequest request, CancellationToken cancellationToken = default);
+#endif
 }
-
-public interface IEventConsumer<TRequest>
-    where TRequest : INotificator
-{
-    public Task ConsumeAsync(TRequest request, CancellationToken cancellationToken = default);
-}
-
-public interface INotificator;

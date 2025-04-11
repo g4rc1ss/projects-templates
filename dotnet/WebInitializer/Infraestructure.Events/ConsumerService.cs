@@ -2,7 +2,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading.Channels;
 
-namespace Infraestructure.Events.Handlers;
+namespace Infraestructure.Events;
 
 public class ConsumerService<TRequest>(
     ILogger<ConsumerService<TRequest>> logger,

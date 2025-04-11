@@ -43,10 +43,8 @@
     <ItemGroup>
         <!--#if (UseCustomIdentity)-->
         <!--#if (UseApi)-->
-        <ProjectReference Include="..\AuthManager\AuthManager.API\AuthManager.API.csproj"/>
         <!--#endif-->
         <!--#if (UseGrpc)-->
-        <ProjectReference Include="..\AuthManager\AuthManager.GRPC\AuthManager.GRPC.csproj"/>
         <!--#endif-->
         <!--#endif-->
         <!--#if (!DatabaseNone)-->

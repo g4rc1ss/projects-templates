@@ -24,6 +24,9 @@ public class EventNotificator(
 ) : IEventNotificator
 {
     public async Task PublishAsync<TRequest>(TRequest request, CancellationToken cancellationToken = default)
+#if (UseMemoryEvents)
+        where TRequest : INotificator
+#endif
     {
 #if (UseMemoryEvents)
         Channel<TRequest> channel = serviceProvider.GetRequiredService<Channel<TRequest>>();

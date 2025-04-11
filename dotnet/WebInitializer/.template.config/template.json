@@ -87,10 +87,6 @@
         {
           "choice": "identity",
           "displayName": "Microsoft Identity"
-        },
-        {
-          "choice": "customIdentity",
-          "displayName": "Custom Identity(Auth Manager)"
         }
       ],
       "defaultValue": "none",
@@ -220,7 +216,6 @@
         {
           "condition": "(AuthNone)",
           "exclude": [
-            "**/AuthManager/**/*",
             "Template.HostWebApi/JwtManagement/*",
             "Infraestructure.Database/Entities/*",
             "Infraestructure.Database/Repository/UserInfo.cs",
@@ -232,7 +227,6 @@
         {
           "condition": "(UseIdentity)",
           "exclude": [
-            "**/AuthManager/**/*",
             "Template.HostWebApi/JwtManagement/*",
             "Infraestructure.Events/SignUpEmailEvent/*",
             "Shared/JWT/*"
@@ -241,7 +235,6 @@
         {
           "condition": "(UseJwt)",
           "exclude": [
-            "**/AuthManager/**/*",
             "Infraestructure.Database/Entities/RoleEntity.cs"
           ],
           "rename": {
@@ -250,7 +243,6 @@
         {
           "condition": "(!UseApi)",
           "exclude": [
-            "**/AuthManager/AuthManager.API/**/*"
           ],
           "rename": {
           }
@@ -258,7 +250,6 @@
         {
           "condition": "(!UseGrpc)",
           "exclude": [
-            "**/AuthManager/AuthManager.GRPC/**/*"
           ],
           "rename": {
           }
@@ -286,7 +277,9 @@
         {
           "condition": "!UseMemoryEvents",
           "exclude": [
-            "Infraestructure.Events/Handlers/*"
+            "Infraestructure.Events/Handlers/*",
+            "Infraestructure.Events/IEventConsumer.cs",
+            "Infraestructure.Events/ConsumerService.cs"
           ]
         }
       ]
