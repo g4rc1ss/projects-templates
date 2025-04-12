@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <!--#if (UseJwt || UseCustomIdentity)-->
+        <!--#if (UseJwt)-->
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="*"/>
         <!--#endif-->
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
@@ -41,12 +41,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!--#if (UseCustomIdentity)-->
-        <!--#if (UseApi)-->
-        <!--#endif-->
-        <!--#if (UseGrpc)-->
-        <!--#endif-->
-        <!--#endif-->
         <!--#if (!DatabaseNone)-->
         <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj"/>
         <!--#endif-->

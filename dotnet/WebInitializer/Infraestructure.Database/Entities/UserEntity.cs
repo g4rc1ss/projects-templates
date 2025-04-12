@@ -1,19 +1,19 @@
-#if (UseCustomIdentity || UseIdentity)
+#if (UseIdentity)
 using Microsoft.AspNetCore.Identity;
 #endif
 
 namespace Infraestructure.Database.Entities;
 
 public class UserEntity
-#if (UseCustomIdentity || UseIdentity)
+#if (UseIdentity)
     : IdentityUser<int>
 #endif
 {
-#if (!UseCustomIdentity && !UseIdentity)
+#if (!UseIdentity)
     public int Id { get; set; }
 #endif
 
-#if (UseCustomIdentity || UseIdentity || UseJwt)
+#if (UseIdentity || UseJwt)
     // Navigation
     public IEnumerable<UserJwtTokensEntity> JwtUserTokens { get; set; }
 #endif

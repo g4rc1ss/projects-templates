@@ -3,12 +3,7 @@ using Infraestructure.Database;
 using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 #endif
-#if (UseCustomIdentity)
-using Infraestructure.Database;
-using Infraestructure.Database.Entities;
-using Microsoft.AspNetCore.Identity;
-#endif
-#if (UseCustomIdentity || UseJwt)
+#if (UseJwt)
 using Microsoft.IdentityModel.Tokens;
 using Shared.JWT;
 using System.Text;
@@ -23,7 +18,7 @@ public static class AuthenticationExtensions
     internal static void AddAuthenticationProtocol(this IServiceCollection services,
         IConfiguration configuration)
     {
-#if (UseCustomIdentity || UseJwt)
+#if (UseJwt)
         services
 #if (UseApi)
             .AddHttpContextAccessor()
@@ -72,25 +67,6 @@ public static class AuthenticationExtensions
             .AddUserManager<UserManager<UserEntity>>()
             .AddRoles<RoleEntity>()
             .AddRoleManager<RoleManager<RoleEntity>>()
-            .AddEntityFrameworkStores<DatabaseContext>();
-#endif
-
-#if (UseCustomIdentity)
-        services.AddIdentityCore<UserEntity>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.User.RequireUniqueEmail = true;
-
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            })
-            .AddUserManager<UserManager<UserEntity>>()
-            .AddRoles<RoleEntity>()
-            .AddRoleManager<RoleManager<RoleEntity>>()
-            .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<DatabaseContext>();
 #endif
     }

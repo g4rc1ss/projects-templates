@@ -16,7 +16,7 @@ public class UserJwtTokensConfiguration : IEntityTypeConfiguration<UserJwtTokens
         builder.Property(x => x.ExpirationUtc)
             .IsRequired();
 
-#if (UseCustomIdentity || UseJwt)
+#if (UseJwt)
         // Relation 1:N con Users
         builder.HasOne<UserEntity>(x => x.User)
             .WithMany(x => x.JwtUserTokens)

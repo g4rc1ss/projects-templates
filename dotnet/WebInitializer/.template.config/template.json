@@ -96,10 +96,6 @@
       "type": "computed",
       "value": "(Authentication == 'identity')"
     },
-    "UseCustomIdentity": {
-      "type": "computed",
-      "value": "(Authentication == 'customIdentity')"
-    },
     "UseJwt": {
       "type": "computed",
       "value": "(Authentication == 'jwt')"
@@ -263,7 +259,7 @@
           ]
         },
         {
-          "condition": "DatabaseNone",
+          "condition": "DatabaseNone && AuthNone",
           "exclude": [
             "**/Infraestructure.Database/**/*"
           ]
