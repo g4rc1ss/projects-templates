@@ -10,8 +10,4 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="*"/>
         <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="*"/>
     </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\CustomArchitecture.Domain\CustomArchitecture.Domain.csproj"/>
-    </ItemGroup>
 </Project>
