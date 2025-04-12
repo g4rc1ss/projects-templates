@@ -1,4 +1,7 @@
-﻿using OpenTelemetry;
+﻿#if (UseMemoryEvents)
+using Infraestructure.Events;
+#endif
+using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -30,6 +33,9 @@ public static class TelemetryExtensions
                 .AddHttpClientInstrumentation()
             )
             .WithTracing(trace => trace
+#if (UseMemoryEvents)
+                    .AddSource(EventsConst.CONSUMER_NAME)
+#endif
                     .AddAspNetCoreInstrumentation()
 #if (UseGrpc)
                     .AddGrpcClientInstrumentation()

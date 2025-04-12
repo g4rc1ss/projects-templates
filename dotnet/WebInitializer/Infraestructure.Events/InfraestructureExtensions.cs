@@ -34,9 +34,10 @@ public static class InfraestructureEventsExtensions
 
             foreach (Type notificator in notificators)
             {
+                Type channelMessage = typeof(Message<>).MakeGenericType(notificator);
                 typeof(InfraestructureEventsExtensions)
                     .GetMethod(nameof(AddChannel))
-                    ?.MakeGenericMethod(notificator)
+                    ?.MakeGenericMethod(channelMessage)
                     .Invoke(null, [builder.Services]);
 
                 Type consumerNotificator = typeof(ConsumerService<>).MakeGenericType(notificator);

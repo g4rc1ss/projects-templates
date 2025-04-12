@@ -1,12 +1,13 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using System.Threading.Channels;
 
 namespace Infraestructure.Events;
 
 public class ConsumerService<TRequest>(
     ILogger<ConsumerService<TRequest>> logger,
-    Channel<TRequest> channel,
+    Channel<Message<TRequest>> channel,
     IEnumerable<IEventConsumer<TRequest>> consumers
 ) : BackgroundService
     where TRequest : INotificator
@@ -15,20 +16,37 @@ public class ConsumerService<TRequest>(
     {
         while (await channel.Reader.WaitToReadAsync(stoppingToken))
         {
-            try
+            while (channel.Reader.TryRead(out Message<TRequest>? request))
             {
-                while (channel.Reader.TryRead(out TRequest? request))
+                ActivityTraceId traceId = default;
+                if (!string.IsNullOrEmpty(request?.Traces?.TraceId))
+                {
+                    traceId = ActivityTraceId.CreateFromString(request?.Traces?.TraceId);
+                }
+
+                ActivitySpanId spanId = default;
+                if (!string.IsNullOrEmpty(request?.Traces?.SpanId))
+                {
+                    spanId = ActivitySpanId.CreateFromString(request?.Traces?.SpanId);
+                }
+#if (UseMemoryEvents)
+                using ActivitySource? tracingConsumer = new(EventsConst.CONSUMER_NAME);
+                using Activity? activity = tracingConsumer.CreateActivity("Execute Handlers", ActivityKind.Consumer);
+                activity?.SetParentId(traceId, spanId, ActivityTraceFlags.Recorded);
+                activity?.Start();
+#endif
+                try
                 {
                     List<Task> parallelConsumers = [];
                     parallelConsumers.AddRange(consumers.Select(x =>
-                        x.ConsumeAsync(request, stoppingToken)));
+                        x.ConsumeAsync(request.Request, stoppingToken)));
 
                     await Task.WhenAll(parallelConsumers);
                 }
-            }
-            catch (Exception e)
-            {
-                logger.LogError(e, "Exception occured on consumer {ConsumerName}", typeof(TRequest).Name);
+                catch (Exception e)
+                {
+                    logger.LogError(e, "Exception occured on consumer {ConsumerName}", typeof(TRequest).Name);
+                }
             }
         }
     }

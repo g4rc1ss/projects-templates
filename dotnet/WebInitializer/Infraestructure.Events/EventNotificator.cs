@@ -1,6 +1,7 @@
 #if (UseMemoryEvents)
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Channels;
+using System.Diagnostics;
 #elif (UseAzServiceBus)
 using Azure.Messaging.ServiceBus;
 using System.Text.Json;
@@ -29,8 +30,16 @@ public class EventNotificator(
 #endif
     {
 #if (UseMemoryEvents)
-        Channel<TRequest> channel = serviceProvider.GetRequiredService<Channel<TRequest>>();
-        await channel.Writer.WriteAsync(request, cancellationToken);
+        Channel<Message<TRequest>> channel = serviceProvider.GetRequiredService<Channel<Message<TRequest>>>();
+
+        MessageDiagnosticTraces traces = new()
+        {
+            TraceId = Activity.Current?.TraceId.ToString(),
+            SpanId = Activity.Current?.SpanId.ToString(),
+            ParentId = Activity.Current?.ParentId,
+        };
+        Message<TRequest> message = new(request, traces);
+        await channel.Writer.WriteAsync(message, cancellationToken);
 #elif (UseAzServiceBus)
         string? queuename = configuration.GetSection("ServiceBusConfig")["QueueName"];
         ServiceBusSender? sender = serviceBusClient.CreateSender(queuename);
