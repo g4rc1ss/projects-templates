@@ -1,8 +1,12 @@
 using Infraestructure.Database.Entities;
+#if (UseIdentity)
+using Microsoft.AspNetCore.Identity;
+#endif
 
 namespace Infraestructure.Database.Repository;
 
 public class UserInfo(
+
 
 #if (UseIdentity)
     UserManager<UserEntity> userManager

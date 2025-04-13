@@ -216,7 +216,6 @@
             "Infraestructure.Database/Entities/*",
             "Infraestructure.Database/Repository/UserInfo.cs",
             "Infraestructure.Database/EntityConfiguration/*",
-            "Infraestructure.Events/SignUpEmailEvent/*",
             "Shared/JWT/*"
           ]
         },
@@ -224,7 +223,6 @@
           "condition": "(UseIdentity)",
           "exclude": [
             "Template.HostWebApi/JwtManagement/*",
-            "Infraestructure.Events/SignUpEmailEvent/*",
             "Shared/JWT/*"
           ]
         },
@@ -232,6 +230,14 @@
           "condition": "(UseJwt)",
           "exclude": [
             "Infraestructure.Database/Entities/RoleEntity.cs"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseJwt)",
+          "exclude": [
+            "Template.HostWebApi/ConfigurationOptions/JwtOption.cs"
           ],
           "rename": {
           }
@@ -251,7 +257,7 @@
           }
         },
         {
-          "condition": "(!SqlDatabase)",
+          "condition": "(!SqlDatabase && !UseIdentity)",
           "exclude": [
             "Infraestructure.Database/EntityConfiguration/*",
             "Infraestructure.Database/DatabaseContext.cs",
@@ -259,7 +265,7 @@
           ]
         },
         {
-          "condition": "DatabaseNone && AuthNone",
+          "condition": "DatabaseNone && (AuthNone || UseJwt)",
           "exclude": [
             "**/Infraestructure.Database/**/*"
           ]

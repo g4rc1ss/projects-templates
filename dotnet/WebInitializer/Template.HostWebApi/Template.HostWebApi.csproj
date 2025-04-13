@@ -41,7 +41,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!--#if (!DatabaseNone)-->
+        <!--#if (!DatabaseNone && !(AuthNone || UseJwt))-->
         <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj"/>
         <!--#endif-->
         <!--#if (!EventBusNone)-->
