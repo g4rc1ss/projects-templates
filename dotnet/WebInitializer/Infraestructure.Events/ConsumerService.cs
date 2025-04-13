@@ -12,6 +12,8 @@ public class ConsumerService<TRequest>(
 ) : BackgroundService
     where TRequest : INotificator
 {
+    private readonly string _consumerName = typeof(TRequest).Name;
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (await channel.Reader.WaitToReadAsync(stoppingToken))
@@ -29,12 +31,12 @@ public class ConsumerService<TRequest>(
                 {
                     spanId = ActivitySpanId.CreateFromString(request?.Traces?.SpanId);
                 }
-#if (UseMemoryEvents)
+
                 using ActivitySource? tracingConsumer = new(EventsConst.CONSUMER_NAME);
-                using Activity? activity = tracingConsumer.CreateActivity("Execute Handlers", ActivityKind.Consumer);
+                using Activity? activity = tracingConsumer.CreateActivity($"{_consumerName} Consumer",
+                    ActivityKind.Consumer);
                 activity?.SetParentId(traceId, spanId, ActivityTraceFlags.Recorded);
                 activity?.Start();
-#endif
                 try
                 {
                     List<Task> parallelConsumers = [];

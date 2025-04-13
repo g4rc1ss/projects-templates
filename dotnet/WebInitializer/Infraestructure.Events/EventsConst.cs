@@ -2,7 +2,8 @@ namespace Infraestructure.Events;
 
 public class EventsConst
 {
-#if (UseMemoryEvents)
+#if (UseAzServiceBus || UseRabbitMQ)
+#else
     public const string CONSUMER_NAME = "Events.ConsumerService";
 #endif
 }
