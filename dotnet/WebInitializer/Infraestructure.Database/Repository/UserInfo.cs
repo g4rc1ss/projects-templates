@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Identity;
 namespace Infraestructure.Database.Repository;
 
 public class UserInfo(
-
-
 #if (UseIdentity)
     UserManager<UserEntity> userManager
 #endif

@@ -1,10 +1,10 @@
-﻿#if (UseMemoryEvents)
-using Infraestructure.Events;
-#endif
-using OpenTelemetry;
+﻿using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+#if (UseMemoryEvents)
+using Infraestructure.Events;
+#endif
 
 namespace Template.HostWebApi.Extensions;
 
@@ -24,15 +24,18 @@ public static class TelemetryExtensions
             logging.IncludeFormattedMessage = true;
         });
 
-        builder.Services.AddOpenTelemetry()
-            .ConfigureResource(resource =>
-                resource.AddService(builder.Configuration["AppName"]!))
-            .WithMetrics(metric => metric.AddMeter(builder.Configuration["AppName"]!)
-                .AddAspNetCoreInstrumentation()
-                .AddRuntimeInstrumentation()
-                .AddHttpClientInstrumentation()
+        builder
+            .Services.AddOpenTelemetry()
+            .ConfigureResource(resource => resource.AddService(builder.Configuration["AppName"]!))
+            .WithMetrics(metric =>
+                metric
+                    .AddMeter(builder.Configuration["AppName"]!)
+                    .AddAspNetCoreInstrumentation()
+                    .AddRuntimeInstrumentation()
+                    .AddHttpClientInstrumentation()
             )
-            .WithTracing(trace => trace
+            .WithTracing(trace =>
+                trace
 #if (UseMemoryEvents)
                     .AddSource(EventsConst.CONSUMER_NAME)
 #endif
@@ -55,9 +58,7 @@ public static class TelemetryExtensions
 
     private static void AddDeveloperOpenTelemetry(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddOpenTelemetry()
-            .WithTracing(trace => { })
-            .WithMetrics(metric => { });
+        builder.Services.AddOpenTelemetry().WithTracing(trace => { }).WithMetrics(metric => { });
     }
 
     private static void AddOtelExporter<TBuilder>(this TBuilder builder)
@@ -68,7 +69,9 @@ public static class TelemetryExtensions
         // OTEL_EXPORTER_OTLP_PROTOCOL: grpc o http/protobuf
         // OTEL_EXPORTER_OTLP_HEADERS: key=value, (Si hay mas de 1 se separan por comas)
 
-        bool useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
+        bool useOtlpExporter = !string.IsNullOrWhiteSpace(
+            builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]
+        );
 
         if (useOtlpExporter)
         {

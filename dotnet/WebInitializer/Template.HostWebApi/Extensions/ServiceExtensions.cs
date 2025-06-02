@@ -36,7 +36,5 @@ internal static class ServiceExtensions
         InitializeFunctionalities(builder);
     }
 
-    private static void InitializeFunctionalities(this WebApplicationBuilder builder)
-    {
-    }
+    private static void InitializeFunctionalities(this WebApplicationBuilder builder) { }
 }

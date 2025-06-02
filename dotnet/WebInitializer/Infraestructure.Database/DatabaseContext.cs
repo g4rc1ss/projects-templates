@@ -1,20 +1,18 @@
+using Microsoft.EntityFrameworkCore;
 #if (UseIdentity)
 using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 #endif
-using Microsoft.EntityFrameworkCore;
+
 
 namespace Infraestructure.Database;
 
 #if (UseIdentity)
-public class DatabaseContext(
-    DbContextOptions<DatabaseContext> options
-) : IdentityDbContext<UserEntity, RoleEntity, int>(options)
+public class DatabaseContext(DbContextOptions<DatabaseContext> options)
+    : IdentityDbContext<UserEntity, RoleEntity, int>(options)
 #else
-public class DatabaseContext(
-    DbContextOptions<DatabaseContext> options
-) : DbContext(options)
+public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
 #endif
 {
 #if (UseIdentity)

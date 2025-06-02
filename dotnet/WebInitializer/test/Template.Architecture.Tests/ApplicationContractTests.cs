@@ -1,5 +1,5 @@
-using Shared;
 using System.Reflection;
+using Shared;
 using Template.HostWebApi;
 
 namespace Template.Architecture.Tests;
@@ -52,7 +52,8 @@ public class ApplicationContractTests
     {
         foreach (Assembly applicationAssembly in _applicationAssemblies)
         {
-            List<Type> interfaceList = applicationAssembly.GetTypes()
+            List<Type> interfaceList = applicationAssembly
+                .GetTypes()
                 .Where(x => x.IsInterface && x.GetMethods().Any())
                 .ToList();
 
@@ -68,8 +69,12 @@ public class ApplicationContractTests
     {
         foreach (Assembly applicationAssembly in _applicationAssemblies)
         {
-            foreach ((Type interfacesType, IEnumerable<Type> implementedClass) classes in
-                     GetClassesImplementingInterface(applicationAssembly))
+            foreach (
+                (
+                    Type interfacesType,
+                    IEnumerable<Type> implementedClass
+                ) classes in GetClassesImplementingInterface(applicationAssembly)
+            )
             {
                 foreach (Type classType in classes.implementedClass)
                 {
@@ -84,12 +89,17 @@ public class ApplicationContractTests
     {
         foreach (Assembly applicationAssembly in _applicationAssemblies)
         {
-            foreach ((Type interfacesType, IEnumerable<Type> implementedClass) implementations in
-                     GetClassesImplementingInterface(applicationAssembly))
+            foreach (
+                (
+                    Type interfacesType,
+                    IEnumerable<Type> implementedClass
+                ) implementations in GetClassesImplementingInterface(applicationAssembly)
+            )
             {
                 foreach (Type classImplementInterface in implementations.implementedClass)
                 {
-                    int publicMethods = classImplementInterface.GetMethods()
+                    int publicMethods = classImplementInterface
+                        .GetMethods()
                         .Count(x => x.IsPublic && x.DeclaringType == classImplementInterface);
 
                     Assert.True(classImplementInterface.IsPublic);
@@ -99,14 +109,14 @@ public class ApplicationContractTests
         }
     }
 
-    private IEnumerable<(Type interfacesType, IEnumerable<Type> implementedClass)> GetClassesImplementingInterface(
-        Assembly assembly)
+    private IEnumerable<(
+        Type interfacesType,
+        IEnumerable<Type> implementedClass
+    )> GetClassesImplementingInterface(Assembly assembly)
     {
         List<(Type, IEnumerable<Type>)> returnList = [];
 
-        List<Type> interfaceList = assembly.GetTypes()
-            .Where(x => x.IsInterface)
-            .ToList();
+        List<Type> interfaceList = assembly.GetTypes().Where(x => x.IsInterface).ToList();
 
         foreach (Type interfaceType in interfaceList)
         {

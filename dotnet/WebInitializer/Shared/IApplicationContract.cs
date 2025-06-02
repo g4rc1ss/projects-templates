@@ -4,7 +4,10 @@ public interface IApplicationContractBase;
 
 public interface IApplicationContract<in TRequest, TResponse> : IApplicationContractBase
 {
-    Task<Result<TResponse>> ExecuteAsync(TRequest request, CancellationToken cancellationToken = default);
+    Task<Result<TResponse>> ExecuteAsync(
+        TRequest request,
+        CancellationToken cancellationToken = default
+    );
 }
 
 public interface IApplicationContract<in TRequest> : IApplicationContractBase

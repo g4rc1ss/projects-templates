@@ -6,9 +6,7 @@ namespace Template.HostWebApi.FilterControllers;
 
 public class ResultResponseFilter : IActionFilter
 {
-    public void OnActionExecuting(ActionExecutingContext context)
-    {
-    }
+    public void OnActionExecuting(ActionExecutingContext context) { }
 
     public void OnActionExecuted(ActionExecutedContext context)
     {

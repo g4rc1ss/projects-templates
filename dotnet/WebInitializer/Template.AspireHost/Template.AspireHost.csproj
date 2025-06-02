@@ -1,43 +1,35 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <Sdk Name="Aspire.AppHost.Sdk" Version="9.1.0"/>
-
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <IsAspireHost>true</IsAspireHost>
-        <UserSecretsId>652fcc35-4045-4fb9-99a8-a5f9df9e979d</UserSecretsId>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost" Version="*"/>
-        <!--#if (UsePostgres)-->
-        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*"/>
-        <!--#endif-->
-        <!--#if (UseRedis)-->
-        <PackageReference Include="Aspire.Hosting.Redis" Version="*"/>
-        <!--#endif-->
-
-        <!--#if (UseGarnet)-->
-        <PackageReference Include="Aspire.Hosting.Garnet" Version="*"/>
-        <!--#endif-->
-
-        <!--#if (UseAzServiceBus)-->
-        <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="*"/>
-        <!--#endif-->
-
-        <!--#if (UseRabbitMQ)-->
-        <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="*"/>
-        <!--#endif-->
-        <!--#if (UseSqlServer || UseAzureSql)-->
-        <PackageReference Include="Aspire.Hosting.SqlServer" Version="*"/>
-        <!--#endif-->
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Template.HostWebApi\Template.HostWebApi.csproj"/>
-    </ItemGroup>
-
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.1.0" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>652fcc35-4045-4fb9-99a8-a5f9df9e979d</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="*" />
+    <!--#if (UsePostgres)-->
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*" />
+    <!--#endif-->
+    <!--#if (UseRedis)-->
+    <PackageReference Include="Aspire.Hosting.Redis" Version="*" />
+    <!--#endif-->
+    <!--#if (UseGarnet)-->
+    <PackageReference Include="Aspire.Hosting.Garnet" Version="*" />
+    <!--#endif-->
+    <!--#if (UseAzServiceBus)-->
+    <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="*" />
+    <!--#endif-->
+    <!--#if (UseRabbitMQ)-->
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="*" />
+    <!--#endif-->
+    <!--#if (UseSqlServer || UseAzureSql)-->
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="*" />
+    <!--#endif-->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Template.HostWebApi\Template.HostWebApi.csproj" />
+  </ItemGroup>
 </Project>

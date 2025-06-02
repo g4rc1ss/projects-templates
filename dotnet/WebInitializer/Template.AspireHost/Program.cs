@@ -1,7 +1,7 @@
+using Projects;
 #if (UseAzServiceBus)
 using Aspire.Hosting.Azure;
 #endif
-using Projects;
 
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
@@ -28,7 +28,8 @@ IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder
     .AddAzureServiceBus("AzureServiceBus")
     .RunAsEmulator();
 #elif (UseRabbitMQ)
-IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddRabbitMQ("RabbitMQ")
+IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder
+    .AddRabbitMQ("RabbitMQ")
     .WithDataVolume("rabbitMQVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
     .WithManagementPlugin();
@@ -42,31 +43,25 @@ IResourceBuilder<RedisResource> redis = builder
 #endif
 
 #if (UseGarnet)
-IResourceBuilder<GarnetResource> garnet = builder
-    .AddGarnet("Cache");
+IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
 #endif
 
 IResourceBuilder<ProjectResource> project = builder.AddProject<Template_HostWebApi>("Template");
 #if (UsePostgres)
-project.WithReference(postgres, "DatabaseContext")
-    .WaitFor(postgres);
+project.WithReference(postgres, "DatabaseContext").WaitFor(postgres);
 #elif (UseSqlServer || UseAzureSql)
-project.WithReference(sqlServer, "DatabaseContext")
-    .WaitFor(sqlServer);
+project.WithReference(sqlServer, "DatabaseContext").WaitFor(sqlServer);
 #endif
 #if (UseRedis)
 project.WithReference(redis);
-    project.WaitFor(redis);
+project.WaitFor(redis);
 #elif (UseGarnet)
-project.WithReference(garnet)
-    .WaitFor(garnet);
+project.WithReference(garnet).WaitFor(garnet);
 #endif
 #if (UseAzServiceBus)
-project.WithReference(azureServiceBus)
-    .WaitFor(azureServiceBus);
+project.WithReference(azureServiceBus).WaitFor(azureServiceBus);
 #elif (UseRabbitMQ)
-project.WithReference(rabbitMQ)
-    .WaitFor(rabbitMQ);
+project.WithReference(rabbitMQ).WaitFor(rabbitMQ);
 #endif
 
 await builder.Build().RunAsync();

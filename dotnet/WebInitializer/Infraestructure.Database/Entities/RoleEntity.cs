@@ -8,5 +8,4 @@ public class RoleEntity
 #if (UseIdentity)
     : IdentityRole<int>
 #endif
-{
-}
+{ }

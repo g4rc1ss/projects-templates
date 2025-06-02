@@ -11,9 +11,11 @@ public class SwaggerAuthMiddleware(RequestDelegate next, IConfiguration configur
         string? userNameValue = swaggerAuth["Username"];
         string? passwordValue = swaggerAuth["Password"];
 
-        if (context.Request.Path.StartsWithSegments("/swagger")
+        if (
+            context.Request.Path.StartsWithSegments("/swagger")
             && !string.IsNullOrWhiteSpace(userNameValue)
-            && !string.IsNullOrWhiteSpace(passwordValue))
+            && !string.IsNullOrWhiteSpace(passwordValue)
+        )
         {
             string? authHeaderValue = context.Request.Headers["Authorization"];
             if (authHeaderValue is not null && authHeaderValue.StartsWith("Basic "))
@@ -25,8 +27,10 @@ public class SwaggerAuthMiddleware(RequestDelegate next, IConfiguration configur
                 string userName = credentials[0];
                 string password = credentials[1];
 
-                if (userName.Equals(userNameValue, StringComparison.Ordinal)
-                    && password.Equals(passwordValue, StringComparison.Ordinal))
+                if (
+                    userName.Equals(userNameValue, StringComparison.Ordinal)
+                    && password.Equals(passwordValue, StringComparison.Ordinal)
+                )
                 {
                     await next.Invoke(context);
                     return;

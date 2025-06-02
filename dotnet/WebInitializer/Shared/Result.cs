@@ -29,8 +29,11 @@ public class Result
     }
 
     public static Result Success() => new(true, Error.None);
+
     public static Result<T> Success<T>(T data) => new(data, true, Error.None);
+
     public static Result Failure(Error error) => new(false, error);
+
     public static Result<T> Failure<T>(Error error) => new(default, false, error);
 }
 
@@ -38,10 +41,7 @@ public class Result<T>(T data, bool isSuccess, Error error) : Result(data, isSuc
 {
     public new T Data
     {
-        get
-        {
-            return data;
-        }
+        get { return data; }
     }
 
     public static implicit operator Result<T>(T? data) =>

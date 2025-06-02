@@ -1,29 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <!--#if (UsePostgres)-->
-        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
-        <!--#endif-->
-        <!--#if (SqlDatabase)-->
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
-        <!--#endif-->
-        <!--#if (UseSqlServer || UseAzureSql)-->
-        <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*"/>
-        <!--#endif-->
-
-        <!--#if (UseIdentity)-->
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>
-        <!--#endif-->
-
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*"/>
-    </ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <!--#if (UsePostgres)-->
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*" />
+    <!--#endif-->
+    <!--#if (SqlDatabase)-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*" />
+    <!--#endif-->
+    <!--#if (UseSqlServer || UseAzureSql)-->
+    <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*" />
+    <!--#endif-->
+    <!--#if (UseIdentity)-->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*" />
+    <!--#endif-->
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*" />
+  </ItemGroup>
 </Project>

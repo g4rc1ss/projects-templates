@@ -1,23 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*"/>
-        <!--#if (UseAzServiceBus)-->
-        <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" Version="*"/>
-        <!--#endif-->
-
-        <!--#if (UseRabbitMQ)-->
-        <PackageReference Include="Aspire.RabbitMQ.Client" Version="*"/>
-        <!--#endif-->
-
-    </ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*" />
+    <!--#if (UseAzServiceBus)-->
+    <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" Version="*" />
+    <!--#endif-->
+    <!--#if (UseRabbitMQ)-->
+    <PackageReference Include="Aspire.RabbitMQ.Client" Version="*" />
+    <!--#endif-->
+  </ItemGroup>
 </Project>

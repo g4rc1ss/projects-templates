@@ -10,9 +10,7 @@ public partial class KebabCaseTransformer : IOutboundParameterTransformer
         if (string.IsNullOrEmpty(valueString))
             return valueString;
 
-        return KebabCaseRegex()
-            .Replace(valueString, "$1-$2")
-            .ToLowerInvariant();
+        return KebabCaseRegex().Replace(valueString, "$1-$2").ToLowerInvariant();
     }
 
     [GeneratedRegex("([a-z])([A-Z])")]

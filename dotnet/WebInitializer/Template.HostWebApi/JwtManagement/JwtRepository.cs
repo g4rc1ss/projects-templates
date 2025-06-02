@@ -17,11 +17,7 @@ public class JwtRepository(
     public async Task<bool> RemoveTokenByIdsAsync(int userId, string refreshTokenId)
     {
 #if ((UseJwt) && SqlDatabase)
-        UserJwtTokensEntity jwtEntity = new()
-        {
-            UserId = userId,
-            Id = refreshTokenId
-        };
+        UserJwtTokensEntity jwtEntity = new() { UserId = userId, Id = refreshTokenId };
         dbContext.UserJwtTokens.Remove(jwtEntity);
         return (await dbContext.SaveChangesAsync()) > 0;
 #else
@@ -37,8 +33,9 @@ public class JwtRepository(
             UserId = userId,
             ExpirationUtc = expiration,
         };
-        EntityEntry<UserJwtTokensEntity> entity = await dbContext.UserJwtTokens
-            .AddAsync(refreshTokenEntity);
+        EntityEntry<UserJwtTokensEntity> entity = await dbContext.UserJwtTokens.AddAsync(
+            refreshTokenEntity
+        );
         await dbContext.SaveChangesAsync();
 
         return entity.Entity.Id;
@@ -50,8 +47,9 @@ public class JwtRepository(
     public async Task<DateTime> GetTokenExpirationAsync(string refreshTokenId)
     {
 #if ((UseJwt) && SqlDatabase)
-        UserJwtTokensEntity refreshTokens = await dbContext.UserJwtTokens
-            .SingleAsync(x => x.Id == refreshTokenId);
+        UserJwtTokensEntity refreshTokens = await dbContext.UserJwtTokens.SingleAsync(x =>
+            x.Id == refreshTokenId
+        );
 
         return refreshTokens.ExpirationUtc;
 #else
@@ -62,8 +60,8 @@ public class JwtRepository(
     public async Task<IEnumerable<JwtTokenData>> GetAllTokensByUserId(int userId)
     {
 #if ((UseJwt) && SqlDatabase)
-        List<UserJwtTokensEntity> tokenList = await dbContext.UserJwtTokens
-            .Where(x => x.UserId == userId && x.ExpirationUtc >= DateTime.UtcNow)
+        List<UserJwtTokensEntity> tokenList = await dbContext
+            .UserJwtTokens.Where(x => x.UserId == userId && x.ExpirationUtc >= DateTime.UtcNow)
             .ToListAsync();
 
         return tokenList.Select(x => new JwtTokenData(Guid.Parse(x.Id), x.ExpirationUtc));

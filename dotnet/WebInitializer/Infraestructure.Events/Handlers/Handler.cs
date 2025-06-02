@@ -2,12 +2,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Infraestructure.Events.Handlers;
 
-public record Request
-    : INotificator;
+public record Request : INotificator;
 
-public class Handler(
-    ILogger<Handler> logger
-) : IEventConsumer<Request>
+public class Handler(ILogger<Handler> logger) : IEventConsumer<Request>
 {
     public Task ConsumeAsync(Request request, CancellationToken cancellationToken = default)
     {
@@ -17,9 +14,7 @@ public class Handler(
     }
 }
 
-public class Handler2(
-    ILogger<Handler2> logger
-) : IEventConsumer<Request>
+public class Handler2(ILogger<Handler2> logger) : IEventConsumer<Request>
 {
     public Task ConsumeAsync(Request request, CancellationToken cancellationToken = default)
     {

@@ -3,9 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Template.HostWebApi.HostedServices;
 
-public class MigrationHostedService(
-    IServiceProvider serviceProvider
-) : IHostedService
+public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedService
 {
     public async Task StartAsync(CancellationToken cancellationToken)
     {

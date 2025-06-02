@@ -1,10 +1,11 @@
-﻿#if (UseApi)
+﻿using Template.HostWebApi.Extensions;
+#if (UseApi)
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Template.HostWebApi.Configurations;
 using Template.HostWebApi.FilterControllers;
 using Template.HostWebApi.OpenAPI;
 #endif
-using Template.HostWebApi.Extensions;
+
 #if (SqlDatabase)
 using Template.HostWebApi.HostedServices;
 #endif
@@ -13,8 +14,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options => options.Limits.MaxRequestBodySize = 5 * 1024 * 1024);
 
-builder.Configuration.AddUserSecrets<Program>()
-    .AddEnvironmentVariables();
+builder.Configuration.AddUserSecrets<Program>().AddEnvironmentVariables();
 
 // Add services to the container.
 builder.InitTemplateHostConfig();

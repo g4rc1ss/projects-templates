@@ -1,8 +1,6 @@
 namespace Template.HostWebApi.Tests;
 
-public class IntegrationTest1(
-    ApiServiceFixture fixture
-) : IClassFixture<ApiServiceFixture>
+public class IntegrationTest1(ApiServiceFixture fixture) : IClassFixture<ApiServiceFixture>
 {
     [Fact]
     public async Task GetWebResourceRootReturnsOkStatusCode()

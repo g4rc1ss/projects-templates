@@ -1,9 +1,9 @@
-﻿#if (UseMemoryEvents)
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+#if (UseMemoryEvents)
 using System.Threading.Channels;
 using System.Reflection;
 #endif
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Infraestructure.Events;
 
@@ -24,13 +24,16 @@ public static class InfraestructureEventsExtensions
     }
 
 #if (UseMemoryEvents)
-    private static void AddConsumerServices(this IHostApplicationBuilder builder,
-        IEnumerable<Assembly> assemblies)
+    private static void AddConsumerServices(
+        this IHostApplicationBuilder builder,
+        IEnumerable<Assembly> assemblies
+    )
     {
         foreach (Assembly assembly in assemblies)
         {
-            IEnumerable<Type> notificators = assembly.GetTypes().Where(x =>
-                x.IsClass && x.GetInterface(nameof(INotificator)) is not null);
+            IEnumerable<Type> notificators = assembly
+                .GetTypes()
+                .Where(x => x.IsClass && x.GetInterface(nameof(INotificator)) is not null);
 
             foreach (Type notificator in notificators)
             {
@@ -47,11 +50,13 @@ public static class InfraestructureEventsExtensions
                     .Invoke(null, [builder.Services]);
 
                 Type handlerConsumer = typeof(IEventConsumer<>).MakeGenericType(notificator);
-                IEnumerable<Type> handlers = assembly.GetTypes()
+                IEnumerable<Type> handlers = assembly
+                    .GetTypes()
+                    .Where(x => x.IsClass && x.GetInterface(handlerConsumer.Name) is not null)
                     .Where(x =>
-                        x.IsClass && x.GetInterface(handlerConsumer.Name) is not null)
-                    .Where(x => x.GetInterfaces().Any(i => i.IsGenericType
-                                                           && i.FullName == handlerConsumer.FullName));
+                        x.GetInterfaces()
+                            .Any(i => i.IsGenericType && i.FullName == handlerConsumer.FullName)
+                    );
 
                 foreach (Type handler in handlers)
                 {

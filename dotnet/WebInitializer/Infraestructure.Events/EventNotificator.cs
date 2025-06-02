@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 #if (UseMemoryEvents)
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Channels;
@@ -9,7 +10,6 @@ using System.Text.Json;
 using RabbitMQ.Client;
 using System.Text.Json;
 #endif
-using Microsoft.Extensions.Configuration;
 
 namespace Infraestructure.Events;
 
@@ -21,16 +21,20 @@ public class EventNotificator(
 #elif (UseRabbitMQ)
     IConnection connection,
 #endif
-    IConfiguration configuration
-) : IEventNotificator
+    IConfiguration configuration) : IEventNotificator
 {
-    public async Task PublishAsync<TRequest>(TRequest request, CancellationToken cancellationToken = default)
+    public async Task PublishAsync<TRequest>(
+        TRequest request,
+        CancellationToken cancellationToken = default
+    )
 #if (UseMemoryEvents)
         where TRequest : INotificator
 #endif
     {
 #if (UseMemoryEvents)
-        Channel<Message<TRequest>> channel = serviceProvider.GetRequiredService<Channel<Message<TRequest>>>();
+        Channel<Message<TRequest>> channel = serviceProvider.GetRequiredService<
+            Channel<Message<TRequest>>
+        >();
 
         MessageDiagnosticTraces traces = new()
         {
@@ -52,10 +56,12 @@ public class EventNotificator(
         IBasicProperties? properties = model.CreateBasicProperties();
         properties.Persistent = true;
 
-        model.BasicPublish(exchange: "",
+        model.BasicPublish(
+            exchange: "",
             routingKey: "",
             basicProperties: properties,
-            body: JsonSerializer.SerializeToUtf8Bytes(request));
+            body: JsonSerializer.SerializeToUtf8Bytes(request)
+        );
 #else
 
         throw new NotImplementedException();

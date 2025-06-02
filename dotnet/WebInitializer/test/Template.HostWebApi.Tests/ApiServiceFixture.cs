@@ -30,7 +30,9 @@ public sealed class ApiServiceFixture : IAsyncLifetime
         Application = app;
 
         await app.StartAsync().WaitAsync(DefaultTimeout);
-        await app.ResourceNotifications.WaitForResourceHealthyAsync("Template").WaitAsync(DefaultTimeout);
+        await app
+            .ResourceNotifications.WaitForResourceHealthyAsync("Template")
+            .WaitAsync(DefaultTimeout);
     }
 
     public async Task DisposeAsync()

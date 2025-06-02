@@ -6,7 +6,5 @@ namespace Infraestructure.Database.EntityConfiguration;
 
 public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
 {
-    public void Configure(EntityTypeBuilder<UserEntity> builder)
-    {
-    }
+    public void Configure(EntityTypeBuilder<UserEntity> builder) { }
 }

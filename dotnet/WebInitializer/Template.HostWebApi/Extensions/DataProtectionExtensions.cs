@@ -4,10 +4,13 @@ namespace Template.HostWebApi.Extensions;
 
 internal static class DataProtectionExtensions
 {
-    internal static void ConfigureDataProtectionProvider(this IServiceCollection services,
-        IConfiguration configuration)
+    internal static void ConfigureDataProtectionProvider(
+        this IServiceCollection services,
+        IConfiguration configuration
+    )
     {
-        services.AddDataProtection()
+        services
+            .AddDataProtection()
             // .PersistKeysToFileSystem(new DirectoryInfo("folder"))
             .SetApplicationName("Template.Host");
     }

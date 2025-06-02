@@ -15,8 +15,10 @@ namespace Template.HostWebApi.Extensions;
 
 public static class AuthenticationExtensions
 {
-    internal static void AddAuthenticationProtocol(this IServiceCollection services,
-        IConfiguration configuration)
+    internal static void AddAuthenticationProtocol(
+        this IServiceCollection services,
+        IConfiguration configuration
+    )
     {
 #if (UseJwt)
         services
@@ -24,13 +26,10 @@ public static class AuthenticationExtensions
             .AddHttpContextAccessor()
 #endif
             .AddAuthorization()
-            .AddAuthentication(options =>
-            {
-            })
+            .AddAuthentication(options => { })
             .AddJwtBearer(options =>
             {
-                IConfigurationSection jwtOptionsSection = configuration
-                    .GetSection("Jwt");
+                IConfigurationSection jwtOptionsSection = configuration.GetSection("Jwt");
 
                 options.TokenValidationParameters = new()
                 {
@@ -42,7 +41,8 @@ public static class AuthenticationExtensions
                     ValidIssuer = jwtOptionsSection["Issuer"],
                     ValidAudience = jwtOptionsSection["Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(jwtOptionsSection["Key"]!))
+                        Encoding.UTF8.GetBytes(jwtOptionsSection["Key"]!)
+                    ),
                 };
             });
         services.AddScoped<IJwtTokenManagement, JwtTokenManagement>();
@@ -51,7 +51,8 @@ public static class AuthenticationExtensions
 #endif
 
 #if (UseIdentity)
-        services.AddIdentityApiEndpoints<UserEntity>(options =>
+        services
+            .AddIdentityApiEndpoints<UserEntity>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
