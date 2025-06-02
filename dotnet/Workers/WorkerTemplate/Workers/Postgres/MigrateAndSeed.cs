@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace WorkerTemplate.Workers.Postgres;
 
@@ -13,7 +13,9 @@ public class MigrateAndSeed(
         using ActivitySource activitySource = new(nameof(MigrateAndSeed));
         Activity? activity = activitySource.StartActivity();
 
-        await using PostgresDbContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+        await using PostgresDbContext context = await dbContextFactory.CreateDbContextAsync(
+            cancellationToken
+        );
         await context.Database.MigrateAsync(cancellationToken);
 
         logger.LogInformation("Postgres migrated");

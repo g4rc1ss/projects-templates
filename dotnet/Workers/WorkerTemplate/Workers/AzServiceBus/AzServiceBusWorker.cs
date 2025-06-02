@@ -1,12 +1,13 @@
-using Azure.Messaging.ServiceBus;
 using System.Diagnostics;
+using Azure.Messaging.ServiceBus;
 
 namespace WorkerTemplate.Workers.AzServiceBus;
 
 public class AzServiceBusWorker(
     ILogger<Worker> logger,
     IConfiguration configuration,
-    ServiceBusClient client) : BackgroundService
+    ServiceBusClient client
+) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

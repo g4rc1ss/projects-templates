@@ -1,7 +1,7 @@
+using Projects;
 #if (UseAzServiceBus)
 using Aspire.Hosting.Azure;
 #endif
-using Projects;
 
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
@@ -25,7 +25,10 @@ IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder
 
 #if (UseRabbitMQ)
 IResourceBuilder<ParameterResource> rabbitUsername = builder.AddParameter("username", "guest");
-IResourceBuilder<ParameterResource> rabbitPassword = builder.AddParameter("password", "ERnyEKvg5mY1ByTDjHyey6");
+IResourceBuilder<ParameterResource> rabbitPassword = builder.AddParameter(
+    "password",
+    "ERnyEKvg5mY1ByTDjHyey6"
+);
 
 IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder
     .AddRabbitMQ("RabbitMQ", rabbitUsername, rabbitPassword)
@@ -36,12 +39,14 @@ IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder
     .WithManagementPlugin();
 #endif
 #if (UseRedis)
-IResourceBuilder<RedisResource> redis = builder.AddRedis("Cache")
+IResourceBuilder<RedisResource> redis = builder
+    .AddRedis("Cache")
     .WithRedisCommander()
     .WithRedisInsight();
 #endif
 #if (UseMongodb)
-IResourceBuilder<MongoDBServerResource> mongoDb = builder.AddMongoDB("mongo")
+IResourceBuilder<MongoDBServerResource> mongoDb = builder
+    .AddMongoDB("mongo")
     // .WithDataVolume("MongoVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
     .WithMongoExpress();
@@ -49,25 +54,19 @@ IResourceBuilder<MongoDBServerResource> mongoDb = builder.AddMongoDB("mongo")
 
 IResourceBuilder<ProjectResource> project = builder.AddProject<WorkerTemplate>("WorkerTemplate");
 #if (UsePostgres)
-project.WithReference(postgres, "DatabaseContext")
-    .WaitFor(postgres);
+project.WithReference(postgres, "DatabaseContext").WaitFor(postgres);
 #endif
 #if (UseMongodb)
-project.WithReference(mongoDb)
-    .WaitFor(mongoDb);
+project.WithReference(mongoDb).WaitFor(mongoDb);
 #endif
 #if (UseRedis)
-project.WithReference(redis)
-    .WaitFor(redis);
+project.WithReference(redis).WaitFor(redis);
 #endif
 #if (UseAzServiceBus)
-project.WithReference(azureServiceBus)
-    .WaitFor(azureServiceBus);
+project.WithReference(azureServiceBus).WaitFor(azureServiceBus);
 #endif
 #if(UseRabbitMQ)
-project.WithReference(rabbitMQ)
-    .WaitFor(rabbitMQ);
+project.WithReference(rabbitMQ).WaitFor(rabbitMQ);
 #endif
 
-await builder.Build()
-    .RunAsync();
+await builder.Build().RunAsync();

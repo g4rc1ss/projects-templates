@@ -1,7 +1,7 @@
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using System.Diagnostics;
 using System.Text;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace WorkerTemplate.Workers.RabbitMq;
 
@@ -31,7 +31,10 @@ public class RabbitMqWorker(
     {
         using ActivitySource activitySource = new(nameof(RabbitMqWorker));
         activitySource.StartActivity();
-        using Activity? activityProcess = activitySource.CreateActivity("Process message", ActivityKind.Consumer);
+        using Activity? activityProcess = activitySource.CreateActivity(
+            "Process message",
+            ActivityKind.Consumer
+        );
         activityProcess?.Start();
 
         string body = Encoding.UTF8.GetString(eventArgs.Body.ToArray());
@@ -40,7 +43,8 @@ public class RabbitMqWorker(
         activityProcess?.SetStatus(ActivityStatusCode.Ok);
         activityProcess?.Stop();
 
-        Activity? activityAck = activitySource.CreateActivity("ACK", ActivityKind.Consumer)
+        Activity? activityAck = activitySource
+            .CreateActivity("ACK", ActivityKind.Consumer)
             ?.Start();
         _channel?.BasicAck(eventArgs.DeliveryTag, false);
         activityAck?.Stop();

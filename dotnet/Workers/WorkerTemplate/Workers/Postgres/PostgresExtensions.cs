@@ -8,7 +8,8 @@ public static class PostgresExtensions
     {
         builder.AddNpgsqlDbContext<PostgresDbContext>("DatabaseContext");
         builder.Services.AddPooledDbContextFactory<PostgresDbContext>(optionsBuilder =>
-            optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseContext")));
+            optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseContext"))
+        );
 
         builder.Services.AddHostedService<MigrateAndSeed>();
         builder.Services.AddHostedService<PostgresWorker>();

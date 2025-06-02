@@ -33,5 +33,4 @@ builder.AddServiceDefaults();
 
 IHost host = builder.Build();
 
-
 await host.RunAsync();
