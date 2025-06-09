@@ -37,6 +37,12 @@
     <!--#if (UseIdentity)-->
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*" />
     <!--#endif-->
+    <!--#if (UseAzureOpts)-->
+    <PackageReference Include="Azure.Identity" Version="*" />
+    <!--#if (UseAzureKeyVault)-->
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="*" />
+    <!--#endif-->
+    <!--#endif-->
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\.dockerignore">
@@ -44,11 +50,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <!--#if (!DatabaseNone && !(AuthNone || UseJwt))-->
+    <!--#if (!DatabaseNone || !(AuthNone || UseJwt))-->
     <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
     <!--#endif-->
     <!--#if (!EventBusNone)-->
     <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj" />
+    <!--#endif-->
+    <!--#if (!StorageNone)-->
+    <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj" />
     <!--#endif-->
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>

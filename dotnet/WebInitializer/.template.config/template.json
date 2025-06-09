@@ -16,6 +16,39 @@
     "type": "project"
   },
   "symbols": {
+    "AzureOpts": {
+      "type": "parameter",
+      "datatype": "choice",
+      "allowMultipleValues": true,
+      "choices": [
+        {
+          "displayName": "Az Key Vault",
+          "choice": "AzureKeyVault"
+        },
+        {
+          "displayName": "Az Blob Storage",
+          "choice": "AzureBlobStorage"
+        }
+      ],
+      "defaultValue": "None",
+      "displayName": "Azure Infra Options"
+    },
+    "UseAzureOpts": {
+      "type": "computed",
+      "value": "(UseAzureKeyVault || UseAzureBlobStorage)"
+    },
+    "UseAzureKeyVault": {
+      "type": "computed",
+      "value": "(AzureOpts == 'AzureKeyVault')"
+    },
+    "UseAzureBlobStorage": {
+      "type": "computed",
+      "value": "(AzureOpts == 'AzureBlobStorage')"
+    },
+    "StorageNone": {
+      "type": "computed",
+      "value": "(!UseAzureBlobStorage)"
+    },
     "UseApi": {
       "displayName": "API",
       "type": "parameter",
@@ -114,7 +147,7 @@
         },
         {
           "choice": "memorycache",
-          "displayName": "En Memoria",
+          "displayName": "In Memory",
           "description": "Memory"
         },
         {
@@ -129,7 +162,7 @@
         }
       ],
       "defaultValue": "memorycache",
-      "description": "Cache a usar"
+      "description": "Cache"
     },
     "UseMemoryCache": {
       "type": "computed",
@@ -152,7 +185,7 @@
         },
         {
           "choice": "memoryevents",
-          "displayName": "En Memoria"
+          "displayName": "In Memory"
         },
         {
           "choice": "azureservicebus",
@@ -163,7 +196,7 @@
           "displayName": "Rabbit MQ"
         }
       ],
-      "displayName": "Gestión de Eventos",
+      "displayName": "Events",
       "defaultValue": "memoryevents"
     },
     "UseMemoryEvents": {
@@ -209,6 +242,32 @@
         "**/Functionality/**/*"
       ],
       "modifiers": [
+        {
+          "condition": "(!UseAzureOpts)",
+          "exclude": [
+            "Template.HostWebApi/Extensions/AzureExtensions.cs",
+            "Template.HostWebApi/ConfigurationOptions/AzureOptions/*"
+          ]
+        },
+        {
+          "condition": "(!UseAzureBlobStorage)",
+          "exclude": [
+            "Infraestructure.Storages/AzureBlobStorage.cs",
+            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureBlobStorageOptions.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureKeyVault)",
+          "exclude": [
+            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
+          ]
+        },
+        {
+          "condition": "(StorageNone)",
+          "exclude": [
+            "Infraestructure.Storages/*"
+          ]
+        },
         {
           "condition": "(AuthNone)",
           "exclude": [

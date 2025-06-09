@@ -39,6 +39,10 @@ builder.Services.InitAndConfigureSwagger();
 builder.Services.AddHostedService<MigrationHostedService>();
 #endif
 
+#if (UseAzureOpts)
+builder.AddAzureServices();
+#endif
+
 WebApplication app = builder.Build();
 
 #if (UseApi)

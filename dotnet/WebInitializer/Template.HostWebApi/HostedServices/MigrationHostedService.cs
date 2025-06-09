@@ -9,7 +9,7 @@ public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedS
     {
         using IServiceScope scope = serviceProvider.CreateScope();
         DatabaseContext context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-        await context.Database.MigrateAsync();
+        await context.Database.MigrateAsync(cancellationToken: cancellationToken);
     }
 
     public Task StopAsync(CancellationToken cancellationToken)

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 #endif
 
-
 namespace Infraestructure.Database;
 
 #if (UseIdentity)
