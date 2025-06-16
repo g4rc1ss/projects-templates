@@ -15,13 +15,13 @@ namespace Infraestructure.Events;
 
 public class EventNotificator(
 #if (UseMemoryEvents)
-    IServiceProvider serviceProvider,
+    IServiceProvider serviceProvider
 #elif (UseAzServiceBus)
-    ServiceBusClient serviceBusClient,
+    ServiceBusClient serviceBusClient, IConfiguration configuration
 #elif (UseRabbitMQ)
-    IConnection connection,
+    IConnection connection
 #endif
-    IConfiguration configuration) : IEventNotificator
+) : IEventNotificator
 {
     public async Task PublishAsync<TRequest>(
         TRequest request,

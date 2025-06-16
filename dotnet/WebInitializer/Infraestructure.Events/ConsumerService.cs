@@ -43,7 +43,7 @@ public class ConsumerService<TRequest>(
                 {
                     List<Task> parallelConsumers = [];
                     parallelConsumers.AddRange(
-                        consumers.Select(x => x.ConsumeAsync(request.Request, stoppingToken))
+                        consumers.Select(x => x.ConsumeAsync(request!.Request, stoppingToken))
                     );
 
                     await Task.WhenAll(parallelConsumers);

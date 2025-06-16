@@ -280,6 +280,7 @@ dotnet_diagnostic.CA1416.severity = none
 # Lowers severity from Warning to Suggestion
 # CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the await operator to the result of the call.
 dotnet_diagnostic.CS4014.severity = suggestion
+dotnet_diagnostic.CS1998.severity = suggestion
 
 dotnet_diagnostic.CS1591.severity = none
 

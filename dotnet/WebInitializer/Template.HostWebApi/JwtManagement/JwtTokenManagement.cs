@@ -8,10 +8,8 @@ using Template.HostWebApi.ConfigurationOptions;
 
 namespace Template.HostWebApi.JwtManagement;
 
-public class JwtTokenManagement(
-    IJwtRepository jwtRepository,
-    IOptions<JwtOption> jwtOptions
-) : IJwtTokenManagement
+public class JwtTokenManagement(IJwtRepository jwtRepository, IOptions<JwtOption> jwtOptions)
+    : IJwtTokenManagement
 {
     public string Create(JwtData jwtData)
     {
