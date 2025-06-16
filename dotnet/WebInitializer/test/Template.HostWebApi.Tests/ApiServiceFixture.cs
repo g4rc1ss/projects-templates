@@ -5,7 +5,7 @@ namespace Template.HostWebApi.Tests;
 
 public sealed class ApiServiceFixture : IAsyncLifetime
 {
-    private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan _defaultTimeout = TimeSpan.FromSeconds(30);
 
     public required DistributedApplication Application { get; set; }
 
@@ -26,13 +26,13 @@ public sealed class ApiServiceFixture : IAsyncLifetime
             clientBuilder.AddStandardResilienceHandler();
         });
 
-        DistributedApplication app = await appHost.BuildAsync().WaitAsync(DefaultTimeout);
+        DistributedApplication app = await appHost.BuildAsync().WaitAsync(_defaultTimeout);
         Application = app;
 
-        await app.StartAsync().WaitAsync(DefaultTimeout);
+        await app.StartAsync().WaitAsync(_defaultTimeout);
         await app
             .ResourceNotifications.WaitForResourceHealthyAsync("Template")
-            .WaitAsync(DefaultTimeout);
+            .WaitAsync(_defaultTimeout);
     }
 
     public async Task DisposeAsync()

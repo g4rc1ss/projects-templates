@@ -3,9 +3,9 @@ using System.Text;
 
 namespace Template.HostWebApi.OpenAPI;
 
-public class SwaggerAuthMiddleware(RequestDelegate next, IConfiguration configuration)
+public class SwaggerAuthMiddleware(IConfiguration configuration) : IMiddleware
 {
-    public async Task Invoke(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         IConfigurationSection swaggerAuth = configuration.GetSection("SwaggerAuth");
         string? userNameValue = swaggerAuth["Username"];

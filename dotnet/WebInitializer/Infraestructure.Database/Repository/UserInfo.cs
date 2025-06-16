@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Infraestructure.Database.Repository;
 
 public class UserInfo(
+
 #if (UseIdentity)
     UserManager<UserEntity> userManager
 #endif
@@ -22,7 +23,8 @@ public class UserInfo(
             return Entity;
         }
 #if (UseIdentity)
-        return await userManager.FindByIdAsync(userId);
+        Entity = await userManager.FindByIdAsync(userId);
+        return Entity;
 #else
         throw new NotImplementedException();
 #endif
@@ -37,7 +39,8 @@ public class UserInfo(
             return Entity;
         }
 #if (UseIdentity)
-        return await userManager.FindByNameAsync(userName);
+        Entity = await userManager.FindByNameAsync(userName);
+        return Entity;
 #else
         throw new NotImplementedException();
 #endif

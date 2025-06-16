@@ -3,7 +3,7 @@ namespace Template.HostWebApi.Tests;
 public class IntegrationTest1(ApiServiceFixture fixture) : IClassFixture<ApiServiceFixture>
 {
     [Fact]
-    public async Task GetWebResourceRootReturnsOkStatusCode()
+    public async Task GetWebResourceRootReturnsOkStatusCodeAsync()
     {
         // Arrange
         HttpClient httpClient = fixture.Application!.CreateHttpClient("Template");

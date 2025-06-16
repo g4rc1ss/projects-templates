@@ -14,12 +14,12 @@ public class Result
 
     private Result(bool isSuccess, Error error)
     {
-        if (isSuccess && error != Error.None)
+        if (isSuccess && error != Error.none)
         {
             throw new InvalidOperationException();
         }
 
-        if (!isSuccess && error == Error.None)
+        if (!isSuccess && error == Error.none)
         {
             throw new InvalidOperationException();
         }
@@ -28,30 +28,27 @@ public class Result
         Error = error;
     }
 
-    public static Result Success() => new(true, Error.None);
+    public static Result Success() => new(true, Error.none);
 
-    public static Result<T> Success<T>(T data) => new(data, true, Error.None);
+    public static Result<T> Success<T>(T data) => new(data, true, Error.none);
 
     public static Result Failure(Error error) => new(false, error);
 
     public static Result<T> Failure<T>(Error error) => new(default, false, error);
 }
 
-public class Result<T>(T data, bool isSuccess, Error error) : Result(data, isSuccess, error)
+public class Result<T>(T? data, bool isSuccess, Error error) : Result(data, isSuccess, error)
 {
-    public new T Data
-    {
-        get { return data; }
-    }
+    public new T? Data => data;
 
     public static implicit operator Result<T>(T? data) =>
-        data is not null ? Success(data) : Failure<T>(Error.NullValue);
+        data is not null ? Success(data) : Failure<T>(Error.nullValue);
 
     public static implicit operator Result<T>(Error error) => Failure<T>(error);
 }
 
 public record Error(string Code, string Message)
 {
-    public static readonly Error None = new(string.Empty, string.Empty);
-    public static readonly Error NullValue = new("Error.NullValue", "Null value was provided.");
+    public static readonly Error none = new(string.Empty, string.Empty);
+    public static readonly Error nullValue = new("Error.NullValue", "Null value was provided.");
 }
