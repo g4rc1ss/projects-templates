@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 namespace Template.HostWebApi.JwtManagement;
 
 public class JwtRepository(
+
 #if ((UseJwt) && SqlDatabase)
     DatabaseContext dbContext
 #endif
@@ -32,6 +33,7 @@ public class JwtRepository(
         {
             UserId = userId,
             ExpirationUtc = expiration,
+            Id = Guid.NewGuid().ToString(),
         };
         EntityEntry<UserJwtTokensEntity> entity = await dbContext.UserJwtTokens.AddAsync(
             refreshTokenEntity

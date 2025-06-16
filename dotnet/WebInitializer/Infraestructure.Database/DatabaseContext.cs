@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-#if (UseIdentity)
+#if (UseJwt || UseIdentity)
 using Infraestructure.Database.Entities;
+#endif
+#if (UseIdentity)
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 #endif
@@ -16,6 +18,10 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
 {
 #if (UseIdentity)
     public override DbSet<UserEntity> Users { get; set; }
+#endif
+
+#if (UseJwt)
+    public DbSet<UserJwtTokensEntity> UserJwtTokens { get; set; }
 #endif
 
     protected override void OnModelCreating(ModelBuilder builder)

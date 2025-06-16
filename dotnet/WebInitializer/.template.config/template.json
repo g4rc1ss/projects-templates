@@ -296,7 +296,8 @@
         {
           "condition": "(!UseJwt)",
           "exclude": [
-            "Template.HostWebApi/ConfigurationOptions/JwtOption.cs"
+            "Template.HostWebApi/ConfigurationOptions/JwtOption.cs",
+            "Infraestructure.Database/Entities/UserJwtTokensEntity.cs"
           ],
           "rename": {
           }
