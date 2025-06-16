@@ -27,7 +27,7 @@ public class RabbitMqWorker(
         return Task.CompletedTask;
     }
 
-    private void HandleMessage(object ch, BasicDeliverEventArgs eventArgs)
+    private void HandleMessage(object? ch, BasicDeliverEventArgs eventArgs)
     {
         using ActivitySource activitySource = new(nameof(RabbitMqWorker));
         activitySource.StartActivity();

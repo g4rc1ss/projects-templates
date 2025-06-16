@@ -4,6 +4,7 @@
         <AnalysisLevelDocumentation>latest</AnalysisLevelDocumentation>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
         <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>

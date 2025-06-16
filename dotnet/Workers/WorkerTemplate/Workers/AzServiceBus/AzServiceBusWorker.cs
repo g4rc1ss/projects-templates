@@ -14,10 +14,10 @@ public class AzServiceBusWorker(
         using ActivitySource activitySource = new(nameof(AzServiceBusWorker));
         activitySource.StartActivity();
 
-        await ListenServiceBus();
+        await ListenServiceBusAsync();
     }
 
-    private async Task ListenServiceBus()
+    private async Task ListenServiceBusAsync()
     {
         string? queueName = configuration.GetSection("ServiceBusConfig")["QueueName"];
         ServiceBusProcessor? processor = client.CreateProcessor(queueName);
