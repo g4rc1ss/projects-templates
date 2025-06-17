@@ -33,6 +33,7 @@ builder.Services.AddControllers(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();
+builder.Services.AddSingleton<SwaggerAuthMiddleware>();
 #endif
 
 #if (SqlDatabase)
