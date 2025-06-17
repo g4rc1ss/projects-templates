@@ -42,14 +42,10 @@ public class Result<T> : Result
     public new T Data => (T?)base.Data ?? throw new NullReferenceException();
 
     public Result(T? data)
-        : base(data)
-    {
-    }
+        : base(data) { }
 
     public Result(Error error)
-        : base(error)
-    {
-    }
+        : base(error) { }
 
     public static implicit operator Result<T>(T? data) =>
         data is not null ? Success(data) : Failure<T>(Error.nullValue);

@@ -1,4 +1,7 @@
-﻿using Template.HostWebApi.Extensions;
+﻿#if (!StorageNone)
+using Infraestructure.Storages;
+#endif
+using Template.HostWebApi.Extensions;
 #if (UseApi)
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Template.HostWebApi.Configurations;
@@ -40,8 +43,11 @@ builder.Services.AddSingleton<SwaggerAuthMiddleware>();
 builder.Services.AddHostedService<MigrationHostedService>();
 #endif
 
-#if (UseAzureOpts)
-builder.AddAzureServices();
+#if (!KeyVaultNone)
+builder.AddKeyVault();
+#endif
+#if (!StorageNone)
+builder.AddStorages();
 #endif
 
 WebApplication app = builder.Build();

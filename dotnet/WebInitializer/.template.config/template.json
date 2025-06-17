@@ -38,6 +38,10 @@
       "type": "computed",
       "value": "(KeyVaults == 'AzureKeyVault')"
     },
+    "KeyVaultNone": {
+      "type": "computed",
+      "value": "(!UseAzureKeyVault)"
+    },
     // Storage Config
     "Storage": {
       "type": "parameter",
@@ -77,8 +81,11 @@
     "Database": {
       "type": "parameter",
       "datatype": "choice",
-      "allowMultipleValues": true,
       "choices": [
+        {
+          "choice": "none",
+          "displayName": "None"
+        },
         {
           "choice": "postgresql",
           "displayName": "PostgreSQL"
@@ -92,8 +99,7 @@
           "displayName": "SQL Server"
         }
       ],
-      "defaultValue": "none",
-      "description": "The database type to use."
+      "defaultValue": "none"
     },
     "SqlDatabase": {
       "type": "computed",
@@ -224,7 +230,7 @@
     },
     "EventBusNone": {
       "type": "computed",
-      "value": "(EventBus == 'none')"
+      "value": "(!UseMemoryEvents && !UseAzServiceBus && !UseRabbitMQ)"
     },
     // Framework Config
     "Framework": {
@@ -257,7 +263,6 @@
         {
           "condition": "(!UseAzureOpts)",
           "exclude": [
-            "Template.HostWebApi/Extensions/AzureExtensions.cs",
             "Template.HostWebApi/ConfigurationOptions/AzureOptions/*"
           ]
         },

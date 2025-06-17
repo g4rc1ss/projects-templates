@@ -1,4 +1,4 @@
-namespace Template.HostWebApi.ConfigurationOptions.AzureOptions;
+namespace Infraestructure.Storages.AzureStorage;
 
 public record AzureBlobStorageOptions
 {

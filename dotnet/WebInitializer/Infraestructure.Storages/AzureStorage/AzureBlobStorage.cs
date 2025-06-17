@@ -4,7 +4,7 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Logging;
 
-namespace Infraestructure.Storages;
+namespace Infraestructure.Storages.AzureStorage;
 
 public class AzureBlobStorage(ILogger<AzureBlobStorage> logger, BlobServiceClient blobServiceClient)
     : IFileStorage
