@@ -80,10 +80,6 @@
       "allowMultipleValues": true,
       "choices": [
         {
-          "choice": "none",
-          "description": "None"
-        },
-        {
           "choice": "postgresql",
           "displayName": "PostgreSQL"
         },
@@ -96,7 +92,7 @@
           "displayName": "SQL Server"
         }
       ],
-      "defaultValue": "postgresql",
+      "defaultValue": "none",
       "description": "The database type to use."
     },
     "SqlDatabase": {
@@ -199,9 +195,6 @@
       "allowMultipleValues": true,
       "choices": [
         {
-          "choice": "none"
-        },
-        {
           "choice": "memoryevents",
           "displayName": "In Memory"
         },
@@ -215,7 +208,7 @@
         }
       ],
       "displayName": "Events",
-      "defaultValue": "memoryevents"
+      "defaultValue": "none"
     },
     "UseMemoryEvents": {
       "type": "computed",
