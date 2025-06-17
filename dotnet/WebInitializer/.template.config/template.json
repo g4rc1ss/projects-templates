@@ -16,7 +16,12 @@
     "type": "project"
   },
   "symbols": {
-    "AzureOpts": {
+    "UseAzureOpts": {
+      "type": "computed",
+      "value": "(UseAzureKeyVault || UseAzureBlobStorage)"
+    },
+    // KeyVault Config
+    "KeyVaults": {
       "type": "parameter",
       "datatype": "choice",
       "allowMultipleValues": true,
@@ -24,31 +29,38 @@
         {
           "displayName": "Az Key Vault",
           "choice": "AzureKeyVault"
-        },
+        }
+      ],
+      "defaultValue": "None",
+      "displayName": "Secrets and Key Vault"
+    },
+    "UseAzureKeyVault": {
+      "type": "computed",
+      "value": "(KeyVaults == 'AzureKeyVault')"
+    },
+    // Storage Config
+    "Storage": {
+      "type": "parameter",
+      "datatype": "choice",
+      "allowMultipleValues": true,
+      "choices": [
         {
           "displayName": "Az Blob Storage",
           "choice": "AzureBlobStorage"
         }
       ],
       "defaultValue": "None",
-      "displayName": "Azure Infra Options"
-    },
-    "UseAzureOpts": {
-      "type": "computed",
-      "value": "(UseAzureKeyVault || UseAzureBlobStorage)"
-    },
-    "UseAzureKeyVault": {
-      "type": "computed",
-      "value": "(AzureOpts == 'AzureKeyVault')"
+      "displayName": "File Storages"
     },
     "UseAzureBlobStorage": {
       "type": "computed",
-      "value": "(AzureOpts == 'AzureBlobStorage')"
+      "value": "(Storage == 'AzureBlobStorage')"
     },
     "StorageNone": {
       "type": "computed",
       "value": "(!UseAzureBlobStorage)"
     },
+    // Host Config
     "UseApi": {
       "displayName": "API",
       "type": "parameter",
@@ -61,9 +73,11 @@
       "datatype": "bool",
       "defaultValue": false
     },
+    // Database Config
     "Database": {
       "type": "parameter",
       "datatype": "choice",
+      "allowMultipleValues": true,
       "choices": [
         {
           "choice": "none",
@@ -105,6 +119,7 @@
       "type": "computed",
       "value": "(Database == 'none')"
     },
+    // Auth Config
     "Authentication": {
       "type": "parameter",
       "datatype": "choice",
@@ -137,6 +152,7 @@
       "type": "computed",
       "value": "(Authentication == 'none')"
     },
+    // Cache Config
     "Cache": {
       "type": "parameter",
       "datatype": "choice",
@@ -176,9 +192,11 @@
       "type": "computed",
       "value": "(Cache == 'garnet')"
     },
+    // EventBus Config
     "EventBus": {
       "type": "parameter",
       "datatype": "choice",
+      "allowMultipleValues": true,
       "choices": [
         {
           "choice": "none"
@@ -215,6 +233,7 @@
       "type": "computed",
       "value": "(EventBus == 'none')"
     },
+    // Framework Config
     "Framework": {
       "type": "parameter",
       "description": "The target framework for the project.",
