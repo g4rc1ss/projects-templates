@@ -46,14 +46,18 @@
     "Storage": {
       "type": "parameter",
       "datatype": "choice",
-      "allowMultipleValues": true,
+      //      "allowMultipleValues": true,
       "choices": [
+        {
+          "displayName": "None",
+          "choice": "none"
+        },
         {
           "displayName": "Az Blob Storage",
           "choice": "AzureBlobStorage"
         }
       ],
-      "defaultValue": "None",
+      "defaultValue": "none",
       "displayName": "File Storages"
     },
     "UseAzureBlobStorage": {
@@ -99,7 +103,7 @@
           "displayName": "SQL Server"
         }
       ],
-      "defaultValue": "none"
+      "defaultValue": "postgresql"
     },
     "SqlDatabase": {
       "type": "computed",

@@ -1,7 +1,8 @@
-﻿#if (!StorageNone)
+﻿using Template.HostWebApi.Extensions;
+#if (!StorageNone)
 using Infraestructure.Storages;
 #endif
-using Template.HostWebApi.Extensions;
+
 #if (UseApi)
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Template.HostWebApi.Configurations;
