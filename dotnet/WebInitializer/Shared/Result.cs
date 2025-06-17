@@ -3,43 +3,53 @@
 public class Result
 {
     public object? Data { get; }
-    public bool IsSuccess { get; }
+    public bool IsSuccess => Error == Error.none;
     public Error Error { get; }
 
-    protected Result(object? data, bool isSuccess, Error error)
-        : this(isSuccess, error)
+    public Result()
+    {
+        Data = null;
+        Error = Error.none;
+    }
+
+    protected Result(object? data)
+        : this()
     {
         Data = data;
     }
 
-    private Result(bool isSuccess, Error error)
+    public Result(Error error)
     {
-        if (isSuccess && error != Error.none)
+        if (error == Error.none)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("Error cannot be none");
         }
 
-        if (!isSuccess && error == Error.none)
-        {
-            throw new InvalidOperationException();
-        }
-
-        IsSuccess = isSuccess;
         Error = error;
     }
 
-    public static Result Success() => new(true, Error.none);
+    public static Result Success() => new();
 
-    public static Result<T> Success<T>(T data) => new(data, true, Error.none);
+    public static Result<T> Success<T>(T data) => new(data);
 
-    public static Result Failure(Error error) => new(false, error);
+    public static Result Failure(Error error) => new(error);
 
-    public static Result<T> Failure<T>(Error error) => new(default, false, error);
+    public static Result<T> Failure<T>(Error error) => new(error);
 }
 
-public class Result<T>(T? data, bool isSuccess, Error error) : Result(data, isSuccess, error)
+public class Result<T> : Result
 {
-    public new T? Data => data;
+    public new T Data => (T?)base.Data ?? throw new NullReferenceException();
+
+    public Result(T? data)
+        : base(data)
+    {
+    }
+
+    public Result(Error error)
+        : base(error)
+    {
+    }
 
     public static implicit operator Result<T>(T? data) =>
         data is not null ? Success(data) : Failure<T>(Error.nullValue);

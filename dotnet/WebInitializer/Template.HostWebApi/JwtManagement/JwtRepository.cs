@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 namespace Template.HostWebApi.JwtManagement;
 
 public class JwtRepository(
-
 #if ((UseJwt) && SqlDatabase)
     DatabaseContext dbContext
 #endif
