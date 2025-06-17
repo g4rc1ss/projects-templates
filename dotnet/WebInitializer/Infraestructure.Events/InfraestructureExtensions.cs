@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Infraestructure.Events.Publisher;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 #if (UseMemoryEvents)
 using System.Threading.Channels;
@@ -11,14 +12,18 @@ public static class InfraestructureEventsExtensions
 {
     public static void AddEventsServices(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddScoped<IEventNotificator, EventNotificator>();
 #if (UseMemoryEvents)
+        builder.Services.AddScoped<IEventNotificator, MemoryEventNotificator>();
         builder.AddConsumerServices([typeof(InfraestructureEventsExtensions).Assembly]);
 #endif
+
 #if (UseAzServiceBus)
+        builder.Services.AddScoped<IEventNotificator, AzureEventNotificator>();
         builder.AddAzureServiceBusClient("AzureServiceBus");
 #endif
+
 #if (UseRabbitMQ)
+        builder.Services.AddScoped<IEventNotificator, RabbitEventNotificator>();
         builder.AddRabbitMQClient("RabbitMQ");
 #endif
     }

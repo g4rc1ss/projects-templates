@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json.schemastore.org/template",
+  "$schema": "https://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "architecture"
@@ -362,7 +362,20 @@
           "exclude": [
             "Infraestructure.Events/Handlers/*",
             "Infraestructure.Events/IEventConsumer.cs",
-            "Infraestructure.Events/ConsumerService.cs"
+            "Infraestructure.Events/ConsumerService.cs",
+            "Infraestructure.Events/Publisher/MemoryEventNotificator.cs"
+          ]
+        },
+        {
+          "condition": "!UseAzServiceBus",
+          "exclude": [
+            "Infraestructure.Events/Publisher/AzureEventNotificator.cs"
+          ]
+        },
+        {
+          "condition": "!UseRabbitMQ",
+          "exclude": [
+            "Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
           ]
         }
       ]
