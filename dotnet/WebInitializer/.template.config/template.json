@@ -218,7 +218,7 @@
         }
       ],
       "displayName": "Events",
-      "defaultValue": "none"
+      "defaultValue": "memoryevents"
     },
     "UseMemoryEvents": {
       "type": "computed",
