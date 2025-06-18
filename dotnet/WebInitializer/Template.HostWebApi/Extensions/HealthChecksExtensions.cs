@@ -16,7 +16,7 @@ public static class HealthChecksExtensions
 #if (UseRedis || UseGarnet)
         healthChecks.AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty);
 #endif
-#if (SqlDatabase)
+#if (SqlDatabase && !UseSqlite)
         healthChecks.AddDbContextCheck<DatabaseContext>();
 #endif
 #if (UseAzServiceBus)

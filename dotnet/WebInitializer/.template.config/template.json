@@ -123,7 +123,7 @@
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql)"
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseSqlite)"
     },
     "UsePostgres": {
       "type": "computed",
@@ -139,7 +139,7 @@
     },
     "UseSqlite": {
       "type": "computed",
-      "value": "(Database == 'azuresql')"
+      "value": "(Database == 'sqlite')"
     },
     "UseMongodb": {
       "type": "computed",
@@ -338,14 +338,6 @@
         },
         // Database
         {
-          "condition": "(AuthNone)",
-          "exclude": [
-            "Infraestructure.Database/Repository/UserInfo.cs",
-            "Infraestructure.Database/Entities/UserEntity.cs",
-            "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs"
-          ]
-        },
-        {
           "condition": "(!UseIdentity)",
           "exclude": [
             "Infraestructure.Database/Entities/RoleEntity.cs"
@@ -363,7 +355,7 @@
           "condition": "(!SqlDatabase && !UseIdentity)",
           "exclude": [
             "Infraestructure.Database/EntityConfiguration/*",
-            "Infraestructure.Database/DatabaseContext.cs",
+            "Infraestructure.Database/DatabaseContext.cs"
           ]
         },
         {
@@ -412,7 +404,7 @@
           "exclude": [
             "Template.HostWebApi/JwtManagement/*",
             "Shared/JWT/*",
-            "Template.HostWebApi/ConfigurationOptions/JwtOption.cs",
+            "Template.HostWebApi/ConfigurationOptions/JwtOption.cs"
           ],
           "rename": {
           }
@@ -439,6 +431,5 @@
         }
       ]
     }
-  ],
-
+  ]
 }
