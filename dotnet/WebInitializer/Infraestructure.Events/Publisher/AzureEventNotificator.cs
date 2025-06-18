@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Configuration;
@@ -16,8 +17,17 @@ public class AzureEventNotificator(ServiceBusClient serviceBusClient, IConfigura
         string? queuename = configuration.GetSection("ServiceBusConfig")["QueueName"];
         ServiceBusSender? sender = serviceBusClient.CreateSender(queuename);
 
-        ServiceBusMessage message = new(JsonSerializer.Serialize(request));
+        MessageDiagnosticTraces traces = new()
+        {
+            TraceId = Activity.Current?.TraceId.ToString(),
+            SpanId = Activity.Current?.SpanId.ToString(),
+            ParentId = Activity.Current?.ParentId,
+        };
 
-        await sender.SendMessageAsync(message, CancellationToken.None);
+        Message<TRequest> message = new(request, traces);
+
+        ServiceBusMessage sbMessage = new(JsonSerializer.Serialize(message));
+
+        await sender.SendMessageAsync(sbMessage, CancellationToken.None);
     }
 }
