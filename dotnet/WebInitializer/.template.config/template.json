@@ -267,6 +267,68 @@
   },
   "sources": [
     {
+      "source": "../Libs",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea",
+        "*.sln",
+        "**/Functionality/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!UseLocalStorage)",
+          "exclude": [
+            "Infraestructure.Storages/LocalStorage.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureBlobStorage)",
+          "exclude": [
+            "Infraestructure.Storages/AzureStorage/AzureBlobStorage.cs",
+            "Infraestructure.Storages/AzureStorage/AzureBlobStorageOptions.cs"
+          ]
+        },
+        {
+          "condition": "(StorageNone)",
+          "exclude": [
+            "Infraestructure.Storages/*"
+          ]
+        },
+        {
+          "condition": "EventBusNone",
+          "exclude": [
+            "**/Infraestructure.Events/**/*"
+          ]
+        },
+        {
+          "condition": "!UseMemoryEvents",
+          "exclude": [
+            "Infraestructure.Events/Handlers/*",
+            "Infraestructure.Events/IEventConsumer.cs",
+            "Infraestructure.Events/ConsumerService.cs",
+            "Infraestructure.Events/Publisher/MemoryEventNotificator.cs"
+          ]
+        },
+        {
+          "condition": "!UseAzServiceBus",
+          "exclude": [
+            "Infraestructure.Events/Publisher/AzureEventNotificator.cs"
+          ]
+        },
+        {
+          "condition": "!UseRabbitMQ",
+          "exclude": [
+            "Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
+          ]
+        }
+      ]
+    },
+    {
       "source": "./",
       "target": "./",
       "exclude": [
@@ -290,25 +352,6 @@
           "condition": "(!UseAzureKeyVault)",
           "exclude": [
             "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
-          ]
-        },
-        {
-          "condition": "(!UseLocalStorage)",
-          "exclude": [
-            "Infraestructure.Storages/LocalStorage.cs"
-          ]
-        },
-        {
-          "condition": "(!UseAzureBlobStorage)",
-          "exclude": [
-            "Infraestructure.Storages/AzureStorage/AzureBlobStorage.cs",
-            "Infraestructure.Storages/AzureStorage/AzureBlobStorageOptions.cs"
-          ]
-        },
-        {
-          "condition": "(StorageNone)",
-          "exclude": [
-            "Infraestructure.Storages/*"
           ]
         },
         {
@@ -368,33 +411,6 @@
           "exclude": [
             "Infraestructure.Database/Repository/MongoPoc.cs",
             "Infraestructure.Database/Entities/MongoDbEntity.cs"
-          ]
-        },
-        {
-          "condition": "EventBusNone",
-          "exclude": [
-            "**/Infraestructure.Events/**/*"
-          ]
-        },
-        {
-          "condition": "!UseMemoryEvents",
-          "exclude": [
-            "Infraestructure.Events/Handlers/*",
-            "Infraestructure.Events/IEventConsumer.cs",
-            "Infraestructure.Events/ConsumerService.cs",
-            "Infraestructure.Events/Publisher/MemoryEventNotificator.cs"
-          ]
-        },
-        {
-          "condition": "!UseAzServiceBus",
-          "exclude": [
-            "Infraestructure.Events/Publisher/AzureEventNotificator.cs"
-          ]
-        },
-        {
-          "condition": "!UseRabbitMQ",
-          "exclude": [
-            "Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
           ]
         }
       ]
