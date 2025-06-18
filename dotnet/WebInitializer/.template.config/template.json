@@ -280,6 +280,7 @@
         "**/Functionality/**/*"
       ],
       "modifiers": [
+        // Storages
         {
           "condition": "(!UseLocalStorage)",
           "exclude": [
@@ -299,6 +300,7 @@
             "Infraestructure.Storages/*"
           ]
         },
+        // Events
         {
           "condition": "EventBusNone",
           "exclude": [
@@ -324,6 +326,49 @@
           "condition": "!UseRabbitMQ",
           "exclude": [
             "Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
+          ]
+        },
+        // Database
+        {
+          "condition": "(AuthNone)",
+          "exclude": [
+            "Infraestructure.Database/Repository/UserInfo.cs",
+            "Infraestructure.Database/Entities/UserEntity.cs",
+            "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs"
+          ]
+        },
+        {
+          "condition": "(!UseIdentity)",
+          "exclude": [
+            "Infraestructure.Database/Entities/RoleEntity.cs"
+          ]
+        },
+        {
+          "condition": "(!UseJwt)",
+          "exclude": [
+            "Infraestructure.Database/Entities/UserJwtTokensEntity.cs"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!SqlDatabase && !UseIdentity)",
+          "exclude": [
+            "Infraestructure.Database/EntityConfiguration/*",
+            "Infraestructure.Database/DatabaseContext.cs",
+          ]
+        },
+        {
+          "condition": "DatabaseNone && (!UseIdentity)",
+          "exclude": [
+            "**/Infraestructure.Database/**/*"
+          ]
+        },
+        {
+          "condition": "!UseMongodb",
+          "exclude": [
+            "Infraestructure.Database/Repository/MongoPoc.cs",
+            "Infraestructure.Database/Entities/MongoDbEntity.cs"
           ]
         }
       ]
@@ -355,29 +400,20 @@
           ]
         },
         {
-          "condition": "(AuthNone)",
-          "exclude": [
-            "Infraestructure.Database/Repository/UserInfo.cs",
-            "Infraestructure.Database/Entities/UserEntity.cs",
-            "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs"
-          ]
-        },
-        {
-          "condition": "(!UseIdentity)",
-          "exclude": [
-            "Infraestructure.Database/Entities/RoleEntity.cs"
-          ]
-        },
-        {
           "condition": "(!UseJwt)",
           "exclude": [
             "Template.HostWebApi/JwtManagement/*",
             "Shared/JWT/*",
             "Template.HostWebApi/ConfigurationOptions/JwtOption.cs",
-            "Infraestructure.Database/Entities/UserJwtTokensEntity.cs"
           ],
           "rename": {
           }
+        },
+        {
+          "condition": "(!SqlDatabase && !UseIdentity)",
+          "exclude": [
+            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
+          ]
         },
         {
           "condition": "(!UseApi)",
@@ -392,27 +428,6 @@
           ],
           "rename": {
           }
-        },
-        {
-          "condition": "(!SqlDatabase && !UseIdentity)",
-          "exclude": [
-            "Infraestructure.Database/EntityConfiguration/*",
-            "Infraestructure.Database/DatabaseContext.cs",
-            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
-          ]
-        },
-        {
-          "condition": "DatabaseNone && (!UseIdentity)",
-          "exclude": [
-            "**/Infraestructure.Database/**/*"
-          ]
-        },
-        {
-          "condition": "!UseMongodb",
-          "exclude": [
-            "Infraestructure.Database/Repository/MongoPoc.cs",
-            "Infraestructure.Database/Entities/MongoDbEntity.cs"
-          ]
         }
       ]
     }

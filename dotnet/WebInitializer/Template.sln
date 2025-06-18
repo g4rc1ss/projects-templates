@@ -18,9 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{484C7F99-8AAA-4574-9225-D4956DEB7724}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Database", "Infraestructure.Database\Infraestructure.Database.csproj", "{F48BFAB1-B7E4-48A4-9A6F-BC516DAF30A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Database", "..\Libs\Infraestructure.Database\Infraestructure.Database.csproj", "{F48BFAB1-B7E4-48A4-9A6F-BC516DAF30A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Events", "../Libs/Infraestructure.Events\Infraestructure.Events.csproj", "{DB292C4B-9944-4567-A0C3-E63258350CCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Events", "..\Libs\Infraestructure.Events\Infraestructure.Events.csproj", "{DB292C4B-9944-4567-A0C3-E63258350CCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Architecture.Tests", "test\Template.Architecture.Tests\Template.Architecture.Tests.csproj", "{C4C850CD-4E09-4E25-A340-8DC8F21FCDBE}"
 EndProject
@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.AspireHost", "Temp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.HostWebApi.Tests", "test\Template.HostWebApi.Tests\Template.HostWebApi.Tests.csproj", "{03D95F30-B279-41EB-8E6D-048162C04A20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Storages", "../Libs/Infraestructure.Storages\Infraestructure.Storages.csproj", "{2A96CD42-AA56-454B-A96D-F3E1DD85C02C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Storages", "..\Libs\Infraestructure.Storages\Infraestructure.Storages.csproj", "{2A96CD42-AA56-454B-A96D-F3E1DD85C02C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
