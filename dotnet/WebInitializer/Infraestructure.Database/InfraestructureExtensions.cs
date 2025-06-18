@@ -1,7 +1,4 @@
-﻿using Infraestructure.Database.Entities;
-using Infraestructure.Database.Repository;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 #if (SqlDatabase)
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
