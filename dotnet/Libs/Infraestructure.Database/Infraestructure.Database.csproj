@@ -5,11 +5,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <!--#if (SqlDatabase)-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*" />
+    <!--#endif-->
     <!--#if (UsePostgres)-->
     <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*" />
     <!--#endif-->
-    <!--#if (SqlDatabase)-->
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*" />
+    <!--#if (UseSqlite)-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="*" />
     <!--#endif-->
     <!--#if (UseSqlServer || UseAzureSql)-->
     <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*" />

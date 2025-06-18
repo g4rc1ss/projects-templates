@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 #if (SqlDatabase)
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +26,8 @@ public static class InfraestructureDatabaseExtensions
             builder.UseSqlServer(connectionString);
 #elif (UseAzureSql)
             builder.UseAzureSql(connectionString);
+#elif (UseSqlite)
+            builder.UseSqlite(connectionString);
 #endif
         });
 
@@ -35,6 +39,8 @@ public static class InfraestructureDatabaseExtensions
             builder.UseSqlServer(connectionString);
 #elif (UseAzureSql)
             builder.UseAzureSql(connectionString);
+#elif (UseSqlite)
+            builder.UseSqlite(connectionString);
 #endif
         });
 #endif

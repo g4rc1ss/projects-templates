@@ -111,6 +111,10 @@
           "displayName": "SQL Server"
         },
         {
+          "choice": "sqlite",
+          "displayName": "Sqlite"
+        },
+        {
           "choice": "mongodb",
           "displayName": "Mongo Database"
         }
@@ -130,6 +134,10 @@
       "value": "(Database == 'sqlserver')"
     },
     "UseAzureSql": {
+      "type": "computed",
+      "value": "(Database == 'azuresql')"
+    },
+    "UseSqlite": {
       "type": "computed",
       "value": "(Database == 'azuresql')"
     },
