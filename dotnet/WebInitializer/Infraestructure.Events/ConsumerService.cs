@@ -10,7 +10,7 @@ public class ConsumerService<TRequest>(
     Channel<Message<TRequest>> channel,
     IEnumerable<IEventConsumer<TRequest>> consumers
 ) : BackgroundService
-    where TRequest : INotificator
+    where TRequest : INotificatorRequest
 {
     private readonly string _consumerName = typeof(TRequest).Name;
 

@@ -36,12 +36,39 @@ public static class InfraestructureEventsExtensions
     {
         foreach (Assembly assembly in assemblies)
         {
+            // Obtenemos todas las clases que implementen
             IEnumerable<Type> notificators = assembly
                 .GetTypes()
-                .Where(x => x.IsClass && x.GetInterface(nameof(INotificator)) is not null);
+                .Where(x => x.IsClass && x.GetInterface(nameof(INotificatorRequest)) is not null);
 
             foreach (Type notificator in notificators)
             {
+                // Obtenemos los handler del tipo que implementa la interfaz de notificacion para verificar si necesitamos crear workers
+                Type handlerConsumer = typeof(IEventConsumer<>).MakeGenericType(notificator);
+                List<Type> handlers =
+                [
+                    .. assembly
+                        .GetTypes()
+                        .Where(x => x.IsClass && x.GetInterface(handlerConsumer.Name) is not null)
+                        .Where(x =>
+                            x.GetInterfaces()
+                                .Any(i => i.IsGenericType && i.FullName == handlerConsumer.FullName)
+                        ),
+                ];
+
+                if (handlers.Count == 0)
+                {
+                    continue;
+                }
+
+                foreach (Type handler in handlers)
+                {
+                    typeof(InfraestructureEventsExtensions)
+                        .GetMethod(nameof(AddHandlers))
+                        ?.MakeGenericMethod(notificator, handler)
+                        .Invoke(null, [builder.Services]);
+                }
+
                 Type channelMessage = typeof(Message<>).MakeGenericType(notificator);
                 typeof(InfraestructureEventsExtensions)
                     .GetMethod(nameof(AddChannel))
@@ -53,23 +80,6 @@ public static class InfraestructureEventsExtensions
                     .GetMethod(nameof(AddWorkersService))
                     ?.MakeGenericMethod(consumerNotificator)
                     .Invoke(null, [builder.Services]);
-
-                Type handlerConsumer = typeof(IEventConsumer<>).MakeGenericType(notificator);
-                IEnumerable<Type> handlers = assembly
-                    .GetTypes()
-                    .Where(x => x.IsClass && x.GetInterface(handlerConsumer.Name) is not null)
-                    .Where(x =>
-                        x.GetInterfaces()
-                            .Any(i => i.IsGenericType && i.FullName == handlerConsumer.FullName)
-                    );
-
-                foreach (Type handler in handlers)
-                {
-                    typeof(InfraestructureEventsExtensions)
-                        .GetMethod(nameof(AddHandlers))
-                        ?.MakeGenericMethod(notificator, handler)
-                        .Invoke(null, [builder.Services]);
-                }
             }
         }
     }
@@ -86,7 +96,7 @@ public static class InfraestructureEventsExtensions
     }
 
     public static void AddHandlers<TRequest, TImplementation>(this IServiceCollection services)
-        where TRequest : INotificator
+        where TRequest : INotificatorRequest
         where TImplementation : class, IEventConsumer<TRequest>
     {
         services.AddSingleton<IEventConsumer<TRequest>, TImplementation>();

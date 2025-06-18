@@ -10,7 +10,7 @@ public class MemoryEventNotificator(IServiceProvider serviceProvider) : IEventNo
         TRequest request,
         CancellationToken cancellationToken = default
     )
-        where TRequest : INotificator
+        where TRequest : INotificatorRequest
     {
         Channel<Message<TRequest>> channel = serviceProvider.GetRequiredService<
             Channel<Message<TRequest>>

@@ -10,7 +10,7 @@ public class RabbitEventNotificator(IConnection connection) : IEventNotificator
         TRequest request,
         CancellationToken cancellationToken = default
     )
-        where TRequest : INotificator
+        where TRequest : INotificatorRequest
     {
         using IModel? model = connection.CreateModel();
         IBasicProperties? properties = model.CreateBasicProperties();

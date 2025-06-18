@@ -2,7 +2,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Infraestructure.Events.Handlers;
 
-public record Request : INotificator;
+public record Request : INotificatorRequest;
 
 public class Handler(ILogger<Handler> logger) : IEventConsumer<Request>
 {

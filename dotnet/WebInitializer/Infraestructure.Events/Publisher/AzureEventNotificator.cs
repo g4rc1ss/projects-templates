@@ -12,7 +12,7 @@ public class AzureEventNotificator(ServiceBusClient serviceBusClient, IConfigura
         TRequest request,
         CancellationToken cancellationToken = default
     )
-        where TRequest : INotificator
+        where TRequest : INotificatorRequest
     {
         string? queuename = configuration.GetSection("ServiceBusConfig")["QueueName"];
         ServiceBusSender? sender = serviceBusClient.CreateSender(queuename);

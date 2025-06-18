@@ -1,9 +1,9 @@
 namespace Infraestructure.Events;
 
 public record Message<TRequest>(TRequest Request, MessageDiagnosticTraces Traces)
-    where TRequest : INotificator;
+    where TRequest : INotificatorRequest;
 
-public interface INotificator;
+public interface INotificatorRequest;
 
 public record MessageDiagnosticTraces
 {
