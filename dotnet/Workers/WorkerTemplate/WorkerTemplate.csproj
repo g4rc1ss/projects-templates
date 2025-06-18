@@ -10,7 +10,7 @@
     <!--#if (UseAzServiceBus)-->
     <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" Version="*" />
     <!--#endif-->
-    <!--#if (UseRedis-->
+    <!--#if (UseRedis)-->
     <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*" />
     <!--#endif-->
     <!--#if (UseRabbitMQ)-->

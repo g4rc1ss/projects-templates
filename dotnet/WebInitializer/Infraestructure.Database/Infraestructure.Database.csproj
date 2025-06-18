@@ -14,6 +14,9 @@
     <!--#if (UseSqlServer || UseAzureSql)-->
     <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*" />
     <!--#endif-->
+    <!--#if (UseMongodb)-->
+    <PackageReference Include="Aspire.MongoDB.Driver" Version="*" />
+    <!--#endif-->
     <!--#if (UseIdentity)-->
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*" />
     <!--#endif-->

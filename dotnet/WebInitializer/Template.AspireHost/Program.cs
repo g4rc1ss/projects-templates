@@ -15,7 +15,9 @@ IResourceBuilder<PostgresDatabaseResource> postgres = builder
     .WithDataVolume("postgresVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
     .AddDatabase("PostgresDB", "Template");
-#elif (UseSqlServer || UseAzureSql)
+#endif
+
+#if (UseSqlServer || UseAzureSql)
 IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder
     .AddSqlServer("SQLServer")
     .WithDataVolume("SqlServerVM", isReadOnly: false)
@@ -23,11 +25,21 @@ IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder
     .AddDatabase("TemplateDatabase", "Template");
 #endif
 
+#if (UseMongodb)
+IResourceBuilder<MongoDBServerResource> mongoDb = builder
+    .AddMongoDB("mongo")
+    // .WithDataVolume("MongoVM", isReadOnly: false)
+    .WithLifetime(ContainerLifetime.Session)
+    .WithMongoExpress();
+#endif
+
 #if (UseAzServiceBus)
 IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder
     .AddAzureServiceBus("AzureServiceBus")
     .RunAsEmulator();
-#elif (UseRabbitMQ)
+#endif
+
+#if (UseRabbitMQ)
 IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder
     .AddRabbitMQ("RabbitMQ")
     .WithDataVolume("rabbitMQVM", isReadOnly: false)
@@ -49,18 +61,30 @@ IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
 IResourceBuilder<ProjectResource> project = builder.AddProject<Template_HostWebApi>("Template");
 #if (UsePostgres)
 project.WithReference(postgres, "DatabaseContext").WaitFor(postgres);
-#elif (UseSqlServer || UseAzureSql)
+#endif
+
+#if (UseSqlServer || UseAzureSql)
 project.WithReference(sqlServer, "DatabaseContext").WaitFor(sqlServer);
 #endif
+
+#if (UseMongodb)
+project.WithReference(mongoDb).WaitFor(mongoDb);
+#endif
+
 #if (UseRedis)
 project.WithReference(redis);
 project.WaitFor(redis);
-#elif (UseGarnet)
+#endif
+
+#if (UseGarnet)
 project.WithReference(garnet).WaitFor(garnet);
 #endif
+
 #if (UseAzServiceBus)
 project.WithReference(azureServiceBus).WaitFor(azureServiceBus);
-#elif (UseRabbitMQ)
+#endif
+
+#if (UseRabbitMQ)
 project.WithReference(rabbitMQ).WaitFor(rabbitMQ);
 #endif
 

@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Infraestructure.Database.Entities;
+using Infraestructure.Database.Repository;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 #if (SqlDatabase)
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +40,10 @@ public static class InfraestructureDatabaseExtensions
             builder.UseAzureSql(connectionString);
 #endif
         });
+#endif
+#if (UseMongodb)
+        builder.Services.AddScoped<IRepository<MongoDbEntity>, MongoPoc>();
+        builder.AddMongoDBClient("mongo");
 #endif
     }
 }

@@ -10,9 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="*" />
-    <!--#if (UsePostgres)-->
-    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*" />
-    <!--#endif-->
     <!--#if (UseRedis)-->
     <PackageReference Include="Aspire.Hosting.Redis" Version="*" />
     <!--#endif-->
@@ -25,8 +22,14 @@
     <!--#if (UseRabbitMQ)-->
     <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="*" />
     <!--#endif-->
+    <!--#if (UsePostgres)-->
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*" />
+    <!--#endif-->
     <!--#if (UseSqlServer || UseAzureSql)-->
     <PackageReference Include="Aspire.Hosting.SqlServer" Version="*" />
+    <!--#endif-->
+    <!--#if (UseMongodb)-->
+    <PackageReference Include="Aspire.Hosting.MongoDB" Version="*" />
     <!--#endif-->
   </ItemGroup>
   <ItemGroup>

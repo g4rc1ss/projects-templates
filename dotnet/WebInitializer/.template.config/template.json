@@ -109,6 +109,10 @@
         {
           "choice": "sqlserver",
           "displayName": "SQL Server"
+        },
+        {
+          "choice": "mongodb",
+          "displayName": "Mongo Database"
         }
       ],
       "defaultValue": "postgresql"
@@ -128,6 +132,10 @@
     "UseAzureSql": {
       "type": "computed",
       "value": "(Database == 'azuresql')"
+    },
+    "UseMongodb": {
+      "type": "computed",
+      "value": "(Database == 'mongodb')"
     },
     "DatabaseNone": {
       "type": "computed",
@@ -306,31 +314,21 @@
         {
           "condition": "(AuthNone)",
           "exclude": [
-            "Template.HostWebApi/JwtManagement/*",
-            "Infraestructure.Database/Entities/*",
             "Infraestructure.Database/Repository/UserInfo.cs",
-            "Infraestructure.Database/EntityConfiguration/*",
-            "Shared/JWT/*"
+            "Infraestructure.Database/Entities/UserEntity.cs"
           ]
         },
         {
-          "condition": "(UseIdentity)",
-          "exclude": [
-            "Template.HostWebApi/JwtManagement/*",
-            "Shared/JWT/*"
-          ]
-        },
-        {
-          "condition": "(UseJwt)",
+          "condition": "(!UseIdentity)",
           "exclude": [
             "Infraestructure.Database/Entities/RoleEntity.cs"
-          ],
-          "rename": {
-          }
+          ]
         },
         {
           "condition": "(!UseJwt)",
           "exclude": [
+            "Template.HostWebApi/JwtManagement/*",
+            "Shared/JWT/*",
             "Template.HostWebApi/ConfigurationOptions/JwtOption.cs",
             "Infraestructure.Database/Entities/UserJwtTokensEntity.cs"
           ],
@@ -360,9 +358,16 @@
           ]
         },
         {
-          "condition": "DatabaseNone && (AuthNone || UseJwt)",
+          "condition": "DatabaseNone && (!UseIdentity)",
           "exclude": [
             "**/Infraestructure.Database/**/*"
+          ]
+        },
+        {
+          "condition": "!UseMongodb",
+          "exclude": [
+            "Infraestructure.Database/Repository/MongoPoc.cs",
+            "Infraestructure.Database/Entities/MongoDbEntity.cs"
           ]
         },
         {

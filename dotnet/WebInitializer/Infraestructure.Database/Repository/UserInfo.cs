@@ -13,7 +13,10 @@ public class UserInfo(
 {
     public UserEntity? Entity { get; set; }
 
-    public async Task<UserEntity?> GetByIdAsync(string userId)
+    public async Task<UserEntity?> GetByIdAsync(
+        string userId,
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(userId);
 
@@ -29,7 +32,56 @@ public class UserInfo(
 #endif
     }
 
-    public async Task<UserEntity?> GetUserByUserNameAsync(string userName)
+    public async Task<UserEntity> CreateAsync(
+        UserEntity entity,
+        CancellationToken cancellationToken = default
+    )
+    {
+#if (UseIdentity)
+        IdentityResult result = await userManager.CreateAsync(entity);
+        if (!result.Succeeded)
+        {
+            throw new Exception("Error creating user");
+        }
+
+        Entity = entity;
+        return entity;
+
+#else
+        throw new NotImplementedException();
+#endif
+    }
+
+    public async Task UpdateAsync(UserEntity entity, CancellationToken cancellationToken = default)
+    {
+#if (UseIdentity)
+        IdentityResult result = await userManager.UpdateAsync(entity);
+        if (!result.Succeeded)
+        {
+            throw new Exception("Error updating user");
+        }
+#else
+        throw new NotImplementedException();
+#endif
+    }
+
+    public async Task DeleteAsync(UserEntity entity, CancellationToken cancellationToken = default)
+    {
+#if (UseIdentity)
+        IdentityResult result = await userManager.DeleteAsync(entity);
+        if (!result.Succeeded)
+        {
+            throw new Exception("Error updating user");
+        }
+#else
+        throw new NotImplementedException();
+#endif
+    }
+
+    public async Task<UserEntity?> GetUserByUserNameAsync(
+        string userName,
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(userName);
 
@@ -48,5 +100,8 @@ public class UserInfo(
 
 public interface IUserInfo : IRepository<UserEntity>
 {
-    Task<UserEntity?> GetUserByUserNameAsync(string userName);
+    Task<UserEntity?> GetUserByUserNameAsync(
+        string userName,
+        CancellationToken cancellationToken = default
+    );
 }
