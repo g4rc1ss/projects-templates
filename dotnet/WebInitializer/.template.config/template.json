@@ -55,6 +55,10 @@
         {
           "displayName": "Az Blob Storage",
           "choice": "AzureBlobStorage"
+        },
+        {
+          "displayName": "Local System Storage",
+          "choice": "LocalSystemStorage"
         }
       ],
       "defaultValue": "none",
@@ -64,9 +68,13 @@
       "type": "computed",
       "value": "(Storage == 'AzureBlobStorage')"
     },
+    "UseLocalStorage": {
+      "type": "computed",
+      "value": "(Storage == 'LocalSystemStorage')"
+    },
     "StorageNone": {
       "type": "computed",
-      "value": "(!UseAzureBlobStorage)"
+      "value": "(!UseAzureBlobStorage && !UseLocalStorage)"
     },
     // Host Config
     "UseApi": {
@@ -217,8 +225,8 @@
           "displayName": "Rabbit MQ"
         }
       ],
-      "displayName": "Events",
-      "defaultValue": "memoryevents"
+      "defaultValue": "none",
+      "displayName": "Events"
     },
     "UseMemoryEvents": {
       "type": "computed",
@@ -271,16 +279,22 @@
           ]
         },
         {
-          "condition": "(!UseAzureBlobStorage)",
-          "exclude": [
-            "Infraestructure.Storages/AzureBlobStorage.cs",
-            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureBlobStorageOptions.cs"
-          ]
-        },
-        {
           "condition": "(!UseAzureKeyVault)",
           "exclude": [
             "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
+          ]
+        },
+        {
+          "condition": "(!UseLocalStorage)",
+          "exclude": [
+            "Infraestructure.Storages/LocalStorage.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureBlobStorage)",
+          "exclude": [
+            "Infraestructure.Storages/AzureStorage/AzureBlobStorage.cs",
+            "Infraestructure.Storages/AzureStorage/AzureBlobStorageOptions.cs"
           ]
         },
         {

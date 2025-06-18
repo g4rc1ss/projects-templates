@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 #if (UseAzureBlobStorage)
 using Azure.Identity;
@@ -15,6 +16,9 @@ public static class StoragesExtensions
     {
 #if (UseAzureBlobStorage)
         builder.AddAzureBlobStorage();
+#endif
+#if (UseLocalStorage)
+        builder.Services.AddSingleton<IFileStorage, LocalStorage>();
 #endif
     }
 

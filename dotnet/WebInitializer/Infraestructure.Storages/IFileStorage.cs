@@ -7,6 +7,7 @@ public interface IFileStorage
         string name,
         CancellationToken cancellationToken = default
     );
+
     Task UploadFileAsync(
         Stream content,
         string path,
