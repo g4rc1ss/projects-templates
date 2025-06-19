@@ -46,7 +46,7 @@
       "displayName": "Android",
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": true
+      "defaultValue": false
     },
     "UseDesktop": {
       "displayName": "Desktop",
@@ -58,7 +58,7 @@
       "displayName": "IOS",
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": true
+      "defaultValue": false
     },
     // Database Config
     "Databases": {
@@ -259,6 +259,24 @@
         "**/Functionality/**/*"
       ],
       "modifiers": [
+        {
+          "condition": "!UseAndroid",
+          "exclude": [
+            "**/AvaloniaDesktop.Android/**/*"
+          ]
+        },
+        {
+          "condition": "!UseIOS",
+          "exclude": [
+            "**/AvaloniaDesktop.IOS/**/*"
+          ]
+        },
+        {
+          "condition": "!UseDesktop",
+          "exclude": [
+            "**/AvaloniaDesktop.Desktop/**/*"
+          ]
+        }
       ]
     }
   ]
