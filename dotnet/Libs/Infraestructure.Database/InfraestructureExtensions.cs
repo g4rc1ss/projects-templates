@@ -1,4 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
+#if (UseMongodb)
+using Infraestructure.Database.Entities;
+using Infraestructure.Database.Repository;
+using Microsoft.Extensions.DependencyInjection;
+#endif
 #if (SqlDatabase)
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;

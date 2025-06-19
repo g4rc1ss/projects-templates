@@ -72,10 +72,12 @@ if (!app.Environment.IsProduction())
 
 #if (UseApi)
 app.UseHttpsRedirection();
+#endif
+
+#if (!AuthNone)
 app.UseAuthentication();
 app.UseAuthorization();
 #endif
-
 #if (UseApi)
 app.MapHealthChecks("/health");
 app.MapControllers();

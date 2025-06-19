@@ -5,7 +5,7 @@
     "architecture"
   ],
   "identity": "web-host-init-configuration",
-  "name": "Web Initializer",
+  "name": "Web Initializer Base",
   "description": "Crear configuración base de diferentes servicios Web y configuraciones de auth, BBDD, etc.",
   "shortName": "Initialize web",
   "sourceName": "Template",
@@ -111,10 +111,6 @@
           "displayName": "SQL Server"
         },
         {
-          "choice": "sqlite",
-          "displayName": "Sqlite"
-        },
-        {
           "choice": "mongodb",
           "displayName": "Mongo Database"
         }
@@ -136,10 +132,6 @@
     "UseAzureSql": {
       "type": "computed",
       "value": "(Database == 'azuresql')"
-    },
-    "UseSqlite": {
-      "type": "computed",
-      "value": "(Database == 'sqlite')"
     },
     "UseMongodb": {
       "type": "computed",
@@ -354,7 +346,9 @@
         {
           "condition": "(!SqlDatabase && !UseIdentity)",
           "exclude": [
-            "Infraestructure.Database/EntityConfiguration/*",
+            "Infraestructure.Database/Entities/UserEntity.cs",
+            "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
+            "Infraestructure.Database/Repository/UserInfo.cs",
             "Infraestructure.Database/DatabaseContext.cs"
           ]
         },
