@@ -34,9 +34,7 @@ public static class InfraestructureDatabaseExtensions
 #endif
 
 #if (UseLitedb)
-        string? litedbConnection = builder.Configuration.GetConnectionString(
-            "litedb"
-        );
+        string? litedbConnection = builder.Configuration.GetConnectionString("litedb");
         builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(litedbConnection));
 #endif
     }

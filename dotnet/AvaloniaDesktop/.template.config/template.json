@@ -41,24 +41,12 @@
       "type": "computed",
       "value": "(!UseAzureBlobStorage && !UseLocalStorage)"
     },
-    // Host Config
-    "UseAndroid": {
-      "displayName": "Android",
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": false
-    },
+    // Avalonia
     "UseDesktop": {
       "displayName": "Desktop",
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": true
-    },
-    "UseIOS": {
-      "displayName": "IOS",
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": false
     },
     // Database Config
     "Databases": {
