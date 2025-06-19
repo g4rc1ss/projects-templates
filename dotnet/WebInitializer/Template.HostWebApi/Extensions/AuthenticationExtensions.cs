@@ -3,13 +3,6 @@ using Infraestructure.Database;
 using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 #endif
-#if (UseJwt)
-using Microsoft.IdentityModel.Tokens;
-using Shared.JWT;
-using System.Text;
-using Template.HostWebApi.ConfigurationOptions;
-using Template.HostWebApi.JwtManagement;
-#endif
 
 namespace Template.HostWebApi.Extensions;
 
@@ -20,35 +13,6 @@ public static class AuthenticationExtensions
         IConfiguration configuration
     )
     {
-#if (UseJwt)
-        services
-#if (UseApi)
-            .AddHttpContextAccessor()
-#endif
-            .AddAuthorization()
-            .AddAuthentication(options => { })
-            .AddJwtBearer(options =>
-            {
-                IConfigurationSection jwtOptionsSection = configuration.GetSection("Jwt");
-
-                options.TokenValidationParameters = new()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    RequireExpirationTime = true,
-                    ValidIssuer = jwtOptionsSection["Issuer"],
-                    ValidAudience = jwtOptionsSection["Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(jwtOptionsSection["Key"]!)
-                    ),
-                };
-            });
-        services.AddScoped<IJwtTokenManagement, JwtTokenManagement>();
-        services.AddScoped<IJwtRepository, JwtRepository>();
-        services.Configure<JwtOption>(configuration.GetSection("Jwt"));
-#endif
 
 #if (UseIdentity)
         services

@@ -166,10 +166,6 @@
       "type": "computed",
       "value": "(Authentication == 'identity')"
     },
-    "UseJwt": {
-      "type": "computed",
-      "value": "(Authentication == 'jwt')"
-    },
     "AuthNone": {
       "type": "computed",
       "value": "(Authentication == 'none')"
@@ -336,14 +332,6 @@
           ]
         },
         {
-          "condition": "(!UseJwt)",
-          "exclude": [
-            "Infraestructure.Database/Entities/UserJwtTokensEntity.cs"
-          ],
-          "rename": {
-          }
-        },
-        {
           "condition": "(!SqlDatabase && !UseIdentity)",
           "exclude": [
             "Infraestructure.Database/Entities/UserEntity.cs",
@@ -392,16 +380,6 @@
           "exclude": [
             "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
           ]
-        },
-        {
-          "condition": "(!UseJwt)",
-          "exclude": [
-            "Template.HostWebApi/JwtManagement/*",
-            "Shared/JWT/*",
-            "Template.HostWebApi/ConfigurationOptions/JwtOption.cs"
-          ],
-          "rename": {
-          }
         },
         {
           "condition": "(!SqlDatabase && !UseIdentity)",

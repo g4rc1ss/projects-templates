@@ -6,9 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <!--#if (UseJwt)-->
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="*" />
-    <!--#endif-->
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="*" />
@@ -50,7 +47,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <!--#if (!DatabaseNone || !(AuthNone || UseJwt))-->
+    <!--#if (!DatabaseNone || !(AuthNone))-->
     <!--#if (false)-->
     <ProjectReference Include="..\..\Libs\Infraestructure.Database\Infraestructure.Database.csproj" />
     <!--#endif-->
