@@ -4,11 +4,11 @@
   "classifications": [
     "architecture"
   ],
-  "identity": "avalonia-desktop-template",
-  "name": "Avalonia Template",
+  "identity": "frontend-desktop-template",
+  "name": "Asier Avalonia Desktop",
   "description": "Template para aplicaciones Desktop",
-  "shortName": "Desktop App",
-  "sourceName": "AvaloniaDesktop",
+  "shortName": "Front Desktop App",
+  "sourceName": "FrontAvaloniaDesktop",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
@@ -41,7 +41,7 @@
       "type": "computed",
       "value": "(!UseLocalStorage)"
     },
-    // Host Config
+    // Config
     "UseAndroid": {
       "displayName": "Android",
       "type": "parameter",
@@ -126,8 +126,11 @@
     "EventBus": {
       "type": "parameter",
       "datatype": "choice",
-      "allowMultipleValues": true,
       "choices": [
+        {
+          "choice": "none",
+          "displayName": "None"
+        },
         {
           "choice": "memoryevents",
           "displayName": "In Memory"
@@ -256,38 +259,6 @@
         "**/Functionality/**/*"
       ],
       "modifiers": [
-        {
-          "condition": "(!UseAzureOpts)",
-          "exclude": [
-            "Template.HostWebApi/ConfigurationOptions/AzureOptions/*"
-          ]
-        },
-        {
-          "condition": "(!UseAzureKeyVault)",
-          "exclude": [
-            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
-          ]
-        },
-        {
-          "condition": "(!SqlDatabase && !UseIdentity)",
-          "exclude": [
-            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
-          ]
-        },
-        {
-          "condition": "(!UseApi)",
-          "exclude": [
-          ],
-          "rename": {
-          }
-        },
-        {
-          "condition": "(!UseGrpc)",
-          "exclude": [
-          ],
-          "rename": {
-          }
-        }
       ]
     }
   ]

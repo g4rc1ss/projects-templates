@@ -21,4 +21,25 @@
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
     </ItemGroup>
+
+    <ItemGroup>
+        <!--#if (!DatabaseNone || (UseIdentity))-->
+        <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
+        <!--#endif-->
+        <!--#if (!EventBusNone)-->
+        <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj" />
+        <!--#endif-->
+        <!--#if (!StorageNone)-->
+        <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj" />
+        <!--#endif-->
+        <!--#if (false)-->
+        <ProjectReference Include="..\..\Libs\Infraestructure.Database\Infraestructure.Database.csproj" />
+        <!--#endif-->
+        <!--#if (false)-->
+        <ProjectReference Include="..\..\Libs\Infraestructure.Events\Infraestructure.Events.csproj" />
+        <!--#endif-->
+        <!--#if (false)-->
+        <ProjectReference Include="..\..\Libs\Infraestructure.Storages\Infraestructure.Storages.csproj" />
+        <!--#endif-->
+    </ItemGroup>
 </Project>

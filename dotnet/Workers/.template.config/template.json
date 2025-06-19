@@ -5,7 +5,7 @@
     "architecture"
   ],
   "identity": "Worker-Service",
-  "name": "Worker Services",
+  "name": "Asier Worker Services",
   "description": "Crear Worker Service",
   "shortName": "Worker Service",
   "sourceName": "WorkerTemplate",

@@ -5,7 +5,7 @@
     "architecture"
   ],
   "identity": "web-host-init-configuration",
-  "name": "Web Initializer Base",
+  "name": "Asier Web Base",
   "description": "Crear configuración base de diferentes servicios Web y configuraciones de auth, BBDD, etc.",
   "shortName": "Initialize web",
   "sourceName": "Template",
