@@ -64,6 +64,15 @@
   },
   "sources": [
     {
+      "source": "../",
+      "target": "./",
+      "include": [
+        "*editorconfig",
+        "*csharpierrc.json",
+        "Directory.Build.props"
+      ]
+    },
+    {
       "source": "../Libs",
       "target": "./",
       "exclude": [

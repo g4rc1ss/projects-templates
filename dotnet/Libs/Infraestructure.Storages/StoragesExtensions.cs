@@ -1,5 +1,8 @@
 using Microsoft.Extensions.Hosting;
+#if (UseLocalStorage)
 using Microsoft.Extensions.DependencyInjection;
+#endif
+
 #if (UseAzureBlobStorage)
 using Azure.Identity;
 using Azure.Storage.Blobs;

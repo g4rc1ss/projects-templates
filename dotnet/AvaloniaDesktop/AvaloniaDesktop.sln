@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Directory.Packages.props = Directory.Packages.props
 		.template.config\template.json = .template.config\template.json
-		..\Libs\Directory.Build.props = ..\Libs\Directory.Build.props
-		..\Libs\.csharpierrc.json = ..\Libs\.csharpierrc.json
-		..\Libs\.editorconfig = ..\Libs\.editorconfig
+		..\Libs\Directory.Build.props = ..\Directory.Build.props
+		..\Libs\.csharpierrc.json = ..\.csharpierrc.json
+		..\Libs\.editorconfig = ..\.editorconfig
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Database", "..\Libs\Infraestructure.Database\Infraestructure.Database.csproj", "{991B833F-DA0A-45E8-AB6D-9C7F172E6F49}"

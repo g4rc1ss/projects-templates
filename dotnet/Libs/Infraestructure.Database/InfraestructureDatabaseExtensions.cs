@@ -1,11 +1,13 @@
-﻿using Infraestructure.Database.Repository;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 #if (UseMongodb)
+using Infraestructure.Database.Repository;
+using Microsoft.Extensions.DependencyInjection;
 using Infraestructure.Database.Entities;
 #endif
 
 #if (SqlDatabase || UseIdentity)
+using Infraestructure.Database.Repository;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 #endif
