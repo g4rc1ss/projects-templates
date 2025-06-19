@@ -6,11 +6,22 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FrontDesktop.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="1" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button Grid.Row="0" Command="{Binding ExecuteEventsAsync}" Content="Lanzar eventos" />
+        <Button Grid.Row="1" Command="{Binding ExecuteCrudAsync}" Content="Ejecutar CRUD Database" />
+        <Button Grid.Row="2" Command="{Binding ExecuteStorageAsync}" Content="Guardar en Storage" />
+    </Grid>
 </UserControl>

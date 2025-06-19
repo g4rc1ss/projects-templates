@@ -4,9 +4,15 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using FrontDesktop.ViewModels;
 using FrontDesktop.Views;
+#if (!SqlDatabase)
 using Infraestructure.Database;
+#endif
+#if (!UseMemoryEvents)
 using Infraestructure.Events;
+#endif
+#if (!StorageNone)
 using Infraestructure.Storages;
+#endif
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,15 +36,16 @@ public class App : Application
 
         builder.Services.AddTransient<MainViewModel>();
 
-#if !DatabaseNone
+#if (!DatabaseNone)
         builder.AddDatabaseConfig();
 #endif
-#if !EventBusNone
+#if (!EventBusNone)
         builder.AddEventsServices();
 #endif
-#if !StorageNone
+#if (!StorageNone)
         builder.AddStorages();
 #endif
+
         IHost app = builder.Build();
         MainViewModel mainViewModel = app.Services.GetRequiredService<MainViewModel>();
 

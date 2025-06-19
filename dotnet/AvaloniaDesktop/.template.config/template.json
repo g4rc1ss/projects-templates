@@ -39,7 +39,7 @@
     },
     "StorageNone": {
       "type": "computed",
-      "value": "(!UseAzureBlobStorage && !UseLocalStorage)"
+      "value": "(!UseLocalStorage)"
     },
     // Desktop
     "UseDesktop": {

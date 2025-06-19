@@ -1,4 +1,8 @@
 ﻿using Microsoft.Extensions.Hosting;
+#if (NoSqlDatabase || SqlDatabase)
+using Infraestructure.Database.Repository;
+#endif
+
 #if (UseLitedb)
 using Microsoft.Extensions.Configuration;
 using LiteDB;
@@ -31,6 +35,8 @@ public static class InfraestructureDatabaseExtensions
             },
             ServiceLifetime.Transient
         );
+
+        builder.Services.AddTransient<IUserRepository, SqlUserPoc>();
 #endif
 
 #if (UseLitedb)
