@@ -34,4 +34,10 @@
         <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj" />
         <!--#endif-->
     </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 </Project>

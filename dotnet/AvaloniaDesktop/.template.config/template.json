@@ -5,7 +5,7 @@
     "architecture"
   ],
   "identity": "frontend-desktop-template",
-  "name": "Asier Avalonia Desktop",
+  "name": "Asier Desktop Template",
   "description": "Template para aplicaciones Desktop",
   "shortName": "Front Desktop App",
   "sourceName": "FrontDesktop",
@@ -41,7 +41,7 @@
       "type": "computed",
       "value": "(!UseAzureBlobStorage && !UseLocalStorage)"
     },
-    // Avalonia
+    // Desktop
     "UseDesktop": {
       "displayName": "Desktop",
       "type": "parameter",

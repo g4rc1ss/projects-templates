@@ -7,6 +7,7 @@ using FrontDesktop.Views;
 using Infraestructure.Database;
 using Infraestructure.Events;
 using Infraestructure.Storages;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -24,34 +25,36 @@ public class App : Application
     public override void OnFrameworkInitializationCompleted()
     {
         HostApplicationBuilder builder = Host.CreateApplicationBuilder();
+
+        builder.Configuration.AddUserSecrets<App>();
+
         builder.Services.AddTransient<MainViewModel>();
 
+#if !DatabaseNone
         builder.AddDatabaseConfig();
-        builder.AddStorages();
+#endif
+#if !EventBusNone
         builder.AddEventsServices();
-
+#endif
+#if !StorageNone
+        builder.AddStorages();
+#endif
         IHost app = builder.Build();
         MainViewModel mainViewModel = app.Services.GetRequiredService<MainViewModel>();
 
-        foreach (
-            IHostedService service in app.Services.GetRequiredService<IEnumerable<IHostedService>>()
-        )
-        {
-            service.StartAsync(CancellationToken.None).Wait();
-        }
-
         _host = app.RunAsync();
 
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        switch (ApplicationLifetime)
         {
-            // Avoid duplicate validations from both Avalonia and the CommunityToolkit.
-            // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
-            DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow { DataContext = mainViewModel };
-        }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
-        {
-            singleViewPlatform.MainView = new MainView { DataContext = mainViewModel };
+            case IClassicDesktopStyleApplicationLifetime desktop:
+                // Avoid duplicate validations from both Avalonia and the CommunityToolkit.
+                // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
+                DisableAvaloniaDataAnnotationValidation();
+                desktop.MainWindow = new MainWindow { DataContext = mainViewModel };
+                break;
+            case ISingleViewApplicationLifetime singleViewPlatform:
+                singleViewPlatform.MainView = new MainView { DataContext = mainViewModel };
+                break;
         }
 
         base.OnFrameworkInitializationCompleted();
