@@ -47,25 +47,25 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <!--#if (!DatabaseNone || !(AuthNone))-->
-    <!--#if (false)-->
-    <ProjectReference Include="..\..\Libs\Infraestructure.Database\Infraestructure.Database.csproj" />
-    <!--#endif-->
+    <!--#if (!DatabaseNone || (UseIdentity))-->
     <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
     <!--#endif-->
-
     <!--#if (!EventBusNone)-->
-    <!--#if (false)-->
-    <ProjectReference Include="..\..\Libs\Infraestructure.Events\Infraestructure.Events.csproj" />
-    <!--#endif-->
     <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj" />
     <!--#endif-->
     <!--#if (!StorageNone)-->
-    <!--#if (false)-->
-    <ProjectReference Include="..\..\Libs\Infraestructure.Storages\Infraestructure.Storages.csproj" />
-    <!--#endif-->
     <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj" />
     <!--#endif-->
     <ProjectReference Include="..\Shared\Shared.csproj" />
+
+    <!--#if (false)-->
+    <ProjectReference Include="..\..\Libs\Infraestructure.Database\Infraestructure.Database.csproj" />
+    <!--#endif-->
+    <!--#if (false)-->
+    <ProjectReference Include="..\..\Libs\Infraestructure.Events\Infraestructure.Events.csproj" />
+    <!--#endif-->
+    <!--#if (false)-->
+    <ProjectReference Include="..\..\Libs\Infraestructure.Storages\Infraestructure.Storages.csproj" />
+    <!--#endif-->
   </ItemGroup>
 </Project>

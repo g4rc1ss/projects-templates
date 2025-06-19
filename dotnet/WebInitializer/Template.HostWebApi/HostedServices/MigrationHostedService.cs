@@ -8,7 +8,11 @@ public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedS
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         using IServiceScope scope = serviceProvider.CreateScope();
+#if (UseIdentity)
+        IdentityDatabaseContext context = scope.ServiceProvider.GetRequiredService<IdentityDatabaseContext>();
+#else
         DatabaseContext context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+#endif
         await context.Database.MigrateAsync(cancellationToken: cancellationToken);
     }
 

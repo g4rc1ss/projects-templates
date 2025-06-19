@@ -4,8 +4,7 @@ using MongoDB.Driver;
 
 namespace Infraestructure.Database.Repository;
 
-public class MongoPoc(ILogger<MongoPoc> logger, IMongoClient mongoClient)
-    : IMongoPoc
+public class MongoPoc(ILogger<MongoPoc> logger, IMongoClient mongoClient) : IMongoPoc
 {
     public MongoDbEntity? Entity { get; set; }
 

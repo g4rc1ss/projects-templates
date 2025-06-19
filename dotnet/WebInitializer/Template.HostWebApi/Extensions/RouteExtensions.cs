@@ -9,7 +9,7 @@ public static class RouteExtensions
     internal static void MapRouteServices(this IEndpointRouteBuilder endpoints)
     {
 #if (UseIdentity)
-        endpoints.MapGroup("auth").MapIdentityApi<UserEntity>();
+        endpoints.MapGroup("auth").MapIdentityApi<IdentityUserEntity>();
 #endif
     }
 }

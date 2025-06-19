@@ -22,6 +22,6 @@ public class IdentityDatabaseContext(DbContextOptions<IdentityDatabaseContext> o
         builder.Entity<IdentityUserRole<int>>().ToTable("UserRoles");
         builder.Entity<IdentityUserToken<int>>().ToTable("UserTokens");
 
-        builder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
+        builder.ApplyConfigurationsFromAssembly(typeof(IdentityDatabaseContext).Assembly);
     }
 }

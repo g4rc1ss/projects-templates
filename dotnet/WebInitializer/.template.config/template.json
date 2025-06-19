@@ -119,7 +119,7 @@
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseSqlite)"
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql)"
     },
     "UsePostgres": {
       "type": "computed",
@@ -137,9 +137,13 @@
       "type": "computed",
       "value": "(Database == 'mongodb')"
     },
+    "NoSqlDatabase": {
+      "type": "computed",
+      "value": "(UseMongodb)"
+    },
     "DatabaseNone": {
       "type": "computed",
-      "value": "(Database == 'none')"
+      "value": "(!SqlDatabase && !NoSqlDatabase)"
     },
     // Auth Config
     "Authentication": {
@@ -149,10 +153,6 @@
         {
           "choice": "none",
           "description": "None"
-        },
-        {
-          "choice": "jwt",
-          "displayName": "JWT"
         },
         {
           "choice": "identity",

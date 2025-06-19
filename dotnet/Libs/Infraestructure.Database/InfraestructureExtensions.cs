@@ -1,14 +1,13 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Infraestructure.Database.Repository;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 #if (UseMongodb)
 using Infraestructure.Database.Entities;
-using Infraestructure.Database.Repository;
-using Microsoft.Extensions.DependencyInjection;
 #endif
 
-#if (SqlDatabase)
+#if (SqlDatabase || UseIdentity)
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 #endif
 
 namespace Infraestructure.Database;
@@ -17,16 +16,23 @@ public static class InfraestructureDatabaseExtensions
 {
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
-#if (SqlDatabase)
+#if (SqlDatabase || UseIdentity)
+
+#if (UseIdentity)
+        string? connectionString = builder.Configuration.GetConnectionString(
+            nameof(IdentityDatabaseContext)
+        );
+#else
         string? connectionString = builder.Configuration.GetConnectionString(
             nameof(DatabaseContext)
         );
+#endif
         ArgumentNullException.ThrowIfNull(connectionString);
 
 #if (UseIdentity)
-        builder.Services.AddDbContextPool<DatabaseContext>(builder =>
-#else
         builder.Services.AddDbContextPool<IdentityDatabaseContext>(builder =>
+#else
+        builder.Services.AddDbContextPool<DatabaseContext>(builder =>
 #endif
 
         {
@@ -42,9 +48,9 @@ public static class InfraestructureDatabaseExtensions
         });
 
 #if (UseIdentity)
-        builder.Services.AddDbContextFactory<DatabaseContext>(builder =>
-#else
         builder.Services.AddDbContextFactory<IdentityDatabaseContext>(builder =>
+#else
+        builder.Services.AddDbContextFactory<DatabaseContext>(builder =>
 #endif
         {
 #if (UsePostgres)
@@ -57,7 +63,6 @@ public static class InfraestructureDatabaseExtensions
             builder.UseSqlite(connectionString);
 #endif
         });
-
 
 #if (UseIdentity)
         builder.Services.AddScoped<IIdentityUserRepository, IdentityUserPoc>();
@@ -65,6 +70,7 @@ public static class InfraestructureDatabaseExtensions
         builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
 #endif
 #endif
+
 #if (UseMongodb)
         builder.Services.AddScoped<IMongoPoc, MongoPoc>();
         builder.AddMongoDBClient("mongo");

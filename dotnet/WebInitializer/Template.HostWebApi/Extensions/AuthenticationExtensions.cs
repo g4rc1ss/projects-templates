@@ -16,7 +16,7 @@ public static class AuthenticationExtensions
 
 #if (UseIdentity)
         services
-            .AddIdentityApiEndpoints<UserEntity>(options =>
+            .AddIdentityApiEndpoints<IdentityUserEntity>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
@@ -29,10 +29,10 @@ public static class AuthenticationExtensions
 
                 options.SignIn.RequireConfirmedEmail = false;
             })
-            .AddUserManager<UserManager<UserEntity>>()
-            .AddRoles<RoleEntity>()
-            .AddRoleManager<RoleManager<RoleEntity>>()
-            .AddEntityFrameworkStores<DatabaseContext>();
+            .AddUserManager<UserManager<IdentityUserEntity>>()
+            .AddRoles<IdentityRoleEntity>()
+            .AddRoleManager<RoleManager<IdentityRoleEntity>>()
+            .AddEntityFrameworkStores<IdentityDatabaseContext>();
 #endif
     }
 }

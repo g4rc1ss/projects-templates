@@ -1,5 +1,6 @@
 using Infraestructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Infraestructure.Database.Repository;
 
@@ -32,18 +33,50 @@ public class SqlUserPoc(DatabaseContext dbContext) : IUserRepository
         CancellationToken cancellationToken = default
     )
     {
-        throw new NotImplementedException();
+        EntityEntry<UserEntity> user = await dbContext.Users.AddAsync(entity, cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return user.Entity;
+    }
+
+    public async Task CreateManyAsync(
+        IEnumerable<UserEntity> entities,
+        CancellationToken cancellationToken = default
+    )
+    {
+        await dbContext.Users.AddRangeAsync(entities, cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task UpdateAsync(UserEntity entity, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        dbContext.Users.Update(entity);
+        await dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task UpdateManyAsync(
+        IEnumerable<UserEntity> entities,
+        CancellationToken cancellationToken = default
+    )
+    {
+        dbContext.Users.UpdateRange(entities);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task DeleteAsync(UserEntity entity, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        dbContext.Users.Remove(entity);
+        await dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task DeleteManyAsync(
+        IEnumerable<UserEntity> entities,
+        CancellationToken cancellationToken = default
+    )
+    {
+        dbContext.Users.RemoveRange(entities);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }
 
-public interface IUserRepository : IRepository<UserEntity, int>;
+public interface IUserRepository : IRepository<UserEntity, int>, IManyCommandRepository<UserEntity>;
