@@ -57,5 +57,11 @@
     <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj" />
     <!--#endif-->
     <ProjectReference Include="..\Shared\Shared.csproj" />
+    <!--#if (UseLayerArchitecture && UseAPI)-->
+    <ProjectReference Include="..\src\Template.API\Template.API.csproj" />
+    <!--#endif-->
+    <!--#if (UseLayerArchitecture && UseGrpc)-->
+    <ProjectReference Include="..\src\Template.Grpc\Template.Grpc.csproj" />
+    <!--#endif-->
   </ItemGroup>
 </Project>

@@ -9,7 +9,8 @@ public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedS
     {
         using IServiceScope scope = serviceProvider.CreateScope();
 #if (UseIdentity)
-        IdentityDatabaseContext context = scope.ServiceProvider.GetRequiredService<IdentityDatabaseContext>();
+        IdentityDatabaseContext context =
+            scope.ServiceProvider.GetRequiredService<IdentityDatabaseContext>();
 #else
         DatabaseContext context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
 #endif

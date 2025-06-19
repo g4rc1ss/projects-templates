@@ -16,6 +16,13 @@
     "type": "project"
   },
   "symbols": {
+    "UseLayerArchitecture": {
+      "displayName": "Use Layer Architecture",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false,
+      "description": "Use a Custom Architecture for Web Development"
+    },
     "UseAzureOpts": {
       "type": "computed",
       "value": "(UseAzureKeyVault || UseAzureBlobStorage)"
@@ -316,6 +323,7 @@
         {
           "condition": "(!UseApi)",
           "exclude": [
+            "src/Template.API"
           ],
           "rename": {
           }
@@ -323,9 +331,17 @@
         {
           "condition": "(!UseGrpc)",
           "exclude": [
+            "src/Template.Grpc"
           ],
           "rename": {
           }
+        },
+        {
+          "condition": "!UseLayerArchitecture",
+          "exclude": [
+            "src/*",
+            "Shared/*"
+          ]
         },
         // Storages
         {

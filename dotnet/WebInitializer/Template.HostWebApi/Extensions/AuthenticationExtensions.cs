@@ -13,7 +13,6 @@ public static class AuthenticationExtensions
         IConfiguration configuration
     )
     {
-
 #if (UseIdentity)
         services
             .AddIdentityApiEndpoints<IdentityUserEntity>(options =>
