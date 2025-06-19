@@ -4,11 +4,17 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using AvaloniaDesktop.ViewModels;
 using AvaloniaDesktop.Views;
+using Infraestructure.Database;
+using Infraestructure.Events;
+using Infraestructure.Storages;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace AvaloniaDesktop;
 
-public partial class App : Application
+public class App : Application
 {
+    private Task? _host;
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -16,16 +22,33 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        HostApplicationBuilder builder = Host.CreateApplicationBuilder();
+        builder.Services.AddTransient<MainViewModel>();
+
+        builder.AddDatabaseConfig();
+        builder.AddStorages();
+        builder.AddEventsServices();
+
+        IHost app = builder.Build();
+        MainViewModel mainViewModel = app.Services.GetRequiredService<MainViewModel>();
+
+        foreach (IHostedService service in app.Services.GetRequiredService<IEnumerable<IHostedService>>())
+        {
+            service.StartAsync(CancellationToken.None).Wait();
+        }
+
+        _host = app.RunAsync();
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit.
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow { DataContext = new MainViewModel() };
+            desktop.MainWindow = new MainWindow { DataContext = mainViewModel };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainView { DataContext = new MainViewModel() };
+            singleViewPlatform.MainView = new MainView { DataContext = mainViewModel };
         }
 
         base.OnFrameworkInitializationCompleted();

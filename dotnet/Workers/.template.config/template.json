@@ -73,24 +73,6 @@
       ]
     },
     {
-      "source": "../Libs",
-      "target": "./",
-      "exclude": [
-        "**/[Bb]in/**",
-        "**/[Oo]bj/**",
-        "**/*template.config/**/*",
-        "**/*.filelist",
-        "**/*.user",
-        "**/*idea",
-        "*.sln",
-        "**/Functionality/**/*",
-        "**/Infraestructure.Events/**/*",
-        "**/Infraestructure.Storages/**/*"
-      ],
-      "modifiers": [
-      ]
-    },
-    {
       "source": "./",
       "target": "./",
       "exclude": [

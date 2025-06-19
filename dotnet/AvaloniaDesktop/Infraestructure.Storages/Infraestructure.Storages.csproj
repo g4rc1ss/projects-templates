@@ -5,10 +5,6 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <!--#if (UseAzureBlobStorage)-->
-        <PackageReference Include="Azure.Identity" Version="*" />
-        <PackageReference Include="Azure.Storage.Blobs" Version="*"/>
-        <!--#endif-->
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*"/>
