@@ -1,0 +1,421 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "architecture"
+  ],
+  "identity": "web-host-init-configuration",
+  "name": "Web Initializer Base",
+  "description": "Crear configuración base de diferentes servicios Web y configuraciones de auth, BBDD, etc.",
+  "shortName": "Initialize web",
+  "sourceName": "Template",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "UseAzureOpts": {
+      "type": "computed",
+      "value": "(UseAzureKeyVault || UseAzureBlobStorage)"
+    },
+    // KeyVault Config
+    "KeyVaults": {
+      "type": "parameter",
+      "datatype": "choice",
+      "allowMultipleValues": true,
+      "choices": [
+        {
+          "displayName": "Az Key Vault",
+          "choice": "AzureKeyVault"
+        }
+      ],
+      "defaultValue": "None",
+      "displayName": "Secrets and Key Vault"
+    },
+    "UseAzureKeyVault": {
+      "type": "computed",
+      "value": "(KeyVaults == 'AzureKeyVault')"
+    },
+    "KeyVaultNone": {
+      "type": "computed",
+      "value": "(!UseAzureKeyVault)"
+    },
+    // Storage Config
+    "Storage": {
+      "type": "parameter",
+      "datatype": "choice",
+      //      "allowMultipleValues": true,
+      "choices": [
+        {
+          "displayName": "None",
+          "choice": "none"
+        },
+        {
+          "displayName": "Az Blob Storage",
+          "choice": "AzureBlobStorage"
+        },
+        {
+          "displayName": "Local System Storage",
+          "choice": "LocalSystemStorage"
+        }
+      ],
+      "defaultValue": "none",
+      "displayName": "File Storages"
+    },
+    "UseAzureBlobStorage": {
+      "type": "computed",
+      "value": "(Storage == 'AzureBlobStorage')"
+    },
+    "UseLocalStorage": {
+      "type": "computed",
+      "value": "(Storage == 'LocalSystemStorage')"
+    },
+    "StorageNone": {
+      "type": "computed",
+      "value": "(!UseAzureBlobStorage && !UseLocalStorage)"
+    },
+    // Host Config
+    "UseApi": {
+      "displayName": "API",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": true
+    },
+    "UseGrpc": {
+      "displayName": "GRPC",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false
+    },
+    // Database Config
+    "SqlDatabases": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "displayName": "None"
+        },
+        {
+          "choice": "postgresql",
+          "displayName": "PostgreSQL"
+        },
+        {
+          "choice": "azuresql",
+          "displayName": "Azure SQL"
+        },
+        {
+          "choice": "sqlserver",
+          "displayName": "SQL Server"
+        }
+      ],
+      "defaultValue": "postgresql"
+    },
+    "SqlDatabase": {
+      "type": "computed",
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql)"
+    },
+    "UsePostgres": {
+      "type": "computed",
+      "value": "(SqlDatabases == 'postgresql')"
+    },
+    "UseSqlServer": {
+      "type": "computed",
+      "value": "(SqlDatabases == 'sqlserver')"
+    },
+    "UseAzureSql": {
+      "type": "computed",
+      "value": "(SqlDatabases == 'azuresql')"
+    },
+    "NoSqlDatabases": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "displayName": "None"
+        },
+        {
+          "choice": "mongodb",
+          "displayName": "Mongo Database"
+        }
+      ],
+      "defaultValue": "none"
+    },
+    "NoSqlDatabase": {
+      "type": "computed",
+      "value": "(UseMongodb)"
+    },
+    "UseMongodb": {
+      "type": "computed",
+      "value": "(NoSqlDatabases == 'mongodb')"
+    },
+    "DatabaseNone": {
+      "type": "computed",
+      "value": "(!SqlDatabase && !NoSqlDatabase)"
+    },
+    // Auth Config
+    "Authentication": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "identity",
+          "displayName": "Microsoft Identity"
+        }
+      ],
+      "defaultValue": "none",
+      "description": "Tipo de auth para usar"
+    },
+    "UseIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'identity')"
+    },
+    "AuthNone": {
+      "type": "computed",
+      "value": "(Authentication == 'none')"
+    },
+    // Cache Config
+    "Cache": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "memorycache",
+          "displayName": "In Memory",
+          "description": "Memory"
+        },
+        {
+          "choice": "Redis",
+          "displayName": "Redis",
+          "description": "redis"
+        },
+        {
+          "choice": "Garnet",
+          "displayName": "Garnet",
+          "description": "garnet"
+        }
+      ],
+      "defaultValue": "memorycache",
+      "description": "Cache"
+    },
+    "UseMemoryCache": {
+      "type": "computed",
+      "value": "(Cache == 'memorycache')"
+    },
+    "UseRedis": {
+      "type": "computed",
+      "value": "(Cache == 'redis')"
+    },
+    "UseGarnet": {
+      "type": "computed",
+      "value": "(Cache == 'garnet')"
+    },
+    // EventBus Config
+    "EventBus": {
+      "type": "parameter",
+      "datatype": "choice",
+      "allowMultipleValues": true,
+      "choices": [
+        {
+          "choice": "memoryevents",
+          "displayName": "In Memory"
+        },
+        {
+          "choice": "azureservicebus",
+          "displayName": "Azure Service Bus"
+        },
+        {
+          "choice": "rabbit",
+          "displayName": "Rabbit MQ"
+        }
+      ],
+      "defaultValue": "none",
+      "displayName": "Events"
+    },
+    "UseMemoryEvents": {
+      "type": "computed",
+      "value": "(EventBus == 'memoryevents')"
+    },
+    "UseAzServiceBus": {
+      "type": "computed",
+      "value": "(EventBus == 'azureservicebus')"
+    },
+    "UseRabbitMQ": {
+      "type": "computed",
+      "value": "(EventBus == 'rabbit')"
+    },
+    "EventBusNone": {
+      "type": "computed",
+      "value": "(!UseMemoryEvents && !UseAzServiceBus && !UseRabbitMQ)"
+    },
+    // Framework Config
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net9.0"
+        }
+      ],
+      "defaultValue": "net9.0"
+    }
+  },
+  "sources": [
+    {
+      "source": "../Libs",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea",
+        "*.sln",
+        "**/Functionality/**/*"
+      ],
+      "modifiers": [
+        // Storages
+        {
+          "condition": "(!UseLocalStorage)",
+          "exclude": [
+            "Infraestructure.Storages/LocalStorage.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureBlobStorage)",
+          "exclude": [
+            "Infraestructure.Storages/AzureStorage/AzureBlobStorage.cs",
+            "Infraestructure.Storages/AzureStorage/AzureBlobStorageOptions.cs"
+          ]
+        },
+        {
+          "condition": "(StorageNone)",
+          "exclude": [
+            "Infraestructure.Storages/*"
+          ]
+        },
+        // Events
+        {
+          "condition": "EventBusNone",
+          "exclude": [
+            "**/Infraestructure.Events/**/*"
+          ]
+        },
+        {
+          "condition": "!UseMemoryEvents",
+          "exclude": [
+            "Infraestructure.Events/Handlers/*",
+            "Infraestructure.Events/IEventConsumer.cs",
+            "Infraestructure.Events/ConsumerService.cs",
+            "Infraestructure.Events/Publisher/MemoryEventNotificator.cs"
+          ]
+        },
+        {
+          "condition": "!UseAzServiceBus",
+          "exclude": [
+            "Infraestructure.Events/Publisher/AzureEventNotificator.cs"
+          ]
+        },
+        {
+          "condition": "!UseRabbitMQ",
+          "exclude": [
+            "Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
+          ]
+        },
+        // Database
+        {
+          "condition": "(!UseIdentity)",
+          "exclude": [
+            "Infraestructure.Database/Entities/IdentityRoleEntity.cs",
+            "Infraestructure.Database/Entities/IdentityUserEntity.cs",
+            "Infraestructure.Database/Repository/IdentityUserPoc.cs",
+            "Infraestructure.Database/IdentityDatabaseContext.cs"
+          ]
+        },
+        {
+          "condition": "(!SqlDatabase || UseIdentity)",
+          "exclude": [
+            "Infraestructure.Database/Entities/UserEntity.cs",
+            "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
+            "Infraestructure.Database/Repository/SqlUserPoc.cs",
+            "Infraestructure.Database/DatabaseContext.cs"
+          ]
+        },
+        {
+          "condition": "!UseMongodb",
+          "exclude": [
+            "Infraestructure.Database/Repository/MongoPoc.cs",
+            "Infraestructure.Database/Entities/MongoDbEntity.cs"
+          ]
+        },
+        {
+          "condition": "DatabaseNone && (!UseIdentity)",
+          "exclude": [
+            "**/Infraestructure.Database/**/*"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea",
+        "*.sln",
+        "**/Functionality/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!UseAzureOpts)",
+          "exclude": [
+            "Template.HostWebApi/ConfigurationOptions/AzureOptions/*"
+          ]
+        },
+        {
+          "condition": "(!UseAzureKeyVault)",
+          "exclude": [
+            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
+          ]
+        },
+        {
+          "condition": "(!SqlDatabase && !UseIdentity)",
+          "exclude": [
+            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
+          ]
+        },
+        {
+          "condition": "(!UseApi)",
+          "exclude": [
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseGrpc)",
+          "exclude": [
+          ],
+          "rename": {
+          }
+        }
+      ]
+    }
+  ]
+}
