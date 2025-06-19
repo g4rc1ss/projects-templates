@@ -8,7 +8,7 @@
   "name": "Asier Avalonia Desktop",
   "description": "Template para aplicaciones Desktop",
   "shortName": "Front Desktop App",
-  "sourceName": "FrontAvaloniaDesktop",
+  "sourceName": "AvaloniaDesktop",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
@@ -16,10 +16,6 @@
     "type": "project"
   },
   "symbols": {
-    "UseAzureOpts": {
-      "type": "computed",
-      "value": "(UseAzureKeyVault || UseAzureBlobStorage)"
-    },
     // Storage Config
     "Storage": {
       "type": "parameter",
@@ -36,6 +32,10 @@
       ],
       "defaultValue": "none",
       "displayName": "File Storages"
+    },
+    "UseAzureBlobStorage": {
+      "type": "computed",
+      "value": "(Storage == 'AzureBlobStorage')"
     },
     "UseLocalStorage": {
       "type": "computed",
@@ -65,7 +65,7 @@
       "defaultValue": false
     },
     // Database Config
-    "SqlDatabases": {
+    "Databases": {
       "type": "parameter",
       "datatype": "choice",
       "choices": [
@@ -74,25 +74,61 @@
           "displayName": "None"
         },
         {
-          "choice": "postgresql",
-          "displayName": "PostgreSQL"
+          "choice": "sqlite",
+          "displayName": "SQLite"
+        },
+        {
+          "choice": "litedb",
+          "displayName": "Lite DB"
         }
       ],
-      "defaultValue": "postgresql"
+      "defaultValue": "sqlite"
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql)"
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseSqlite)"
     },
     "UsePostgres": {
       "type": "computed",
-      "value": "(SqlDatabases == 'postgresql')"
+      "value": "(Databases == 'postgresql')"
+    },
+    "UseSqlServer": {
+      "type": "computed",
+      "value": "(Databases == 'sqlserver')"
+    },
+    "UseAzureSql": {
+      "type": "computed",
+      "value": "(Databases == 'azuresql')"
+    },
+    "UseSqlite": {
+      "type": "computed",
+      "value": "(Databases == 'sqlite')"
+    },
+    "NoSqlDatabase": {
+      "type": "computed",
+      "value": "(UseMongodb)"
+    },
+    "UseMongodb": {
+      "type": "computed",
+      "value": "(Databases == 'mongodb')"
+    },
+    "UseLitedb": {
+      "type": "computed",
+      "value": "(Databases == 'litedb')"
     },
     "DatabaseNone": {
       "type": "computed",
       "value": "(!SqlDatabase && !NoSqlDatabase)"
     },
     // Auth Config
+    "UseIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'identity')"
+    },
+    "AuthNone": {
+      "type": "computed",
+      "value": "(Authentication == 'none')"
+    },
     // Cache Config
     "Cache": {
       "type": "parameter",
@@ -115,12 +151,23 @@
       "type": "computed",
       "value": "(Cache == 'memorycache')"
     },
+    "UseRedis": {
+      "type": "computed",
+      "value": "(Cache == 'redis')"
+    },
+    "UseGarnet": {
+      "type": "computed",
+      "value": "(Cache == 'garnet')"
+    },
     // EventBus Config
     "EventBus": {
       "type": "parameter",
       "datatype": "choice",
-      "allowMultipleValues": true,
       "choices": [
+        {
+          "choice": "none",
+          "displayName": "None"
+        },
         {
           "choice": "memoryevents",
           "displayName": "In Memory"
@@ -132,6 +179,14 @@
     "UseMemoryEvents": {
       "type": "computed",
       "value": "(EventBus == 'memoryevents')"
+    },
+    "UseAzServiceBus": {
+      "type": "computed",
+      "value": "(EventBus == 'azureservicebus')"
+    },
+    "UseRabbitMQ": {
+      "type": "computed",
+      "value": "(EventBus == 'rabbit')"
     },
     "EventBusNone": {
       "type": "computed",
@@ -151,6 +206,15 @@
     }
   },
   "sources": [
+    {
+      "source": "../",
+      "target": "./",
+      "include": [
+        "*editorconfig",
+        "*csharpierrc.json",
+        "Directory.Build.props"
+      ]
+    },
     {
       "source": "../Libs",
       "target": "./",
@@ -262,36 +326,22 @@
       ],
       "modifiers": [
         {
-          "condition": "(!UseAzureOpts)",
+          "condition": "!UseAndroid",
           "exclude": [
-            "Template.HostWebApi/ConfigurationOptions/AzureOptions/*"
+            "**/AvaloniaDesktop.Android/**/*"
           ]
         },
         {
-          "condition": "(!UseAzureKeyVault)",
+          "condition": "!UseIOS",
           "exclude": [
-            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
+            "**/AvaloniaDesktop.iOS/**/*"
           ]
         },
         {
-          "condition": "(!SqlDatabase && !UseIdentity)",
+          "condition": "!UseDesktop",
           "exclude": [
-            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
+            "**/AvaloniaDesktop.Desktop/**/*"
           ]
-        },
-        {
-          "condition": "(!UseApi)",
-          "exclude": [
-          ],
-          "rename": {
-          }
-        },
-        {
-          "condition": "(!UseGrpc)",
-          "exclude": [
-          ],
-          "rename": {
-          }
         }
       ]
     }

@@ -1,5 +1,3 @@
-using UIKit;
-
 namespace AvaloniaDesktop.iOS;
 
 public class Application

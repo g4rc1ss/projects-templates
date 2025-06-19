@@ -1,7 +1,16 @@
-﻿using Infraestructure.Events.Publisher;
+﻿using Microsoft.Extensions.Hosting;
+#if (UseAzServiceBus)
+using Infraestructure.Events.Publisher;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+#endif
+#if (UseRabbitMQ)
+using Infraestructure.Events.Publisher;
+using Microsoft.Extensions.DependencyInjection;
+#endif
+
 #if (UseMemoryEvents)
+using Infraestructure.Events.Publisher;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Channels;
 using System.Reflection;
 #endif
