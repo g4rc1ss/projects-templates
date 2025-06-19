@@ -15,7 +15,6 @@
 
 
     <ItemGroup>
-        <ProjectReference Include="..\CustomArchitecture.Infraestructure\CustomArchitecture.Infraestructure.csproj"/>
         <ProjectReference Include="..\CustomArchitecture.Application\CustomArchitecture.Application.csproj"/>
     </ItemGroup>
 </Project>

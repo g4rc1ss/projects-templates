@@ -1,5 +1,4 @@
 ﻿using CustomArchitecture.Application;
-using CustomArchitecture.Infraestructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -12,6 +11,5 @@ public static class ApiExtensions
         builder.Services.AddControllers().AddApplicationPart(typeof(ApiExtensions).Assembly);
 
         builder.Services.AddBusinessServices();
-        builder.AddDataAccessService();
     }
 }
