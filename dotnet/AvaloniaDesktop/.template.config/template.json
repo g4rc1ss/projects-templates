@@ -16,6 +16,10 @@
     "type": "project"
   },
   "symbols": {
+    "UseAzureOpts": {
+      "type": "computed",
+      "value": "(UseAzureKeyVault || UseAzureBlobStorage)"
+    },
     // Storage Config
     "Storage": {
       "type": "parameter",
@@ -39,9 +43,9 @@
     },
     "StorageNone": {
       "type": "computed",
-      "value": "(!UseLocalStorage)"
+      "value": "(!UseAzureBlobStorage && !UseLocalStorage)"
     },
-    // Config
+    // Host Config
     "UseAndroid": {
       "displayName": "Android",
       "type": "parameter",
@@ -61,7 +65,7 @@
       "defaultValue": false
     },
     // Database Config
-    "Databases": {
+    "SqlDatabases": {
       "type": "parameter",
       "datatype": "choice",
       "choices": [
@@ -70,36 +74,25 @@
           "displayName": "None"
         },
         {
-          "choice": "sqlite",
-          "displayName": "SQLite"
-        },
-        {
-          "choice": "litedb",
-          "displayName": "LiteDB"
+          "choice": "postgresql",
+          "displayName": "PostgreSQL"
         }
       ],
-      "defaultValue": "sqlite"
+      "defaultValue": "postgresql"
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UseSqlite)"
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql)"
     },
-    "UseSqlite": {
+    "UsePostgres": {
       "type": "computed",
-      "value": "(Databases == 'sqlite')"
-    },
-    "NoSqlDatabase": {
-      "type": "computed",
-      "value": "(UseLitedb)"
-    },
-    "UseLitedb": {
-      "type": "computed",
-      "value": "(Databases == 'litedb')"
+      "value": "(SqlDatabases == 'postgresql')"
     },
     "DatabaseNone": {
       "type": "computed",
       "value": "(!SqlDatabase && !NoSqlDatabase)"
     },
+    // Auth Config
     // Cache Config
     "Cache": {
       "type": "parameter",
@@ -126,11 +119,8 @@
     "EventBus": {
       "type": "parameter",
       "datatype": "choice",
+      "allowMultipleValues": true,
       "choices": [
-        {
-          "choice": "none",
-          "displayName": "None"
-        },
         {
           "choice": "memoryevents",
           "displayName": "In Memory"
@@ -146,6 +136,18 @@
     "EventBusNone": {
       "type": "computed",
       "value": "(!UseMemoryEvents && !UseAzServiceBus && !UseRabbitMQ)"
+    },
+    // Framework Config
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net9.0"
+        }
+      ],
+      "defaultValue": "net9.0"
     }
   },
   "sources": [
@@ -260,22 +262,36 @@
       ],
       "modifiers": [
         {
-          "condition": "!UseAndroid",
+          "condition": "(!UseAzureOpts)",
           "exclude": [
-            "**/AvaloniaDesktop.Android/**/*"
+            "Template.HostWebApi/ConfigurationOptions/AzureOptions/*"
           ]
         },
         {
-          "condition": "!UseIOS",
+          "condition": "(!UseAzureKeyVault)",
           "exclude": [
-            "**/AvaloniaDesktop.IOS/**/*"
+            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
           ]
         },
         {
-          "condition": "!UseDesktop",
+          "condition": "(!SqlDatabase && !UseIdentity)",
           "exclude": [
-            "**/AvaloniaDesktop.Desktop/**/*"
+            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
           ]
+        },
+        {
+          "condition": "(!UseApi)",
+          "exclude": [
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseGrpc)",
+          "exclude": [
+          ],
+          "rename": {
+          }
         }
       ]
     }
