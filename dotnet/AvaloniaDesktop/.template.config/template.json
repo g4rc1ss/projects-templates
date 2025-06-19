@@ -33,10 +33,6 @@
       "defaultValue": "none",
       "displayName": "File Storages"
     },
-    "UseAzureBlobStorage": {
-      "type": "computed",
-      "value": "(Storage == 'AzureBlobStorage')"
-    },
     "UseLocalStorage": {
       "type": "computed",
       "value": "(Storage == 'LocalSystemStorage')"
@@ -86,19 +82,7 @@
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseSqlite)"
-    },
-    "UsePostgres": {
-      "type": "computed",
-      "value": "(Databases == 'postgresql')"
-    },
-    "UseSqlServer": {
-      "type": "computed",
-      "value": "(Databases == 'sqlserver')"
-    },
-    "UseAzureSql": {
-      "type": "computed",
-      "value": "(Databases == 'azuresql')"
+      "value": "(UseSqlite)"
     },
     "UseSqlite": {
       "type": "computed",
@@ -106,11 +90,7 @@
     },
     "NoSqlDatabase": {
       "type": "computed",
-      "value": "(UseMongodb)"
-    },
-    "UseMongodb": {
-      "type": "computed",
-      "value": "(Databases == 'mongodb')"
+      "value": "(UseLitedb)"
     },
     "UseLitedb": {
       "type": "computed",
@@ -119,15 +99,6 @@
     "DatabaseNone": {
       "type": "computed",
       "value": "(!SqlDatabase && !NoSqlDatabase)"
-    },
-    // Auth Config
-    "UseIdentity": {
-      "type": "computed",
-      "value": "(Authentication == 'identity')"
-    },
-    "AuthNone": {
-      "type": "computed",
-      "value": "(Authentication == 'none')"
     },
     // Cache Config
     "Cache": {
@@ -151,14 +122,6 @@
       "type": "computed",
       "value": "(Cache == 'memorycache')"
     },
-    "UseRedis": {
-      "type": "computed",
-      "value": "(Cache == 'redis')"
-    },
-    "UseGarnet": {
-      "type": "computed",
-      "value": "(Cache == 'garnet')"
-    },
     // EventBus Config
     "EventBus": {
       "type": "parameter",
@@ -180,17 +143,9 @@
       "type": "computed",
       "value": "(EventBus == 'memoryevents')"
     },
-    "UseAzServiceBus": {
-      "type": "computed",
-      "value": "(EventBus == 'azureservicebus')"
-    },
-    "UseRabbitMQ": {
-      "type": "computed",
-      "value": "(EventBus == 'rabbit')"
-    },
     "EventBusNone": {
       "type": "computed",
-      "value": "(!UseMemoryEvents && !UseAzServiceBus && !UseRabbitMQ)"
+      "value": "(!UseMemoryEvents)"
     },
     // Framework Config
     "Framework": {
@@ -237,13 +192,6 @@
           ]
         },
         {
-          "condition": "(!UseAzureBlobStorage)",
-          "exclude": [
-            "Infraestructure.Storages/AzureStorage/AzureBlobStorage.cs",
-            "Infraestructure.Storages/AzureStorage/AzureBlobStorageOptions.cs"
-          ]
-        },
-        {
           "condition": "(StorageNone)",
           "exclude": [
             "Infraestructure.Storages/*"
@@ -265,30 +213,9 @@
             "Infraestructure.Events/Publisher/MemoryEventNotificator.cs"
           ]
         },
-        {
-          "condition": "!UseAzServiceBus",
-          "exclude": [
-            "Infraestructure.Events/Publisher/AzureEventNotificator.cs"
-          ]
-        },
-        {
-          "condition": "!UseRabbitMQ",
-          "exclude": [
-            "Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
-          ]
-        },
         // Database
         {
-          "condition": "(!UseIdentity)",
-          "exclude": [
-            "Infraestructure.Database/Entities/IdentityRoleEntity.cs",
-            "Infraestructure.Database/Entities/IdentityUserEntity.cs",
-            "Infraestructure.Database/Repository/IdentityUserPoc.cs",
-            "Infraestructure.Database/IdentityDatabaseContext.cs"
-          ]
-        },
-        {
-          "condition": "(!SqlDatabase || UseIdentity)",
+          "condition": "(!SqlDatabase)",
           "exclude": [
             "Infraestructure.Database/Entities/UserEntity.cs",
             "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
@@ -304,7 +231,7 @@
           ]
         },
         {
-          "condition": "DatabaseNone && (!UseIdentity)",
+          "condition": "DatabaseNone",
           "exclude": [
             "**/Infraestructure.Database/**/*"
           ]

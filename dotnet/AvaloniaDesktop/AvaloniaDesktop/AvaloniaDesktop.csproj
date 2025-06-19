@@ -32,14 +32,5 @@
         <!--#if (!StorageNone)-->
         <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj" />
         <!--#endif-->
-        <!--#if (false)-->
-        <ProjectReference Include="..\..\Libs\Infraestructure.Database\Infraestructure.Database.csproj" />
-        <!--#endif-->
-        <!--#if (false)-->
-        <ProjectReference Include="..\..\Libs\Infraestructure.Events\Infraestructure.Events.csproj" />
-        <!--#endif-->
-        <!--#if (false)-->
-        <ProjectReference Include="..\..\Libs\Infraestructure.Storages\Infraestructure.Storages.csproj" />
-        <!--#endif-->
     </ItemGroup>
 </Project>
