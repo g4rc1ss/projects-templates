@@ -41,10 +41,10 @@ csharp_new_line_between_query_expression_clauses=true
 csharp_prefer_braces=true:error
 
 # http://kent-boogaart.com/blog/editorconfig-reference-for-c-developers#csharp_prefer_simple_default_expression
-csharp_prefer_simple_default_expression=false:error
+csharp_prefer_simple_default_expression=true:error
 
 # IDE0063: Use simple 'using' statement
-csharp_prefer_simple_using_statement=false
+csharp_prefer_simple_using_statement=true
 
 # http://kent-boogaart.com/blog/editorconfig-reference-for-c-developers#csharp_preserve_single_line_blocks
 csharp_preserve_single_line_blocks=true
@@ -271,7 +271,7 @@ dotnet_naming_rule.async_method_should_be_ends_with_async.style = ends_with_asyn
 resharper_arrange_this_qualifier_highlighting=hint
 
 # IDE1006: Naming Styles
-dotnet_diagnostic.ide1006.severity=error
+dotnet_diagnostic.IDE1006.severity=error
 
 # Ignore that our code is compatible only with Windows
 # CA1416: Validate platform compatibility
@@ -279,10 +279,20 @@ dotnet_diagnostic.CA1416.severity = none
 
 # Lowers severity from Warning to Suggestion
 # CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the await operator to the result of the call.
-dotnet_diagnostic.CS4014.severity = suggestion
+dotnet_diagnostic.CS4014.severity = warning
 dotnet_diagnostic.CS1998.severity = suggestion
 
+# Missing XML comment
 dotnet_diagnostic.CS1591.severity = none
+
+# Namespace does not match folder structure
+dotnet_diagnostic.IDE0130.severity = error
+
+# Remove unnecessary using directives
+dotnet_diagnostic.IDE0005.severity = error
+
+# Prefer System.Threading.Lock
+dotnet_diagnostic.IDE0330.severity = error
 
 # Disable IDE0058 - Remove unnecessary expression value
 csharp_style_unused_value_expression_statement_preference = discard_variable:none

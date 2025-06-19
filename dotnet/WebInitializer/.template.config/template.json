@@ -90,7 +90,7 @@
       "defaultValue": false
     },
     // Database Config
-    "Database": {
+    "SqlDatabases": {
       "type": "parameter",
       "datatype": "choice",
       "choices": [
@@ -109,10 +109,6 @@
         {
           "choice": "sqlserver",
           "displayName": "SQL Server"
-        },
-        {
-          "choice": "mongodb",
-          "displayName": "Mongo Database"
         }
       ],
       "defaultValue": "postgresql"
@@ -123,23 +119,38 @@
     },
     "UsePostgres": {
       "type": "computed",
-      "value": "(Database == 'postgresql')"
+      "value": "(SqlDatabases == 'postgresql')"
     },
     "UseSqlServer": {
       "type": "computed",
-      "value": "(Database == 'sqlserver')"
+      "value": "(SqlDatabases == 'sqlserver')"
     },
     "UseAzureSql": {
       "type": "computed",
-      "value": "(Database == 'azuresql')"
+      "value": "(SqlDatabases == 'azuresql')"
     },
-    "UseMongodb": {
-      "type": "computed",
-      "value": "(Database == 'mongodb')"
+    "NoSqlDatabases": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "displayName": "None"
+        },
+        {
+          "choice": "mongodb",
+          "displayName": "Mongo Database"
+        }
+      ],
+      "defaultValue": "none"
     },
     "NoSqlDatabase": {
       "type": "computed",
       "value": "(UseMongodb)"
+    },
+    "UseMongodb": {
+      "type": "computed",
+      "value": "(NoSqlDatabases == 'mongodb')"
     },
     "DatabaseNone": {
       "type": "computed",
