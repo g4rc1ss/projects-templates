@@ -5,7 +5,7 @@ using MongoDB.Driver;
 namespace Infraestructure.Database.Repository;
 
 public class MongoPoc(ILogger<MongoPoc> logger, IMongoClient mongoClient)
-    : IRepository<MongoDbEntity>
+    : IMongoPoc
 {
     public MongoDbEntity? Entity { get; set; }
 
@@ -83,3 +83,5 @@ public class MongoPoc(ILogger<MongoPoc> logger, IMongoClient mongoClient)
         );
     }
 }
+
+public interface IMongoPoc : IRepository<MongoDbEntity, string>;

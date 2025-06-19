@@ -4,6 +4,7 @@ using Infraestructure.Database.Entities;
 using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
 #endif
+
 #if (SqlDatabase)
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,13 @@ public static class InfraestructureDatabaseExtensions
             nameof(DatabaseContext)
         );
         ArgumentNullException.ThrowIfNull(connectionString);
+
+#if (UseIdentity)
         builder.Services.AddDbContextPool<DatabaseContext>(builder =>
+#else
+        builder.Services.AddDbContextPool<IdentityDatabaseContext>(builder =>
+#endif
+
         {
 #if (UsePostgres)
             builder.UseNpgsql(connectionString);
@@ -34,7 +41,11 @@ public static class InfraestructureDatabaseExtensions
 #endif
         });
 
+#if (UseIdentity)
         builder.Services.AddDbContextFactory<DatabaseContext>(builder =>
+#else
+        builder.Services.AddDbContextFactory<IdentityDatabaseContext>(builder =>
+#endif
         {
 #if (UsePostgres)
             builder.UseNpgsql(connectionString);
@@ -46,9 +57,16 @@ public static class InfraestructureDatabaseExtensions
             builder.UseSqlite(connectionString);
 #endif
         });
+
+
+#if (UseIdentity)
+        builder.Services.AddScoped<IIdentityUserRepository, IdentityUserPoc>();
+#else
+        builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
+#endif
 #endif
 #if (UseMongodb)
-        builder.Services.AddScoped<IRepository<MongoDbEntity>, MongoPoc>();
+        builder.Services.AddScoped<IMongoPoc, MongoPoc>();
         builder.AddMongoDBClient("mongo");
 #endif
     }

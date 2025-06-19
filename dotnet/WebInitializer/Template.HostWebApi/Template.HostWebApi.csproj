@@ -53,6 +53,7 @@
     <!--#endif-->
     <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
     <!--#endif-->
+
     <!--#if (!EventBusNone)-->
     <!--#if (false)-->
     <ProjectReference Include="..\..\Libs\Infraestructure.Events\Infraestructure.Events.csproj" />

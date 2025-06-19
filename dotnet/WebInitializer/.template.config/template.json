@@ -328,22 +328,19 @@
         {
           "condition": "(!UseIdentity)",
           "exclude": [
-            "Infraestructure.Database/Entities/RoleEntity.cs"
+            "Infraestructure.Database/Entities/IdentityRoleEntity.cs",
+            "Infraestructure.Database/Entities/IdentityUserEntity.cs",
+            "Infraestructure.Database/Repository/IdentityUserPoc.cs",
+            "Infraestructure.Database/IdentityDatabaseContext.cs"
           ]
         },
         {
-          "condition": "(!SqlDatabase && !UseIdentity)",
+          "condition": "(!SqlDatabase || UseIdentity)",
           "exclude": [
             "Infraestructure.Database/Entities/UserEntity.cs",
             "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
-            "Infraestructure.Database/Repository/UserInfo.cs",
+            "Infraestructure.Database/Repository/SqlUserPoc.cs",
             "Infraestructure.Database/DatabaseContext.cs"
-          ]
-        },
-        {
-          "condition": "DatabaseNone && (!UseIdentity)",
-          "exclude": [
-            "**/Infraestructure.Database/**/*"
           ]
         },
         {
@@ -351,6 +348,12 @@
           "exclude": [
             "Infraestructure.Database/Repository/MongoPoc.cs",
             "Infraestructure.Database/Entities/MongoDbEntity.cs"
+          ]
+        },
+        {
+          "condition": "DatabaseNone && (!UseIdentity)",
+          "exclude": [
+            "**/Infraestructure.Database/**/*"
           ]
         }
       ]
