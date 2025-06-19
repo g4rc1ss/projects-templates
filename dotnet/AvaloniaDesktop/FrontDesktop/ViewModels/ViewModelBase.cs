@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace AvaloniaDesktop.ViewModels;
+namespace FrontDesktop.ViewModels;
 
 public abstract class ViewModelBase : ObservableObject { }

@@ -1,8 +1,8 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using AvaloniaDesktop.ViewModels;
+using FrontDesktop.ViewModels;
 
-namespace AvaloniaDesktop;
+namespace FrontDesktop;
 
 public class ViewLocator : IDataTemplate
 {

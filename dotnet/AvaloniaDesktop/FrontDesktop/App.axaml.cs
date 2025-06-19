@@ -2,19 +2,20 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using AvaloniaDesktop.ViewModels;
-using AvaloniaDesktop.Views;
+using FrontDesktop.ViewModels;
+using FrontDesktop.Views;
 using Infraestructure.Database;
 using Infraestructure.Events;
 using Infraestructure.Storages;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace AvaloniaDesktop;
+namespace FrontDesktop;
 
 public class App : Application
 {
     private Task? _host;
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -32,7 +33,9 @@ public class App : Application
         IHost app = builder.Build();
         MainViewModel mainViewModel = app.Services.GetRequiredService<MainViewModel>();
 
-        foreach (IHostedService service in app.Services.GetRequiredService<IEnumerable<IHostedService>>())
+        foreach (
+            IHostedService service in app.Services.GetRequiredService<IEnumerable<IHostedService>>()
+        )
         {
             service.StartAsync(CancellationToken.None).Wait();
         }

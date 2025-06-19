@@ -1,6 +1,6 @@
 ﻿using Avalonia;
 
-namespace AvaloniaDesktop.Desktop;
+namespace FrontDesktop.Desktop;
 
 sealed class Program
 {

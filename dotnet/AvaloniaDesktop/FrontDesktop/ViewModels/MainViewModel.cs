@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace AvaloniaDesktop.ViewModels;
+namespace FrontDesktop.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {

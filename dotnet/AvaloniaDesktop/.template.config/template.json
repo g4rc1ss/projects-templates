@@ -8,7 +8,7 @@
   "name": "Asier Avalonia Desktop",
   "description": "Template para aplicaciones Desktop",
   "shortName": "Front Desktop App",
-  "sourceName": "AvaloniaDesktop",
+  "sourceName": "FrontDesktop",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
