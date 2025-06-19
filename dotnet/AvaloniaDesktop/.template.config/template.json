@@ -171,7 +171,7 @@
       ]
     },
     {
-      "source": "../Libs",
+      "source": "./",
       "target": "./",
       "exclude": [
         "**/[Bb]in/**",
@@ -224,10 +224,10 @@
           ]
         },
         {
-          "condition": "!UseMongodb",
+          "condition": "!UseLitedb",
           "exclude": [
-            "Infraestructure.Database/Repository/MongoPoc.cs",
-            "Infraestructure.Database/Entities/MongoDbEntity.cs"
+            "Infraestructure.Database/Repository/LitedbPoc.cs",
+            "Infraestructure.Database/Entities/LiteDbEntity.cs"
           ]
         },
         {
@@ -235,23 +235,8 @@
           "exclude": [
             "**/Infraestructure.Database/**/*"
           ]
-        }
-      ]
-    },
-    {
-      "source": "./",
-      "target": "./",
-      "exclude": [
-        "**/[Bb]in/**",
-        "**/[Oo]bj/**",
-        "**/*template.config/**/*",
-        "**/*.filelist",
-        "**/*.user",
-        "**/*idea",
-        "*.sln",
-        "**/Functionality/**/*"
-      ],
-      "modifiers": [
+        },
+        // Avalonia
         {
           "condition": "!UseAndroid",
           "exclude": [

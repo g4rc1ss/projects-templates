@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-#if (UseMongodb)
-using Infraestructure.Database.Repository;
-using Infraestructure.Database.Entities;
+﻿using Microsoft.Extensions.Hosting;
+#if (UseLitedb)
+using Microsoft.Extensions.Configuration;
+using LiteDB;
+using Microsoft.Extensions.DependencyInjection;
 #endif
-
 #if (SqlDatabase)
-using Infraestructure.Database.Repository;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 #endif
 
@@ -16,10 +16,10 @@ public static class InfraestructureDatabaseExtensions
 {
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
+#if (SqlDatabase)
         string? connectionString = builder.Configuration.GetConnectionString(
             nameof(DatabaseContext)
         );
-#if (SqlDatabase)
         ArgumentNullException.ThrowIfNull(connectionString);
 
         builder.Services.AddDbContext<DatabaseContext>(
@@ -34,7 +34,10 @@ public static class InfraestructureDatabaseExtensions
 #endif
 
 #if (UseLitedb)
-        builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(connectionString));
+        string? litedbConnection = builder.Configuration.GetConnectionString(
+            "litedb"
+        );
+        builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(litedbConnection));
 #endif
     }
 }
