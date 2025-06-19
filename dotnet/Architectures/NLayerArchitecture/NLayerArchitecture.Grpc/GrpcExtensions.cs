@@ -1,6 +1,6 @@
-﻿using NLayerArchitecture.Application;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using NLayerArchitecture.Application;
 using NLayerArchitecture.Grpc.Services;
 using NLayerArchitecture.Infraestructure;
 

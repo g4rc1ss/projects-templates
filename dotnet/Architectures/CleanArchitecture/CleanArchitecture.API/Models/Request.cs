@@ -1,6 +1,3 @@
 namespace CleanArchitecture.API.Models;
 
-public class Request
-{
-    
-}
+public class Request { }

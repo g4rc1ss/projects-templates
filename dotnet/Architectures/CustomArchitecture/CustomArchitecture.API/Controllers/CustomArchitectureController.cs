@@ -5,16 +5,13 @@ namespace CustomArchitecture.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CustomArchitectureController(
-    ILogger<CustomArchitectureController> logger
-) : Controller
+public class CustomArchitectureController(ILogger<CustomArchitectureController> logger) : Controller
 {
     [HttpGet]
     public IActionResult Get()
     {
-        if (HttpContext.ToString() is null)
-        {
-        }
+        logger.LogInformation("Get called");
+        if (HttpContext.ToString() is null) { }
 
         return Ok();
     }

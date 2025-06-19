@@ -1,6 +1,3 @@
 namespace CleanArchitecture.API.Models;
 
-public class Response
-{
-    
-}
+public class Response { }

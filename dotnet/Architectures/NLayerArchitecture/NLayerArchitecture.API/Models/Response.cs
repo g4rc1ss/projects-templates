@@ -1,6 +1,3 @@
 namespace NLayerArchitecture.API.Models;
 
-public class Response
-{
-    
-}
+public class Response { }

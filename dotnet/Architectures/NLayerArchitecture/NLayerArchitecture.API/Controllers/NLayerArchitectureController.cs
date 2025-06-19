@@ -5,16 +5,13 @@ namespace NLayerArchitecture.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class NLayerArchitectureController(
-    ILogger<NLayerArchitectureController> logger
-) : Controller
+public class NLayerArchitectureController(ILogger<NLayerArchitectureController> logger) : Controller
 {
     [HttpGet]
     public IActionResult Get()
     {
-        if (HttpContext.ToString() is null)
-        {
-        }
+        logger.LogInformation("Get called");
+        if (HttpContext.ToString() is null) { }
 
         return Ok();
     }

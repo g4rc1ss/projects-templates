@@ -1,3 +1,3 @@
-namespace CustomArchitecture.Domain.BusinessObjects;
+namespace CustomArchitecture.Application.BusinessObjects;
 
 public record BusinessObject();

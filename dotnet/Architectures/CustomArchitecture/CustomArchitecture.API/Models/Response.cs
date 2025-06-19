@@ -1,5 +1,3 @@
 namespace CustomArchitecture.API.Models;
 
-public class Response
-{
-}
+public class Response { }

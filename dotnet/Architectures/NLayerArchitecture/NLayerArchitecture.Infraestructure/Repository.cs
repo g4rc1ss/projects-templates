@@ -2,6 +2,4 @@ namespace NLayerArchitecture.Infraestructure;
 
 public interface IRepository;
 
-public class Repository : IRepository
-{
-}
+public class Repository : IRepository { }

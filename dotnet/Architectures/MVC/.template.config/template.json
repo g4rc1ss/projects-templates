@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "architecture"
+  ],
+  "identity": "MVC Architecture",
+  "name": "Asier Architecture Structure",
+  "description": "",
+  "shortName": "MvcArchitecture",
+  "sourceName": "MvcArchitecture",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "UseApi": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": true
+    },
+    "UseGrpc": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false
+    },
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net9.0"
+        }
+      ],
+      "defaultValue": "net9.0"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea",
+        "*.sln",
+        "**/MvcArchitecture/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!UseApi)",
+          "exclude": [
+            "**/MvcArchitecture.API/**/*"
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseGrpc)",
+          "exclude": [
+            "**/MvcArchitecture.Grpc/**/*"
+          ],
+          "rename": {
+          }
+        }
+      ]
+    }
+  ]
+}

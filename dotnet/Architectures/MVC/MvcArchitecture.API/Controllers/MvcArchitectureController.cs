@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitecture.API.Controllers;
+namespace MvcArchitecture.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CleanArchitectureController(ILogger<CleanArchitectureController> logger) : Controller
+public class MvcArchitectureController(ILogger<MvcArchitectureController> logger) : Controller
 {
     [HttpGet]
     public IActionResult Get()

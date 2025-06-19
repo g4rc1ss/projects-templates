@@ -10,7 +10,5 @@ public static class InfraestructureExtensions
         builder.Services.AddRepositoryServices();
     }
 
-    private static void AddRepositoryServices(this IServiceCollection services)
-    {
-    }
+    private static void AddRepositoryServices(this IServiceCollection services) { }
 }

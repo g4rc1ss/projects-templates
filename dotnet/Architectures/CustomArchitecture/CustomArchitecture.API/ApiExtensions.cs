@@ -9,8 +9,7 @@ public static class ApiExtensions
 {
     public static void InitCustomArchitectureApi(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddControllers()
-            .AddApplicationPart(typeof(ApiExtensions).Assembly);
+        builder.Services.AddControllers().AddApplicationPart(typeof(ApiExtensions).Assembly);
 
         builder.Services.AddBusinessServices();
         builder.AddDataAccessService();
