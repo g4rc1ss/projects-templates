@@ -283,7 +283,7 @@
       ]
     },
     {
-      "source": "../Libs",
+      "source": "./",
       "target": "./",
       "exclude": [
         "**/[Bb]in/**",
@@ -292,10 +292,41 @@
         "**/*.filelist",
         "**/*.user",
         "**/*idea",
-        "*.sln",
-        "**/Functionality/**/*"
+        "*.sln"
       ],
       "modifiers": [
+        {
+          "condition": "(!UseAzureOpts)",
+          "exclude": [
+            "Template.HostWebApi/ConfigurationOptions/AzureOptions/*"
+          ]
+        },
+        {
+          "condition": "(!UseAzureKeyVault)",
+          "exclude": [
+            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
+          ]
+        },
+        {
+          "condition": "(!SqlDatabase && !UseIdentity)",
+          "exclude": [
+            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
+          ]
+        },
+        {
+          "condition": "(!UseApi)",
+          "exclude": [
+          ],
+          "rename": {
+          }
+        },
+        {
+          "condition": "(!UseGrpc)",
+          "exclude": [
+          ],
+          "rename": {
+          }
+        },
         // Storages
         {
           "condition": "(!UseLocalStorage)",
@@ -375,54 +406,6 @@
           "exclude": [
             "**/Infraestructure.Database/**/*"
           ]
-        }
-      ]
-    },
-    {
-      "source": "./",
-      "target": "./",
-      "exclude": [
-        "**/[Bb]in/**",
-        "**/[Oo]bj/**",
-        "**/*template.config/**/*",
-        "**/*.filelist",
-        "**/*.user",
-        "**/*idea",
-        "*.sln",
-        "**/Functionality/**/*"
-      ],
-      "modifiers": [
-        {
-          "condition": "(!UseAzureOpts)",
-          "exclude": [
-            "Template.HostWebApi/ConfigurationOptions/AzureOptions/*"
-          ]
-        },
-        {
-          "condition": "(!UseAzureKeyVault)",
-          "exclude": [
-            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
-          ]
-        },
-        {
-          "condition": "(!SqlDatabase && !UseIdentity)",
-          "exclude": [
-            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
-          ]
-        },
-        {
-          "condition": "(!UseApi)",
-          "exclude": [
-          ],
-          "rename": {
-          }
-        },
-        {
-          "condition": "(!UseGrpc)",
-          "exclude": [
-          ],
-          "rename": {
-          }
         }
       ]
     }
