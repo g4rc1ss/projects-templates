@@ -30,37 +30,37 @@ public static class InfraestructureDatabaseExtensions
         ArgumentNullException.ThrowIfNull(connectionString);
 
 #if (UseIdentity)
-        builder.Services.AddDbContextPool<IdentityDatabaseContext>(builder =>
+        builder.Services.AddDbContextPool<IdentityDatabaseContext>(dbContextBuilder =>
 #else
-        builder.Services.AddDbContextPool<DatabaseContext>(builder =>
+        builder.Services.AddDbContextPool<DatabaseContext>(dbContextBuilder =>
 #endif
 
         {
 #if (UsePostgres)
-            builder.UseNpgsql(connectionString);
+            dbContextBuilder.UseNpgsql(connectionString);
 #elif (UseSqlServer)
-            builder.UseSqlServer(connectionString);
+            dbContextBuilder.UseSqlServer(connectionString);
 #elif (UseAzureSql)
-            builder.UseAzureSql(connectionString);
+            dbContextBuilder.UseAzureSql(connectionString);
 #elif (UseSqlite)
-            builder.UseSqlite(connectionString);
+            dbContextBuilder.UseSqlite(connectionString);
 #endif
         });
 
 #if (UseIdentity)
-        builder.Services.AddDbContextFactory<IdentityDatabaseContext>(builder =>
+        builder.Services.AddDbContextFactory<IdentityDatabaseContext>(dbContextBuilder =>
 #else
-        builder.Services.AddDbContextFactory<DatabaseContext>(builder =>
+        builder.Services.AddDbContextFactory<DatabaseContext>(dbContextBuilder =>
 #endif
         {
 #if (UsePostgres)
-            builder.UseNpgsql(connectionString);
+            dbContextBuilder.UseNpgsql(connectionString);
 #elif (UseSqlServer)
-            builder.UseSqlServer(connectionString);
+            dbContextBuilder.UseSqlServer(connectionString);
 #elif (UseAzureSql)
-            builder.UseAzureSql(connectionString);
+            dbContextBuilder.UseAzureSql(connectionString);
 #elif (UseSqlite)
-            builder.UseSqlite(connectionString);
+            dbContextBuilder.UseSqlite(connectionString);
 #endif
         });
 

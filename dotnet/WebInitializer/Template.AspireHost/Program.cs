@@ -60,11 +60,19 @@ IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
 
 IResourceBuilder<ProjectResource> project = builder.AddProject<Template_HostWebApi>("Template");
 #if (UsePostgres)
+#if (UseIdentity)
+project.WithReference(postgres, "IdentityDatabaseContext").WaitFor(postgres);
+#else
 project.WithReference(postgres, "DatabaseContext").WaitFor(postgres);
+#endif
 #endif
 
 #if (UseSqlServer || UseAzureSql)
+#if (UseIdentity)
+project.WithReference(sqlServer, "IdentityDatabaseContext").WaitFor(sqlServer);
+#else
 project.WithReference(sqlServer, "DatabaseContext").WaitFor(sqlServer);
+#endif
 #endif
 
 #if (UseMongodb)

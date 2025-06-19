@@ -1,4 +1,4 @@
-#if (!DatabaseNone)
+#if (!DatabaseNone || UseIdentity)
 using Infraestructure.Database;
 #endif
 #if (!EventBusNone)
@@ -21,7 +21,7 @@ internal static class ServiceExtensions
         builder.Services.AddAuthenticationProtocol(builder.Configuration);
         builder.Services.ConfigureDataProtectionProvider(builder.Configuration);
 
-#if (!DatabaseNone)
+#if (!DatabaseNone || UseIdentity)
         builder.AddDatabaseConfig();
 #endif
 #if (!EventBusNone)
