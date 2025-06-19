@@ -4,11 +4,11 @@
   "classifications": [
     "architecture"
   ],
-  "identity": "web-host-init-configuration",
-  "name": "Web Initializer Base",
-  "description": "Crear configuración base de diferentes servicios Web y configuraciones de auth, BBDD, etc.",
-  "shortName": "Initialize web",
-  "sourceName": "Template",
+  "identity": "avalonia-desktop-template",
+  "name": "Avalonia Template",
+  "description": "Template para aplicaciones Desktop",
+  "shortName": "Desktop App",
+  "sourceName": "AvaloniaDesktop",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
@@ -16,45 +16,14 @@
     "type": "project"
   },
   "symbols": {
-    "UseAzureOpts": {
-      "type": "computed",
-      "value": "(UseAzureKeyVault || UseAzureBlobStorage)"
-    },
-    // KeyVault Config
-    "KeyVaults": {
-      "type": "parameter",
-      "datatype": "choice",
-      "allowMultipleValues": true,
-      "choices": [
-        {
-          "displayName": "Az Key Vault",
-          "choice": "AzureKeyVault"
-        }
-      ],
-      "defaultValue": "None",
-      "displayName": "Secrets and Key Vault"
-    },
-    "UseAzureKeyVault": {
-      "type": "computed",
-      "value": "(KeyVaults == 'AzureKeyVault')"
-    },
-    "KeyVaultNone": {
-      "type": "computed",
-      "value": "(!UseAzureKeyVault)"
-    },
     // Storage Config
     "Storage": {
       "type": "parameter",
       "datatype": "choice",
-      //      "allowMultipleValues": true,
       "choices": [
         {
           "displayName": "None",
           "choice": "none"
-        },
-        {
-          "displayName": "Az Blob Storage",
-          "choice": "AzureBlobStorage"
         },
         {
           "displayName": "Local System Storage",
@@ -64,33 +33,35 @@
       "defaultValue": "none",
       "displayName": "File Storages"
     },
-    "UseAzureBlobStorage": {
-      "type": "computed",
-      "value": "(Storage == 'AzureBlobStorage')"
-    },
     "UseLocalStorage": {
       "type": "computed",
       "value": "(Storage == 'LocalSystemStorage')"
     },
     "StorageNone": {
       "type": "computed",
-      "value": "(!UseAzureBlobStorage && !UseLocalStorage)"
+      "value": "(!UseLocalStorage)"
     },
     // Host Config
-    "UseApi": {
-      "displayName": "API",
+    "UseAndroid": {
+      "displayName": "Android",
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": true
     },
-    "UseGrpc": {
-      "displayName": "GRPC",
+    "UseDesktop": {
+      "displayName": "Desktop",
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": false
+      "defaultValue": true
+    },
+    "UseIOS": {
+      "displayName": "IOS",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": true
     },
     // Database Config
-    "SqlDatabases": {
+    "Databases": {
       "type": "parameter",
       "datatype": "choice",
       "choices": [
@@ -99,87 +70,35 @@
           "displayName": "None"
         },
         {
-          "choice": "postgresql",
-          "displayName": "PostgreSQL"
+          "choice": "sqlite",
+          "displayName": "SQLite"
         },
         {
-          "choice": "azuresql",
-          "displayName": "Azure SQL"
-        },
-        {
-          "choice": "sqlserver",
-          "displayName": "SQL Server"
+          "choice": "litedb",
+          "displayName": "LiteDB"
         }
       ],
-      "defaultValue": "postgresql"
+      "defaultValue": "sqlite"
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql)"
+      "value": "(UseSqlite)"
     },
-    "UsePostgres": {
+    "UseSqlite": {
       "type": "computed",
-      "value": "(SqlDatabases == 'postgresql')"
-    },
-    "UseSqlServer": {
-      "type": "computed",
-      "value": "(SqlDatabases == 'sqlserver')"
-    },
-    "UseAzureSql": {
-      "type": "computed",
-      "value": "(SqlDatabases == 'azuresql')"
-    },
-    "NoSqlDatabases": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "none",
-          "displayName": "None"
-        },
-        {
-          "choice": "mongodb",
-          "displayName": "Mongo Database"
-        }
-      ],
-      "defaultValue": "none"
+      "value": "(Databases == 'sqlite')"
     },
     "NoSqlDatabase": {
       "type": "computed",
-      "value": "(UseMongodb)"
+      "value": "(UseLitedb)"
     },
-    "UseMongodb": {
+    "UseLitedb": {
       "type": "computed",
-      "value": "(NoSqlDatabases == 'mongodb')"
+      "value": "(Databases == 'litedb')"
     },
     "DatabaseNone": {
       "type": "computed",
       "value": "(!SqlDatabase && !NoSqlDatabase)"
-    },
-    // Auth Config
-    "Authentication": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "none",
-          "description": "None"
-        },
-        {
-          "choice": "identity",
-          "displayName": "Microsoft Identity"
-        }
-      ],
-      "defaultValue": "none",
-      "description": "Tipo de auth para usar"
-    },
-    "UseIdentity": {
-      "type": "computed",
-      "value": "(Authentication == 'identity')"
-    },
-    "AuthNone": {
-      "type": "computed",
-      "value": "(Authentication == 'none')"
     },
     // Cache Config
     "Cache": {
@@ -194,16 +113,6 @@
           "choice": "memorycache",
           "displayName": "In Memory",
           "description": "Memory"
-        },
-        {
-          "choice": "Redis",
-          "displayName": "Redis",
-          "description": "redis"
-        },
-        {
-          "choice": "Garnet",
-          "displayName": "Garnet",
-          "description": "garnet"
         }
       ],
       "defaultValue": "memorycache",
@@ -212,14 +121,6 @@
     "UseMemoryCache": {
       "type": "computed",
       "value": "(Cache == 'memorycache')"
-    },
-    "UseRedis": {
-      "type": "computed",
-      "value": "(Cache == 'redis')"
-    },
-    "UseGarnet": {
-      "type": "computed",
-      "value": "(Cache == 'garnet')"
     },
     // EventBus Config
     "EventBus": {
@@ -230,14 +131,6 @@
         {
           "choice": "memoryevents",
           "displayName": "In Memory"
-        },
-        {
-          "choice": "azureservicebus",
-          "displayName": "Azure Service Bus"
-        },
-        {
-          "choice": "rabbit",
-          "displayName": "Rabbit MQ"
         }
       ],
       "defaultValue": "none",
@@ -247,29 +140,9 @@
       "type": "computed",
       "value": "(EventBus == 'memoryevents')"
     },
-    "UseAzServiceBus": {
-      "type": "computed",
-      "value": "(EventBus == 'azureservicebus')"
-    },
-    "UseRabbitMQ": {
-      "type": "computed",
-      "value": "(EventBus == 'rabbit')"
-    },
     "EventBusNone": {
       "type": "computed",
       "value": "(!UseMemoryEvents && !UseAzServiceBus && !UseRabbitMQ)"
-    },
-    // Framework Config
-    "Framework": {
-      "type": "parameter",
-      "description": "The target framework for the project.",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "net9.0"
-        }
-      ],
-      "defaultValue": "net9.0"
     }
   },
   "sources": [
