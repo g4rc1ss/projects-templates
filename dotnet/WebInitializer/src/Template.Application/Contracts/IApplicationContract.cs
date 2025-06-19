@@ -1,4 +1,4 @@
-namespace Template.Application;
+namespace Template.Application.Contracts;
 
 public interface IApplicationContractBase;
 

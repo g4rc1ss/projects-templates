@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-#if !UseLayerArchitecture
+#if (!UseLayerArchitecture)
 using Shared;
 #else
-Template.Application
+using Template.Application.Contracts;
 #endif
 
 namespace Template.HostWebApi.FilterControllers;

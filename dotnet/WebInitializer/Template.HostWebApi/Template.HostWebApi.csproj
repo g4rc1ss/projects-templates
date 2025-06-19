@@ -56,8 +56,10 @@
     <!--#if (!StorageNone)-->
     <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj" />
     <!--#endif-->
+    <!--#if (!UseLayerArchitecture)-->
     <ProjectReference Include="..\Shared\Shared.csproj" />
-    <!--#if (UseLayerArchitecture && UseAPI)-->
+    <!--#endif-->
+    <!--#if (UseLayerArchitecture && UseApi)-->
     <ProjectReference Include="..\src\Template.API\Template.API.csproj" />
     <!--#endif-->
     <!--#if (UseLayerArchitecture && UseGrpc)-->

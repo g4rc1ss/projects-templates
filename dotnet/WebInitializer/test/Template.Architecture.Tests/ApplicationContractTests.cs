@@ -1,6 +1,11 @@
 using System.Reflection;
-using Shared;
 using Template.HostWebApi;
+#if (!UseLayerArchitecture)
+using Shared;
+
+#else
+using Template.Application.Contracts;
+#endif
 
 namespace Template.Architecture.Tests;
 
@@ -52,10 +57,10 @@ public class ApplicationContractTests
     {
         foreach (Assembly applicationAssembly in _applicationAssemblies)
         {
-            List<Type> interfaceList = applicationAssembly
-                .GetTypes()
-                .Where(x => x.IsInterface && x.GetMethods().Any())
-                .ToList();
+            List<Type> interfaceList =
+            [
+                .. applicationAssembly.GetTypes().Where(x => x.IsInterface && x.GetMethods().Any()),
+            ];
 
             foreach (Type interfaceType in interfaceList)
             {

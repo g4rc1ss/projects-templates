@@ -1,4 +1,10 @@
 ﻿using Template.HostWebApi.Extensions;
+#if (UseGrpc)
+#if (UseLayerArchitecture)
+using Template.Grpc;
+#endif
+#endif
+
 #if (!StorageNone)
 using Infraestructure.Storages;
 #endif
@@ -84,6 +90,9 @@ app.MapControllers();
 #endif
 
 #if (UseGrpc)
+#if (UseLayerArchitecture)
+app.MapTemplateGrpc();
+#endif
 app.MapGrpcHealthChecksService();
 #endif
 app.MapRouteServices();

@@ -1,13 +1,12 @@
 ﻿using Microsoft.Extensions.Hosting;
-#if (UseMongodb)
+#if (SqlDatabase || UseIdentity || NoSqlDatabase)
 using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
+#endif
+#if (UseMongodb)
 using Infraestructure.Database.Entities;
 #endif
-
 #if (SqlDatabase || UseIdentity)
-using Infraestructure.Database.Repository;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 #endif
@@ -19,7 +18,6 @@ public static class InfraestructureDatabaseExtensions
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
 #if (SqlDatabase || UseIdentity)
-
 #if (UseIdentity)
         string? connectionString = builder.Configuration.GetConnectionString(
             nameof(IdentityDatabaseContext)

@@ -339,7 +339,12 @@
         {
           "condition": "!UseLayerArchitecture",
           "exclude": [
-            "src/*",
+            "src/*"
+          ]
+        },
+        {
+          "condition": "UseLayerArchitecture",
+          "exclude": [
             "Shared/*"
           ]
         },

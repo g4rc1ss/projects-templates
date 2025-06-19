@@ -1,3 +1,11 @@
+#if (UseLayerArchitecture)
+#if (UseApi)
+using Template.API;
+#endif
+#if (UseGrpc)
+using Template.Grpc;
+#endif
+#endif
 #if (!DatabaseNone || UseIdentity)
 using Infraestructure.Database;
 #endif
@@ -36,5 +44,15 @@ internal static class ServiceExtensions
         InitializeFunctionalities(builder);
     }
 
-    private static void InitializeFunctionalities(this WebApplicationBuilder builder) { }
+    private static void InitializeFunctionalities(this WebApplicationBuilder builder)
+    {
+#if (UseLayerArchitecture)
+#if (UseApi)
+        builder.InitTemplateApi();
+#endif
+#if (UseGrpc)
+        builder.InitTemplateGrpc();
+#endif
+#endif
+    }
 }

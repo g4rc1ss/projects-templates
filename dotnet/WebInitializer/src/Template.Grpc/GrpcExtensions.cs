@@ -7,12 +7,12 @@ namespace Template.Grpc;
 
 public static class GrpcExtensions
 {
-    public static void InitCustomArchitectureGrpc(this WebApplicationBuilder builder)
+    public static void InitTemplateGrpc(this WebApplicationBuilder builder)
     {
         builder.Services.AddBusinessServices();
     }
 
-    public static void MapCustomArchitectureGrpc(this IEndpointRouteBuilder routeBuilder)
+    public static void MapTemplateGrpc(this IEndpointRouteBuilder routeBuilder)
     {
         routeBuilder.MapGrpcService<GreeterService>();
     }
