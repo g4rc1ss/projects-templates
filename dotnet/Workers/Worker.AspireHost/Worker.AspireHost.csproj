@@ -8,21 +8,21 @@
     <IsAspireHost>true</IsAspireHost>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="*" />
+    <PackageReference Include="Aspire.Hosting.AppHost" />
     <!--#if (UsePostgres)-->
-    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
     <!--#endif-->
     <!--#if (UseRedis)-->
-    <PackageReference Include="Aspire.Hosting.Redis" Version="*" />
+    <PackageReference Include="Aspire.Hosting.Redis" />
     <!--#endif-->
     <!--#if (UseAzServiceBus)-->
-    <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="*" />
+    <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" />
     <!--#endif-->
     <!--#if (UseMongodb)-->
-    <PackageReference Include="Aspire.Hosting.MongoDB" Version="*" />
+    <PackageReference Include="Aspire.Hosting.MongoDB" />
     <!--#endif-->
     <!--#if (UseRabbitMQ)-->
-    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="*" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" />
     <!--#endif-->
   </ItemGroup>
   <ItemGroup>
