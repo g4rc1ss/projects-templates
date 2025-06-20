@@ -1,19 +1,23 @@
 {
-  "$schema": "http://json.schemastore.org/template",
+  "$schema": "https://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
-    "architecture"
+    "architecture",
+    "Template",
+    "csharp",
+    "desktop"
   ],
   "identity": "frontend-desktop-template",
   "name": "Asier Desktop Template",
   "description": "Template para aplicaciones Desktop",
-  "shortName": "Front Desktop App",
+  "shortName": "asier.desktop",
   "sourceName": "FrontDesktop",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
     "language": "C#",
-    "type": "project"
+    "type": "solution",
+    "editorTreatAs": "solution"
   },
   "symbols": {
     // Storage Config
@@ -47,6 +51,18 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": true
+    },
+    "UseIOS": {
+      "displayName": "iOS",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false
+    },
+    "UseAndroid": {
+      "displayName": "Android",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false
     },
     // Database Config
     "Databases": {
@@ -167,9 +183,7 @@
         "**/*template.config/**/*",
         "**/*.filelist",
         "**/*.user",
-        "**/*idea",
-        "*.sln",
-        "**/Functionality/**/*"
+        "**/*idea/**/*"
       ],
       "modifiers": [
         // Storages
@@ -229,19 +243,19 @@
         {
           "condition": "!UseAndroid",
           "exclude": [
-            "**/AvaloniaDesktop.Android/**/*"
+            "**/FrontDesktop.Android/**/*"
           ]
         },
         {
           "condition": "!UseIOS",
           "exclude": [
-            "**/AvaloniaDesktop.iOS/**/*"
+            "**/FrontDesktop.iOS/**/*"
           ]
         },
         {
           "condition": "!UseDesktop",
           "exclude": [
-            "**/AvaloniaDesktop.Desktop/**/*"
+            "**/FrontDesktop.Desktop/**/*"
           ]
         }
       ]
