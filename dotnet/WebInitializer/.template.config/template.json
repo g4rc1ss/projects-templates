@@ -269,18 +269,6 @@
     "EventBusNone": {
       "type": "computed",
       "value": "(!UseMemoryEvents && !UseAzServiceBus && !UseRabbitMQ)"
-    },
-    // Framework Config
-    "Framework": {
-      "type": "parameter",
-      "description": "The target framework for the project.",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "net9.0"
-        }
-      ],
-      "defaultValue": "net9.0"
     }
   },
   "sources": [

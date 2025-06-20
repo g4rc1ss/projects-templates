@@ -53,9 +53,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLayerArchitecture.Applicat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{410134F0-1012-4CFA-BC10-AB4D525D112A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcArchitecture.API", "MVC\MvcArchitecture.API\MvcArchitecture.API.csproj", "{FD1FFB1D-FF22-48BE-ABAD-30C7F183DCDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcArchitecture.API", "MvcArchitecture\MvcArchitecture.API\MvcArchitecture.API.csproj", "{FD1FFB1D-FF22-48BE-ABAD-30C7F183DCDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcArchitecture.Grpc", "MVC\MvcArchitecture.Grpc\MvcArchitecture.Grpc.csproj", "{C12FE8F5-75D4-4611-AF4A-997A03EB0E85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcArchitecture.Grpc", "MvcArchitecture\MvcArchitecture.Grpc\MvcArchitecture.Grpc.csproj", "{C12FE8F5-75D4-4611-AF4A-997A03EB0E85}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5DF7310-9F92-4CC8-AA3B-AE90F44980AA}"
 	ProjectSection(SolutionItems) = preProject

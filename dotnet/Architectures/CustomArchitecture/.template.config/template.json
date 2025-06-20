@@ -25,17 +25,6 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": false
-    },
-    "Framework": {
-      "type": "parameter",
-      "description": "The target framework for the project.",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "net9.0"
-        }
-      ],
-      "defaultValue": "net9.0"
     }
   },
   "sources": [
