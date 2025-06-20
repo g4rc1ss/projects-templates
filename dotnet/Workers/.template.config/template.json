@@ -1,32 +1,25 @@
 {
-  "$schema": "https://json.schemastore.org/template",
+  "$schema": "http://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
-    "architecture"
+    "Architecture",
+    "Template",
+    "Csharp",
+    "Workers"
   ],
-  "identity": "Worker-Service",
+  "identity": "worker-service",
   "name": "Asier Worker Services",
   "description": "Crear Worker Service",
-  "shortName": "Worker Service",
+  "shortName": "asier.worker",
   "sourceName": "WorkerTemplate",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
     "language": "C#",
-    "type": "project"
+    "type": "solution",
+    "editorTreatAs": "solution"
   },
   "symbols": {
-    "Framework": {
-      "type": "parameter",
-      "description": "The target framework for the project.",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "net9.0"
-        }
-      ],
-      "defaultValue": "net9.0"
-    },
     "UseRabbitMQ": {
       "type": "parameter",
       "datatype": "bool",
@@ -81,8 +74,7 @@
         "**/*template.config/**/*",
         "**/*.filelist",
         "**/*.user",
-        "**/*idea",
-        "*.sln"
+        "**/*idea/**/*"
       ],
       "modifiers": [
         {
@@ -119,6 +111,34 @@
           }
         }
       ]
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "WorkerTemplate/Program.cs"
+    }
+  ],
+  "postActions": [
+    {
+      "id": "build",
+      "description": "Build project.",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet build'"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    },
+    {
+      "id": "editor",
+      "description": "",
+      "manualInstructions": [],
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
+      "args": {
+        "files": "0"
+      },
+      "continueOnError": true
     }
   ]
 }
