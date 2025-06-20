@@ -2,14 +2,15 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-#if (SqlDatabase)
-using FrontDesktop.HostedServices;
-#endif
 using FrontDesktop.ViewModels;
 using FrontDesktop.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+#if (SqlDatabase)
+using FrontDesktop.HostedServices;
+#endif
+
 #if (!DatabaseNone)
 using Infraestructure.Database;
 #endif

@@ -1,30 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-  <ItemGroup>
-    <!--#if (SqlDatabase)-->
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*" />
-    <!--#endif-->
-    <!--#if (UsePostgres)-->
-    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*" />
-    <!--#endif-->
-    <!--#if (UseSqlite)-->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="*" />
-    <!--#endif-->
-    <!--#if (UseSqlServer || UseAzureSql)-->
-    <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*" />
-    <!--#endif-->
-    <!--#if (UseMongodb)-->
-    <PackageReference Include="Aspire.MongoDB.Driver" Version="*" />
-    <!--#endif-->
-    <!--#if (UseIdentity)-->
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*" />
-    <!--#endif-->
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*" />
-  </ItemGroup>
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <!--#if (SqlDatabase)-->
+        <PackageReference Include="Microsoft.EntityFrameworkCore"/>
+        <!--#endif-->
+        <!--#if (UsePostgres)-->
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
+        <!--#endif-->
+        <!--#if (UseSqlite)-->
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
+        <!--#endif-->
+        <!--#if (UseSqlServer || UseAzureSql)-->
+        <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer"/>
+        <!--#endif-->
+        <!--#if (UseMongodb)-->
+        <PackageReference Include="Aspire.MongoDB.Driver"/>
+        <!--#endif-->
+        <!--#if (UseIdentity)-->
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"/>
+        <!--#endif-->
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions"/>
+    </ItemGroup>
 </Project>

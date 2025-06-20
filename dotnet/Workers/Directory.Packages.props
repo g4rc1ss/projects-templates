@@ -1,8 +1,10 @@
 <Project>
-    <!-- https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management -->
     <PropertyGroup>
         <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+        <CentralPackageFloatingVersionsEnabled>true</CentralPackageFloatingVersionsEnabled>
     </PropertyGroup>
+
     <ItemGroup>
+        <PackageVersion Include="CSharpier.MsBuild" Version="*"/>
     </ItemGroup>
 </Project>

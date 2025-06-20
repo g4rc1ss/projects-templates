@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="*" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="*" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
     <!--#if (UseRedis || UseGarnet)-->
-    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*" />
+    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" />
     <!--#endif-->
     <!--#if (SqlDatabase)-->
     <PackageReference
       Include="OpenTelemetry.Instrumentation.EntityFrameworkCore"
-      Version="1.11.0-beta.2"
     />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
     <!--#endif-->
     <!--#if (UseGrpc)-->
-    <PackageReference Include="Grpc.AspNetCore" Version="*" />
-    <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="*" />
-    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="*" />
+    <PackageReference Include="Grpc.AspNetCore" />
+    <PackageReference Include="Grpc.AspNetCore.HealthChecks" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" />
     <PackageReference
       Include="OpenTelemetry.Instrumentation.GrpcNetClient"
-      Version="1.11.0-beta.2"
     />
     <!--#endif-->
     <!--#if (UseIdentity)-->
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <!--#endif-->
     <!--#if (UseAzureOpts)-->
-    <PackageReference Include="Azure.Identity" Version="*" />
+    <PackageReference Include="Azure.Identity" />
     <!--#if (UseAzureKeyVault)-->
-    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="*" />
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" />
     <!--#endif-->
     <!--#endif-->
   </ItemGroup>

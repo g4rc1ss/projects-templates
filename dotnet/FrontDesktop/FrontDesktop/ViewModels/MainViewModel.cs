@@ -51,10 +51,7 @@ public partial class MainViewModel(
 #endif
 #if (UseLitedb)
         ILitedbPoc poc = serviceProvider.GetRequiredService<ILitedbPoc>();
-        LiteDbEntity entity = new()
-        {
-            Id = Guid.NewGuid().ToString(),
-        };
+        LiteDbEntity entity = new() { Id = Guid.NewGuid().ToString() };
         await poc.CreateAsync(entity);
         entity.Property = "Campo agregado";
         await poc.UpdateAsync(entity);
