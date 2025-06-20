@@ -7,10 +7,10 @@
     "csharp",
     "Web"
   ],
-  "identity": "Web App",
+  "identity": "Web Native AOT",
   "name": "Asier Web Base",
-  "description": "Crear configuración base de diferentes servicios Web y configuraciones de auth, BBDD, etc.",
-  "shortName": "asier.webapp",
+  "description": "",
+  "shortName": "asier.webapp.aot",
   "sourceName": "Template",
   "language": "C#",
   "preferNameDirectory": true,
@@ -92,13 +92,13 @@
       "displayName": "API",
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": true
+      "defaultValue": false
     },
     "UseGrpc": {
       "displayName": "GRPC",
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": false
+      "defaultValue": true
     },
     // Database Config
     "SqlDatabases": {
@@ -282,7 +282,7 @@
       ]
     },
     {
-      "source": "./",
+      "source": "../WebInitializer",
       "target": "./",
       "exclude": [
         "**/[Bb]in/**",
