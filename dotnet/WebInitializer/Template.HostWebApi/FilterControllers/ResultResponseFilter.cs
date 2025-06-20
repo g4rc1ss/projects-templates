@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 #if (!UseLayerArchitecture)
 using Shared;
 #else
-using Template.Application.Contracts;
+using Template.Application;
 #endif
 
 namespace Template.HostWebApi.FilterControllers;

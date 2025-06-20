@@ -2,18 +2,22 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
-    "architecture"
+    "Architecture",
+    "Template",
+    "csharp",
+    "Web"
   ],
   "identity": "web-host-init-configuration",
   "name": "Asier Web Base",
   "description": "Crear configuración base de diferentes servicios Web y configuraciones de auth, BBDD, etc.",
-  "shortName": "Initialize web",
+  "shortName": "asier.webapp",
   "sourceName": "Template",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
     "language": "C#",
-    "type": "project"
+    "type": "solution",
+    "editorTreatAs": "solution"
   },
   "symbols": {
     "UseLayerArchitecture": {
@@ -298,8 +302,7 @@
         "**/*template.config/**/*",
         "**/*.filelist",
         "**/*.user",
-        "**/*idea",
-        "*.sln"
+        "**/*idea/**/*"
       ],
       "modifiers": [
         {
@@ -323,7 +326,7 @@
         {
           "condition": "(!UseApi)",
           "exclude": [
-            "src/Template.API"
+            "src/Template.API/**/*"
           ],
           "rename": {
           }
@@ -331,15 +334,15 @@
         {
           "condition": "(!UseGrpc)",
           "exclude": [
-            "src/Template.Grpc"
+            "src/Template.Grpc/**/*"
           ],
           "rename": {
           }
         },
         {
-          "condition": "!UseLayerArchitecture",
+          "condition": "(!UseLayerArchitecture)",
           "exclude": [
-            "src/*"
+            "src/**/*"
           ]
         },
         {
@@ -429,6 +432,34 @@
           ]
         }
       ]
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "Template.HostWebApi/Program.cs"
+    }
+  ],
+  "postActions": [
+    {
+      "id": "build",
+      "description": "Build project.",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet build'"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    },
+    {
+      "id": "editor",
+      "description": "",
+      "manualInstructions": [],
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
+      "args": {
+        "files": "0"
+      },
+      "continueOnError": true
     }
   ]
 }

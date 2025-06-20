@@ -20,12 +20,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	#else
 		Directory.Build.props = Directory.Build.props
 	#endif
-	#if (UseCentralPackageManagement)
+	#if (false)
 		.csharpierrc.json = ..\.csharpierrc.json
 	#else
 		.csharpierrc.json = .csharpierrc.json
 	#endif
-	#if (UseCentralPackageManagement)
+	#if (false)
 		.editorconfig = ..\.editorconfig
 	#else
 		.editorconfig = .editorconfig
