@@ -10,8 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore" Version="*"/>
-        <PackageReference Include="Riok.Mapperly" Version="*"/>
+        <PackageReference Include="Grpc.AspNetCore" />
+
 
     </ItemGroup>
 
