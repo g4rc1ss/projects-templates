@@ -5,8 +5,10 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontDesktop", "FrontDesktop\FrontDesktop.csproj", "{EBFA8512-1EA5-4D8C-B4AC-AB5B48A6D568}"
 EndProject
+#if (UseDesktop)
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontDesktop.Desktop", "FrontDesktop.Desktop\FrontDesktop.Desktop.csproj", "{ABC31E74-02FF-46EB-B3B2-4E6AE43B456C}"
 EndProject
+#endif
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3DA99C4E-89E3-4049-9C22-0A7EC60D83D8}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Packages.props = Directory.Packages.props
@@ -30,14 +32,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	#endif
 	EndProjectSection
 EndProject
+#if (!DatabaseNone)
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Database", "Infraestructure.Database\Infraestructure.Database.csproj", "{991B833F-DA0A-45E8-AB6D-9C7F172E6F49}"
 EndProject
+#endif
+#if (!EventBusNone)
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Events", "Infraestructure.Events\Infraestructure.Events.csproj", "{AFF6E440-A609-4A52-B8BC-69822B3EA234}"
 EndProject
+#endif
+#if (!StorageNone)
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Storages", "Infraestructure.Storages\Infraestructure.Storages.csproj", "{D1AA08CF-D54A-4640-9F12-2F5769AD84A9}"
 EndProject
+#endif
+#if (UseIOS)
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontDesktop.iOS", "FrontDesktop.iOS\FrontDesktop.iOS.csproj", "{86BD929A-000A-46E0-8A24-145BFAF43130}"
 EndProject
+#endif
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,26 +58,36 @@ Global
 		{EBFA8512-1EA5-4D8C-B4AC-AB5B48A6D568}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBFA8512-1EA5-4D8C-B4AC-AB5B48A6D568}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBFA8512-1EA5-4D8C-B4AC-AB5B48A6D568}.Release|Any CPU.Build.0 = Release|Any CPU
+#if (UseDesktop)
 		{ABC31E74-02FF-46EB-B3B2-4E6AE43B456C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ABC31E74-02FF-46EB-B3B2-4E6AE43B456C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABC31E74-02FF-46EB-B3B2-4E6AE43B456C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABC31E74-02FF-46EB-B3B2-4E6AE43B456C}.Release|Any CPU.Build.0 = Release|Any CPU
+#endif
+#if (!DatabaseNone)
 		{991B833F-DA0A-45E8-AB6D-9C7F172E6F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{991B833F-DA0A-45E8-AB6D-9C7F172E6F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{991B833F-DA0A-45E8-AB6D-9C7F172E6F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{991B833F-DA0A-45E8-AB6D-9C7F172E6F49}.Release|Any CPU.Build.0 = Release|Any CPU
+#endif
+#if (!EventBusNone)
 		{AFF6E440-A609-4A52-B8BC-69822B3EA234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFF6E440-A609-4A52-B8BC-69822B3EA234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFF6E440-A609-4A52-B8BC-69822B3EA234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFF6E440-A609-4A52-B8BC-69822B3EA234}.Release|Any CPU.Build.0 = Release|Any CPU
+#endif
+#if (!StorageNone)
 		{D1AA08CF-D54A-4640-9F12-2F5769AD84A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1AA08CF-D54A-4640-9F12-2F5769AD84A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1AA08CF-D54A-4640-9F12-2F5769AD84A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1AA08CF-D54A-4640-9F12-2F5769AD84A9}.Release|Any CPU.Build.0 = Release|Any CPU
+#endif
+#if (UseIOS)
 		{86BD929A-000A-46E0-8A24-145BFAF43130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{86BD929A-000A-46E0-8A24-145BFAF43130}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86BD929A-000A-46E0-8A24-145BFAF43130}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86BD929A-000A-46E0-8A24-145BFAF43130}.Release|Any CPU.Build.0 = Release|Any CPU
+#endif
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
