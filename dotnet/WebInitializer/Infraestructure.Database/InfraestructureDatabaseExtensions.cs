@@ -3,9 +3,6 @@
 using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
 #endif
-#if (UseMongodb)
-using Infraestructure.Database.Entities;
-#endif
 #if (SqlDatabase || UseIdentity)
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
