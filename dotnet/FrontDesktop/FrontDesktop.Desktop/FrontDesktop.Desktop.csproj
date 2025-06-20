@@ -19,9 +19,23 @@
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
+
+        <!--#if (SqlDatabase)-->
+        <PackageReference
+                Include="OpenTelemetry.Instrumentation.EntityFrameworkCore"
+                Version="1.11.0-beta.2"
+        />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*" />
+        <!--#endif-->
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\FrontDesktop\FrontDesktop.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
-#if (NoSqlDatabase || SqlDatabase)
+#if (SqlDatabase || NoSqlDatabase)
 using Infraestructure.Database.Repository;
 #endif
 
@@ -40,6 +40,7 @@ public static class InfraestructureDatabaseExtensions
 #endif
 
 #if (UseLitedb)
+        builder.Services.AddTransient<ILitedbPoc, LitedbPoc>();
         string? litedbConnection = builder.Configuration.GetConnectionString("litedb");
         builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(litedbConnection));
 #endif

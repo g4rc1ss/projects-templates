@@ -208,7 +208,8 @@
             "Infraestructure.Database/Entities/UserEntity.cs",
             "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
             "Infraestructure.Database/Repository/SqlUserPoc.cs",
-            "Infraestructure.Database/DatabaseContext.cs"
+            "Infraestructure.Database/DatabaseContext.cs",
+            "FrontDesktop/HostedServices/MigrationsServices.cs"
           ]
         },
         {

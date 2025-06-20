@@ -1,5 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-#if (UseMemoryEvents || SqlDatabase || UseLocalStorage)
+#if (UseLitedb)
+using Infraestructure.Database.Entities;
+using Infraestructure.Database.Repository;
+#endif
+#if (UseMemoryEvents || SqlDatabase || UseLocalStorage || NoSqlDatabase)
 using Microsoft.Extensions.DependencyInjection;
 #endif
 #if SqlDatabase
@@ -17,12 +21,13 @@ using Infraestructure.Storages;
 namespace FrontDesktop.ViewModels;
 
 public partial class MainViewModel(
-#if (UseMemoryEvents || SqlDatabase || UseLocalStorage)
+#if (UseMemoryEvents || SqlDatabase || UseLocalStorage || NoSqlDatabase)
     IServiceProvider serviceProvider
 #endif
-    ) : ViewModelBase
+) : ViewModelBase
 {
-    [ObservableProperty] private string _greeting = "Welcome to Avalonia!";
+    [ObservableProperty]
+    private string _greeting = "Welcome to Avalonia!";
 
     public async Task ExecuteEventsAsync()
     {
@@ -43,6 +48,18 @@ public partial class MainViewModel(
 
         UserEntity? userGet = await userRepository.GetByIdAsync(userCreated.Id);
         Greeting = userGet?.Name ?? "Nombre";
+#endif
+#if (UseLitedb)
+        ILitedbPoc poc = serviceProvider.GetRequiredService<ILitedbPoc>();
+        LiteDbEntity entity = new()
+        {
+            Id = Guid.NewGuid().ToString(),
+        };
+        await poc.CreateAsync(entity);
+        entity.Property = "Campo agregado";
+        await poc.UpdateAsync(entity);
+        LiteDbEntity? pocGet = await poc.GetByIdAsync(entity.Id);
+        Greeting = pocGet?.Property ?? "Nombre";
 #endif
     }
 

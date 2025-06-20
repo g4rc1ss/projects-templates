@@ -2,20 +2,23 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+#if (SqlDatabase)
+using FrontDesktop.HostedServices;
+#endif
 using FrontDesktop.ViewModels;
 using FrontDesktop.Views;
-#if (!SqlDatabase)
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+#if (!DatabaseNone)
 using Infraestructure.Database;
 #endif
-#if (!UseMemoryEvents)
+#if (!EventBusNone)
 using Infraestructure.Events;
 #endif
 #if (!StorageNone)
 using Infraestructure.Storages;
 #endif
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace FrontDesktop;
 
@@ -35,6 +38,11 @@ public class App : Application
         builder.Configuration.AddUserSecrets<App>();
 
         builder.Services.AddTransient<MainViewModel>();
+
+#if (SqlDatabase)
+        builder.Services.AddSingleton<MigrationsServices>();
+        builder.Services.AddHostedService<MigrationsServices>();
+#endif
 
 #if (!DatabaseNone)
         builder.AddDatabaseConfig();

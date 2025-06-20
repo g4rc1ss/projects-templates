@@ -1,4 +1,8 @@
 ﻿using Avalonia;
+#if (SqlDatabase)
+using Infraestructure.Database;
+using Microsoft.Extensions.Hosting;
+#endif
 
 namespace FrontDesktop.Desktop;
 
@@ -14,4 +18,13 @@ sealed class Program
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp() =>
         AppBuilder.Configure<App>().UsePlatformDetect().WithInterFont().LogToTrace();
+
+#if (SqlDatabase)
+    public static IHostApplicationBuilder CreateHostBuilder(string[] args)
+    {
+        HostApplicationBuilder builder = Host.CreateApplicationBuilder();
+        builder.AddDatabaseConfig();
+        return builder;
+    }
+#endif
 }

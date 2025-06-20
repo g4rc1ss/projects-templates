@@ -21,13 +21,6 @@
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="*" />
-        <!--#if (SqlDatabase)-->
-        <PackageReference
-                Include="OpenTelemetry.Instrumentation.EntityFrameworkCore"
-                Version="1.11.0-beta.2"
-        />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*" />
-        <!--#endif-->
     </ItemGroup>
 
     <ItemGroup>
@@ -40,11 +33,5 @@
         <!--#if (!StorageNone)-->
         <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj" />
         <!--#endif-->
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="appsettings.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 </Project>
