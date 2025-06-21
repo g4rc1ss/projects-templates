@@ -437,7 +437,8 @@
       "id": "Clean Directory.Packages.props",
       "description": "Clean Nuget Project.",
       "args": {
-        "executable": "RemoveUnusedDuplicatePackages.ps1"
+        "executable": "pwsh",
+        "args": "-File RemoveUnusedDuplicatePackages.ps1"
       },
       "manualInstructions": [
         {
