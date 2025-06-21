@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json.schemastore.org/template",
+  "$schema": "https://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "Architecture",
@@ -279,7 +279,7 @@
         "*editorconfig",
         "*csharpierrc.json",
         "Directory.Build.props",
-        "RemoveNuget.ps1"
+        "RemoveUnusedDuplicatePackages.ps1"
       ]
     },
     {
@@ -426,6 +426,9 @@
   "primaryOutputs": [
     {
       "path": "Template.HostWebApi/Program.cs"
+    },
+    {
+      "path": "RemoveUnusedDuplicatePackages.ps1"
     }
   ],
   "postActions": [
@@ -434,14 +437,11 @@
       "id": "Clean Directory.Packages.props",
       "description": "Clean Nuget Project.",
       "args": {
-        "executable": "pwsh",
-        "args": "RemoveNuget.ps1",
-        "redirectStandardOutput": true,
-        "redirectStandardError": true
+        "executable": "RemoveUnusedDuplicatePackages.ps1"
       },
       "manualInstructions": [
         {
-          "text": "Run 'pwsh RemoveNuget.ps1'"
+          "text": "Run 'pwsh RemoveUnusedDuplicatePackages.ps1'"
         }
       ],
       "continueOnError": false
