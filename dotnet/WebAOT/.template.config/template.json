@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/template",
+  "$schema": "http://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "Architecture",
@@ -9,7 +9,7 @@
     "AOT"
   ],
   "identity": "Web Native AOT",
-  "name": "Asier Web AOT",
+  "name": "Asier Web Base",
   "description": "Crear configuración base de diferentes servicios Web y configuraciones de auth, BBDD, etc.",
   "shortName": "asier.webapp.aot",
   "sourceName": "Template",
@@ -21,6 +21,10 @@
     "editorTreatAs": "solution"
   },
   "symbols": {
+    "UseNativeAOT": {
+      "type": "computed",
+      "value": "(true)"
+    },
     "UseLayerArchitecture": {
       "displayName": "Use Layer Architecture",
       "type": "parameter",
