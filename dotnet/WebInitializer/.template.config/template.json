@@ -438,7 +438,9 @@
       "description": "Clean Nuget Project.",
       "args": {
         "executable": "pwsh",
-        "args": "-File RemoveUnusedDuplicatePackages.ps1"
+        "args": "-File RemoveUnusedDuplicatePackages.ps1",
+        "redirectStandardOutput": false,
+        "redirectStandardError": false
       },
       "manualInstructions": [
         {

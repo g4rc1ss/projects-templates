@@ -6,7 +6,7 @@ foreach ($pkgNode in $packages) {
     $found = Get-ChildItem -Recurse -Include *.csproj, Directory.Build.props -File | Select-String -Pattern $pkg
 
     if (-not $found) {
-        Write-Output "$pkg not used in any .csproj"
+#        Write-Output "$pkg not used in any .csproj"
         $unusedPackages += $pkgNode.Node.Include
     }
 }
@@ -20,7 +20,7 @@ if ($unusedPackages.Count -eq 0) {
 
 foreach ($unused in $unusedPackages) {
     $node = $doc.SelectSingleNode("//PackageVersion[@Include='$unused']")
-    if ($node -ne $null) {
+    if ($null -ne $node) {
         $null = $node.ParentNode.RemoveChild($node)
         Write-Host "Removed $unused"
     }
