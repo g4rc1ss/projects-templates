@@ -159,7 +159,8 @@
       "include": [
         "*editorconfig",
         "*csharpierrc.json",
-        "Directory.Build.props"
+        "Directory.Build.props",
+        "RemoveUnusedDuplicatePackages.ps1"
       ]
     },
     {

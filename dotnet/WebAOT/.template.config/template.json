@@ -274,7 +274,7 @@
   },
   "sources": [
     {
-      "source": "../WebInitializer",
+      "source": "../",
       "target": "./",
       "include": [
         "*editorconfig",
@@ -284,7 +284,7 @@
       ]
     },
     {
-      "source": "./",
+      "source": "../WebInitializer",
       "target": "./",
       "exclude": [
         "**/[Bb]in/**",
