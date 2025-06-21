@@ -160,6 +160,7 @@
         "*editorconfig",
         "*csharpierrc.json",
         "Directory.Build.props",
+        "Directory.Packages.props",
         "RemoveUnusedDuplicatePackages.ps1"
       ]
     },

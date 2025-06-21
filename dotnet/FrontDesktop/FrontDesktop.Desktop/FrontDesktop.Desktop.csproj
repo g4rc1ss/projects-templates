@@ -13,19 +13,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia.Desktop" Version="*"/>
+        <PackageReference Include="Avalonia.Desktop"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Include="Avalonia.Diagnostics" Version="*">
+        <PackageReference Include="Avalonia.Diagnostics">
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
 
         <!--#if (SqlDatabase)-->
-        <PackageReference
-                Include="OpenTelemetry.Instrumentation.EntityFrameworkCore"
-                Version="1.11.0-beta.2"
-        />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools"/>
         <!--#endif-->
     </ItemGroup>
 

@@ -276,6 +276,7 @@
         "*editorconfig",
         "*csharpierrc.json",
         "Directory.Build.props",
+        "Directory.Packages.props",
         "RemoveUnusedDuplicatePackages.ps1"
       ]
     },
@@ -437,31 +438,29 @@
   ],
   "postActions": [
     {
-      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
       "id": "Clean Directory.Packages.props",
-      "description": "Clean Nuget Project.",
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "description": "Clean Unused Nugets.",
       "args": {
         "executable": "pwsh",
-        "args": "-File RemoveUnusedDuplicatePackages.ps1",
-        "redirectStandardOutput": false,
-        "redirectStandardError": false
+        "args": "-File RemoveUnusedDuplicatePackages.ps1"
       },
       "manualInstructions": [
         {
-          "text": "Run 'pwsh RemoveUnusedDuplicatePackages.ps1'"
+          "text": "Run the following command"
         }
       ],
       "continueOnError": false
     },
     {
-      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
       "id": "build",
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
       "description": "Build project.",
       "args": {
         "executable": "dotnet",
         "args": "build",
-        "redirectStandardOutput": false,
-        "redirectStandardError": false
+        "redirectStandardOutput": true,
+        "redirectStandardError": true
       },
       "manualInstructions": [
         {
@@ -471,8 +470,8 @@
       "continueOnError": true
     },
     {
-      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
       "id": "editor",
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
       "description": "",
       "manualInstructions": [],
       "args": {
