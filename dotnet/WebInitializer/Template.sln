@@ -29,6 +29,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
         #else
             .editorconfig = .editorconfig
         #endif
+        #if (false)
+            RemoveNuget.ps1 = ..\RemoveNuget.ps1
+        #else
+            RemoveNuget.ps1 = RemoveNuget.ps1
+        #endif
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
