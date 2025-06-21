@@ -17,98 +17,98 @@
         <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
         <PackageVersion Include="Swashbuckle.AspNetCore" Version="*"/>
 
-        <PackageVersion Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="*"/>
-        <PackageVersion Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="*"/>
-        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="*"/>
-        <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="*"/>
-        <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="*"/>
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="*"/>
-        <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="*"/>
+        <PackageVersion Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="9.*"/>
+        <PackageVersion Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="9.*"/>
+        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.*"/>
+        <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.*"/>
+        <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.*"/>
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.*"/>
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.*"/>
+        <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.*"/>
 
         <!--#if (UseAzureOpts)-->
-        <PackageVersion Include="Azure.Identity" Version="*"/>
+        <PackageVersion Include="Azure.Identity" Version="1.*"/>
         <!--#if (UseAzureKeyVault)-->
-        <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="*"/>
+        <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.*"/>
         <!--#endif-->
         <!--#endif-->
         <!--#if (UseGrpc)-->
-        <PackageVersion Include="Grpc.AspNetCore" Version="*"/>
-        <PackageVersion Include="Grpc.AspNetCore.HealthChecks" Version="*"/>
-        <PackageVersion Include="Grpc.AspNetCore.Server.Reflection" Version="*"/>
+        <PackageVersion Include="Grpc.AspNetCore" Version="2.*"/>
+        <PackageVersion Include="Grpc.AspNetCore.HealthChecks" Version="2.*"/>
+        <PackageVersion Include="Grpc.AspNetCore.Server.Reflection" Version="2.*"/>
         <PackageVersion
                 Include="OpenTelemetry.Instrumentation.GrpcNetClient"
                 Version="1.12.0-beta.1"
         />
         <!--#endif-->
         <!--#if (UseRedis || UseGarnet)-->
-        <PackageVersion Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*"/>
+        <PackageVersion Include="Aspire.StackExchange.Redis.DistributedCaching" Version="9.*"/>
         <!--#endif-->
         <!--#if (SqlDatabase)-->
-        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="*"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.*"/>
         <PackageVersion
                 Include="OpenTelemetry.Instrumentation.EntityFrameworkCore"
                 Version="1.12.0-beta.1"
         />
-        <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="*"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.*"/>
         <!--#endif-->
         <!--#if (UsePostgres)-->
-        <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
+        <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseSqlite)-->
-        <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="*"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseSqlServer || UseAzureSql)-->
-        <PackageVersion Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*"/>
+        <PackageVersion Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseMongodb)-->
-        <PackageVersion Include="Aspire.MongoDB.Driver" Version="*"/>
+        <PackageVersion Include="Aspire.MongoDB.Driver" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseIdentity)-->
-        <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>
+        <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseAzServiceBus)-->
-        <PackageVersion Include="Aspire.Azure.Messaging.ServiceBus" Version="*"/>
+        <PackageVersion Include="Aspire.Azure.Messaging.ServiceBus" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseRabbitMQ)-->
-        <PackageVersion Include="Aspire.RabbitMQ.Client" Version="*"/>
+        <PackageVersion Include="Aspire.RabbitMQ.Client" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseAzureBlobStorage)-->
-        <PackageVersion Include="Azure.Identity" Version="*"/>
-        <PackageVersion Include="Azure.Storage.Blobs" Version="*"/>
+        <PackageVersion Include="Azure.Identity" Version="1.*"/>
+        <PackageVersion Include="Azure.Storage.Blobs" Version="12.*"/>
         <!--#endif-->
     </ItemGroup>
 
     <ItemGroup Label="Aspire">
-        <PackageVersion Include="Aspire.Hosting.AppHost" Version="*"/>
+        <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.*"/>
         <!--#if (UseRedis)-->
-        <PackageVersion Include="Aspire.Hosting.Redis" Version="*"/>
+        <PackageVersion Include="Aspire.Hosting.Redis" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseGarnet)-->
-        <PackageVersion Include="Aspire.Hosting.Garnet" Version="*"/>
+        <PackageVersion Include="Aspire.Hosting.Garnet" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseAzServiceBus)-->
-        <PackageVersion Include="Aspire.Hosting.Azure.ServiceBus" Version="*"/>
+        <PackageVersion Include="Aspire.Hosting.Azure.ServiceBus" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseRabbitMQ)-->
-        <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="*"/>
+        <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="9.*"/>
         <!--#endif-->
         <!--#if (UsePostgres)-->
-        <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="*"/>
+        <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseSqlServer || UseAzureSql)-->
-        <PackageVersion Include="Aspire.Hosting.SqlServer" Version="*"/>
+        <PackageVersion Include="Aspire.Hosting.SqlServer" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseMongodb)-->
-        <PackageVersion Include="Aspire.Hosting.MongoDB" Version="*"/>
+        <PackageVersion Include="Aspire.Hosting.MongoDB" Version="9.*"/>
         <!--#endif-->
     </ItemGroup>
 
     <ItemGroup Label="Test">
-        <PackageVersion Include="Aspire.Hosting.Testing" Version="*"/>
-        <PackageVersion Include="coverlet.collector" Version="*"/>
-        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="*"/>
-        <PackageVersion Include="xunit" Version="*"/>
-        <PackageVersion Include="xunit.runner.visualstudio" Version="*"/>
+        <PackageVersion Include="Aspire.Hosting.Testing" Version="9.*"/>
+        <PackageVersion Include="coverlet.collector" Version="6.*"/>
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.*"/>
+        <PackageVersion Include="xunit" Version="2.*"/>
+        <PackageVersion Include="xunit.runner.visualstudio" Version="3.*"/>
     </ItemGroup>
 </Project>
