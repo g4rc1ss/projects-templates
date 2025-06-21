@@ -74,7 +74,6 @@
         <PackageVersion Include="Aspire.RabbitMQ.Client" Version="9.*"/>
         <!--#endif-->
         <!--#if (UseAzureBlobStorage)-->
-        <PackageVersion Include="Azure.Identity" Version="1.*"/>
         <PackageVersion Include="Azure.Storage.Blobs" Version="12.*"/>
         <!--#endif-->
     </ItemGroup>
