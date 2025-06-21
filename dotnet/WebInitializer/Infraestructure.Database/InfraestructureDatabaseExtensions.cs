@@ -67,6 +67,10 @@ public static class InfraestructureDatabaseExtensions
         builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
 #endif
 #endif
+#if (UseAzureCosmos)
+        builder.Services.AddScoped<ICosmosdbPoc, CosmosdbPoc>();
+        builder.AddAzureCosmosClient("Templatedb");
+#endif
 
 #if (UseMongodb)
         builder.Services.AddScoped<IMongoPoc, MongoPoc>();

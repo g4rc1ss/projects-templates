@@ -10,14 +10,14 @@
         <!--#if (UsePostgres)-->
         <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
         <!--#endif-->
-        <!--#if (UseSqlite)-->
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
-        <!--#endif-->
         <!--#if (UseSqlServer || UseAzureSql)-->
         <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer"/>
         <!--#endif-->
         <!--#if (UseMongodb)-->
         <PackageReference Include="Aspire.MongoDB.Driver"/>
+        <!--#endif-->
+        <!--#if (UseAzureCosmos)-->
+        <PackageReference Include="Aspire.Microsoft.Azure.Cosmos" />
         <!--#endif-->
         <!--#if (UseIdentity)-->
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"/>

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/template",
+  "$schema": "http://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "Architecture",
@@ -101,7 +101,7 @@
       "defaultValue": false
     },
     // Database Config
-    "SqlDatabases": {
+    "Databases": {
       "type": "parameter",
       "datatype": "choice",
       "choices": [
@@ -120,52 +120,49 @@
         {
           "choice": "sqlserver",
           "displayName": "SQL Server"
+        },
+        {
+          "choice": "mongodb",
+          "displayName": "Mongo Database"
+        },
+        {
+          "choice": "cosmosdb",
+          "displayName": "Azure Cosmos DB"
         }
       ],
       "defaultValue": "postgresql"
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql)"
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseMariaDB)"
     },
     "UsePostgres": {
       "type": "computed",
-      "value": "(SqlDatabases == 'postgresql')"
+      "value": "(Databases == 'postgresql' || ((DatabaseNone || NoSqlDatabase) && UseIdentity))"
     },
     "UseSqlServer": {
       "type": "computed",
-      "value": "(SqlDatabases == 'sqlserver')"
+      "value": "(Databases == 'sqlserver')"
     },
     "UseAzureSql": {
       "type": "computed",
-      "value": "(SqlDatabases == 'azuresql')"
+      "value": "(Databases == 'azuresql')"
     },
-    "NoSqlDatabases": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "none",
-          "displayName": "None"
-        },
-        {
-          "choice": "mongodb",
-          "displayName": "Mongo Database"
-        }
-      ],
-      "defaultValue": "none"
+    "UseAzureCosmos": {
+      "type": "computed",
+      "value": "(Databases == 'cosmosdb')"
     },
     "NoSqlDatabase": {
       "type": "computed",
-      "value": "(UseMongodb)"
+      "value": "(UseMongodb || UseAzureCosmos)"
     },
     "UseMongodb": {
       "type": "computed",
-      "value": "(NoSqlDatabases == 'mongodb')"
+      "value": "(Databases == 'mongodb')"
     },
     "DatabaseNone": {
       "type": "computed",
-      "value": "(!SqlDatabase && !NoSqlDatabase)"
+      "value": "(Databases == 'none')"
     },
     // Auth Config
     "Authentication": {
@@ -408,7 +405,7 @@
           ]
         },
         {
-          "condition": "!UseMongodb",
+          "condition": "(!UseMongodb)",
           "exclude": [
             "Infraestructure.Database/Repository/MongoPoc.cs",
             "Infraestructure.Database/Entities/MongoDbEntity.cs"
@@ -418,6 +415,13 @@
           "condition": "DatabaseNone && (!UseIdentity)",
           "exclude": [
             "**/Infraestructure.Database/**/*"
+          ]
+        },
+        {
+          "condition": "(!UseAzureCosmos)",
+          "exclude": [
+            "Infraestructure.Database/Repository/CosmosdbPoc.cs",
+            "Infraestructure.Database/Entities/CosmosDbEntity.cs"
           ]
         }
       ]
