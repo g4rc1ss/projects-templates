@@ -10,12 +10,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
-        <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="*"/>
-        <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="*"/>
-        <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*"/>
-        <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
-        <PackageVersion Include="Swashbuckle.AspNetCore" Version="*"/>
+        <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.*"/>
+        <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.*"/>
+        <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.*"/>
+        <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.*"/>
+        <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.*"/>
+        <PackageVersion Include="Swashbuckle.AspNetCore" Version="9.*"/>
 
         <PackageVersion Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="9.*"/>
         <PackageVersion Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="9.*"/>
