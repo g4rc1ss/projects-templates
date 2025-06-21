@@ -5,7 +5,7 @@
         <CentralPackageFloatingVersionsEnabled>true</CentralPackageFloatingVersionsEnabled>
     </PropertyGroup>
 
-    <ItemGroup>
+    <ItemGroup Label="Build.Props">
         <PackageVersion Include="CSharpier.MsBuild" Version="*"/>
     </ItemGroup>
 
