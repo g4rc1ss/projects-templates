@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
-#if (SqlDatabase || NoSqlDatabase)
+#if (SqlDatabase || UseIdentity || NoSqlDatabase)
 using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 #if (UseLitedb)
 using LiteDB;
 #endif
-#if (SqlDatabase)
+#if (SqlDatabase || UseIdentity)
 using Infraestructure.Database.HostedServices;
 using Microsoft.EntityFrameworkCore;
 #endif
@@ -18,16 +18,25 @@ public static class InfraestructureDatabaseExtensions
 {
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
-#if (SqlDatabase)
+#if (SqlDatabase || UseIdentity)
         builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
-
+#if (UseIdentity)
+        string? connectionString = builder.Configuration.GetConnectionString(
+            nameof(IdentityDatabaseContext)
+        );
+#else
         string? connectionString = builder.Configuration.GetConnectionString(
             nameof(DatabaseContext)
         );
+#endif
         ArgumentNullException.ThrowIfNull(connectionString);
 
+#if (UseIdentity)
+        builder.Services.AddDbContextPool<IdentityDatabaseContext>(dbContextBuilder =>
+#else
         builder.Services.AddDbContextPool<DatabaseContext>(dbContextBuilder =>
+#endif
         {
 #if (UsePostgres)
             dbContextBuilder.UseNpgsql(connectionString);
@@ -40,7 +49,11 @@ public static class InfraestructureDatabaseExtensions
 #endif
         });
 
+#if (UseIdentity)
+        builder.Services.AddDbContextFactory<IdentityDatabaseContext>(dbContextBuilder =>
+#else
         builder.Services.AddDbContextFactory<DatabaseContext>(dbContextBuilder =>
+#endif
         {
 #if (UsePostgres)
             dbContextBuilder.UseNpgsql(connectionString);
@@ -53,9 +66,12 @@ public static class InfraestructureDatabaseExtensions
 #endif
         });
 
+#if (UseIdentity)
+        builder.Services.AddScoped<IIdentityUserRepository, IdentityUserPoc>();
+#else
         builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
 #endif
-
+#endif
 #if (UseAzureCosmos)
         builder.Services.AddScoped<ICosmosdbPoc, CosmosdbPoc>();
         builder.AddAzureCosmosClient("Templatedb");

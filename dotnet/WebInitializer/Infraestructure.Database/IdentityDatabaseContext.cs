@@ -1,9 +1,9 @@
-using Infraestructure.Auth.Entities;
+using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infraestructure.Auth;
+namespace Infraestructure.Database;
 
 public class IdentityDatabaseContext(DbContextOptions<IdentityDatabaseContext> options)
     : IdentityDbContext<IdentityUserEntity, IdentityRoleEntity, int>(options)
