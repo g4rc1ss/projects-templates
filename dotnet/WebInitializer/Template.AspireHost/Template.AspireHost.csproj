@@ -9,27 +9,27 @@
     <UserSecretsId>652fcc35-4045-4fb9-99a8-a5f9df9e979d</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="*"/>
     <!--#if (UseRedis)-->
-    <PackageReference Include="Aspire.Hosting.Redis" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="*"/>
     <!--#endif-->
     <!--#if (UseGarnet)-->
-    <PackageReference Include="Aspire.Hosting.Garnet" />
+    <PackageReference Include="Aspire.Hosting.Garnet" Version="*"/>
     <!--#endif-->
     <!--#if (UseAzServiceBus)-->
-    <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" />
+    <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="*"/>
     <!--#endif-->
     <!--#if (UseRabbitMQ)-->
-    <PackageReference Include="Aspire.Hosting.RabbitMQ" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="*"/>
     <!--#endif-->
     <!--#if (UsePostgres)-->
-    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*"/>
     <!--#endif-->
     <!--#if (UseSqlServer || UseAzureSql)-->
-    <PackageReference Include="Aspire.Hosting.SqlServer" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="*"/>
     <!--#endif-->
     <!--#if (UseMongodb)-->
-    <PackageReference Include="Aspire.Hosting.MongoDB" />
+    <PackageReference Include="Aspire.Hosting.MongoDB" Version="*"/>
     <!--#endif-->
   </ItemGroup>
   <ItemGroup>

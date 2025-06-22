@@ -4,14 +4,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*"/>
     <!--#if (UseAzServiceBus)-->
-    <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" />
+    <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" Version="*"/>
     <!--#endif-->
     <!--#if (UseRabbitMQ)-->
-    <PackageReference Include="Aspire.RabbitMQ.Client" />
+    <PackageReference Include="Aspire.RabbitMQ.Client" Version="*"/>
     <!--#endif-->
   </ItemGroup>
 </Project>
