@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json.schemastore.org/template",
+  "$schema": "https://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "architecture",
@@ -46,6 +46,12 @@
       "value": "(!UseLocalStorage)"
     },
     // Desktop
+    "UseCli": {
+      "displayName": "Console App",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false
+    },
     "UseDesktop": {
       "displayName": "Desktop",
       "type": "parameter",
@@ -63,6 +69,10 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": false
+    },
+    "UseGui": {
+      "type": "computed",
+      "value": "(UseIOS || UseDesktop || UseAndroid)"
     },
     // Database Config
     "Databases": {
@@ -246,6 +256,18 @@
           "condition": "!UseDesktop",
           "exclude": [
             "**/FrontDesktop.Desktop/**/*"
+          ]
+        },
+        {
+          "condition": "(!UseGui)",
+          "exclude": [
+            "**/FrontDesktop/**/*"
+          ]
+        },
+        {
+          "condition": "!UseCli",
+          "exclude": [
+            "**/FrontDesktop.Cli/**/*"
           ]
         }
       ]

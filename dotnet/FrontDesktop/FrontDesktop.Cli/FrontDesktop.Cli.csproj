@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PublishAot>true</PublishAot>
+        <InvariantGlobalization>true</InvariantGlobalization>
+    </PropertyGroup>
+
+    <Target Name="CleanNugetPackages" BeforeTargets="Build">
+        <Exec Command="pwsh -File ../RemoveUnusedDuplicatePackages.ps1" ContinueOnError="true"/>
+    </Target>
+
+    <ItemGroup>
+        <!--#if (!DatabaseNone || (UseIdentity))-->
+        <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj"/>
+        <!--#endif-->
+        <!--#if (!EventBusNone)-->
+        <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj"/>
+        <!--#endif-->
+        <!--#if (!StorageNone)-->
+        <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj"/>
+        <!--#endif-->
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.CommandLine" />
+    </ItemGroup>
+</Project>
