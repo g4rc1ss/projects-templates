@@ -7,19 +7,6 @@ using FrontDesktop.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-#if (SqlDatabase)
-using FrontDesktop.HostedServices;
-#endif
-
-#if (!DatabaseNone)
-using Infraestructure.Database;
-#endif
-#if (!EventBusNone)
-using Infraestructure.Events;
-#endif
-#if (!StorageNone)
-using Infraestructure.Storages;
-#endif
 
 namespace FrontDesktop;
 
@@ -39,21 +26,6 @@ public class App : Application
         builder.Configuration.AddUserSecrets<App>();
 
         builder.Services.AddTransient<MainViewModel>();
-
-#if (SqlDatabase)
-        builder.Services.AddSingleton<MigrationsServices>();
-        builder.Services.AddHostedService<MigrationsServices>();
-#endif
-
-#if (!DatabaseNone)
-        builder.AddDatabaseConfig();
-#endif
-#if (!EventBusNone)
-        builder.AddEventsServices();
-#endif
-#if (!StorageNone)
-        builder.AddStorages();
-#endif
 
         IHost app = builder.Build();
         MainViewModel mainViewModel = app.Services.GetRequiredService<MainViewModel>();

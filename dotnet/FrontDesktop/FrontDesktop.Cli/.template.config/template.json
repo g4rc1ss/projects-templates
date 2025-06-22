@@ -20,37 +20,10 @@
     "editorTreatAs": "solution"
   },
   "symbols": {
-    // Storage Config
-    "Storage": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "displayName": "None",
-          "choice": "none"
-        },
-        {
-          "displayName": "Local System Storage",
-          "choice": "LocalSystemStorage"
-        }
-      ],
-      "defaultValue": "none",
-      "displayName": "File Storages"
-    },
-    "UseLocalStorage": {
-      "type": "computed",
-      "value": "(Storage == 'LocalSystemStorage')"
-    },
-    "StorageNone": {
-      "type": "computed",
-      "value": "(!UseLocalStorage)"
-    },
     // Desktop
     "UseCli": {
-      "displayName": "Console App",
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": true
+      "type": "computed",
+      "value": "true"
     },
     "UseDesktop": {
       "type": "computed",
@@ -67,46 +40,6 @@
     "UseGui": {
       "type": "computed",
       "value": "(UseIOS || UseDesktop || UseAndroid)"
-    },
-    // Database Config
-    "Databases": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "none",
-          "displayName": "None"
-        },
-        {
-          "choice": "sqlite",
-          "displayName": "SQLite"
-        },
-        {
-          "choice": "litedb",
-          "displayName": "Lite DB"
-        }
-      ],
-      "defaultValue": "sqlite"
-    },
-    "SqlDatabase": {
-      "type": "computed",
-      "value": "(UseSqlite)"
-    },
-    "UseSqlite": {
-      "type": "computed",
-      "value": "(Databases == 'sqlite')"
-    },
-    "NoSqlDatabase": {
-      "type": "computed",
-      "value": "(UseLitedb)"
-    },
-    "UseLitedb": {
-      "type": "computed",
-      "value": "(Databases == 'litedb')"
-    },
-    "DatabaseNone": {
-      "type": "computed",
-      "value": "(!SqlDatabase && !NoSqlDatabase)"
     },
     // Cache Config
     "Cache": {
@@ -129,31 +62,6 @@
     "UseMemoryCache": {
       "type": "computed",
       "value": "(Cache == 'memorycache')"
-    },
-    // EventBus Config
-    "EventBus": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "none",
-          "displayName": "None"
-        },
-        {
-          "choice": "memoryevents",
-          "displayName": "In Memory"
-        }
-      ],
-      "defaultValue": "none",
-      "displayName": "Events"
-    },
-    "UseMemoryEvents": {
-      "type": "computed",
-      "value": "(EventBus == 'memoryevents')"
-    },
-    "EventBusNone": {
-      "type": "computed",
-      "value": "(!UseMemoryEvents)"
     }
   },
   "sources": [
@@ -181,59 +89,6 @@
         "FrontDesktop.Cli/*template.config/**/*",
       ],
       "modifiers": [
-        // Storages
-        {
-          "condition": "(!UseLocalStorage)",
-          "exclude": [
-            "Infraestructure.Storages/LocalStorage.cs"
-          ]
-        },
-        {
-          "condition": "(StorageNone)",
-          "exclude": [
-            "Infraestructure.Storages/*"
-          ]
-        },
-        // Events
-        {
-          "condition": "EventBusNone",
-          "exclude": [
-            "**/Infraestructure.Events/**/*"
-          ]
-        },
-        {
-          "condition": "!UseMemoryEvents",
-          "exclude": [
-            "Infraestructure.Events/Handlers/*",
-            "Infraestructure.Events/IEventConsumer.cs",
-            "Infraestructure.Events/ConsumerService.cs",
-            "Infraestructure.Events/Publisher/MemoryEventNotificator.cs"
-          ]
-        },
-        // Database
-        {
-          "condition": "(!SqlDatabase)",
-          "exclude": [
-            "Infraestructure.Database/Entities/UserEntity.cs",
-            "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
-            "Infraestructure.Database/Repository/SqlUserPoc.cs",
-            "Infraestructure.Database/DatabaseContext.cs",
-            "FrontDesktop.Cli/HostedServices/MigrationsServices.cs"
-          ]
-        },
-        {
-          "condition": "!UseLitedb",
-          "exclude": [
-            "Infraestructure.Database/Repository/LitedbPoc.cs",
-            "Infraestructure.Database/Entities/LiteDbEntity.cs"
-          ]
-        },
-        {
-          "condition": "DatabaseNone",
-          "exclude": [
-            "**/Infraestructure.Database/**/*"
-          ]
-        },
         // Avalonia
         {
           "condition": "!UseAndroid",

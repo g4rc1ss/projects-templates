@@ -25,16 +25,4 @@
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="Microsoft.Extensions.Hosting"/>
     </ItemGroup>
-
-    <ItemGroup>
-        <!--#if (!DatabaseNone || (UseIdentity))-->
-        <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj"/>
-        <!--#endif-->
-        <!--#if (!EventBusNone)-->
-        <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj"/>
-        <!--#endif-->
-        <!--#if (!StorageNone)-->
-        <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj"/>
-        <!--#endif-->
-    </ItemGroup>
 </Project>
