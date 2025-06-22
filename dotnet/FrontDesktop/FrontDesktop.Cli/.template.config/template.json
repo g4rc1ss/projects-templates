@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/template",
+  "$schema": "http://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "architecture",
@@ -7,10 +7,10 @@
     "csharp",
     "desktop"
   ],
-  "identity": "Desktop GUI",
+  "identity": "Desktop CLI",
   "name": "Asier Desktop Template",
   "description": "Template para aplicaciones Desktop",
-  "shortName": "asier.desktop.gui",
+  "shortName": "asier.desktop.cli",
   "sourceName": "FrontDesktop",
   "language": "C#",
   "preferNameDirectory": true,
@@ -47,26 +47,22 @@
     },
     // Desktop
     "UseCli": {
-      "type": "computed",
-      "value": "false"
-    },
-    "UseDesktop": {
-      "displayName": "Desktop",
+      "displayName": "Console App",
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": true
     },
+    "UseDesktop": {
+      "type": "computed",
+      "value": "false"
+    },
     "UseIOS": {
-      "displayName": "iOS",
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": false
+      "type": "computed",
+      "value": "false"
     },
     "UseAndroid": {
-      "displayName": "Android",
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": false
+      "type": "computed",
+      "value": "false"
     },
     "UseGui": {
       "type": "computed",
@@ -162,7 +158,7 @@
   },
   "sources": [
     {
-      "source": "../",
+      "source": "../../",
       "target": "./",
       "include": [
         "*editorconfig",
@@ -173,7 +169,7 @@
       ]
     },
     {
-      "source": "./",
+      "source": "../",
       "target": "./",
       "exclude": [
         "**/[Bb]in/**",
@@ -181,7 +177,8 @@
         "**/*template.config/**/*",
         "**/*.filelist",
         "**/*.user",
-        "**/*idea/**/*"
+        "**/*idea/**/*",
+        "FrontDesktop.Cli/*template.config/**/*",
       ],
       "modifiers": [
         // Storages
@@ -273,13 +270,10 @@
   ],
   "primaryOutputs": [
     {
-      "path": "FrontDesktop/FrontDesktop.csproj"
+      "path": "FrontDesktop.Cli/FrontDesktop.Cli.csproj"
     },
     {
-      "path": "FrontDesktop/App.axaml.cs"
-    },
-    {
-      "path": "FrontDesktop/App.axaml"
+      "path": "FrontDesktop.Cli/Program.cs"
     }
   ],
   "postActions": [

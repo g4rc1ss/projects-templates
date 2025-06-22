@@ -6,8 +6,7 @@ $unusedPackages = @()
 
 foreach ($pkgNode in $packages)
 {
-    $pkg = $pkgNode.Node.Include
-    $found = Get-ChildItem -Recurse -Include *.csproj, Directory.Build.props -File | Select-String -Pattern $pkg
+    $found = Get-ChildItem -Recurse -Include *.csproj, Directory.Build.props -File | Select-String -Pattern $pkgNode.Node.Include
 
     if (-not $found)
     {
