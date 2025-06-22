@@ -8,13 +8,9 @@
         <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
 
-    <Target Name="CleanNugetPackages" BeforeTargets="Build">
-        <Exec Command="pwsh -File ../RemoveUnusedDuplicatePackages.ps1" ContinueOnError="true"/>
-    </Target>
-
     <ItemGroup>
-        <PackageReference Include="System.CommandLine"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="System.CommandLine" Version="2.0.0-beta5.25306.1"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="*"/>
     </ItemGroup>
 
     <ItemGroup>

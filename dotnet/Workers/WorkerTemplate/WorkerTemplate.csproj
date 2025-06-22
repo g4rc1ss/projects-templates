@@ -5,33 +5,27 @@
     <UserSecretsId>dotnet-WorkerTemplate-edf7b112-e947-442d-a354-4398d05dafad</UserSecretsId>
   </PropertyGroup>
 
-  <Target Name="CleanNugetPackages" BeforeTargets="Build">
-    <Exec Command="pwsh -File ../RemoveUnusedDuplicatePackages.ps1" ContinueOnError="true"/>
-  </Target>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="*"/>
     <!--#if (UseAzServiceBus)-->
-    <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" />
+    <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" Version="*"/>
     <!--#endif-->
     <!--#if (UseRedis)-->
-    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" />
+    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*"/>
     <!--#endif-->
     <!--#if (UseRabbitMQ)-->
-    <PackageReference Include="Aspire.RabbitMQ.Client" />
+    <PackageReference Include="Aspire.RabbitMQ.Client" Version="*"/>
     <!--#endif-->
     <!--#if (SqlDatabase)-->
-    <PackageReference
-      Include="OpenTelemetry.Instrumentation.EntityFrameworkCore"
-    />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.1"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
     <!--#endif-->
     <!--#if (UsePostgres)-->
-    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
     <!--#endif-->
     <!--#if (UseMongodb)-->
-    <PackageReference Include="Aspire.MongoDB.Driver" />
+    <PackageReference Include="Aspire.MongoDB.Driver" Version="*"/>
     <!--#endif-->
   </ItemGroup>
   <ItemGroup>

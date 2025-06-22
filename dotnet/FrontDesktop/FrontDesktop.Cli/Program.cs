@@ -11,7 +11,9 @@ ParseResult parse = builder.CompileCommands(args);
 
 IHost app = builder.Build();
 
-IEnumerable<IHostedService> hostedServices = app.Services.GetRequiredService<IEnumerable<IHostedService>>();
+IEnumerable<IHostedService> hostedServices = app.Services.GetRequiredService<
+    IEnumerable<IHostedService>
+>();
 foreach (IHostedService hostedService in hostedServices)
 {
     await hostedService.StartAsync(CancellationToken.None);
