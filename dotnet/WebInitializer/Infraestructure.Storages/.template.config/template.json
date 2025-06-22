@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "Infraestructure",
+    "Template",
+    "C#"
+  ],
+  "identity": "Storage",
+  "name": "Asier Infraestructure",
+  "description": "Crear Infraestructura",
+  "shortName": "asier.infra.storage",
+  "sourceName": "Template",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "Storage": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "displayName": "Az Blob Storage",
+          "choice": "AzureBlobStorage"
+        },
+        {
+          "displayName": "Local System Storage",
+          "choice": "LocalSystemStorage"
+        }
+      ],
+      "defaultValue": "LocalSystemStorage",
+      "displayName": "File Storages"
+    },
+    "UseAzureBlobStorage": {
+      "type": "computed",
+      "value": "(Storage == 'AzureBlobStorage')"
+    },
+    "UseLocalStorage": {
+      "type": "computed",
+      "value": "(Storage == 'LocalSystemStorage')"
+    },
+    "StorageNone": {
+      "type": "computed",
+      "value": "(!UseAzureBlobStorage && !UseLocalStorage)"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!UseLocalStorage)",
+          "exclude": [
+            "LocalStorage.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureBlobStorage)",
+          "exclude": [
+            "AzureStorage/AzureBlobStorage.cs",
+            "AzureStorage/AzureBlobStorageOptions.cs"
+          ]
+        }
+      ]
+    }
+  ]
+}

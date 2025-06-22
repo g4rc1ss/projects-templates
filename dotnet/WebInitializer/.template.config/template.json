@@ -122,8 +122,16 @@
           "displayName": "SQL Server"
         },
         {
+          "choice": "sqlite",
+          "displayName": "SQLite"
+        },
+        {
           "choice": "mongodb",
           "displayName": "Mongo Database"
+        },
+        {
+          "choice": "litedb",
+          "displayName": "LiteDB"
         },
         {
           "choice": "cosmosdb",
@@ -152,6 +160,10 @@
       "type": "computed",
       "value": "(Databases == 'cosmosdb')"
     },
+    "UseSqlite": {
+      "type": "computed",
+      "value": "(Databases == 'sqlite')"
+    },
     "NoSqlDatabase": {
       "type": "computed",
       "value": "(UseMongodb || UseAzureCosmos)"
@@ -159,6 +171,10 @@
     "UseMongodb": {
       "type": "computed",
       "value": "(Databases == 'mongodb')"
+    },
+    "UseLitedb": {
+      "type": "computed",
+      "value": "(Databases == 'litedb')"
     },
     "DatabaseNone": {
       "type": "computed",

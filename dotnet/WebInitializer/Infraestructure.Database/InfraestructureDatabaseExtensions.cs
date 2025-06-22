@@ -2,9 +2,14 @@
 #if (SqlDatabase || UseIdentity || NoSqlDatabase)
 using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+#endif
+
+#if (UseLitedb)
+using LiteDB;
 #endif
 #if (SqlDatabase || UseIdentity)
-using Microsoft.Extensions.Configuration;
+using Infraestructure.Database.HostedServices;
 using Microsoft.EntityFrameworkCore;
 #endif
 
@@ -15,6 +20,7 @@ public static class InfraestructureDatabaseExtensions
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
 #if (SqlDatabase || UseIdentity)
+        builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
 #if (UseIdentity)
         string? connectionString = builder.Configuration.GetConnectionString(
@@ -32,7 +38,6 @@ public static class InfraestructureDatabaseExtensions
 #else
         builder.Services.AddDbContextPool<DatabaseContext>(dbContextBuilder =>
 #endif
-
         {
 #if (UsePostgres)
             dbContextBuilder.UseNpgsql(connectionString);
@@ -71,6 +76,12 @@ public static class InfraestructureDatabaseExtensions
 #if (UseAzureCosmos)
         builder.Services.AddScoped<ICosmosdbPoc, CosmosdbPoc>();
         builder.AddAzureCosmosClient("Templatedb");
+#endif
+
+#if (UseLitedb)
+        builder.Services.AddTransient<ILitedbPoc, LitedbPoc>();
+        string? litedbConnection = builder.Configuration.GetConnectionString("litedb");
+        builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(litedbConnection));
 #endif
 
 #if (UseMongodb)

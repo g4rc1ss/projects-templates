@@ -1,0 +1,188 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "Infraestructure",
+    "Template",
+    "C#"
+  ],
+  "identity": "Database",
+  "name": "Asier Infraestructure",
+  "description": "Crear Infraestructura",
+  "shortName": "asier.infra.db",
+  "sourceName": "Template",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    // Database Config
+    "Databases": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "displayName": "None"
+        },
+        {
+          "choice": "postgresql",
+          "displayName": "PostgreSQL"
+        },
+        {
+          "choice": "azuresql",
+          "displayName": "Azure SQL"
+        },
+        {
+          "choice": "sqlserver",
+          "displayName": "SQL Server"
+        },
+        {
+          "choice": "sqlite",
+          "displayName": "SQLite"
+        },
+        {
+          "choice": "mongodb",
+          "displayName": "Mongo Database"
+        },
+        {
+          "choice": "litedb",
+          "displayName": "LiteDB"
+        },
+        {
+          "choice": "cosmosdb",
+          "displayName": "Azure Cosmos DB"
+        }
+      ],
+      "defaultValue": "postgresql"
+    },
+    "SqlDatabase": {
+      "type": "computed",
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseMariaDB)"
+    },
+    "UsePostgres": {
+      "type": "computed",
+      "value": "(Databases == 'postgresql' || ((DatabaseNone || NoSqlDatabase) && UseIdentity))"
+    },
+    "UseSqlServer": {
+      "type": "computed",
+      "value": "(Databases == 'sqlserver')"
+    },
+    "UseAzureSql": {
+      "type": "computed",
+      "value": "(Databases == 'azuresql')"
+    },
+    "UseAzureCosmos": {
+      "type": "computed",
+      "value": "(Databases == 'cosmosdb')"
+    },
+    "UseSqlite": {
+      "type": "computed",
+      "value": "(Databases == 'sqlite')"
+    },
+    "NoSqlDatabase": {
+      "type": "computed",
+      "value": "(UseMongodb || UseAzureCosmos)"
+    },
+    "UseMongodb": {
+      "type": "computed",
+      "value": "(Databases == 'mongodb')"
+    },
+    "UseLitedb": {
+      "type": "computed",
+      "value": "(Databases == 'litedb')"
+    },
+    "DatabaseNone": {
+      "type": "computed",
+      "value": "(Databases == 'none')"
+    },
+    // Auth Config
+    "Authentication": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "identity",
+          "displayName": "Microsoft Identity"
+        }
+      ],
+      "defaultValue": "none",
+      "description": "Tipo de auth para usar"
+    },
+    "UseIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'identity')"
+    },
+    "AuthNone": {
+      "type": "computed",
+      "value": "(Authentication == 'none')"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!SqlDatabase && !UseIdentity)",
+          "exclude": [
+            "HostedServices/MigrationHostedService.cs"
+          ]
+        },
+        {
+          "condition": "(!UseIdentity)",
+          "exclude": [
+            "Entities/IdentityRoleEntity.cs",
+            "Entities/IdentityUserEntity.cs",
+            "Repository/IdentityUserPoc.cs",
+            "IdentityDatabaseContext.cs"
+          ]
+        },
+        {
+          "condition": "(!SqlDatabase || UseIdentity)",
+          "exclude": [
+            "Entities/UserEntity.cs",
+            "EntityConfiguration/UserEntityConfiguration.cs",
+            "Repository/SqlUserPoc.cs",
+            "DatabaseContext.cs"
+          ]
+        },
+        {
+          "condition": "(!UseMongodb)",
+          "exclude": [
+            "Repository/MongoPoc.cs",
+            "Entities/MongoDbEntity.cs"
+          ]
+        },
+        {
+          "condition": "(!UseLitedb)",
+          "exclude": [
+            "Repository/LitedbPoc.cs",
+            "Entities/LiteDbEntity.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureCosmos)",
+          "exclude": [
+            "Repository/CosmosdbPoc.cs",
+            "Entities/CosmosDbEntity.cs"
+          ]
+        }
+      ]
+    }
+  ]
+}

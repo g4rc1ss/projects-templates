@@ -13,8 +13,14 @@
         <!--#if (UseSqlServer || UseAzureSql)-->
         <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer"/>
         <!--#endif-->
+        <!--#if (UseSqlite)-->
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
+        <!--#endif-->
         <!--#if (UseMongodb)-->
         <PackageReference Include="Aspire.MongoDB.Driver"/>
+        <!--#endif-->
+        <!--#if (UseLitedb)-->
+        <PackageReference Include="LiteDB"/>
         <!--#endif-->
         <!--#if (UseAzureCosmos)-->
         <PackageReference Include="Aspire.Microsoft.Azure.Cosmos" />

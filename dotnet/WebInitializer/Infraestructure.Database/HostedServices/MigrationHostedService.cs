@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Infraestructure.Database;
+namespace Infraestructure.Database.HostedServices;
 
 public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedService
 {

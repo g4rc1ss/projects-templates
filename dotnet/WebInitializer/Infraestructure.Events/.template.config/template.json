@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "Infraestructure",
+    "Template",
+    "C#"
+  ],
+  "identity": "Events",
+  "name": "Asier Infraestructure",
+  "description": "Crear Infraestructura",
+  "shortName": "asier.infra.events",
+  "sourceName": "Template",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "EventBus": {
+      "type": "parameter",
+      "datatype": "choice",
+      "allowMultipleValues": true,
+      "choices": [
+        {
+          "choice": "memoryevents",
+          "displayName": "In Memory"
+        },
+        {
+          "choice": "azureservicebus",
+          "displayName": "Azure Service Bus"
+        },
+        {
+          "choice": "rabbit",
+          "displayName": "Rabbit MQ"
+        }
+      ],
+      "defaultValue": "memoryevents",
+      "displayName": "Events"
+    },
+    "UseMemoryEvents": {
+      "type": "computed",
+      "value": "(EventBus == 'memoryevents')"
+    },
+    "UseAzServiceBus": {
+      "type": "computed",
+      "value": "(EventBus == 'azureservicebus')"
+    },
+    "UseRabbitMQ": {
+      "type": "computed",
+      "value": "(EventBus == 'rabbit')"
+    },
+    "EventBusNone": {
+      "type": "computed",
+      "value": "(!UseMemoryEvents && !UseAzServiceBus && !UseRabbitMQ)"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "!UseMemoryEvents",
+          "exclude": [
+            "Handlers/*",
+            "IEventConsumer.cs",
+            "ConsumerService.cs",
+            "Publisher/MemoryEventNotificator.cs"
+          ]
+        },
+        {
+          "condition": "!UseAzServiceBus",
+          "exclude": [
+            "Publisher/AzureEventNotificator.cs"
+          ]
+        },
+        {
+          "condition": "!UseRabbitMQ",
+          "exclude": [
+            "Publisher/RabbitEventNotificator.cs"
+          ]
+        }
+      ]
+    }
+  ]
+}
