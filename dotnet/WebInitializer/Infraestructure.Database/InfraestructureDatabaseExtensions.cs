@@ -4,7 +4,6 @@ using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 #endif
-
 #if (UseLitedb)
 using LiteDB;
 #endif

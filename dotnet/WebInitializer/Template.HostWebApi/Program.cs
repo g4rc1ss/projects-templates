@@ -16,10 +16,6 @@ using Template.HostWebApi.FilterControllers;
 using Template.HostWebApi.OpenAPI;
 #endif
 
-#if (SqlDatabase)
-using Template.HostWebApi.HostedServices;
-#endif
-
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options => options.Limits.MaxRequestBodySize = 5 * 1024 * 1024);

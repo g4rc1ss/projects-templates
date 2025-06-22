@@ -142,7 +142,7 @@
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseMariaDB)"
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseSqlite)"
     },
     "UsePostgres": {
       "type": "computed",
@@ -166,7 +166,7 @@
     },
     "NoSqlDatabase": {
       "type": "computed",
-      "value": "(UseMongodb || UseAzureCosmos)"
+      "value": "(UseMongodb || UseAzureCosmos || UseLitedb)"
     },
     "UseMongodb": {
       "type": "computed",
