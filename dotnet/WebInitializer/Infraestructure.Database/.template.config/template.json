@@ -60,7 +60,7 @@
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseMariaDB)"
+      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseSqlite)"
     },
     "UsePostgres": {
       "type": "computed",
@@ -84,7 +84,7 @@
     },
     "NoSqlDatabase": {
       "type": "computed",
-      "value": "(UseMongodb || UseAzureCosmos)"
+      "value": "(UseMongodb || UseAzureCosmos || UseLitedb)"
     },
     "UseMongodb": {
       "type": "computed",
@@ -99,29 +99,15 @@
       "value": "(Databases == 'none')"
     },
     // Auth Config
-    "Authentication": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "none",
-          "description": "None"
-        },
-        {
-          "choice": "identity",
-          "displayName": "Microsoft Identity"
-        }
-      ],
-      "defaultValue": "none",
-      "description": "Tipo de auth para usar"
-    },
     "UseIdentity": {
-      "type": "computed",
-      "value": "(Authentication == 'identity')"
+      "type": "parameter",
+      "displayName": "Use Identity",
+      "datatype": "bool",
+      "defaultValue": false
     },
     "AuthNone": {
       "type": "computed",
-      "value": "(Authentication == 'none')"
+      "value": "(!UseIdentity)"
     }
   },
   "sources": [

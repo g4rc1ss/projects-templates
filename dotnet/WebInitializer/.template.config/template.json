@@ -305,7 +305,8 @@
         "**/*template.config/**/*",
         "**/*.filelist",
         "**/*.user",
-        "**/*idea/**/*"
+        "**/*idea/**/*",
+        "*.sln"
       ],
       "modifiers": [
         {
@@ -426,6 +427,13 @@
           "exclude": [
             "Infraestructure.Database/Repository/MongoPoc.cs",
             "Infraestructure.Database/Entities/MongoDbEntity.cs"
+          ]
+        },
+        {
+          "condition": "(!UseLitedb)",
+          "exclude": [
+            "Infraestructure.Database/Repository/LitedbPoc.cs",
+            "Infraestructure.Database/Entities/LiteDbEntity.cs"
           ]
         },
         {
