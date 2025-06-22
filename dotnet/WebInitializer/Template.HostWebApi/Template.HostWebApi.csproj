@@ -25,9 +25,6 @@
     <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="*"/>
     <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.12.0-beta.1"/>
     <!--#endif-->
-    <!--#if (UseIdentity)-->
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>
-    <!--#endif-->
     <!--#if (UseAzureOpts)-->
     <PackageReference Include="Azure.Identity" Version="*"/>
     <!--#if (UseAzureKeyVault)-->
@@ -41,7 +38,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <!--#if (!DatabaseNone || (UseIdentity))-->
+    <!--#if (!AuthNone)-->
+    <ProjectReference Include="..\Infraestructure.Auth\Infraestructure.Auth.csproj" />
+    <!--#endif-->
+    <!--#if (!DatabaseNone)-->
     <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
     <!--#endif-->
     <!--#if (!EventBusNone)-->

@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json.schemastore.org/template",
+  "$schema": "https://json.schemastore.org/template",
   "author": "Asier",
   "classifications": [
     "Architecture",
@@ -305,7 +305,8 @@
         "**/*template.config/**/*",
         "**/*.filelist",
         "**/*.user",
-        "**/*idea/**/*"
+        "**/*idea/**/*",
+        "*.sln"
       ],
       "modifiers": [
         {
@@ -320,6 +321,7 @@
             "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
           ]
         },
+        // Hosting
         {
           "condition": "(!UseApi)",
           "exclude": [
@@ -345,7 +347,7 @@
         {
           "condition": "UseLayerArchitecture",
           "exclude": [
-            "Shared/*"
+            "Shared/**/*"
           ]
         },
         // Storages
@@ -365,7 +367,7 @@
         {
           "condition": "(StorageNone)",
           "exclude": [
-            "Infraestructure.Storages/*"
+            "Infraestructure.Storages/**/*"
           ]
         },
         // Events
@@ -396,28 +398,30 @@
             "Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
           ]
         },
-        // Database
+        // Auth
         {
           "condition": "(!UseIdentity)",
           "exclude": [
-            "Infraestructure.Database/Entities/IdentityRoleEntity.cs",
-            "Infraestructure.Database/Entities/IdentityUserEntity.cs",
-            "Infraestructure.Database/Repository/IdentityUserPoc.cs",
-            "Infraestructure.Database/IdentityDatabaseContext.cs"
+            "Infraestructure.Auth/Entities/IdentityRoleEntity.cs",
+            "Infraestructure.Auth/Entities/IdentityUserEntity.cs",
+            "Infraestructure.Auth/HostedServices/MigrationHostedService.cs",
+            "Infraestructure.Auth/IdentityDatabaseContext.cs"
           ]
         },
         {
-          "condition": "(!SqlDatabase && !UseIdentity)",
+          "condition": "(AuthNone)",
           "exclude": [
-            "Infraestructure.Database/MigrationHostedService.cs"
+            "Infraestructure.Auth/**/*"
           ]
         },
+        // Database
         {
-          "condition": "(!SqlDatabase || UseIdentity)",
+          "condition": "(!SqlDatabase)",
           "exclude": [
             "Infraestructure.Database/Entities/UserEntity.cs",
             "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
             "Infraestructure.Database/Repository/SqlUserPoc.cs",
+            "Infraestructure.Database/MigrationHostedService.cs",
             "Infraestructure.Database/DatabaseContext.cs"
           ]
         },
@@ -429,7 +433,7 @@
           ]
         },
         {
-          "condition": "DatabaseNone && (!UseIdentity)",
+          "condition": "(DatabaseNone)",
           "exclude": [
             "**/Infraestructure.Database/**/*"
           ]

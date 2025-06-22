@@ -1,6 +1,6 @@
 #if (UseIdentity)
-using Infraestructure.Database;
-using Infraestructure.Database.Entities;
+using Infraestructure.Auth;
+using Infraestructure.Auth.Entities;
 using Microsoft.AspNetCore.Identity;
 #endif
 

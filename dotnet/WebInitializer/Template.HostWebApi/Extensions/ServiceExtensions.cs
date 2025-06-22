@@ -6,7 +6,10 @@ using Template.API;
 using Template.Grpc;
 #endif
 #endif
-#if (!DatabaseNone || UseIdentity)
+#if (!AuthNone)
+using Infraestructure.Auth;
+#endif
+#if (!DatabaseNone)
 using Infraestructure.Database;
 #endif
 #if (!EventBusNone)
@@ -29,8 +32,11 @@ internal static class ServiceExtensions
         builder.Services.AddAuthenticationProtocol(builder.Configuration);
         builder.Services.ConfigureDataProtectionProvider(builder.Configuration);
 
-#if (!DatabaseNone || UseIdentity)
+#if (!DatabaseNone)
         builder.AddDatabaseConfig();
+#endif
+#if (!AuthNone)
+        builder.AddAuthConfig();
 #endif
 #if (!EventBusNone)
         builder.AddEventsServices();

@@ -1,3 +1,6 @@
+#if (UseIdentity)
+using Infraestructure.Auth;
+#endif
 #if (SqlDatabase)
 using Infraestructure.Database;
 #endif
@@ -17,11 +20,11 @@ public static class HealthChecksExtensions
         healthChecks.AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty);
 #endif
 #if (SqlDatabase)
+        healthChecks.AddDbContextCheck<DatabaseContext>();
+#endif
 #if (UseIdentity)
         healthChecks.AddDbContextCheck<IdentityDatabaseContext>();
 #else
-        healthChecks.AddDbContextCheck<DatabaseContext>();
-#endif
 #endif
 #if (UseAzServiceBus)
         // string? azureConnection = builder.Configuration.GetConnectionString("AzureServiceBus");

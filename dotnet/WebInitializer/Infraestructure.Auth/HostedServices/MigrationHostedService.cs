@@ -2,14 +2,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Infraestructure.Database.HostedServices;
+namespace Infraestructure.Auth.HostedServices;
 
 public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedService
 {
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         using IServiceScope scope = serviceProvider.CreateScope();
-        DatabaseContext context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+        IdentityDatabaseContext context =
+            scope.ServiceProvider.GetRequiredService<IdentityDatabaseContext>();
+
         await context.Database.MigrateAsync(cancellationToken: cancellationToken);
     }
 

@@ -1,5 +1,5 @@
 #if (UseIdentity)
-using Infraestructure.Database.Entities;
+using Infraestructure.Auth.Entities;
 #endif
 
 namespace Template.HostWebApi.Extensions;

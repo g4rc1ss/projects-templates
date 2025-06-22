@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*"/>
+
+        <!--#if (UseIdentity)-->
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>
+        <!--#endif-->
+        <!--#if (UsePostgres)-->
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
+        <!--#endif-->
+    </ItemGroup>
+
+</Project>
