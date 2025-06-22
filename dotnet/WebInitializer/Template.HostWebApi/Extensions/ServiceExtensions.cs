@@ -6,6 +6,9 @@ using Template.API;
 using Template.Grpc;
 #endif
 #endif
+#if (!StorageNone)
+using Infraestructure.Storages;
+#endif
 #if (!DatabaseNone || UseIdentity)
 using Infraestructure.Database;
 #endif
@@ -34,6 +37,9 @@ internal static class ServiceExtensions
 #endif
 #if (!EventBusNone)
         builder.AddEventsServices();
+#endif
+#if (!StorageNone)
+        builder.AddStorages();
 #endif
 #if (UseMemoryCache)
         builder.Services.AddDistributedMemoryCache();

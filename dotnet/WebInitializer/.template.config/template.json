@@ -397,6 +397,13 @@
             "Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
           ]
         },
+        // Auth
+        {
+          "condition": "AuthNone",
+          "exclude": [
+            "Infraestructure.Auth/*"
+          ]
+        },
         // Database
         {
           "condition": "(!UseIdentity)",

@@ -5,10 +5,6 @@ using Template.Grpc;
 #endif
 #endif
 
-#if (!StorageNone)
-using Infraestructure.Storages;
-#endif
-
 #if (UseApi)
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Template.HostWebApi.Configurations;
@@ -44,9 +40,6 @@ builder.Services.AddSingleton<SwaggerAuthMiddleware>();
 
 #if (!KeyVaultNone)
 builder.AddKeyVault();
-#endif
-#if (!StorageNone)
-builder.AddStorages();
 #endif
 
 WebApplication app = builder.Build();

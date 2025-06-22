@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "Infraestructure",
+    "Template",
+    "C#"
+  ],
+  "identity": "Authentication",
+  "name": "Asier Infraestructure",
+  "description": "Crear Infraestructura",
+  "shortName": "asier.infra.auth",
+  "sourceName": "Template",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "UseIdentity": {
+      "type": "parameter",
+      "displayName": "Use Identity",
+      "datatype": "bool",
+      "defaultValue": false
+    },
+    "AuthNone": {
+      "type": "computed",
+      "value": "(!UseIdentity)"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea/**/*"
+      ],
+      "modifiers": [
+      ]
+    }
+  ]
+}
