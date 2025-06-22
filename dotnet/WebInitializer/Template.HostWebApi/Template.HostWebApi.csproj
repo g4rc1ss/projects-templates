@@ -4,6 +4,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <Target Name="CleanNugetPackages" BeforeTargets="Build">
+    <Exec Command="pwsh -File ../RemoveUnusedDuplicatePackages.ps1" ContinueOnError="true"/>
+  </Target>
+
   <ItemGroup>
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" />

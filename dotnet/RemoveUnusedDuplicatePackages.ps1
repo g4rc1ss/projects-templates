@@ -1,30 +1,38 @@
+Write-Output (Get-Item $PSCommandPath).FullName
+Set-Location -Path (Get-Item $PSCommandPath).DirectoryName
+
 $packages = Select-Xml -Path "Directory.Packages.props" -XPath "//PackageVersion"
 $unusedPackages = @()
 
-foreach ($pkgNode in $packages) {
+foreach ($pkgNode in $packages)
+{
     $pkg = $pkgNode.Node.Include
     $found = Get-ChildItem -Recurse -Include *.csproj, Directory.Build.props -File | Select-String -Pattern $pkg
 
-    if (-not $found) {
-#        Write-Output "$pkg not used in any .csproj"
+    if (-not $found)
+    {
+        #        Write-Output "$pkg not used in any .csproj"
         $unusedPackages += $pkgNode.Node.Include
     }
 }
 
-if ($unusedPackages.Count -eq 0) {
+if ($unusedPackages.Count -eq 0)
+{
     Write-Output "No unused packages found."
     exit 0
 }
 
 [xml]$doc = Get-Content "Directory.Packages.props" -Raw
 
-foreach ($unused in $unusedPackages) {
+foreach ($unused in $unusedPackages)
+{
     $node = $doc.SelectSingleNode("//PackageVersion[@Include='$unused']")
-    if ($null -ne $node) {
+    if ($null -ne $node)
+    {
         $null = $node.ParentNode.RemoveChild($node)
         Write-Host "Removed $unused"
     }
 }
 
-$doc.Save("Directory.Packages.props")
+$doc.Save((Resolve-Path "Directory.Packages.props"))
 Write-Output "Updated Directory.Packages.props with unused packages removed."

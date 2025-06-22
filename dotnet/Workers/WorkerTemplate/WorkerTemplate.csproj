@@ -4,6 +4,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-WorkerTemplate-edf7b112-e947-442d-a354-4398d05dafad</UserSecretsId>
   </PropertyGroup>
+
+  <Target Name="CleanNugetPackages" BeforeTargets="Build">
+    <Exec Command="pwsh -File ../RemoveUnusedDuplicatePackages.ps1" ContinueOnError="true"/>
+  </Target>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <!--#if (UseAzServiceBus)-->
