@@ -15,6 +15,7 @@ public static class InfraestructureDatabaseExtensions
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
 #if (SqlDatabase || UseIdentity)
+        builder.Services.AddHostedService<MigrationHostedService>();
 #if (UseIdentity)
         string? connectionString = builder.Configuration.GetConnectionString(
             nameof(IdentityDatabaseContext)

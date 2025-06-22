@@ -46,10 +46,6 @@ builder.Services.InitAndConfigureSwagger();
 builder.Services.AddSingleton<SwaggerAuthMiddleware>();
 #endif
 
-#if (SqlDatabase)
-builder.Services.AddHostedService<MigrationHostedService>();
-#endif
-
 #if (!KeyVaultNone)
 builder.AddKeyVault();
 #endif

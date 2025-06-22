@@ -305,12 +305,6 @@
           ]
         },
         {
-          "condition": "(!SqlDatabase && !UseIdentity)",
-          "exclude": [
-            "Template.HostWebApi/HostedServices/MigrationHostedService.cs"
-          ]
-        },
-        {
           "condition": "(!UseApi)",
           "exclude": [
             "src/Template.API/**/*"
@@ -394,6 +388,12 @@
             "Infraestructure.Database/Entities/IdentityUserEntity.cs",
             "Infraestructure.Database/Repository/IdentityUserPoc.cs",
             "Infraestructure.Database/IdentityDatabaseContext.cs"
+          ]
+        },
+        {
+          "condition": "(!SqlDatabase && !UseIdentity)",
+          "exclude": [
+            "Infraestructure.Database/MigrationHostedService.cs"
           ]
         },
         {
