@@ -12,8 +12,6 @@ namespace FrontDesktop;
 
 public class App : Application
 {
-    private Task? _host;
-
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -30,7 +28,11 @@ public class App : Application
         IHost app = builder.Build();
         MainViewModel mainViewModel = app.Services.GetRequiredService<MainViewModel>();
 
-        _host = app.RunAsync();
+        IEnumerable<IHostedService> hostedServices = app.Services.GetServices<IHostedService>();
+        foreach (IHostedService hostedService in hostedServices)
+        {
+            hostedService.StartAsync(CancellationToken.None).Wait();
+        }
 
         switch (ApplicationLifetime)
         {
