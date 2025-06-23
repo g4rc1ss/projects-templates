@@ -38,11 +38,13 @@ public static class TelemetryExtensions
                     .AddGrpcClientInstrumentation()
 #endif
                     .AddHttpClientInstrumentation()
+#if (SqlDatabase)
                     .AddEntityFrameworkCoreInstrumentation(options =>
                     {
                         // Guardamos las consultas generadas por EF
                         options.SetDbStatementForText = true;
                     })
+#endif
             );
 
         builder.AddOtelExporter();

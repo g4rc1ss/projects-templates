@@ -13,7 +13,11 @@ internal static class ServiceExtensions
         builder.ConfigureDataProtectionProvider();
 
         builder.AddDatabaseConfig();
+#if (UseMemoryCache)
+        builder.Services.AddDistributedMemoryCache();
+#elif (UseRedis || UseGarnet)
         builder.AddRedisDistributedCache("Cache");
+#endif
 
         InitializeFunctionalities(builder);
     }

@@ -1,4 +1,6 @@
+#if (SqlDatabase)
 using SimpleWeb.HostWebApi.Database;
+#endif
 
 namespace SimpleWeb.HostWebApi.Extensions;
 
@@ -6,16 +8,22 @@ public static class HealthChecksExtensions
 {
     public static void AddHealthChecks(this IHostApplicationBuilder builder)
     {
-        builder
-            .Services.AddHealthChecks()
-            .AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty)
-            .AddDbContextCheck<DatabaseContext>();
-        
+        IHealthChecksBuilder apiHealthChecks = builder.Services.AddHealthChecks();
+#if (UseRedis || UseGarnet)
+        apiHealthChecks.AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty);
+#endif
+#if (SqlDatabase)
+        apiHealthChecks.AddDbContextCheck<DatabaseContext>()
+#endif
+
 #if (UseGrpc)
-        builder
-            .Services.AddGrpcHealthChecks()
-            .AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty)
-            .AddDbContextCheck<DatabaseContext>();
+        IHealthChecksBuilder grpcHealthChecks = builder.Services.AddGrpcHealthChecks();
+#if (UseRedis || UseGarnet)
+        grpcHealthChecks.AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty);
+#endif
+#if (SqlDatabase)
+        grpcHealthChecks.AddDbContextCheck<DatabaseContext>()
+#endif
 #endif
     }
 }
