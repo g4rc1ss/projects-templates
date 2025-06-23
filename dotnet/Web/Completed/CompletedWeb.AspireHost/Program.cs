@@ -14,7 +14,7 @@ IResourceBuilder<PostgresDatabaseResource> postgres = builder
     .WithPgWeb()
     .WithDataVolume("postgresVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
-    .AddDatabase("PostgresDB", "Template");
+    .AddDatabase("PostgresDB", "CompletedWeb");
 #endif
 
 #if (UseSqlServer || UseAzureSql)
@@ -22,7 +22,7 @@ IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder
     .AddSqlServer("SQLServer")
     .WithDataVolume("SqlServerVM", isReadOnly: false)
     .WithLifetime(ContainerLifetime.Session)
-    .AddDatabase("TemplateDatabase", "Template");
+    .AddDatabase("CompletedWebDatabase", "CompletedWeb");
 #endif
 
 #if (UseMongodb)
@@ -58,7 +58,9 @@ IResourceBuilder<RedisResource> redis = builder
 IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
 #endif
 
-IResourceBuilder<ProjectResource> project = builder.AddProject<CompletedWeb_HostWebApi>("Template");
+IResourceBuilder<ProjectResource> project = builder.AddProject<CompletedWeb_HostWebApi>(
+    "CompletedWeb"
+);
 #if (UsePostgres)
 #if (UseIdentity)
 project.WithReference(postgres, "IdentityDatabaseContext").WaitFor(postgres);

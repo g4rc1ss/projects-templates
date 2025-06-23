@@ -8,17 +8,14 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 COPY . .
 RUN ls -la
-RUN dotnet test --filter " \
-    FullyQualifiedName!~CompletedWeb.HostWebApi.Tests \
-    FullyQualifiedName!~Functionality.Infraestructure.Test \
-" /p:CSharpier_Bypass=true
+RUN dotnet test /p:CSharpier_Bypass=true
 RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build /p:CSharpier_Bypass=true
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "src/CompletedWeb.HostWebApi/CompletedWeb.HostWebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false /p:CSharpier_Bypass=true
+RUN dotnet publish "src/SimpleWeb.HostWebApi/SimpleWeb.HostWebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false /p:CSharpier_Bypass=true
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CompletedWeb.HostWebApi.dll"]
+ENTRYPOINT ["dotnet", "SimpleWeb.HostWebApi.dll"]

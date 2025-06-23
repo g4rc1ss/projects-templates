@@ -1,0 +1,220 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "Architecture",
+    "Template",
+    "csharp",
+    "Web"
+  ],
+  "identity": "Simple Web App",
+  "name": "Asier Web",
+  "description": "Simple Web Application",
+  "shortName": "asier.web.simple",
+  "sourceName": "SimpleWeb",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "solution",
+    "editorTreatAs": "solution"
+  },
+  "symbols": {
+    "UseApi": {
+      "displayName": "API",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": true
+    },
+    "UseGrpc": {
+      "displayName": "GRPC",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false
+    },
+    "Databases": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "displayName": "None"
+        },
+        {
+          "choice": "postgresql",
+          "displayName": "PostgreSQL"
+        },
+        {
+          "choice": "azuresql",
+          "displayName": "Azure SQL"
+        },
+        {
+          "choice": "sqlserver",
+          "displayName": "SQL Server"
+        },
+        {
+          "choice": "sqlite",
+          "displayName": "SQLite"
+        },
+        {
+          "choice": "mongodb",
+          "displayName": "Mongo Database"
+        },
+        {
+          "choice": "litedb",
+          "displayName": "LiteDB"
+        },
+        {
+          "choice": "cosmosdb",
+          "displayName": "Azure Cosmos DB"
+        }
+      ],
+      "defaultValue": "postgresql"
+    },
+    "SqlDatabase": {
+      "type": "computed",
+      "value": "(UsePostgres)"
+    },
+    "UsePostgres": {
+      "type": "computed",
+      "value": "(Databases == 'postgresql')"
+    },
+    "NoSqlDatabase": {
+      "type": "computed",
+      "value": "(UseMongodb)"
+    },
+    "UseMongodb": {
+      "type": "computed",
+      "value": "(Databases == 'mongodb')"
+    },
+    "DatabaseNone": {
+      "type": "computed",
+      "value": "(Databases == 'none')"
+    },
+    "Cache": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "memorycache",
+          "displayName": "In Memory",
+          "description": "Memory"
+        },
+        {
+          "choice": "Redis",
+          "displayName": "Redis",
+          "description": "redis"
+        },
+        {
+          "choice": "Garnet",
+          "displayName": "Garnet",
+          "description": "garnet"
+        }
+      ],
+      "defaultValue": "memorycache",
+      "description": "Cache"
+    },
+    "UseMemoryCache": {
+      "type": "computed",
+      "value": "(Cache == 'memorycache')"
+    },
+    "UseRedis": {
+      "type": "computed",
+      "value": "(Cache == 'redis')"
+    },
+    "UseGarnet": {
+      "type": "computed",
+      "value": "(Cache == 'garnet')"
+    }
+  },
+  "sources": [
+    {
+      "source": "../../",
+      "target": "./",
+      "include": [
+        "*editorconfig",
+        "*csharpierrc.json",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "RemoveUnusedDuplicatePackages.ps1"
+      ]
+    },
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!UsePostgres)",
+          "exclude": [
+            "SimpleWeb.HostWebApi/Database/Entities/UserEntity.cs",
+            "SimpleWeb.HostWebApi/Database/Repository/SqlUserPoc.cs",
+            "SimpleWeb.HostWebApi/Database/EntityConfiguration/UserEntityConfiguration.cs",
+            "SimpleWeb.HostWebApi/Database/HostedServices/MigrationHostedService.cs",
+            "SimpleWeb.HostWebApi/Database/DatabaseContext.cs"
+          ]
+        },
+        {
+          "condition": "(!UseMongodb)",
+          "exclude": [
+            "SimpleWeb.HostWebApi/Database/Repository/MongoPoc.cs",
+            "SimpleWeb.HostWebApi/Database/Entities/MongoDbEntity.cs"
+          ]
+        },
+        {
+          "condition": "(DatabaseNone)",
+          "exclude": [
+            "SimpleWeb.HostWebApi/Database/**/*",
+            "SimpleWeb.HostWebApi/Extensions/DatabaseExtensions.cs"
+          ]
+        }
+      ]
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "SimpleWeb.HostWebApi/Program.cs"
+    }
+  ],
+  "postActions": [
+    {
+      "id": "build",
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "description": "Build project.",
+      "args": {
+        "executable": "dotnet",
+        "args": "build",
+        "redirectStandardOutput": true,
+        "redirectStandardError": true
+      },
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet build'"
+        }
+      ],
+      "continueOnError": true
+    },
+    {
+      "id": "editor",
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
+      "condition": "(HostIdentifier != \"dotnetcli\")",
+      "description": "",
+      "manualInstructions": [],
+      "args": {
+        "files": "0;1"
+      },
+      "continueOnError": true
+    }
+  ]
+}

@@ -24,7 +24,7 @@ namespace CompletedWeb.HostWebApi.Extensions;
 
 internal static class ServiceExtensions
 {
-    internal static void InitTemplateHostConfig(this WebApplicationBuilder builder)
+    internal static void InitCompletedWebHostConfig(this WebApplicationBuilder builder)
     {
         builder.AddHealthChecks();
         builder.Services.AddProblemDetails();
@@ -60,10 +60,10 @@ internal static class ServiceExtensions
     {
 #if (UseLayerArchitecture)
 #if (UseApi)
-        builder.InitTemplateApi();
+        builder.InitCompletedWebApi();
 #endif
 #if (UseGrpc)
-        builder.InitTemplateGrpc();
+        builder.InitCompletedWebGrpc();
 #endif
 #endif
     }

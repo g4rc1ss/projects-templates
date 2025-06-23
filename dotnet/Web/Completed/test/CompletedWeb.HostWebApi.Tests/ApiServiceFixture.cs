@@ -31,7 +31,7 @@ public sealed class ApiServiceFixture : IAsyncLifetime
 
         await app.StartAsync().WaitAsync(_defaultTimeout);
         await app
-            .ResourceNotifications.WaitForResourceHealthyAsync("Template")
+            .ResourceNotifications.WaitForResourceHealthyAsync("CompletedWeb")
             .WaitAsync(_defaultTimeout);
     }
 

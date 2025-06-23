@@ -1,16 +1,7 @@
-﻿using CompletedWeb.HostWebApi.Extensions;
-#if (UseGrpc)
-#if (UseLayerArchitecture)
-using CompletedWeb.Grpc;
-#endif
-#endif
-
-#if (UseApi)
+﻿using SimpleWeb.HostWebApi.Extensions;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using CompletedWeb.HostWebApi.Configurations;
-using CompletedWeb.HostWebApi.FilterControllers;
-using CompletedWeb.HostWebApi.OpenAPI;
-#endif
+using SimpleWeb.HostWebApi.Configurations;
+using SimpleWeb.HostWebApi.OpenAPI;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -19,72 +10,37 @@ builder.WebHost.ConfigureKestrel(options => options.Limits.MaxRequestBodySize = 
 builder.Configuration.AddUserSecrets<Program>().AddEnvironmentVariables();
 
 // Add services to the container.
-builder.InitCompletedWebHostConfig();
+builder.InitSimpleWebHostConfig();
 
-#if (UseGrpc)
 builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
-#endif
 
-#if (UseApi)
 builder.Services.AddControllers(options =>
 {
     options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer()));
-    options.Filters.Add<ResultResponseFilter>();
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();
-builder.Services.AddSingleton<SwaggerAuthMiddleware>();
-#endif
-
-#if (!KeyVaultNone)
-builder.AddKeyVault();
-#endif
 
 WebApplication app = builder.Build();
 
-#if (UseApi)
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
-#endif
 if (!app.Environment.IsProduction())
 {
-#if (UseApi)
     app.UseDeveloperExceptionPage();
-    app.UseMiddleware<SwaggerAuthMiddleware>();
     app.UseSwagger();
     app.UseSwaggerUI();
-#endif
-#if (UseGrpc)
     app.MapGrpcReflectionService();
-#endif
 }
 
-#if (UseApi)
 app.UseHttpsRedirection();
-#endif
 
-#if (!AuthNone)
-app.UseAuthentication();
-app.UseAuthorization();
-#endif
-#if (UseApi)
 app.MapHealthChecks("/health");
 app.MapControllers();
-#endif
 
-#if (UseGrpc)
-#if (UseLayerArchitecture)
-app.MapCompletedWebGrpc();
-#endif
 app.MapGrpcHealthChecksService();
-#endif
 app.MapRouteServices();
 
 await app.RunAsync();
-
-namespace CompletedWeb.HostWebApi
-{
-    public class Program;
-}

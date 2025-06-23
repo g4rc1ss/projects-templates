@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.1"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
+        <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*"/>
+        <PackageReference Include="Grpc.AspNetCore" Version="*"/>
+        <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="*"/>
+        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.12.0-beta.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
+</Project>

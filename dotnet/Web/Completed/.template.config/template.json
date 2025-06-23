@@ -319,19 +319,19 @@
         {
           "condition": "(!UseAzureOpts)",
           "exclude": [
-            "Template.HostWebApi/ConfigurationOptions/AzureOptions/*"
+            "CompletedWeb.HostWebApi/ConfigurationOptions/AzureOptions/*"
           ]
         },
         {
           "condition": "(!UseAzureKeyVault)",
           "exclude": [
-            "Template.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
+            "CompletedWeb.HostWebApi/ConfigurationOptions/AzureOptions/AzureKeyVaultOptions.cs"
           ]
         },
         {
           "condition": "(!UseApi)",
           "exclude": [
-            "src/Template.API/**/*"
+            "src/CompletedWeb.API/**/*"
           ],
           "rename": {
           }
@@ -339,7 +339,7 @@
         {
           "condition": "(!UseGrpc)",
           "exclude": [
-            "src/Template.Grpc/**/*"
+            "src/CompletedWeb.Grpc/**/*"
           ],
           "rename": {
           }
@@ -474,28 +474,10 @@
   ],
   "primaryOutputs": [
     {
-      "path": "Template.HostWebApi/Program.cs"
-    },
-    {
-      "path": "RemoveUnusedDuplicatePackages.ps1"
+      "path": "CompletedWeb.HostWebApi/Program.cs"
     }
   ],
   "postActions": [
-    {
-      "id": "Clean Directory.Packages.props",
-      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "description": "Clean Unused Nugets.",
-      "args": {
-        "executable": "pwsh",
-        "args": "-File RemoveUnusedDuplicatePackages.ps1"
-      },
-      "manualInstructions": [
-        {
-          "text": "Run the following command"
-        }
-      ],
-      "continueOnError": false
-    },
     {
       "id": "build",
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",

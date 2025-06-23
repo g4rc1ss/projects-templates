@@ -1,0 +1,66 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31808.319
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleWeb.HostWebApi", "SimpleWeb.HostWebApi\SimpleWeb.HostWebApi.csproj", "{50AFDF73-735C-48DD-B197-415C0B9992FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{5074454F-D196-4EDD-B6A9-5A0597F6E59B}"
+	ProjectSection(SolutionItems) = preProject
+								#if (false)
+												.template.config\template.json = .template.config\template.json
+								#endif
+								#if (false)
+												Directory.Build.props = ..\..\Directory.Build.props
+								#else
+												Directory.Build.props = Directory.Build.props
+								#endif
+								#if (false)
+												.csharpierrc.json = ..\..\.csharpierrc.json
+								#else
+												.csharpierrc.json = .csharpierrc.json
+								#endif
+								#if (false)
+												.editorconfig = ..\..\.editorconfig
+								#else
+												.editorconfig = .editorconfig
+								#endif
+								#if (false)
+												RemoveUnusedDuplicatePackages.ps1 = ..\..\RemoveUnusedDuplicatePackages.ps1
+								#else
+												RemoveUnusedDuplicatePackages.ps1 = RemoveUnusedDuplicatePackages.ps1
+								#endif
+								#if (false)
+												Directory.Packages.props = ..\..\Directory.Packages.props
+								#else
+												Directory.Packages.props = Directory.Packages.props
+								#endif
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWeb.AspireHost", "SimpleWeb.AspireHost\SimpleWeb.AspireHost.csproj", "{3A0A4FE8-3433-4C47-AE87-15FDFE6A16B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infra", "infra", "{AAE4E007-3EAF-4300-B76C-ED13CD8B2DF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50AFDF73-735C-48DD-B197-415C0B9992FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50AFDF73-735C-48DD-B197-415C0B9992FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50AFDF73-735C-48DD-B197-415C0B9992FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50AFDF73-735C-48DD-B197-415C0B9992FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A0A4FE8-3433-4C47-AE87-15FDFE6A16B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A0A4FE8-3433-4C47-AE87-15FDFE6A16B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A0A4FE8-3433-4C47-AE87-15FDFE6A16B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A0A4FE8-3433-4C47-AE87-15FDFE6A16B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9910F84-F791-4753-8A02-193B05CB3472}
+	EndGlobalSection
+EndGlobal

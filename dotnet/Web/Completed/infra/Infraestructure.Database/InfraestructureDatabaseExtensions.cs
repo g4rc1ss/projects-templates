@@ -74,7 +74,7 @@ public static class InfraestructureDatabaseExtensions
 #endif
 #if (UseAzureCosmos)
         builder.Services.AddScoped<ICosmosdbPoc, CosmosdbPoc>();
-        builder.AddAzureCosmosClient("Templatedb");
+        builder.AddAzureCosmosClient("CompletedWebdb");
 #endif
 
 #if (UseLitedb)

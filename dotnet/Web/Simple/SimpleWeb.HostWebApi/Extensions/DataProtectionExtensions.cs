@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.DataProtection;
 
-namespace CompletedWeb.HostWebApi.Extensions;
+namespace SimpleWeb.HostWebApi.Extensions;
 
 internal static class DataProtectionExtensions
 {
@@ -12,6 +12,6 @@ internal static class DataProtectionExtensions
         services
             .AddDataProtection()
             // .PersistKeysToFileSystem(new DirectoryInfo("folder"))
-            .SetApplicationName("CompletedWeb.Host");
+            .SetApplicationName("SimpleWeb.Host");
     }
 }
