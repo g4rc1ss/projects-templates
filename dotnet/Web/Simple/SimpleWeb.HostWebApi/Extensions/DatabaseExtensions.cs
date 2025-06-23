@@ -1,4 +1,6 @@
-﻿using SimpleWeb.HostWebApi.Database.Repository;
+﻿#if (SqlDatabase || NoSqlDatabase)
+using SimpleWeb.HostWebApi.Database.Repository;
+#endif
 #if (SqlDatabase)
 using Microsoft.EntityFrameworkCore;
 using SimpleWeb.HostWebApi.Database;
@@ -22,17 +24,23 @@ public static class DatabaseExtensions
 
         builder.Services.AddDbContextPool<DatabaseContext>(dbContextBuilder =>
         {
+#if (UsePostgres)
             dbContextBuilder.UseNpgsql(connectionString);
+#endif
         });
 
         builder.Services.AddDbContextFactory<DatabaseContext>(dbContextBuilder =>
         {
+#if (UsePostgres)
             dbContextBuilder.UseNpgsql(connectionString);
+#endif
         });
 
         builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
 #endif
+#if (UseMongodb)
         builder.Services.AddScoped<IMongoPoc, MongoPoc>();
         builder.AddMongoDBClient("mongo");
+#endif
     }
 }

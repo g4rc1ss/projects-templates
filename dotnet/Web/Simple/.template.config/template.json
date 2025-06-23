@@ -185,11 +185,6 @@
           ]
         },
         {
-          "condition": "(!UseMinimalApi)",
-          "exclude": [
-          ]
-        },
-        {
           "condition": "(!UseGrpc)",
           "exclude": [
             "SimpleWeb.HostWebApi/GrpcServices/**/*"

@@ -5,19 +5,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
-    <!--#if (UseGrpc)-->
-    <ItemGroup>
-        <Protobuf Include="GrpcServices\Protos\greet.proto" GrpcServices="Server"/>
-    </ItemGroup>
-    <!--#endif-->
-
     <ItemGroup>
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
         <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
-        
+
         <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
 
         <!--#if (UseRedis || UseGarnet)-->
@@ -49,9 +43,16 @@
             <Link>.dockerignore</Link>
         </Content>
     </ItemGroup>
+
+    <!--#if (UseGrpc)-->
     <ItemGroup>
-      <Protobuf Include="GrpcServices\Protos\greet.proto">
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
+        <Protobuf Include="GrpcServices\Protos\greet.proto" GrpcServices="Server"/>
     </ItemGroup>
+    
+    <ItemGroup>
+        <Protobuf Include="GrpcServices\Protos\greet.proto">
+            <Generator>MSBuild:Compile</Generator>
+        </Protobuf>
+    </ItemGroup>
+    <!--#endif-->
 </Project>

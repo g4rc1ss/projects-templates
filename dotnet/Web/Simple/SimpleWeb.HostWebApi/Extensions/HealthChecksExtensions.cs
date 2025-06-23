@@ -10,10 +10,12 @@ public static class HealthChecksExtensions
             .Services.AddHealthChecks()
             .AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty)
             .AddDbContextCheck<DatabaseContext>();
-
+        
+#if (UseGrpc)
         builder
             .Services.AddGrpcHealthChecks()
             .AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty)
             .AddDbContextCheck<DatabaseContext>();
+#endif
     }
 }
