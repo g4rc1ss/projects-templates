@@ -305,8 +305,7 @@
         "**/*template.config/**/*",
         "**/*.filelist",
         "**/*.user",
-        "**/*idea/**/*",
-        "*.sln"
+        "**/*idea/**/*"
       ],
       "modifiers": [
         {
@@ -399,7 +398,7 @@
         },
         // Auth
         {
-          "condition": "AuthNone",
+          "condition": "AuthNone || UseIdentity",
           "exclude": [
             "Infraestructure.Auth/*"
           ]
