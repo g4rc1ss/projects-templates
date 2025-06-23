@@ -44,11 +44,5 @@
     <ItemGroup>
         <Protobuf Include="GrpcServices\Protos\greet.proto" GrpcServices="Server"/>
     </ItemGroup>
-    
-    <ItemGroup>
-        <Protobuf Include="GrpcServices\Protos\greet.proto">
-            <Generator>MSBuild:Compile</Generator>
-        </Protobuf>
-    </ItemGroup>
     <!--#endif-->
 </Project>
