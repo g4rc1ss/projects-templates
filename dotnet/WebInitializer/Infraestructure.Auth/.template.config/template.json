@@ -18,15 +18,25 @@
     "type": "project"
   },
   "symbols": {
-    "UseIdentity": {
+    "Authentication": {
       "type": "parameter",
-      "displayName": "Use Identity",
-      "datatype": "bool",
-      "defaultValue": false
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "Sin autenticación"
+        }
+      ],
+      "defaultValue": "none",
+      "description": "Tipo de auth para usar"
+    },
+    "UseIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'identity')"
     },
     "AuthNone": {
       "type": "computed",
-      "value": "(!UseIdentity)"
+      "value": "(Authentication == 'none')"
     }
   },
   "sources": [
