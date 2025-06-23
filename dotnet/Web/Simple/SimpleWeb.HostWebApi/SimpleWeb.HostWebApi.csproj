@@ -39,11 +39,6 @@
         <PackageReference Include="LiteDB" Version="*"/>
         <!--#endif-->
     </ItemGroup>
-    <ItemGroup>
-        <Content Include="..\..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
-    </ItemGroup>
 
     <!--#if (UseGrpc)-->
     <ItemGroup>
