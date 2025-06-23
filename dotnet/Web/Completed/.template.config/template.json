@@ -294,7 +294,7 @@
   },
   "sources": [
     {
-      "source": "../",
+      "source": "../../",
       "target": "./",
       "include": [
         "*editorconfig",
