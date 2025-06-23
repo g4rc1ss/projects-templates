@@ -41,6 +41,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <!--#if (!AuthNone)-->
+    <ProjectReference Include="..\Infraestructure.Auth\Infraestructure.Auth.csproj" />
+    <!--#endif-->
     <!--#if (!DatabaseNone || (UseIdentity))-->
     <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
     <!--#endif-->

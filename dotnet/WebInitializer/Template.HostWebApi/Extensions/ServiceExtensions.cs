@@ -6,6 +6,10 @@ using Template.API;
 using Template.Grpc;
 #endif
 #endif
+
+#if (!AuthNone)
+using Infraestructure.Auth;
+#endif
 #if (!StorageNone)
 using Infraestructure.Storages;
 #endif
@@ -28,9 +32,11 @@ internal static class ServiceExtensions
 
         builder.ConfigureOpenTelemetry();
         builder.Services.AddHttpClient();
-
-        builder.Services.AddAuthenticationProtocol(builder.Configuration);
         builder.Services.ConfigureDataProtectionProvider(builder.Configuration);
+
+#if (!AuthNone)
+        builder.AddAuthenticationProtocol();
+#endif
 
 #if (!DatabaseNone || UseIdentity)
         builder.AddDatabaseConfig();

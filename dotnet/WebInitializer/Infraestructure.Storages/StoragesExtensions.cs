@@ -35,7 +35,10 @@ public static class StoragesExtensions
 
         builder.Services.AddSingleton<IFileStorage, AzureBlobStorage>();
 
-        AzureBlobStorageOptions? blobStorage = builder.Configuration.Get<AzureBlobStorageOptions>();
+        AzureBlobStorageOptions? blobStorage = builder
+            .Configuration.GetSection("AzureBlobStorage")
+            .Get<AzureBlobStorageOptions>();
+
         if (!string.IsNullOrEmpty(blobStorage?.AccountName))
         {
             builder.Services.AddSingleton<BlobServiceClient>(services => new BlobServiceClient(

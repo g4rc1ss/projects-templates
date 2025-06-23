@@ -1,15 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <!--#if (UseJwt)-->
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3" />
+        <!--#endif-->
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="*"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!--#if (!DatabaseNone || (UseIdentity)) -->
+      <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
+        <!--#endif-->
     </ItemGroup>
 
 </Project>

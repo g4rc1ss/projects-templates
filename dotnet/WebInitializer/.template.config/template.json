@@ -192,6 +192,10 @@
         {
           "choice": "identity",
           "displayName": "Microsoft Identity"
+        },
+        {
+          "choice": "jwt",
+          "displayName": "JWT"
         }
       ],
       "defaultValue": "none",
@@ -200,6 +204,10 @@
     "UseIdentity": {
       "type": "computed",
       "value": "(Authentication == 'identity')"
+    },
+    "UseJwt": {
+      "type": "computed",
+      "value": "(Authentication == 'jwt')"
     },
     "AuthNone": {
       "type": "computed",
@@ -398,9 +406,15 @@
         },
         // Auth
         {
-          "condition": "AuthNone || UseIdentity",
+          "condition": "AuthNone",
           "exclude": [
             "Infraestructure.Auth/*"
+          ]
+        },
+        {
+          "condition": "!UseJwt",
+          "exclude": [
+            "Infraestructure.Auth/JwtManager/**/*"
           ]
         },
         // Database

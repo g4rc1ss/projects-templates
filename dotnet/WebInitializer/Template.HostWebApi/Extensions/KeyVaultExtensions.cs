@@ -23,7 +23,9 @@ public static class KeyVaultExtensions
             .Bind(builder.Configuration.GetSection("KeyVault"))
             .ValidateOnStart();
 
-        AzureKeyVaultOptions? keyVaultConfig = builder.Configuration.Get<AzureKeyVaultOptions>();
+        AzureKeyVaultOptions? keyVaultConfig = builder
+            .Configuration.GetSection("KeyVault")
+            .Get<AzureKeyVaultOptions>();
         if (!string.IsNullOrEmpty(keyVaultConfig?.AccountName))
         {
             builder.Configuration.AddAzureKeyVault(

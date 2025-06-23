@@ -23,16 +23,24 @@
       "datatype": "choice",
       "choices": [
         {
-          "choice": "none",
-          "description": "Sin autenticación"
+          "choice": "identity",
+          "description": "Microsoft Identity"
+        },
+        {
+          "choice": "jwt",
+          "description": "JWT"
         }
       ],
-      "defaultValue": "none",
+      "defaultValue": "identity",
       "description": "Tipo de auth para usar"
     },
     "UseIdentity": {
       "type": "computed",
       "value": "(Authentication == 'identity')"
+    },
+    "UseJwt": {
+      "type": "computed",
+      "value": "(Authentication == 'jwt')"
     },
     "AuthNone": {
       "type": "computed",
@@ -52,6 +60,12 @@
         "**/*idea/**/*"
       ],
       "modifiers": [
+        {
+          "condition": "!UseJwt",
+          "exclude": [
+            "JwtManager/**/*"
+          ]
+        }
       ]
     }
   ]
