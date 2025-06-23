@@ -20,11 +20,28 @@
     "editorTreatAs": "solution"
   },
   "symbols": {
-    "UseApi": {
+    "Api": {
       "displayName": "API",
       "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": true
+      "datatype": "choice",
+      "choices": [
+        {
+          "displayName": "MVC",
+          "choice": "mvc"
+        },
+        {
+          "displayName": "Minimal API",
+          "choice": "minimalapi"
+        }
+      ]
+    },
+    "UseMvc": {
+      "type": "computed",
+      "value": "Api == 'mvc'"
+    },
+    "UseMinimalApi": {
+      "type": "computed",
+      "value": "Api == 'minimalapi'"
     },
     "UseGrpc": {
       "displayName": "GRPC",
@@ -32,6 +49,7 @@
       "datatype": "bool",
       "defaultValue": false
     },
+    // Databases
     "Databases": {
       "type": "parameter",
       "datatype": "choice",
@@ -45,28 +63,8 @@
           "displayName": "PostgreSQL"
         },
         {
-          "choice": "azuresql",
-          "displayName": "Azure SQL"
-        },
-        {
-          "choice": "sqlserver",
-          "displayName": "SQL Server"
-        },
-        {
-          "choice": "sqlite",
-          "displayName": "SQLite"
-        },
-        {
           "choice": "mongodb",
           "displayName": "Mongo Database"
-        },
-        {
-          "choice": "litedb",
-          "displayName": "LiteDB"
-        },
-        {
-          "choice": "cosmosdb",
-          "displayName": "Azure Cosmos DB"
         }
       ],
       "defaultValue": "postgresql"
@@ -91,6 +89,7 @@
       "type": "computed",
       "value": "(Databases == 'none')"
     },
+    // Cache
     "Cache": {
       "type": "parameter",
       "datatype": "choice",
@@ -177,6 +176,23 @@
           "exclude": [
             "SimpleWeb.HostWebApi/Database/**/*",
             "SimpleWeb.HostWebApi/Extensions/DatabaseExtensions.cs"
+          ]
+        },
+        {
+          "condition": "(!UseMvc)",
+          "exclude": [
+            "SimpleWeb.HostWebApi/Controllers/**/*"
+          ]
+        },
+        {
+          "condition": "(!UseMinimalApi)",
+          "exclude": [
+          ]
+        },
+        {
+          "condition": "(!UseGrpc)",
+          "exclude": [
+            "SimpleWeb.HostWebApi/GrpcServices/**/*"
           ]
         }
       ]

@@ -4,14 +4,11 @@ namespace SimpleWeb.HostWebApi.Extensions;
 
 internal static class DataProtectionExtensions
 {
-    internal static void ConfigureDataProtectionProvider(
-        this IServiceCollection services,
-        IConfiguration configuration
-    )
+    internal static void ConfigureDataProtectionProvider(this IHostApplicationBuilder builder)
     {
-        services
-            .AddDataProtection()
+        builder
+            .Services.AddDataProtection()
             // .PersistKeysToFileSystem(new DirectoryInfo("folder"))
-            .SetApplicationName("SimpleWeb.Host");
+            .SetApplicationName(builder.Environment.ApplicationName);
     }
 }

@@ -1,7 +1,9 @@
 ﻿using SimpleWeb.HostWebApi.Extensions;
+using SimpleWeb.HostWebApi.OpenAPI;
+#if (UseMvc)
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using SimpleWeb.HostWebApi.Configurations;
-using SimpleWeb.HostWebApi.OpenAPI;
+#endif
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +14,17 @@ builder.Configuration.AddUserSecrets<Program>().AddEnvironmentVariables();
 // Add services to the container.
 builder.InitSimpleWebHostConfig();
 
+#if (UseGrpc)
 builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
+#endif
 
+#if (UseMvc)
 builder.Services.AddControllers(options =>
 {
     options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer()));
 });
+#endif
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();
@@ -32,7 +38,9 @@ if (!app.Environment.IsProduction())
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
+#if (UseGrpc)
     app.MapGrpcReflectionService();
+#endif
 }
 
 app.UseHttpsRedirection();
@@ -40,7 +48,9 @@ app.UseHttpsRedirection();
 app.MapHealthChecks("/health");
 app.MapControllers();
 
+#if (UseGrpc)
 app.MapGrpcHealthChecksService();
+#endif
 app.MapRouteServices();
 
 await app.RunAsync();

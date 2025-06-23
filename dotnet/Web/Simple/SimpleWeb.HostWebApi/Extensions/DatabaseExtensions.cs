@@ -1,9 +1,10 @@
-﻿#if (SqlDatabase)
+﻿using SimpleWeb.HostWebApi.Database.Repository;
+#if (SqlDatabase)
 using Microsoft.EntityFrameworkCore;
 using SimpleWeb.HostWebApi.Database;
 using SimpleWeb.HostWebApi.Database.HostedServices;
 #endif
-using SimpleWeb.HostWebApi.Database.Repository;
+
 
 namespace SimpleWeb.HostWebApi.Extensions;
 

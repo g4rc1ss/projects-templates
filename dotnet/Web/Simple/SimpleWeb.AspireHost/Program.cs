@@ -25,9 +25,7 @@ IResourceBuilder<RedisResource> redis = builder
 IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
 #endif
 
-IResourceBuilder<ProjectResource> project = builder.AddProject<SimpleWeb_HostWebApi>(
-    "SimpleWeb"
-);
+IResourceBuilder<ProjectResource> project = builder.AddProject<SimpleWeb_HostWebApi>("SimpleWeb");
 #if (UsePostgres)
 project.WithReference(postgres, "DatabaseContext").WaitFor(postgres);
 #endif

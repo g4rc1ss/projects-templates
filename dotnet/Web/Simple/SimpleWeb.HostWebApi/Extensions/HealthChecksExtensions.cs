@@ -6,8 +6,14 @@ public static class HealthChecksExtensions
 {
     public static void AddHealthChecks(this IHostApplicationBuilder builder)
     {
-        IHealthChecksBuilder healthChecks = builder.Services.AddHealthChecks();
-        healthChecks.AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty);
-        healthChecks.AddDbContextCheck<DatabaseContext>();
+        builder
+            .Services.AddHealthChecks()
+            .AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty)
+            .AddDbContextCheck<DatabaseContext>();
+
+        builder
+            .Services.AddGrpcHealthChecks()
+            .AddRedis(builder.Configuration.GetConnectionString("Cache") ?? string.Empty)
+            .AddDbContextCheck<DatabaseContext>();
     }
 }

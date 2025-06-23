@@ -5,15 +5,20 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <!--#if (UseGrpc)-->
+    <ItemGroup>
+        <Protobuf Include="GrpcServices\Protos\greet.proto" GrpcServices="Server"/>
+    </ItemGroup>
+    <!--#endif-->
+
     <ItemGroup>
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
         <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
-        <!--#if (UseApi)-->
+        
         <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
-        <!--#endif-->
 
         <!--#if (UseRedis || UseGarnet)-->
         <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*"/>
@@ -32,7 +37,6 @@
         <!--#endif-->
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
-        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.1"/>
         <!--#endif-->
 
@@ -44,5 +48,10 @@
         <Content Include="..\..\.dockerignore">
             <Link>.dockerignore</Link>
         </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <Protobuf Include="GrpcServices\Protos\greet.proto">
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
     </ItemGroup>
 </Project>
