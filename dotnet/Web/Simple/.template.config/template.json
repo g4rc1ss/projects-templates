@@ -184,7 +184,7 @@
           "condition": "(!UseMongodb)",
           "exclude": [
             "SimpleWeb.HostWebApi/Database/Repository/MongoPoc.cs",
-            "SimpleWeb.HostWebApi/Database/Entities/MongoDbEntity.cs"
+            "SimpleWeb.HostWebApi/Database/Entities/MongoDbEntity.cs",
           ]
         },
         {
@@ -211,6 +211,31 @@
           "condition": "(!UseGrpc)",
           "exclude": [
             "SimpleWeb.HostWebApi/GrpcServices/**/*"
+          ]
+        },
+        // Aspire
+        {
+          "condition": "(!UsePostgres)",
+          "exclude": [
+            "SimpleWeb.AspireHost/Resources/PostgresResource.cs",
+          ]
+        },
+        {
+          "condition": "(!UseMongodb)",
+          "exclude": [
+            "SimpleWeb.AspireHost/Resources/MongodbResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseRedis)",
+          "exclude": [
+            "SimpleWeb.AspireHost/Resources/RedisCacheResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseGarnet)",
+          "exclude": [
+            "SimpleWeb.AspireHost/Resources/GarnetCacheResource.cs"
           ]
         }
       ]

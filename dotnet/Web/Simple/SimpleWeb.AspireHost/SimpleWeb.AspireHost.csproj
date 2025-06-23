@@ -10,8 +10,18 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Aspire.Hosting.AppHost" Version="*"/>
+        <!--#if (UseRedis)-->
         <PackageReference Include="Aspire.Hosting.Redis" Version="*"/>
+        <!--#endif-->
+        <!--#if (UseGarnet)-->
+        <PackageReference Include="Aspire.Hosting.Garnet" Version="*"/>
+        <!--#endif-->
+        <!--#if (UsePostgres)-->
         <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*"/>
+        <!--#endif-->
+        <!--#if (UseMongodb)-->
+        <PackageReference Include="Aspire.Hosting.MongoDB" Version="*"/>
+        <!--#endif-->
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\SimpleWeb.HostWebApi\SimpleWeb.HostWebApi.csproj"/>
