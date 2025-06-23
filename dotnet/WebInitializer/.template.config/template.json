@@ -360,113 +360,113 @@
         {
           "condition": "(!UseLocalStorage)",
           "exclude": [
-            "Infraestructure.Storages/LocalStorage.cs"
+            "infra/Infraestructure.Storages/LocalStorage.cs"
           ]
         },
         {
           "condition": "(!UseAzureBlobStorage)",
           "exclude": [
-            "Infraestructure.Storages/AzureStorage/AzureBlobStorage.cs",
-            "Infraestructure.Storages/AzureStorage/AzureBlobStorageOptions.cs"
+            "infra/Infraestructure.Storages/AzureStorage/AzureBlobStorage.cs",
+            "infra/Infraestructure.Storages/AzureStorage/AzureBlobStorageOptions.cs"
           ]
         },
         {
           "condition": "(StorageNone)",
           "exclude": [
-            "Infraestructure.Storages/*"
+            "infra/Infraestructure.Storages/*"
           ]
         },
         // Events
         {
           "condition": "EventBusNone",
           "exclude": [
-            "**/Infraestructure.Events/**/*"
+            "**/infra/Infraestructure.Events/**/*"
           ]
         },
         {
           "condition": "!UseMemoryEvents",
           "exclude": [
-            "Infraestructure.Events/Handlers/*",
-            "Infraestructure.Events/IEventConsumer.cs",
-            "Infraestructure.Events/ConsumerService.cs",
-            "Infraestructure.Events/Publisher/MemoryEventNotificator.cs"
+            "infra/Infraestructure.Events/Handlers/*",
+            "infra/Infraestructure.Events/IEventConsumer.cs",
+            "infra/Infraestructure.Events/ConsumerService.cs",
+            "infra/Infraestructure.Events/Publisher/MemoryEventNotificator.cs"
           ]
         },
         {
           "condition": "!UseAzServiceBus",
           "exclude": [
-            "Infraestructure.Events/Publisher/AzureEventNotificator.cs"
+            "infra/Infraestructure.Events/Publisher/AzureEventNotificator.cs"
           ]
         },
         {
           "condition": "!UseRabbitMQ",
           "exclude": [
-            "Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
+            "infra/Infraestructure.Events/Publisher/RabbitEventNotificator.cs"
           ]
         },
         // Auth
         {
           "condition": "AuthNone",
           "exclude": [
-            "Infraestructure.Auth/*"
+            "infra/Infraestructure.Auth/*"
           ]
         },
         {
           "condition": "!UseJwt",
           "exclude": [
-            "Infraestructure.Auth/JwtManager/**/*"
+            "infra/Infraestructure.Auth/JwtManager/**/*"
           ]
         },
         // Database
         {
           "condition": "(!UseIdentity)",
           "exclude": [
-            "Infraestructure.Database/Entities/IdentityRoleEntity.cs",
-            "Infraestructure.Database/Entities/IdentityUserEntity.cs",
-            "Infraestructure.Database/Repository/IdentityUserPoc.cs",
-            "Infraestructure.Database/IdentityDatabaseContext.cs"
+            "infra/Infraestructure.Database/Entities/IdentityRoleEntity.cs",
+            "infra/Infraestructure.Database/Entities/IdentityUserEntity.cs",
+            "infra/Infraestructure.Database/Repository/IdentityUserPoc.cs",
+            "infra/Infraestructure.Database/IdentityDatabaseContext.cs"
           ]
         },
         {
           "condition": "(!SqlDatabase && !UseIdentity)",
           "exclude": [
-            "Infraestructure.Database/MigrationHostedService.cs"
+            "infra/Infraestructure.Database/MigrationHostedService.cs"
           ]
         },
         {
           "condition": "(!SqlDatabase || UseIdentity)",
           "exclude": [
-            "Infraestructure.Database/Entities/UserEntity.cs",
-            "Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
-            "Infraestructure.Database/Repository/SqlUserPoc.cs",
-            "Infraestructure.Database/DatabaseContext.cs"
+            "infra/Infraestructure.Database/Entities/UserEntity.cs",
+            "infra/Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
+            "infra/Infraestructure.Database/Repository/SqlUserPoc.cs",
+            "infra/Infraestructure.Database/DatabaseContext.cs"
           ]
         },
         {
           "condition": "(!UseMongodb)",
           "exclude": [
-            "Infraestructure.Database/Repository/MongoPoc.cs",
-            "Infraestructure.Database/Entities/MongoDbEntity.cs"
+            "infra/Infraestructure.Database/Repository/MongoPoc.cs",
+            "infra/Infraestructure.Database/Entities/MongoDbEntity.cs"
           ]
         },
         {
           "condition": "(!UseLitedb)",
           "exclude": [
-            "Infraestructure.Database/Repository/LitedbPoc.cs",
-            "Infraestructure.Database/Entities/LiteDbEntity.cs"
+            "infra/Infraestructure.Database/Repository/LitedbPoc.cs",
+            "infra/Infraestructure.Database/Entities/LiteDbEntity.cs"
           ]
         },
         {
           "condition": "DatabaseNone && (!UseIdentity)",
           "exclude": [
-            "**/Infraestructure.Database/**/*"
+            "**/infra/Infraestructure.Database/**/*"
           ]
         },
         {
           "condition": "(!UseAzureCosmos)",
           "exclude": [
-            "Infraestructure.Database/Repository/CosmosdbPoc.cs",
-            "Infraestructure.Database/Entities/CosmosDbEntity.cs"
+            "infra/Infraestructure.Database/Repository/CosmosdbPoc.cs",
+            "infra/Infraestructure.Database/Entities/CosmosDbEntity.cs"
           ]
         }
       ]

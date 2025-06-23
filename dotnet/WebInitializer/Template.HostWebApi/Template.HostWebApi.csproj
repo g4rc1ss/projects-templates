@@ -42,16 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <!--#if (!AuthNone)-->
-    <ProjectReference Include="..\Infraestructure.Auth\Infraestructure.Auth.csproj" />
+    <ProjectReference Include="..\infra\Infraestructure.Auth\Infraestructure.Auth.csproj" />
     <!--#endif-->
     <!--#if (!DatabaseNone || (UseIdentity))-->
-    <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
+    <ProjectReference Include="..\infra\Infraestructure.Database\Infraestructure.Database.csproj" />
     <!--#endif-->
     <!--#if (!EventBusNone)-->
-    <ProjectReference Include="..\Infraestructure.Events\Infraestructure.Events.csproj" />
+    <ProjectReference Include="..\infra\Infraestructure.Events\Infraestructure.Events.csproj" />
     <!--#endif-->
     <!--#if (!StorageNone)-->
-    <ProjectReference Include="..\Infraestructure.Storages\Infraestructure.Storages.csproj" />
+    <ProjectReference Include="..\infra\Infraestructure.Storages\Infraestructure.Storages.csproj" />
     <!--#endif-->
     <!--#if (!UseLayerArchitecture)-->
     <ProjectReference Include="..\Shared\Shared.csproj" />

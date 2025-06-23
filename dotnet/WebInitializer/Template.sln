@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.HostWebApi", "Temp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{217D2AD2-889B-438D-A898-08BA601811C1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5074454F-D196-4EDD-B6A9-5A0597F6E59B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{5074454F-D196-4EDD-B6A9-5A0597F6E59B}"
 	ProjectSection(SolutionItems) = preProject
 		#if (false)
 		    .template.config\template.json = .template.config\template.json
@@ -45,11 +45,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csp
 EndProject
 #endif
 #if (!DatabaseNone || UseIdentity)
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Database", "Infraestructure.Database\Infraestructure.Database.csproj", "{F48BFAB1-B7E4-48A4-9A6F-BC516DAF30A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Database", "infra\Infraestructure.Database\Infraestructure.Database.csproj", "{F48BFAB1-B7E4-48A4-9A6F-BC516DAF30A3}"
 EndProject
 #endif
 #if (!EventBusNone)
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Events", "Infraestructure.Events\Infraestructure.Events.csproj", "{DB292C4B-9944-4567-A0C3-E63258350CCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Events", "infra\Infraestructure.Events\Infraestructure.Events.csproj", "{DB292C4B-9944-4567-A0C3-E63258350CCE}"
 EndProject
 #endif
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Architecture.Tests", "test\Template.Architecture.Tests\Template.Architecture.Tests.csproj", "{C4C850CD-4E09-4E25-A340-8DC8F21FCDBE}"
@@ -59,7 +59,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.HostWebApi.Tests", "test\Template.HostWebApi.Tests\Template.HostWebApi.Tests.csproj", "{03D95F30-B279-41EB-8E6D-048162C04A20}"
 EndProject
 #if (!StorageNone)
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Storages", "Infraestructure.Storages\Infraestructure.Storages.csproj", "{2A96CD42-AA56-454B-A96D-F3E1DD85C02C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Storages", "infra\Infraestructure.Storages\Infraestructure.Storages.csproj", "{2A96CD42-AA56-454B-A96D-F3E1DD85C02C}"
 EndProject
 #endif
 #if (UseLayerArchitecture)
@@ -79,7 +79,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infra", "infra", "{AAE4E007-3EAF-4300-B76C-ED13CD8B2DF8}"
 EndProject
 #if (!AuthNone)
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Auth", "Infraestructure.Auth\Infraestructure.Auth.csproj", "{395C5CB3-CA68-4B3C-8480-B3448889CE34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Auth", "infra\Infraestructure.Auth\Infraestructure.Auth.csproj", "{395C5CB3-CA68-4B3C-8480-B3448889CE34}"
 EndProject
 #endif
 Global
@@ -166,7 +166,6 @@ Global
 		{0CADA354-EA5B-4406-9E33-6BD8D76CAB59} = {DB6FD3CC-2392-4383-A768-778E9AA19E22}
 		{63107101-C948-45AE-A3A4-2945D7D5D2B3} = {DB6FD3CC-2392-4383-A768-778E9AA19E22}
 #endif
-		{AAE4E007-3EAF-4300-B76C-ED13CD8B2DF8} = {DB6FD3CC-2392-4383-A768-778E9AA19E22}
 #if (!DatabaseNone || UseIdentity)
 		{F48BFAB1-B7E4-48A4-9A6F-BC516DAF30A3} = {AAE4E007-3EAF-4300-B76C-ED13CD8B2DF8}
 #endif
