@@ -1,4 +1,6 @@
+#if (!AuthNone)
 using Infraestructure.Auth;
+#endif
 
 namespace Template.HostWebApi.Extensions;
 

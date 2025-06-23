@@ -63,10 +63,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Storages", 
 EndProject
 #endif
 #if (UseLayerArchitecture)
+#if (UseApi)
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.API", "src\Template.API\Template.API.csproj", "{C45DBBAA-F0BB-48AE-8C55-CB7258BA56A1}"
 EndProject
+#endif
+#if (UseGrpc)
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Grpc", "src\Template.Grpc\Template.Grpc.csproj", "{63107101-C948-45AE-A3A4-2945D7D5D2B3}"
 EndProject
+#endif
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Application.UnitTest", "src\Template.Application.UnitTest\Template.Application.UnitTest.csproj", "{77B75C8F-FB6B-480C-BBD8-C4BA7F2F2D5D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Application", "src\Template.Application\Template.Application.csproj", "{0CADA354-EA5B-4406-9E33-6BD8D76CAB59}"
