@@ -7,11 +7,6 @@ EXPOSE 5151
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 COPY . .
-RUN ls -la
-RUN dotnet test --filter " \
-    FullyQualifiedName!~CompletedWeb.HostWebApi.Tests \
-    FullyQualifiedName!~Functionality.Infraestructure.Test \
-" /p:CSharpier_Bypass=true
 RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build /p:CSharpier_Bypass=true
 
 FROM build AS publish

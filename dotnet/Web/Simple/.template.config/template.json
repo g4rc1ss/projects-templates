@@ -63,27 +63,43 @@
           "displayName": "PostgreSQL"
         },
         {
+          "choice": "sqlite",
+          "displayName": "SQLite"
+        },
+        {
           "choice": "mongodb",
           "displayName": "Mongo Database"
+        },
+        {
+          "choice": "litedb",
+          "displayName": "LiteDB"
         }
       ],
       "defaultValue": "postgresql"
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres)"
+      "value": "(UsePostgres || UseSqlite)"
     },
     "UsePostgres": {
       "type": "computed",
       "value": "(Databases == 'postgresql')"
     },
+    "UseSqlite": {
+      "type": "computed",
+      "value": "(Databases == 'sqlite')"
+    },
     "NoSqlDatabase": {
       "type": "computed",
-      "value": "(UseMongodb)"
+      "value": "(UseMongodb || UseLitedb)"
     },
     "UseMongodb": {
       "type": "computed",
       "value": "(Databases == 'mongodb')"
+    },
+    "UseLitedb": {
+      "type": "computed",
+      "value": "(Databases == 'litedb')"
     },
     "DatabaseNone": {
       "type": "computed",
@@ -172,6 +188,13 @@
           ]
         },
         {
+          "condition": "(!UseLitedb)",
+          "exclude": [
+            "SimpleWeb.HostWebApi/Database/Repository/LitedbPoc.cs",
+            "SimpleWeb.HostWebApi/Database/Entities/LiteDbEntity.cs"
+          ]
+        },
+        {
           "condition": "(DatabaseNone)",
           "exclude": [
             "SimpleWeb.HostWebApi/Database/**/*",
@@ -223,7 +246,7 @@
       "description": "",
       "manualInstructions": [],
       "args": {
-        "files": "0;1"
+        "files": "0"
       },
       "continueOnError": true
     }

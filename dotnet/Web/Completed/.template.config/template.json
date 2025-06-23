@@ -502,7 +502,7 @@
       "description": "",
       "manualInstructions": [],
       "args": {
-        "files": "0;1"
+        "files": "0"
       },
       "continueOnError": true
     }

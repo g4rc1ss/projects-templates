@@ -25,12 +25,18 @@
         <!--#if (UsePostgres)-->
         <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
         <!--#endif-->
+        <!--#if (UseSqlite)-->
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="*"/>
+        <!--#endif-->
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
         <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.1"/>
         <!--#endif-->
         <!--#if (UseMongodb)-->
         <PackageReference Include="Aspire.MongoDB.Driver" Version="*"/>
+        <!--#endif-->
+        <!--#if (UseLitedb)-->
+        <PackageReference Include="LiteDB" Version="*"/>
         <!--#endif-->
     </ItemGroup>
     <ItemGroup>
