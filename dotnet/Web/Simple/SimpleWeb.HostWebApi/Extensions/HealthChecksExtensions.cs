@@ -1,4 +1,5 @@
-#if (SqlDatabase)
+
+#if (SqlDatabase && !UseSqlite)
 using SimpleWeb.HostWebApi.Database;
 #endif
 
