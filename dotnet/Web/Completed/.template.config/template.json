@@ -7,11 +7,11 @@
     "csharp",
     "Web"
   ],
-  "identity": "Web App",
+  "identity": "Completed Web App",
   "name": "Asier Web Base",
   "description": "Crear configuración base de diferentes servicios Web y configuraciones de auth, BBDD, etc.",
-  "shortName": "asier.webapp",
-  "sourceName": "Template",
+  "shortName": "asier.web.complete",
+  "sourceName": "CompletedWeb",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {

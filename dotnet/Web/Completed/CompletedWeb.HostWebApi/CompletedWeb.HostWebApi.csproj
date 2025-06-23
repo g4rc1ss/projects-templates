@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*"/>
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="*"/>
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*"/>
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
+    <!--#if (UseRedis || UseGarnet)-->
+    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*"/>
+    <!--#endif-->
+    <!--#if (SqlDatabase)-->
+    <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.1"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*"/>
+    <!--#endif-->
+    <!--#if (UseGrpc)-->
+    <PackageReference Include="Grpc.AspNetCore" Version="*"/>
+    <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="*"/>
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="*"/>
+    <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.12.0-beta.1"/>
+    <!--#endif-->
+    <!--#if (UseIdentity)-->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>
+    <!--#endif-->
+    <!--#if (UseAzureOpts)-->
+    <PackageReference Include="Azure.Identity" Version="*"/>
+    <!--#if (UseAzureKeyVault)-->
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="*"/>
+    <!--#endif-->
+    <!--#endif-->
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <!--#if (!AuthNone)-->
+    <ProjectReference Include="..\infra\Infraestructure.Auth\Infraestructure.Auth.csproj" />
+    <!--#endif-->
+    <!--#if (!DatabaseNone || (UseIdentity))-->
+    <ProjectReference Include="..\infra\Infraestructure.Database\Infraestructure.Database.csproj" />
+    <!--#endif-->
+    <!--#if (!EventBusNone)-->
+    <ProjectReference Include="..\infra\Infraestructure.Events\Infraestructure.Events.csproj" />
+    <!--#endif-->
+    <!--#if (!StorageNone)-->
+    <ProjectReference Include="..\infra\Infraestructure.Storages\Infraestructure.Storages.csproj" />
+    <!--#endif-->
+    <!--#if (!UseLayerArchitecture)-->
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <!--#endif-->
+    <!--#if (UseLayerArchitecture && UseApi)-->
+    <ProjectReference Include="..\src\CompletedWeb.API\CompletedWeb.API.csproj" />
+    <!--#endif-->
+    <!--#if (UseLayerArchitecture && UseGrpc)-->
+    <ProjectReference Include="..\src\CompletedWeb.Grpc\CompletedWeb.Grpc.csproj" />
+    <!--#endif-->
+  </ItemGroup>
+</Project>
