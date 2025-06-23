@@ -8,7 +8,7 @@
     "Web"
   ],
   "identity": "Completed Web App",
-  "name": "Asier Web Base",
+  "name": "Asier Web",
   "description": "Crear configuración base de diferentes servicios Web y configuraciones de auth, BBDD, etc.",
   "shortName": "asier.web.complete",
   "sourceName": "CompletedWeb",

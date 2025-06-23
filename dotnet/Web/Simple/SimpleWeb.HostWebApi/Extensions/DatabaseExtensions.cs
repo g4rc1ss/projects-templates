@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#if (SqlDatabase)
+using Microsoft.EntityFrameworkCore;
 using SimpleWeb.HostWebApi.Database;
 using SimpleWeb.HostWebApi.Database.HostedServices;
+#endif
 using SimpleWeb.HostWebApi.Database.Repository;
 
 namespace SimpleWeb.HostWebApi.Extensions;
@@ -29,7 +31,7 @@ public static class DatabaseExtensions
 
         builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
 #endif
-
-
+        builder.Services.AddScoped<IMongoPoc, MongoPoc>();
+        builder.AddMongoDBClient("mongo");
     }
 }
