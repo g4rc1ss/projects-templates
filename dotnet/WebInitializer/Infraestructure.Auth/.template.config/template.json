@@ -24,11 +24,11 @@
       "choices": [
         {
           "choice": "identity",
-          "description": "Microsoft Identity"
+          "displayName": "Microsoft Identity"
         },
         {
           "choice": "jwt",
-          "description": "JWT"
+          "displayName": "JWT"
         }
       ],
       "defaultValue": "identity",

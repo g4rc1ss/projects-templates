@@ -19,9 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!--#if (!DatabaseNone || (UseIdentity)) -->
-      <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
-        <!--#endif-->
     </ItemGroup>
 
 </Project>
