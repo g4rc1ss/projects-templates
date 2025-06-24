@@ -17,7 +17,7 @@ public static class InfraEventsExtensions
 #if (UseMemoryEvents)
         builder.Services.AddScoped<IEventNotificator, MemoryEventNotificator>();
         builder.AddConsumerServices([typeof(InfraestructureEventsExtensions).Assembly]);
-        
+
         builder.ConfigureOpenTelemetry();
 #endif
 
@@ -108,7 +108,8 @@ public static class InfraEventsExtensions
 
     private static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddOpenTelemetry()
+        builder
+            .Services.AddOpenTelemetry()
             .WithTracing(providerBuilder => providerBuilder.AddSource(EventsConst.CONSUMER_NAME));
     }
 #endif

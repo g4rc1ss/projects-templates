@@ -95,13 +95,15 @@ public static class InfraDatabaseExtensions
 #if (SqlDatabase || UseIdentity)
     private static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddOpenTelemetry().WithTracing(providerBuilder =>
-            providerBuilder.AddEntityFrameworkCoreInstrumentation(options =>
-            {
-                // Guardamos las consultas generadas por EF
-                options.SetDbStatementForText = true;
-            })
-        );
+        builder
+            .Services.AddOpenTelemetry()
+            .WithTracing(providerBuilder =>
+                providerBuilder.AddEntityFrameworkCoreInstrumentation(options =>
+                {
+                    // Guardamos las consultas generadas por EF
+                    options.SetDbStatementForText = true;
+                })
+            );
     }
 #endif
 }

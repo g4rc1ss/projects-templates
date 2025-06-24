@@ -29,7 +29,8 @@ public static class InfraCachingExtensions
 #if (UseMemoryCache)
     private static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddOpenTelemetry()
+        builder
+            .Services.AddOpenTelemetry()
             .WithTracing(providerBuilder => providerBuilder.AddSource(CACHING_TRACE));
     }
 #endif

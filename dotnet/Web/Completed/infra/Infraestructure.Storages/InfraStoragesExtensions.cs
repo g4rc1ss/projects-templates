@@ -56,7 +56,8 @@ public static class InfraStoragesExtensions
 #if (UseLocalStorage)
     private static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddOpenTelemetry()
+        builder
+            .Services.AddOpenTelemetry()
             .WithTracing(providerBuilder => providerBuilder.AddSource(STORAGE_TRACE));
     }
 #endif

@@ -29,7 +29,7 @@ public class MemoryCaching(IMemoryCache memoryCache) : ICaching
             ActivityKind.Producer
         );
         activity?.Start();
-        
+
         memoryCache.Set(key, value);
         return Task.CompletedTask;
     }
@@ -42,7 +42,7 @@ public class MemoryCaching(IMemoryCache memoryCache) : ICaching
             ActivityKind.Producer
         );
         activity?.Start();
-        
+
         memoryCache.TryGetValue(key, out _);
         return Task.CompletedTask;
     }
@@ -55,7 +55,7 @@ public class MemoryCaching(IMemoryCache memoryCache) : ICaching
             ActivityKind.Producer
         );
         activity?.Start();
-        
+
         memoryCache.Remove(key);
         return Task.CompletedTask;
     }
