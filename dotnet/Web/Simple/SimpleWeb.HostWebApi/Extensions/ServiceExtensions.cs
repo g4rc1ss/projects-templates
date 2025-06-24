@@ -12,7 +12,9 @@ internal static class ServiceExtensions
         builder.Services.AddHttpClient();
         builder.ConfigureDataProtectionProvider();
 
+#if (!DatabaseNone)
         builder.AddDatabaseConfig();
+#endif
 #if (UseMemoryCache)
         builder.Services.AddDistributedMemoryCache();
 #elif (UseRedis || UseGarnet)
