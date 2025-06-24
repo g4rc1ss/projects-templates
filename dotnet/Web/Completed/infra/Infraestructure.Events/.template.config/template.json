@@ -72,9 +72,7 @@
         {
           "condition": "!UseMemoryEvents",
           "exclude": [
-            "Handlers/*",
-            "IEventConsumer.cs",
-            "ConsumerService.cs",
+            "Handlers/**/*",
             "Publisher/MemoryEventNotificator.cs"
           ]
         },

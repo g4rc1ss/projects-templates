@@ -3,7 +3,9 @@
 using Infraestructure.Events.Publisher;
 using Microsoft.Extensions.DependencyInjection;
 #endif
+
 #if (UseMemoryEvents)
+using Infraestructure.Events.Consumer;
 using System.Threading.Channels;
 using System.Reflection;
 #endif
@@ -12,23 +14,44 @@ namespace Infraestructure.Events;
 
 public static class InfraEventsExtensions
 {
-    public static void AddEventsServices(this IHostApplicationBuilder builder)
+    public static void AddEventsServices(
+        this IHostApplicationBuilder builder,
+        Action<EventBusSettings>? configureSettings = null
+    )
     {
+        EventBusSettings settings = new();
+        configureSettings?.Invoke(settings);
+
 #if (UseMemoryEvents)
         builder.Services.AddScoped<IEventNotificator, MemoryEventNotificator>();
         builder.AddConsumerServices([typeof(InfraEventsExtensions).Assembly]);
 
-        builder.ConfigureOpenTelemetry();
+        if (!settings.DisableTracing)
+        {
+            builder.ConfigureOpenTelemetry();
+        }
 #endif
 
 #if (UseAzServiceBus)
         builder.Services.AddScoped<IEventNotificator, AzureEventNotificator>();
-        builder.AddAzureServiceBusClient("AzureServiceBus");
+        builder.AddAzureServiceBusClient(
+            "AzureServiceBus",
+            busSettings =>
+            {
+                busSettings.DisableTracing = settings.DisableTracing;
+            }
+        );
 #endif
 
 #if (UseRabbitMQ)
         builder.Services.AddScoped<IEventNotificator, RabbitEventNotificator>();
-        builder.AddRabbitMQClient("RabbitMQ");
+        builder.AddRabbitMQClient(
+            "RabbitMQ",
+            clientSettings =>
+            {
+                clientSettings.DisableTracing = settings.DisableTracing;
+            }
+        );
 #endif
     }
 

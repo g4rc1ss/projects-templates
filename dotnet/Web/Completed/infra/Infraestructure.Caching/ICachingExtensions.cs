@@ -15,7 +15,7 @@ public static class CachingExtensions
         byte[] encodingValue = JsonSerializer.SerializeToUtf8Bytes(value);
         return caching.SetAsync(key, encodingValue, options, token);
     }
-    
+
     public static Task SetAsync<T>(
         this ICaching caching,
         string key,

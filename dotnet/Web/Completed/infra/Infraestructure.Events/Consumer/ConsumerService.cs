@@ -3,7 +3,7 @@ using System.Threading.Channels;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Infraestructure.Events;
+namespace Infraestructure.Events.Consumer;
 
 public class ConsumerService<TRequest>(
     ILogger<ConsumerService<TRequest>> logger,

@@ -16,7 +16,7 @@ public class LocalStorage : IFileStorage
             ActivityKind.Producer
         );
         activity?.Start();
-        
+
         return Task.FromResult<Stream>(File.Open(path + name, FileMode.Open, FileAccess.ReadWrite));
     }
 

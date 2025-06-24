@@ -1,4 +1,4 @@
-namespace Infraestructure.Events;
+namespace Infraestructure.Events.Consumer;
 
 public interface IEventConsumer<TRequest>
     where TRequest : INotificatorRequest

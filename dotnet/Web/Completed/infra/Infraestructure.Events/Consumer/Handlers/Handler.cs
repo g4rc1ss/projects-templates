@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Infraestructure.Events.Handlers;
+namespace Infraestructure.Events.Consumer.Handlers;
 
 public record Request : INotificatorRequest;
 

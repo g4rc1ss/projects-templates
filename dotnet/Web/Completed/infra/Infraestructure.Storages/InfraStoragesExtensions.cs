@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 #if (UseAzureBlobStorage)
 using Azure.Identity;
-using Azure.Storage.Blobs;
 using Infraestructure.Storages.AzureStorage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,10 +16,15 @@ public static class InfraStoragesExtensions
 {
     internal const string STORAGE_TRACE = "Storage.Tracing";
 
-    public static void AddStorages(this IHostApplicationBuilder builder)
+    public static void AddStorages(
+        this IHostApplicationBuilder builder,
+        Action<StorageSettings>? configureStorageSettings = null
+    )
     {
+        StorageSettings storageSettings = new();
+        configureStorageSettings?.Invoke(storageSettings);
 #if (UseAzureBlobStorage)
-        builder.AddAzureBlobStorage();
+        builder.AddAzureBlobStorage(storageSettings);
 #endif
 #if (UseLocalStorage)
         builder.ConfigureOpenTelemetry();
@@ -29,7 +33,10 @@ public static class InfraStoragesExtensions
     }
 
 #if (UseAzureBlobStorage)
-    private static void AddAzureBlobStorage(this IHostApplicationBuilder builder)
+    private static void AddAzureBlobStorage(
+        this IHostApplicationBuilder builder,
+        StorageSettings storageSettings
+    )
     {
         builder
             .Services.AddOptions<AzureBlobStorageOptions>()
@@ -44,11 +51,16 @@ public static class InfraStoragesExtensions
 
         if (!string.IsNullOrEmpty(blobStorage?.AccountName))
         {
-            builder.Services.AddSingleton<BlobServiceClient>(services => new BlobServiceClient(
-                new Uri($"https://{blobStorage.AccountName}.blob.core.windows.net"),
-                new DefaultAzureCredential(),
-                new BlobClientOptions() { }
-            ));
+            builder.AddAzureBlobClient(
+                "",
+                settings =>
+                {
+                    settings.ConnectionString =
+                        $"https://{blobStorage.AccountName}.blob.core.windows.net";
+                    settings.DisableTracing = storageSettings.DisableTracing;
+                    settings.Credential = new DefaultAzureCredential();
+                }
+            );
         }
     }
 #endif
