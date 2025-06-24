@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
-#if (UseMemoryCache)
-using OpenTelemetry;
-#endif
 
-#if (UseMemoryCache || UseGarnet || UseRedis)
+#if (UseMemoryCache || UseDistributedCache)
+using Infraestructure.Caching.CacheImplementation;
 using Microsoft.Extensions.DependencyInjection;
 #endif
 
@@ -18,11 +16,11 @@ public static class InfraCachingExtensions
 #if (UseMemoryCache)
         builder.ConfigureOpenTelemetry();
         builder.Services.AddMemoryCache();
-#elif (UseRedis || UseGarnet)
-        builder.AddRedisDistributedCache("Cache");
+        builder.Services.AddScoped<ICaching, MemoryCaching>();
 #endif
-#if (UseMemoryCache || UseGarnet || UseRedis)
-        builder.Services.AddScoped<ICaching, DistributedCache>();
+#if (UseRedis || UseGarnet)
+        builder.AddRedisDistributedCache("Cache");
+        builder.Services.AddScoped<ICaching, DistributedCaching>();
 #endif
     }
 

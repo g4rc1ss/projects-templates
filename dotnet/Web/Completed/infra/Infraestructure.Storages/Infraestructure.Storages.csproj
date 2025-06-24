@@ -11,6 +11,7 @@
         <!--#endif-->
         <!--#if (UseLocalStorage)-->
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*"/>
         <!--#endif-->
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>

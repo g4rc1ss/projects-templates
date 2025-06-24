@@ -12,8 +12,8 @@
         <!--#endif-->
         <!--#if (UseMemoryCache)-->
         <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*"/>
         <!--#endif-->
-        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
     </ItemGroup>
 
 </Project>

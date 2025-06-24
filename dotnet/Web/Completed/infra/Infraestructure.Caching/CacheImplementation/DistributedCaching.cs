@@ -12,10 +12,15 @@ public class DistributedCaching(IDistributedCache cache) : ICaching
     public Task SetAsync(
         string key,
         byte[] value,
-        CachingOptions options,
+        CachingOptions? options,
         CancellationToken token = default
     )
     {
+        if (options is null)
+        {
+            return cache.SetAsync(key, value, token);
+        }
+
         DistributedCacheEntryOptions cacheOptions = new()
         {
             AbsoluteExpirationRelativeToNow = options.AbsoluteExpirationRelativeToNow,

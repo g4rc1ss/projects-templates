@@ -16,6 +16,7 @@
         <!--#endif-->
         <!--#if (UseSqlite)-->
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*"/>
         <!--#endif-->
         <!--#if (UseMongodb)-->
         <PackageReference Include="Aspire.MongoDB.Driver" Version="*"/>

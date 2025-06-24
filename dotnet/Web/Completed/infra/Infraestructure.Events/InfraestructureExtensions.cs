@@ -16,7 +16,7 @@ public static class InfraEventsExtensions
     {
 #if (UseMemoryEvents)
         builder.Services.AddScoped<IEventNotificator, MemoryEventNotificator>();
-        builder.AddConsumerServices([typeof(InfraestructureEventsExtensions).Assembly]);
+        builder.AddConsumerServices([typeof(InfraEventsExtensions).Assembly]);
 
         builder.ConfigureOpenTelemetry();
 #endif
@@ -67,20 +67,20 @@ public static class InfraEventsExtensions
 
                 foreach (Type handler in handlers)
                 {
-                    typeof(InfraestructureEventsExtensions)
+                    typeof(InfraEventsExtensions)
                         .GetMethod(nameof(AddHandlers))
                         ?.MakeGenericMethod(notificator, handler)
                         .Invoke(null, [builder.Services]);
                 }
 
                 Type channelMessage = typeof(Message<>).MakeGenericType(notificator);
-                typeof(InfraestructureEventsExtensions)
+                typeof(InfraEventsExtensions)
                     .GetMethod(nameof(AddChannel))
                     ?.MakeGenericMethod(channelMessage)
                     .Invoke(null, [builder.Services]);
 
                 Type consumerNotificator = typeof(ConsumerService<>).MakeGenericType(notificator);
-                typeof(InfraestructureEventsExtensions)
+                typeof(InfraEventsExtensions)
                     .GetMethod(nameof(AddWorkersService))
                     ?.MakeGenericMethod(consumerNotificator)
                     .Invoke(null, [builder.Services]);

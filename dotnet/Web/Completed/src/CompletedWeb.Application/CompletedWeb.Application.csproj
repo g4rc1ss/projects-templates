@@ -12,6 +12,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <!--#if (UseCache)-->
+        <ProjectReference Include="..\..\infra\Infraestructure.Caching\Infraestructure.Caching.csproj" />
+        <!--#endif-->
         <!--#if (!DatabaseNone || (UseIdentity))-->
         <ProjectReference Include="..\..\infra\Infraestructure.Database\Infraestructure.Database.csproj"/>
         <!--#endif-->

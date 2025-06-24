@@ -9,7 +9,7 @@ public static class CachingExtensions
         this ICaching caching,
         string key,
         string value,
-        CachingOptions options,
+        CachingOptions? options = null,
         CancellationToken token = default
     )
     {
@@ -21,7 +21,7 @@ public static class CachingExtensions
         this ICaching caching,
         string key,
         T value,
-        CachingOptions options,
+        CachingOptions? options = null,
         CancellationToken token = default
     )
     {
@@ -32,8 +32,6 @@ public static class CachingExtensions
     public static async Task<string> GetAsync(
         this ICaching caching,
         string key,
-        string value,
-        CachingOptions options,
         CancellationToken token = default
     )
     {
@@ -44,8 +42,6 @@ public static class CachingExtensions
     public static async Task<T?> GetAsync<T>(
         this ICaching caching,
         string key,
-        string value,
-        CachingOptions options,
         CancellationToken token = default
     )
     {

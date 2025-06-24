@@ -7,7 +7,7 @@ public interface ICaching
     Task SetAsync(
         string key,
         byte[] value,
-        CachingOptions options,
+        CachingOptions? options = null,
         CancellationToken token = default
     );
 

@@ -19,7 +19,7 @@ public class MemoryCaching(IMemoryCache memoryCache) : ICaching
     public Task SetAsync(
         string key,
         byte[] value,
-        CachingOptions options,
+        CachingOptions? options,
         CancellationToken token = default
     )
     {
@@ -29,6 +29,18 @@ public class MemoryCaching(IMemoryCache memoryCache) : ICaching
             ActivityKind.Producer
         );
         activity?.Start();
+
+        if (options?.AbsoluteExpirationRelativeToNow is not null)
+        {
+            memoryCache.Set(key, value, options.AbsoluteExpirationRelativeToNow.Value);
+            return Task.CompletedTask;
+        }
+
+        if (options?.AbsoluteExpiration is not null)
+        {
+            memoryCache.Set(key, value, options.AbsoluteExpiration.Value);
+            return Task.CompletedTask;
+        }
 
         memoryCache.Set(key, value);
         return Task.CompletedTask;

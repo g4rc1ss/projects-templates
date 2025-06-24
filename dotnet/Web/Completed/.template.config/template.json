@@ -224,18 +224,15 @@
         },
         {
           "choice": "memorycache",
-          "displayName": "In Memory",
-          "description": "Memory"
+          "displayName": "In Memory"
         },
         {
           "choice": "Redis",
-          "displayName": "Redis",
-          "description": "redis"
+          "displayName": "Redis"
         },
         {
           "choice": "Garnet",
-          "displayName": "Garnet",
-          "description": "garnet"
+          "displayName": "Garnet"
         }
       ],
       "defaultValue": "memorycache",
@@ -259,7 +256,7 @@
     },
     "UseCache": {
       "type": "computed",
-      "value": "(Cache != 'none')"
+      "value": "(UseMemoryCache || UseDistributedCache)"
     },
     // EventBus Config
     "EventBus": {

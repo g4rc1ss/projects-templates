@@ -35,7 +35,7 @@
     <!--#endif-->
   </ItemGroup>
   <ItemGroup>
-    <!--#if (!UseCache)-->
+    <!--#if (UseCache)-->
     <ProjectReference Include="..\infra\Infraestructure.Caching\Infraestructure.Caching.csproj" />
     <!--#endif-->
     <!--#if (!AuthNone)-->
