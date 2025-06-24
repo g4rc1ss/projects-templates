@@ -8,9 +8,7 @@ public static class AzServiceBusResource
         this IDistributedApplicationBuilder builder
     )
     {
-        return builder
-            .AddAzureServiceBus("AzureServiceBus")
-            .RunAsEmulator();
+        return builder.AddAzureServiceBus("AzureServiceBus").RunAsEmulator();
     }
 
     internal static IResourceBuilder<T> WithAspireAzServiceBus<T>(

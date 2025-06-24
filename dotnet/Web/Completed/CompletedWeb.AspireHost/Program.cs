@@ -2,12 +2,12 @@ using Projects;
 #if (UseAspire)
 using CompletedWeb.AspireHost.Resources;
 #endif
-#if (UseAzureStorage)
-using Aspire.Hosting.Azure;
+
+#if (UseAzureBlobStorage)
 using Microsoft.Extensions.Azure;
 #endif
 
-#if (UseAzServiceBus)
+#if (UseAzServiceBus || UseAzureCosmos || UseAzureBlobStorage)
 using Aspire.Hosting.Azure;
 #endif
 
@@ -22,6 +22,9 @@ IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder.AddAspireSqlServ
 #if (UseMongodb)
 IResourceBuilder<MongoDBServerResource> mongodb = builder.AddAspireMongo();
 #endif
+#if (UseAzureCosmos)
+IResourceBuilder<AzureCosmosDBDatabaseResource> cosmosdb = builder.AddAspireAzureCosmos();
+#endif
 #if (UseAzServiceBus)
 IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder.AddAspireAzureServiceBus();
 #endif
@@ -34,13 +37,11 @@ IResourceBuilder<RedisResource> redis = builder.AddRedisCache();
 #if (UseGarnet)
 IResourceBuilder<GarnetResource> garnet = builder.AddGarnetCache();
 #endif
-#if (UseAzureStorage)
+#if (UseAzureBlobStorage)
 IResourceBuilder<AzureBlobStorageResource> blobStorage = builder.AddAspireAzBlobStorage();
 #endif
 
-builder.AddProject<CompletedWeb_HostWebApi>(
-        "CompletedWeb"
-    )
+builder.AddProject<CompletedWeb_HostWebApi>("CompletedWeb")
 #if (UsePostgres)
 .WithAspirePostgres(postgres)
 #endif
@@ -49,6 +50,9 @@ builder.AddProject<CompletedWeb_HostWebApi>(
 #endif
 #if (UseMongodb)
 .WithAspireMongodb(mongodb)
+#endif
+#if (UseAzureCosmos)
+.WithAspireAzureCosmos(cosmosdb)
 #endif
 #if (UseAzServiceBus)
 .WithAspireAzServiceBus()
@@ -62,9 +66,9 @@ builder.AddProject<CompletedWeb_HostWebApi>(
 #if (UseGarnet)
 .WithGarnetCache(garnet)
 #endif
-#if (UseAzureStorage)
-.WithAspireRabbitMq(blobStorage)
+#if (UseAzureBlobStorage)
+.WithAspireAzBlobStorage(blobStorage)
 #endif
-    ;
+;
 
 await builder.Build().RunAsync();

@@ -20,7 +20,7 @@ public static class SqlServerResource
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
 #if (UseIdentity)
-return builder.WithReference(sqlServer, "IdentityDatabaseContext").WaitFor(sqlServer);
+        return builder.WithReference(sqlServer, "IdentityDatabaseContext").WaitFor(sqlServer);
 #else
         return builder.WithReference(sqlServer, "DatabaseContext").WaitFor(sqlServer);
 #endif

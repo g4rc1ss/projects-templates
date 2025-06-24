@@ -57,7 +57,6 @@
     "Storage": {
       "type": "parameter",
       "datatype": "choice",
-      //      "allowMultipleValues": true,
       "choices": [
         {
           "displayName": "None",
@@ -512,6 +511,12 @@
           "condition": "(!UseMongodb)",
           "exclude": [
             "CompletedWeb.AspireHost/Resources/MongodbResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureCosmos)",
+          "exclude": [
+            "CompletedWeb.AspireHost/Resources/AzureCosmosResource.cs"
           ]
         },
         {

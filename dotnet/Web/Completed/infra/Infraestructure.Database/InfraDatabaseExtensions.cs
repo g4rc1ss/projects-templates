@@ -87,7 +87,7 @@ public static class InfraDatabaseExtensions
 #if (UseAzureCosmos)
         builder.Services.AddScoped<ICosmosdbPoc, CosmosdbPoc>();
         builder.AddAzureCosmosClient(
-            "CompletedWebdb",
+            "Cosmos",
             cosmosSettings =>
             {
                 cosmosSettings.DisableTracing = settings.DisableTracing;

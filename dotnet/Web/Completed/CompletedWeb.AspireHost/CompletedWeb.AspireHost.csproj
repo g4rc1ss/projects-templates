@@ -34,6 +34,9 @@
     <!--#if (UseMongodb)-->
     <PackageReference Include="Aspire.Hosting.MongoDB" Version="*"/>
     <!--#endif-->
+    <!--#if (UseAzureCosmos)-->
+    <PackageReference Include="Aspire.Hosting.Azure.CosmosDB" Version="*"/>
+    <!--#endif-->
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CompletedWeb.HostWebApi\CompletedWeb.HostWebApi.csproj" />

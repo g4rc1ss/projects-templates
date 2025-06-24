@@ -1,4 +1,3 @@
-
 namespace CompletedWeb.AspireHost.Resources;
 
 public static class RabbitResource

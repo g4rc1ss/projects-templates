@@ -8,15 +8,12 @@ public static class AzureStorageResource
         this IDistributedApplicationBuilder builder
     )
     {
-        return builder
-            .AddAzureStorage("AzureBlobStorage")
-            .RunAsEmulator()
-            .AddBlobs("blob");
+        return builder.AddAzureStorage("AzureBlobStorage").RunAsEmulator().AddBlobs("blob");
     }
 
     internal static IResourceBuilder<T> WithAspireAzBlobStorage<T>(
         this IResourceBuilder<T> builder,
-        IResourceBuilder<RabbitMQServerResource> blobStorage
+        IResourceBuilder<AzureBlobStorageResource> blobStorage
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
