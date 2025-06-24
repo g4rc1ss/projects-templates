@@ -18,12 +18,14 @@ namespace Infraestructure.Database;
 
 public static class InfraDatabaseExtensions
 {
-    public static void AddDatabaseConfig(this IHostApplicationBuilder builder,
-        Action<DatabaseSettings>? configureSettings = null)
+    public static void AddDatabaseConfig(
+        this IHostApplicationBuilder builder,
+        Action<DatabaseSettings>? configureSettings = null
+    )
     {
         DatabaseSettings settings = new();
         configureSettings?.Invoke(settings);
-        
+
 #if (SqlDatabase || UseIdentity)
         if (!settings.DisableTracing)
         {
@@ -84,10 +86,13 @@ public static class InfraDatabaseExtensions
 #endif
 #if (UseAzureCosmos)
         builder.Services.AddScoped<ICosmosdbPoc, CosmosdbPoc>();
-        builder.AddAzureCosmosClient("CompletedWebdb", cosmosSettings =>
-        {
-            cosmosSettings.DisableTracing = settings.DisableTracing;
-        });
+        builder.AddAzureCosmosClient(
+            "CompletedWebdb",
+            cosmosSettings =>
+            {
+                cosmosSettings.DisableTracing = settings.DisableTracing;
+            }
+        );
 #endif
 
 #if (UseLitedb)
@@ -98,10 +103,13 @@ public static class InfraDatabaseExtensions
 
 #if (UseMongodb)
         builder.Services.AddScoped<IMongoPoc, MongoPoc>();
-        builder.AddMongoDBClient("mongo", dbSettings =>
-        {
-            dbSettings.DisableTracing = dbSettings.DisableTracing;
-        });
+        builder.AddMongoDBClient(
+            "mongo",
+            dbSettings =>
+            {
+                dbSettings.DisableTracing = dbSettings.DisableTracing;
+            }
+        );
 #endif
     }
 

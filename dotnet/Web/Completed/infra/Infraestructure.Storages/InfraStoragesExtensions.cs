@@ -27,7 +27,11 @@ public static class InfraStoragesExtensions
         builder.AddAzureBlobStorage(storageSettings);
 #endif
 #if (UseLocalStorage)
-        builder.ConfigureOpenTelemetry();
+        if (!storageSettings.DisableTracing)
+        {
+            builder.ConfigureOpenTelemetry();
+        }
+
         builder.Services.AddSingleton<IFileStorage, LocalStorage>();
 #endif
     }
