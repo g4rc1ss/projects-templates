@@ -6,6 +6,7 @@
     <ItemGroup>
         <!--#if (SqlDatabase)-->
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.1"/>
         <!--#endif-->
         <!--#if (UsePostgres)-->
         <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>

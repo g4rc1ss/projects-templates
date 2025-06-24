@@ -4,10 +4,12 @@ using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 #endif
+
 #if (UseLitedb)
 using LiteDB;
 #endif
 #if (SqlDatabase || UseIdentity)
+using OpenTelemetry.Trace;
 using Infraestructure.Database.HostedServices;
 using Microsoft.EntityFrameworkCore;
 #endif
@@ -19,6 +21,7 @@ public static class InfraestructureDatabaseExtensions
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
 #if (SqlDatabase || UseIdentity)
+        builder.ConfigureOpenTelemetry();
         builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
 #if (UseIdentity)
@@ -88,4 +91,17 @@ public static class InfraestructureDatabaseExtensions
         builder.AddMongoDBClient("mongo");
 #endif
     }
+
+#if (SqlDatabase || UseIdentity)
+    private static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
+    {
+        builder.Services.AddOpenTelemetry().WithTracing(providerBuilder =>
+            providerBuilder.AddEntityFrameworkCoreInstrumentation(options =>
+            {
+                // Guardamos las consultas generadas por EF
+                options.SetDbStatementForText = true;
+            })
+        );
+    }
+#endif
 }
