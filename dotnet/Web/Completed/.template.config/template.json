@@ -253,6 +253,10 @@
       "type": "computed",
       "value": "(Cache == 'garnet')"
     },
+    "UseCache": {
+      "type": "computed",
+      "value": "(Cache != 'none')"
+    }
     // EventBus Config
     "EventBus": {
       "type": "parameter",
@@ -354,6 +358,13 @@
           "condition": "UseLayerArchitecture",
           "exclude": [
             "Shared/*"
+          ]
+        },
+        // Cache
+        {
+          "condition": "(!UseCache)",
+          "exclude": [
+            "infra/Infraestructure.Caching/**/*"
           ]
         },
         // Storages

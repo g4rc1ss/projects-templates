@@ -6,7 +6,9 @@ using CompletedWeb.API;
 using CompletedWeb.Grpc;
 #endif
 #endif
-
+#if (UseCache)
+using Infraestructure.Caching;
+#endif
 #if (!AuthNone)
 using Infraestructure.Auth;
 #endif
@@ -47,10 +49,8 @@ internal static class ServiceExtensions
 #if (!StorageNone)
         builder.AddStorages();
 #endif
-#if (UseMemoryCache)
-        builder.Services.AddDistributedMemoryCache();
-#elif (UseRedis || UseGarnet)
-        builder.AddRedisDistributedCache("Cache");
+#if (UseCache)
+        builder.AddCaching();
 #endif
 
         InitializeFunctionalities(builder);

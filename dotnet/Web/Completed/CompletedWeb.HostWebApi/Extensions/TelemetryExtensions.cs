@@ -26,10 +26,10 @@ public static class TelemetryExtensions
 
         builder
             .Services.AddOpenTelemetry()
-            .ConfigureResource(resource => resource.AddService(builder.Configuration["AppName"]!))
+            .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
             .WithMetrics(metric =>
                 metric
-                    .AddMeter(builder.Configuration["AppName"]!)
+                    .AddMeter(builder.Environment.ApplicationName)
                     .AddAspNetCoreInstrumentation()
                     .AddRuntimeInstrumentation()
                     .AddHttpClientInstrumentation()

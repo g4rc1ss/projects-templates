@@ -14,9 +14,6 @@
     <!--#if (UseApi)-->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
     <!--#endif-->
-    <!--#if (UseRedis || UseGarnet)-->
-    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*"/>
-    <!--#endif-->
     <!--#if (SqlDatabase)-->
     <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.1"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*"/>
@@ -38,6 +35,9 @@
     <!--#endif-->
   </ItemGroup>
   <ItemGroup>
+    <!--#if (!UseCache)-->
+    <ProjectReference Include="..\infra\Infraestructure.Caching\Infraestructure.Caching.csproj" />
+    <!--#endif-->
     <!--#if (!AuthNone)-->
     <ProjectReference Include="..\infra\Infraestructure.Auth\Infraestructure.Auth.csproj" />
     <!--#endif-->

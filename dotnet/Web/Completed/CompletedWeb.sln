@@ -11,34 +11,34 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{5074454F-D196-4EDD-B6A9-5A0597F6E59B}"
 	ProjectSection(SolutionItems) = preProject
 		#if (false)
-            .template.config\template.json = .template.config\template.json
-        #endif
-        #if (false)
-            Directory.Build.props = ..\..\Directory.Build.props
-        #else
-            Directory.Build.props = Directory.Build.props
-        #endif
-        #if (false)
-            .csharpierrc.json = ..\..\.csharpierrc.json
-        #else
-            .csharpierrc.json = .csharpierrc.json
-        #endif
-        #if (false)
-            .editorconfig = ..\..\.editorconfig
-        #else
-            .editorconfig = .editorconfig
-        #endif
-        #if (false)
-            RemoveUnusedDuplicatePackages.ps1 = ..\..\RemoveUnusedDuplicatePackages.ps1
-        #else
-            RemoveUnusedDuplicatePackages.ps1 = RemoveUnusedDuplicatePackages.ps1
-        #endif
-        #if (false)
-            Directory.Packages.props = ..\..\Directory.Packages.props
-        #else
-            Directory.Packages.props = Directory.Packages.props
-        #endif
-        Dockerfile = Dockerfile
+												.template.config\template.json = .template.config\template.json
+								#endif
+								#if (false)
+												Directory.Build.props = ..\..\Directory.Build.props
+								#else
+												Directory.Build.props = Directory.Build.props
+								#endif
+								#if (false)
+												.csharpierrc.json = ..\..\.csharpierrc.json
+								#else
+												.csharpierrc.json = .csharpierrc.json
+								#endif
+								#if (false)
+												.editorconfig = ..\..\.editorconfig
+								#else
+												.editorconfig = .editorconfig
+								#endif
+								#if (false)
+												RemoveUnusedDuplicatePackages.ps1 = ..\..\RemoveUnusedDuplicatePackages.ps1
+								#else
+												RemoveUnusedDuplicatePackages.ps1 = RemoveUnusedDuplicatePackages.ps1
+								#endif
+								#if (false)
+												Directory.Packages.props = ..\..\Directory.Packages.props
+								#else
+												Directory.Packages.props = Directory.Packages.props
+								#endif
+								Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 #if (!UseLayerArchitecture)
@@ -81,6 +81,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infra", "infra", "{AAE4E007
 EndProject
 #if (!AuthNone)
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Auth", "infra\Infraestructure.Auth\Infraestructure.Auth.csproj", "{395C5CB3-CA68-4B3C-8480-B3448889CE34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure.Caching", "infra\Infraestructure.Caching\Infraestructure.Caching.csproj", "{BAA283BF-20A1-4293-AF40-C80909FF64A5}"
 EndProject
 #endif
 Global
@@ -151,6 +153,10 @@ Global
 		{395C5CB3-CA68-4B3C-8480-B3448889CE34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{395C5CB3-CA68-4B3C-8480-B3448889CE34}.Release|Any CPU.Build.0 = Release|Any CPU
 #endif
+		{BAA283BF-20A1-4293-AF40-C80909FF64A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAA283BF-20A1-4293-AF40-C80909FF64A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAA283BF-20A1-4293-AF40-C80909FF64A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAA283BF-20A1-4293-AF40-C80909FF64A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -179,6 +185,7 @@ Global
 #if (!AuthNone)
 		{395C5CB3-CA68-4B3C-8480-B3448889CE34} = {AAE4E007-3EAF-4300-B76C-ED13CD8B2DF8}
 #endif
+		{BAA283BF-20A1-4293-AF40-C80909FF64A5} = {AAE4E007-3EAF-4300-B76C-ED13CD8B2DF8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9910F84-F791-4753-8A02-193B05CB3472}
