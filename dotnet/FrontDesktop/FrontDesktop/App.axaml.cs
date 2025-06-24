@@ -1,3 +1,4 @@
+
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
@@ -7,6 +8,8 @@ using FrontDesktop.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Events;
 
 namespace FrontDesktop;
 
@@ -20,6 +23,11 @@ public class App : Application
     public override void OnFrameworkInitializationCompleted()
     {
         HostApplicationBuilder builder = Host.CreateApplicationBuilder();
+        
+        builder.Services.AddSerilog((configuration) =>
+        {
+            configuration.WriteTo.File("./logs.txt", LogEventLevel.Information);
+        });
 
         builder.Configuration.AddUserSecrets<App>();
 

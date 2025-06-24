@@ -20,5 +20,8 @@
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="*"/>
+        <PackageReference Include="Serilog" Version="*"/>
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="*"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="*"/>
     </ItemGroup>
 </Project>
