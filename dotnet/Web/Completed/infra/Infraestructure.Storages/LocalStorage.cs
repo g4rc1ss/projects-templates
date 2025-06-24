@@ -15,6 +15,8 @@ public class LocalStorage : IFileStorage
             $"Downloading file",
             ActivityKind.Producer
         );
+        activity?.Start();
+        
         return Task.FromResult<Stream>(File.Open(path + name, FileMode.Open, FileAccess.ReadWrite));
     }
 
@@ -30,6 +32,8 @@ public class LocalStorage : IFileStorage
             $"Uploading file",
             ActivityKind.Producer
         );
+        activity?.Start();
+
         await using FileStream file = new(path + name, FileMode.Create, FileAccess.Write);
         await content.CopyToAsync(file, cancellationToken);
     }
