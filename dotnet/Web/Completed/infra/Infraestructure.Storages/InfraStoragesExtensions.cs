@@ -1,13 +1,11 @@
 using Microsoft.Extensions.Hosting;
-#if (UseLocalStorage)
+#if (UseLocalStorage || UseAzureBlobStorage)
 using Microsoft.Extensions.DependencyInjection;
 #endif
-
 #if (UseAzureBlobStorage)
 using Azure.Identity;
 using Infraestructure.Storages.AzureStorage;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 #endif
 
 namespace Infraestructure.Storages;
@@ -49,18 +47,13 @@ public static class InfraStoragesExtensions
 
         builder.Services.AddSingleton<IFileStorage, AzureBlobStorage>();
 
-        AzureBlobStorageOptions? blobStorage = builder
-            .Configuration.GetSection("AzureBlobStorage")
-            .Get<AzureBlobStorageOptions>();
-
-        if (!string.IsNullOrEmpty(blobStorage?.AccountName))
+        string? blobStorage = builder.Configuration.GetConnectionString("AzureBlobStorage");
+        if (!string.IsNullOrEmpty(blobStorage))
         {
             builder.AddAzureBlobClient(
-                "",
+                "AzureBlobStorage",
                 settings =>
                 {
-                    settings.ConnectionString =
-                        $"https://{blobStorage.AccountName}.blob.core.windows.net";
                     settings.DisableTracing = storageSettings.DisableTracing;
                     settings.Credential = new DefaultAzureCredential();
                 }

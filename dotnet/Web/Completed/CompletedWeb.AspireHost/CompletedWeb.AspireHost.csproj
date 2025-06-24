@@ -19,6 +19,9 @@
     <!--#if (UseAzServiceBus)-->
     <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="*"/>
     <!--#endif-->
+    <!--#if (UseAzureBlobStorage)-->
+    <PackageReference Include="Aspire.Hosting.Azure.Storage" Version="*"/>
+    <!--#endif-->
     <!--#if (UseRabbitMQ)-->
     <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="*"/>
     <!--#endif-->

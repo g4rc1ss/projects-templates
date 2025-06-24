@@ -1,4 +1,9 @@
 using Projects;
+#if (UseAzureStorage)
+using Aspire.Hosting.Azure;
+using Microsoft.Extensions.Azure;
+#endif
+
 #if (UseAzServiceBus)
 using Aspire.Hosting.Azure;
 #endif
@@ -58,6 +63,13 @@ IResourceBuilder<RedisResource> redis = builder
 IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
 #endif
 
+#if (UseAzureStorage)
+IResourceBuilder<AzureBlobStorageResource> blobStorage = builder
+    .AddAzureStorage("AzureBlobStorage")
+    .RunAsEmulator()
+    .AddBlobs("blob");
+#endif
+
 IResourceBuilder<ProjectResource> project = builder.AddProject<CompletedWeb_HostWebApi>(
     "CompletedWeb"
 );
@@ -81,6 +93,14 @@ project.WithReference(sqlServer, "DatabaseContext").WaitFor(sqlServer);
 project.WithReference(mongoDb).WaitFor(mongoDb);
 #endif
 
+#if (UseAzServiceBus)
+project.WithReference(azureServiceBus).WaitFor(azureServiceBus);
+#endif
+
+#if (UseRabbitMQ)
+project.WithReference(rabbitMQ).WaitFor(rabbitMQ);
+#endif
+
 #if (UseRedis)
 project.WithReference(redis);
 project.WaitFor(redis);
@@ -90,12 +110,8 @@ project.WaitFor(redis);
 project.WithReference(garnet).WaitFor(garnet);
 #endif
 
-#if (UseAzServiceBus)
-project.WithReference(azureServiceBus).WaitFor(azureServiceBus);
-#endif
-
-#if (UseRabbitMQ)
-project.WithReference(rabbitMQ).WaitFor(rabbitMQ);
+#if (UseAzureStorage)
+project.WithReference(blobStorage).WaitFor(blobStorage);
 #endif
 
 await builder.Build().RunAsync();
