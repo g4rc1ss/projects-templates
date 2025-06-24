@@ -1,4 +1,7 @@
 using Projects;
+#if (UseAspire)
+using CompletedWeb.AspireHost.Resources;
+#endif
 #if (UseAzureStorage)
 using Aspire.Hosting.Azure;
 using Microsoft.Extensions.Azure;
@@ -11,107 +14,57 @@ using Aspire.Hosting.Azure;
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
 #if (UsePostgres)
-IResourceBuilder<ParameterResource> username = builder.AddParameter("username", "postgres");
-IResourceBuilder<ParameterResource> password = builder.AddParameter("password", "123456");
-
-IResourceBuilder<PostgresDatabaseResource> postgres = builder
-    .AddPostgres("Postgres", username, password, 5432)
-    .WithPgWeb()
-    .WithDataVolume("postgresVM", isReadOnly: false)
-    .WithLifetime(ContainerLifetime.Session)
-    .AddDatabase("PostgresDB", "CompletedWeb");
+IResourceBuilder<PostgresDatabaseResource> postgres = builder.AddAspirePostgres();
 #endif
-
 #if (UseSqlServer || UseAzureSql)
-IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder
-    .AddSqlServer("SQLServer")
-    .WithDataVolume("SqlServerVM", isReadOnly: false)
-    .WithLifetime(ContainerLifetime.Session)
-    .AddDatabase("CompletedWebDatabase", "CompletedWeb");
+IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder.AddAspireSqlServer();
 #endif
-
 #if (UseMongodb)
-IResourceBuilder<MongoDBServerResource> mongoDb = builder
-    .AddMongoDB("mongo")
-    // .WithDataVolume("MongoVM", isReadOnly: false)
-    .WithLifetime(ContainerLifetime.Session)
-    .WithMongoExpress();
+IResourceBuilder<MongoDBServerResource> mongodb = builder.AddAspireMongo();
 #endif
-
 #if (UseAzServiceBus)
-IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder
-    .AddAzureServiceBus("AzureServiceBus")
-    .RunAsEmulator();
+IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder.AddAspireAzureServiceBus();
 #endif
-
 #if (UseRabbitMQ)
-IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder
-    .AddRabbitMQ("RabbitMQ")
-    .WithDataVolume("rabbitMQVM", isReadOnly: false)
-    .WithLifetime(ContainerLifetime.Session)
-    .WithManagementPlugin();
+IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddAspireRabbitMq();
 #endif
-
 #if (UseRedis)
-IResourceBuilder<RedisResource> redis = builder
-    .AddRedis("Cache")
-    .WithRedisCommander()
-    .WithRedisInsight();
+IResourceBuilder<RedisResource> redis = builder.AddRedisCache();
 #endif
-
 #if (UseGarnet)
-IResourceBuilder<GarnetResource> garnet = builder.AddGarnet("Cache");
+IResourceBuilder<GarnetResource> garnet = builder.AddGarnetCache();
 #endif
-
 #if (UseAzureStorage)
-IResourceBuilder<AzureBlobStorageResource> blobStorage = builder
-    .AddAzureStorage("AzureBlobStorage")
-    .RunAsEmulator()
-    .AddBlobs("blob");
+IResourceBuilder<AzureBlobStorageResource> blobStorage = builder.AddAspireAzBlobStorage();
 #endif
 
-IResourceBuilder<ProjectResource> project = builder.AddProject<CompletedWeb_HostWebApi>(
-    "CompletedWeb"
-);
+builder.AddProject<CompletedWeb_HostWebApi>(
+        "CompletedWeb"
+    )
 #if (UsePostgres)
-#if (UseIdentity)
-project.WithReference(postgres, "IdentityDatabaseContext").WaitFor(postgres);
-#else
-project.WithReference(postgres, "DatabaseContext").WaitFor(postgres);
+.WithAspirePostgres(postgres)
 #endif
-#endif
-
 #if (UseSqlServer || UseAzureSql)
-#if (UseIdentity)
-project.WithReference(sqlServer, "IdentityDatabaseContext").WaitFor(sqlServer);
-#else
-project.WithReference(sqlServer, "DatabaseContext").WaitFor(sqlServer);
+.WithAspireSqlServer(sqlServer)
 #endif
-#endif
-
 #if (UseMongodb)
-project.WithReference(mongoDb).WaitFor(mongoDb);
+.WithAspireMongodb(mongodb)
 #endif
-
 #if (UseAzServiceBus)
-project.WithReference(azureServiceBus).WaitFor(azureServiceBus);
+.WithAspireAzServiceBus()
 #endif
-
 #if (UseRabbitMQ)
-project.WithReference(rabbitMQ).WaitFor(rabbitMQ);
+.WithAspireRabbitMq(rabbitMQ)
 #endif
-
 #if (UseRedis)
-project.WithReference(redis);
-project.WaitFor(redis);
+.WithRedisCache(redis)
 #endif
-
 #if (UseGarnet)
-project.WithReference(garnet).WaitFor(garnet);
+.WithGarnetCache(garnet)
 #endif
-
 #if (UseAzureStorage)
-project.WithReference(blobStorage).WaitFor(blobStorage);
+.WithAspireRabbitMq(blobStorage)
 #endif
+    ;
 
 await builder.Build().RunAsync();

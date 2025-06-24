@@ -100,6 +100,10 @@
       "datatype": "bool",
       "defaultValue": false
     },
+    "UseAspire": {
+      "type": "computed",
+      "value": "(true)"
+    },
     // Database Config
     "Databases": {
       "type": "parameter",
@@ -489,6 +493,55 @@
           "exclude": [
             "infra/Infraestructure.Database/Repository/CosmosdbPoc.cs",
             "infra/Infraestructure.Database/Entities/CosmosDbEntity.cs"
+          ]
+        },
+        // Aspire
+        {
+          "condition": "(!UsePostgres)",
+          "exclude": [
+            "CompletedWeb.AspireHost/Resources/PostgresResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseSqlServer && !UseAzureSql))",
+          "exclude": [
+            "CompletedWeb.AspireHost/Resources/SqlServerResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseMongodb)",
+          "exclude": [
+            "CompletedWeb.AspireHost/Resources/MongodbResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseRedis)",
+          "exclude": [
+            "CompletedWeb.AspireHost/Resources/RedisCacheResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseGarnet)",
+          "exclude": [
+            "CompletedWeb.AspireHost/Resources/GarnetCacheResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseRabbitMQ)",
+          "exclude": [
+            "CompletedWeb.AspireHost/Resources/RabbitResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureBlobStorage)",
+          "exclude": [
+            "CompletedWeb.AspireHost/Resources/AzureStorageResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzServiceBus)",
+          "exclude": [
+            "CompletedWeb.AspireHost/Resources/AzureServiceBusResource.cs"
           ]
         }
       ]
