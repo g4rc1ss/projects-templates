@@ -245,6 +245,10 @@
       "type": "computed",
       "value": "(Cache == 'memorycache')"
     },
+    "UseDistributedCache": {
+      "type": "computed",
+      "value": "(UseRedis || UseGarnet)"
+    },
     "UseRedis": {
       "type": "computed",
       "value": "(Cache == 'redis')"
@@ -256,7 +260,7 @@
     "UseCache": {
       "type": "computed",
       "value": "(Cache != 'none')"
-    }
+    },
     // EventBus Config
     "EventBus": {
       "type": "parameter",
@@ -365,6 +369,18 @@
           "condition": "(!UseCache)",
           "exclude": [
             "infra/Infraestructure.Caching/**/*"
+          ]
+        },
+        {
+          "condition": "(!UseMemoryCache)",
+          "exclude": [
+            "infra/Infraestructure.Caching/CacheImplementation/MemoryCaching.cs"
+          ]
+        },
+        {
+          "condition": "(!UseDistributedCache)",
+          "exclude": [
+            "infra/Infraestructure.Caching/CacheImplementation/DistributedCaching.cs"
           ]
         },
         // Storages

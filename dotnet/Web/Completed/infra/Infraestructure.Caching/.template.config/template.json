@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "Infraestructure",
+    "Template",
+    "C#"
+  ],
+  "identity": "Cache",
+  "name": "Asier Infraestructure",
+  "description": "Create Cache Infraestructure",
+  "shortName": "asier.infra.cache",
+  "sourceName": "Infraestructure.Caching",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "Cache": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "memorycache",
+          "displayName": "In Memory",
+          "description": "Memory"
+        },
+        {
+          "choice": "Redis",
+          "displayName": "Redis",
+          "description": "redis"
+        },
+        {
+          "choice": "Garnet",
+          "displayName": "Garnet",
+          "description": "garnet"
+        }
+      ],
+      "defaultValue": "memorycache",
+      "description": "Cache"
+    },
+    "UseMemoryCache": {
+      "type": "computed",
+      "value": "(Cache == 'memorycache')"
+    },
+    "UseDistributedCache": {
+      "type": "computed",
+      "value": "(UseRedis || UseGarnet)"
+    },
+    "UseRedis": {
+      "type": "computed",
+      "value": "(Cache == 'redis')"
+    },
+    "UseGarnet": {
+      "type": "computed",
+      "value": "(Cache == 'garnet')"
+    },
+    "UseCache": {
+      "type": "computed",
+      "value": "(Cache != 'none')"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!UseMemoryCache)",
+          "exclude": [
+            "CacheImplementation/MemoryCaching.cs"
+          ]
+        },
+        {
+          "condition": "(!UseDistributedCache)",
+          "exclude": [
+            "CacheImplementation/DistributedCaching.cs"
+          ]
+        }
+      ]
+    }
+  ]
+}
