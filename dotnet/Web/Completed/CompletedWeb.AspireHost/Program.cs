@@ -2,11 +2,6 @@ using Projects;
 #if (UseAspire)
 using CompletedWeb.AspireHost.Resources;
 #endif
-
-#if (UseAzureBlobStorage)
-using Microsoft.Extensions.Azure;
-#endif
-
 #if (UseAzServiceBus || UseAzureCosmos || UseAzureBlobStorage)
 using Aspire.Hosting.Azure;
 #endif
@@ -29,7 +24,7 @@ IResourceBuilder<AzureCosmosDBDatabaseResource> cosmosdb = builder.AddAspireAzur
 IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder.AddAspireAzureServiceBus();
 #endif
 #if (UseRabbitMQ)
-IResourceBuilder<RabbitMQServerResource> rabbitMQ = builder.AddAspireRabbitMq();
+IResourceBuilder<RabbitMQServerResource> rabbitMq = builder.AddAspireRabbitMq();
 #endif
 #if (UseRedis)
 IResourceBuilder<RedisResource> redis = builder.AddRedisCache();
@@ -55,10 +50,10 @@ builder.AddProject<CompletedWeb_HostWebApi>("CompletedWeb")
 .WithAspireAzureCosmos(cosmosdb)
 #endif
 #if (UseAzServiceBus)
-.WithAspireAzServiceBus()
+.WithAspireAzServiceBus(azureServiceBus)
 #endif
 #if (UseRabbitMQ)
-.WithAspireRabbitMq(rabbitMQ)
+.WithAspireRabbitMq(rabbitMq)
 #endif
 #if (UseRedis)
 .WithRedisCache(redis)

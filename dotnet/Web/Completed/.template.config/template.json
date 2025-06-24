@@ -502,7 +502,7 @@
           ]
         },
         {
-          "condition": "(!UseSqlServer && !UseAzureSql))",
+          "condition": "(!UseSqlServer && !UseAzureSql)",
           "exclude": [
             "CompletedWeb.AspireHost/Resources/SqlServerResource.cs"
           ]
