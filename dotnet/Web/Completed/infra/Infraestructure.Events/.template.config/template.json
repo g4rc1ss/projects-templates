@@ -8,9 +8,9 @@
   ],
   "identity": "Events",
   "name": "Asier Infraestructure",
-  "description": "Crear Infraestructura",
+  "description": "Create project with Event Bus publisher",
   "shortName": "asier.infra.events",
-  "sourceName": "Template",
+  "sourceName": "Infraestructure.Events",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {

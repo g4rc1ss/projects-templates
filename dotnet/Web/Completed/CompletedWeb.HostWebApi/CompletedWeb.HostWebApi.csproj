@@ -38,11 +38,6 @@
     <!--#endif-->
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <!--#if (!AuthNone)-->
     <ProjectReference Include="..\infra\Infraestructure.Auth\Infraestructure.Auth.csproj" />
     <!--#endif-->

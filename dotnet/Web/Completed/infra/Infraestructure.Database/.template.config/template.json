@@ -8,9 +8,9 @@
   ],
   "identity": "Database",
   "name": "Asier Infraestructure",
-  "description": "Crear Infraestructura",
+  "description": "Create project with different Database options",
   "shortName": "asier.infra.db",
-  "sourceName": "Template",
+  "sourceName": "Infraestructure.Database",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {

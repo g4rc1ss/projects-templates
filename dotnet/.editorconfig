@@ -154,7 +154,8 @@ csharp_style_var_elsewhere = false:error
 # http://kent-boogaart.com/blog/editorconfig-reference-for-c-developers#csharp_style_var_for_built_in_types
 csharp_style_var_for_built_in_types = false:error
 
-csharp_style_namespace_declarations = file_scoped:error
+# https://kent-boogaart.com/blog/editorconfig-reference-for-c-developers#csharp_style_var_when_type_is_apparent
+csharp_style_var_when_type_is_apparent = false:error
 
 # http://kent-boogaart.com/blog/editorconfig-reference-for-c-developers#dotnet_sort_system_directives_first
 dotnet_sort_system_directives_first = true
@@ -275,6 +276,9 @@ resharper_arrange_this_qualifier_highlighting = hint
 
 # IDE1006: Naming Styles
 dotnet_diagnostic.IDE1006.severity = error
+
+# Namespace declaration preferences (IDE0161 - File Scoped)
+dotnet_diagnostic.IDE0161.severity = error
 
 # Ignore that our code is compatible only with Windows
 # CA1416: Validate platform compatibility

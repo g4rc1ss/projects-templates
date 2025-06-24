@@ -8,9 +8,9 @@
   ],
   "identity": "Authentication",
   "name": "Asier Infraestructure",
-  "description": "Crear Infraestructura",
+  "description": "Create auth infraestructure",
   "shortName": "asier.infra.auth",
-  "sourceName": "Template",
+  "sourceName": "Infraestructure.Auth",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {

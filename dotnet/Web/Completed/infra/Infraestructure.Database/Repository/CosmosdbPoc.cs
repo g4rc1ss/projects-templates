@@ -21,7 +21,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
 
         Container container = cosmosClient.GetDatabase("Poc").GetContainer(nameof(CosmosDbEntity));
 
-        var iterator = container
+        FeedIterator<CosmosDbEntity>? iterator = container
             .GetItemLinqQueryable<CosmosDbEntity>()
             .Where(e => e.Id == id)
             .ToFeedIterator();

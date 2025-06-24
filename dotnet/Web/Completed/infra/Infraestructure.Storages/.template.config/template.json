@@ -8,9 +8,9 @@
   ],
   "identity": "Storage",
   "name": "Asier Infraestructure",
-  "description": "Crear Infraestructura",
+  "description": "Create Project to connect with storages",
   "shortName": "asier.infra.storage",
-  "sourceName": "Template",
+  "sourceName": "Infraestructure.Storages",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
