@@ -9,12 +9,12 @@ public static class GarnetCacheResource
         return builder.AddGarnet("Cache");
     }
 
-    internal static void WithGarnetCache<T>(
+    internal static IResourceBuilder<T> WithGarnetCache<T>(
         this IResourceBuilder<T> builder,
-        IResourceBuilder<GarnetResource> redis
+        IResourceBuilder<GarnetResource> garnet
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
-        builder.WithReference(redis).WaitFor(redis);
+        return builder.WithReference(garnet).WaitFor(garnet);
     }
 }

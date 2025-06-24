@@ -17,12 +17,12 @@ public static class PostgresResource
             .AddDatabase("PostgresDB", "SimpleWeb");
     }
 
-    internal static void WithAspirePostgres<T>(
+    internal static IResourceBuilder<T> WithAspirePostgres<T>(
         this IResourceBuilder<T> builder,
         IResourceBuilder<PostgresDatabaseResource> postgres
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
-        builder.WithReference(postgres, "DatabaseContext").WaitFor(postgres);
+        return builder.WithReference(postgres, "DatabaseContext").WaitFor(postgres);
     }
 }

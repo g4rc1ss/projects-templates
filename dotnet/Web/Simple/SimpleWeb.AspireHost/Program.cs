@@ -1,4 +1,7 @@
 using Projects;
+#if (UseAspire)
+using SimpleWeb.AspireHost.Resources;
+#endif
 
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
@@ -15,18 +18,19 @@ IResourceBuilder<RedisResource> redis = builder.AddRedisCache();
 IResourceBuilder<GarnetResource> garnet = builder.AddGarnetCache();
 #endif
 
-IResourceBuilder<ProjectResource> project = builder.AddProject<SimpleWeb_HostWebApi>("SimpleWeb");
+builder.AddProject<SimpleWeb_HostWebApi>("SimpleWeb")
 #if (UsePostgres)
-project.WithAspirePostgres(postgres);
+.WithAspirePostgres(postgres)
 #endif
 #if (UseMongoDB)
-project.WithAspireMongodb(mongodb);
+.WithAspireMongodb(mongodb)
 #endif
 #if (UseRedis)
-project.WithRedisCache(redis);
+.WithRedisCache(redis)
 #endif
 #if (UseGarnet)
-project.WithReference(garnet).WaitFor(garnet);
+.WithGarnetCache(garnet)
 #endif
+;
 
 await builder.Build().RunAsync();

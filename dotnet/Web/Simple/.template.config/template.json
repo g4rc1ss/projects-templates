@@ -49,6 +49,10 @@
       "datatype": "bool",
       "defaultValue": false
     },
+    "UseAspire": {
+      "type": "computed",
+      "value": "(true)"
+    },
     // Databases
     "Databases": {
       "type": "parameter",
@@ -217,7 +221,7 @@
         {
           "condition": "(!UsePostgres)",
           "exclude": [
-            "SimpleWeb.AspireHost/Resources/PostgresResource.cs",
+            "SimpleWeb.AspireHost/Resources/PostgresResource.cs"
           ]
         },
         {

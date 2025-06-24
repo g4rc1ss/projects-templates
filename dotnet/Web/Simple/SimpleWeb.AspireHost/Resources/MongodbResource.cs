@@ -13,12 +13,12 @@ public static class MongodbResource
             .WithMongoExpress();
     }
 
-    internal static void WithAspireMongodb<T>(
+    internal static IResourceBuilder<T> WithAspireMongodb<T>(
         this IResourceBuilder<T> builder,
         IResourceBuilder<MongoDBServerResource> mongodb
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
-        builder.WithReference(mongodb).WaitFor(mongodb);
+        return builder.WithReference(mongodb).WaitFor(mongodb);
     }
 }
