@@ -17,6 +17,8 @@ public static class InfraestructureEventsExtensions
 #if (UseMemoryEvents)
         builder.Services.AddScoped<IEventNotificator, MemoryEventNotificator>();
         builder.AddConsumerServices([typeof(InfraestructureEventsExtensions).Assembly]);
+        
+        builder.ConfigureOpenTelemetry();
 #endif
 
 #if (UseAzServiceBus)
@@ -102,6 +104,12 @@ public static class InfraestructureEventsExtensions
         where TImplementation : class, IEventConsumer<TRequest>
     {
         services.AddSingleton<IEventConsumer<TRequest>, TImplementation>();
+    }
+
+    public static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
+    {
+        builder.Services.AddOpenTelemetry()
+            .WithTracing(providerBuilder => providerBuilder.AddSource(EventsConst.CONSUMER_NAME));
     }
 #endif
 }

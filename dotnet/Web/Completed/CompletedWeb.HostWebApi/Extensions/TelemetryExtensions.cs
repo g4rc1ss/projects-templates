@@ -2,9 +2,6 @@
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-#if (UseMemoryEvents)
-using Infraestructure.Events;
-#endif
 
 namespace CompletedWeb.HostWebApi.Extensions;
 
@@ -36,9 +33,6 @@ public static class TelemetryExtensions
             )
             .WithTracing(trace =>
                 trace
-#if (UseMemoryEvents)
-                    .AddSource(EventsConst.CONSUMER_NAME)
-#endif
                     .AddAspNetCoreInstrumentation()
 #if (UseGrpc)
                     .AddGrpcClientInstrumentation()
