@@ -7,7 +7,10 @@
     <ItemGroup>
         <!--#if (UseAzureBlobStorage)-->
         <PackageReference Include="Azure.Identity" Version="*"/>
-        <PackageReference Include="Azure.Storage.Blobs" Version="*"/>
+        <PackageReference Include="Aspire.Azure.Storage.Blobs" Version="*"/>
+        <!--#endif-->
+        <!--#if (UseLocalStorage)-->
+        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*"/>
         <!--#endif-->
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>

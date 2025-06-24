@@ -13,14 +13,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infraestructure.Storages;
 
-public static class StoragesExtensions
+public static class InfraStoragesExtensions
 {
+    internal const string STORAGE_TRACE = "Storage.Tracing";
+
     public static void AddStorages(this IHostApplicationBuilder builder)
     {
 #if (UseAzureBlobStorage)
         builder.AddAzureBlobStorage();
 #endif
 #if (UseLocalStorage)
+        builder.ConfigureOpenTelemetry();
         builder.Services.AddSingleton<IFileStorage, LocalStorage>();
 #endif
     }
@@ -47,6 +50,14 @@ public static class StoragesExtensions
                 new BlobClientOptions() { }
             ));
         }
+    }
+#endif
+
+#if (UseLocalStorage)
+    private static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
+    {
+        builder.Services.AddOpenTelemetry()
+            .WithTracing(providerBuilder => providerBuilder.AddSource(STORAGE_TRACE));
     }
 #endif
 }

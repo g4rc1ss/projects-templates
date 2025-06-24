@@ -19,7 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infraestructure.Auth;
 
-public static class AuthExtensions
+public static class InfraAuthExtensions
 {
     public static void AddAuthenticationProtocol(this IHostApplicationBuilder builder)
     {

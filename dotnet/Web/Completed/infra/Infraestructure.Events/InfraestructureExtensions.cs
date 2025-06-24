@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Infraestructure.Events;
 
-public static class InfraestructureEventsExtensions
+public static class InfraEventsExtensions
 {
     public static void AddEventsServices(this IHostApplicationBuilder builder)
     {
@@ -106,7 +106,7 @@ public static class InfraestructureEventsExtensions
         services.AddSingleton<IEventConsumer<TRequest>, TImplementation>();
     }
 
-    public static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
+    private static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
         builder.Services.AddOpenTelemetry()
             .WithTracing(providerBuilder => providerBuilder.AddSource(EventsConst.CONSUMER_NAME));

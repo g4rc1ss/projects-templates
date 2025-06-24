@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Infraestructure.Storages;
 
 public class LocalStorage : IFileStorage
@@ -8,6 +10,11 @@ public class LocalStorage : IFileStorage
         CancellationToken cancellationToken = default
     )
     {
+        using ActivitySource? tracingConsumer = new(InfraStoragesExtensions.STORAGE_TRACE);
+        using Activity? activity = tracingConsumer.CreateActivity(
+            $"Downloading file",
+            ActivityKind.Producer
+        );
         return Task.FromResult<Stream>(File.Open(path + name, FileMode.Open, FileAccess.ReadWrite));
     }
 
@@ -18,6 +25,11 @@ public class LocalStorage : IFileStorage
         CancellationToken cancellationToken = default
     )
     {
+        using ActivitySource? tracingConsumer = new(InfraStoragesExtensions.STORAGE_TRACE);
+        using Activity? activity = tracingConsumer.CreateActivity(
+            $"Uploading file",
+            ActivityKind.Producer
+        );
         await using FileStream file = new(path + name, FileMode.Create, FileAccess.Write);
         await content.CopyToAsync(file, cancellationToken);
     }

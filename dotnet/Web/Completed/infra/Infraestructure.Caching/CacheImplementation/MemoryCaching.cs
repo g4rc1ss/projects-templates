@@ -7,7 +7,7 @@ public class MemoryCaching(IMemoryCache memoryCache) : ICaching
 {
     public Task<byte[]?> GetAsync(string key, CancellationToken token = default)
     {
-        using ActivitySource? tracingConsumer = new(InfraestructureCachingExtensions.CACHING_TRACE);
+        using ActivitySource? tracingConsumer = new(InfraCachingExtensions.CACHING_TRACE);
         using Activity? activity = tracingConsumer.CreateActivity(
             $"Get object",
             ActivityKind.Producer
@@ -23,7 +23,7 @@ public class MemoryCaching(IMemoryCache memoryCache) : ICaching
         CancellationToken token = default
     )
     {
-        using ActivitySource? tracingConsumer = new(InfraestructureCachingExtensions.CACHING_TRACE);
+        using ActivitySource? tracingConsumer = new(InfraCachingExtensions.CACHING_TRACE);
         using Activity? activity = tracingConsumer.CreateActivity(
             $"Set object",
             ActivityKind.Producer
@@ -36,7 +36,7 @@ public class MemoryCaching(IMemoryCache memoryCache) : ICaching
 
     public Task RefreshAsync(string key, CancellationToken token = default)
     {
-        using ActivitySource? tracingConsumer = new(InfraestructureCachingExtensions.CACHING_TRACE);
+        using ActivitySource? tracingConsumer = new(InfraCachingExtensions.CACHING_TRACE);
         using Activity? activity = tracingConsumer.CreateActivity(
             $"Refresh Cache",
             ActivityKind.Producer
@@ -49,7 +49,7 @@ public class MemoryCaching(IMemoryCache memoryCache) : ICaching
 
     public Task RemoveAsync(string key, CancellationToken token = default)
     {
-        using ActivitySource? tracingConsumer = new(InfraestructureCachingExtensions.CACHING_TRACE);
+        using ActivitySource? tracingConsumer = new(InfraCachingExtensions.CACHING_TRACE);
         using Activity? activity = tracingConsumer.CreateActivity(
             $"Remove Cache",
             ActivityKind.Producer

@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure.Database;
 
-public static class InfraestructureDatabaseExtensions
+public static class InfraDatabaseExtensions
 {
     public static void AddDatabaseConfig(this IHostApplicationBuilder builder)
     {
