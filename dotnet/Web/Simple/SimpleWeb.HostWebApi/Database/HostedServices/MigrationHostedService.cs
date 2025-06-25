@@ -14,6 +14,7 @@ public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedS
             scope.ServiceProvider.GetRequiredService<PostgresContext>();
         await postgresContext.Database.MigrateAsync(cancellationToken: cancellationToken);
 #endif
+        
 #if (UseSqlite)
         SqliteContext sqliteContext = scope.ServiceProvider.GetRequiredService<SqliteContext>();
         await sqliteContext.Database.MigrateAsync(cancellationToken: cancellationToken);
