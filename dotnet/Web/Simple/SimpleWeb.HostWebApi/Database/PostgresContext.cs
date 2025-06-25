@@ -3,7 +3,7 @@ using SimpleWeb.HostWebApi.Database.Entities;
 
 namespace SimpleWeb.HostWebApi.Database;
 
-public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
+public class PostgresContext(DbContextOptions<PostgresContext> options) : DbContext(options)
 {
     public DbSet<UserEntity> Users { get; set; }
 
@@ -11,6 +11,6 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     {
         base.OnModelCreating(builder);
 
-        builder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
+        builder.ApplyConfigurationsFromAssembly(typeof(PostgresContext).Assembly);
     }
 }

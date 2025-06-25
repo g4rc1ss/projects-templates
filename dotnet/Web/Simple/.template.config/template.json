@@ -57,6 +57,7 @@
     "Databases": {
       "type": "parameter",
       "datatype": "choice",
+      "allowMultipleValues": true,
       "choices": [
         {
           "choice": "none",
@@ -107,7 +108,7 @@
     },
     "DatabaseNone": {
       "type": "computed",
-      "value": "(Databases == 'none')"
+      "value": "(!SqlDatabase && !NoSqlDatabase)"
     },
     // Cache
     "Cache": {
@@ -178,17 +179,29 @@
           "condition": "(!SqlDatabase)",
           "exclude": [
             "SimpleWeb.HostWebApi/Database/Entities/UserEntity.cs",
-            "SimpleWeb.HostWebApi/Database/Repository/SqlUserPoc.cs",
             "SimpleWeb.HostWebApi/Database/EntityConfiguration/UserEntityConfiguration.cs",
-            "SimpleWeb.HostWebApi/Database/HostedServices/MigrationHostedService.cs",
-            "SimpleWeb.HostWebApi/Database/DatabaseContext.cs"
+            "SimpleWeb.HostWebApi/Database/HostedServices/MigrationHostedService.cs"
+          ]
+        },
+        {
+          "condition": "(!UsePostgres)",
+          "exclude": [
+            "SimpleWeb.HostWebApi/Database/Repository/PostgresPoc.cs",
+            "SimpleWeb.HostWebApi/Database/PostgresContext.cs"
+          ]
+        },
+        {
+          "condition": "(!UseSqlite)",
+          "exclude": [
+            "SimpleWeb.HostWebApi/Database/Repository/SqlitePoc.cs",
+            "SimpleWeb.HostWebApi/Database/SqliteContext.cs"
           ]
         },
         {
           "condition": "(!UseMongodb)",
           "exclude": [
             "SimpleWeb.HostWebApi/Database/Repository/MongoPoc.cs",
-            "SimpleWeb.HostWebApi/Database/Entities/MongoDbEntity.cs",
+            "SimpleWeb.HostWebApi/Database/Entities/MongoDbEntity.cs"
           ]
         },
         {
@@ -221,25 +234,25 @@
         {
           "condition": "(!UsePostgres)",
           "exclude": [
-            "SimpleWeb.AspireHost/Resources/PostgresResource.cs"
+            "SimpleWeb.AspireHost/Resources/AspirePostgresResource.cs"
           ]
         },
         {
           "condition": "(!UseMongodb)",
           "exclude": [
-            "SimpleWeb.AspireHost/Resources/MongodbResource.cs"
+            "SimpleWeb.AspireHost/Resources/AspireMongodbResource.cs"
           ]
         },
         {
           "condition": "(!UseRedis)",
           "exclude": [
-            "SimpleWeb.AspireHost/Resources/RedisCacheResource.cs"
+            "SimpleWeb.AspireHost/Resources/AspireRedisCacheResource.cs"
           ]
         },
         {
           "condition": "(!UseGarnet)",
           "exclude": [
-            "SimpleWeb.AspireHost/Resources/GarnetCacheResource.cs"
+            "SimpleWeb.AspireHost/Resources/AspireGarnetCacheResource.cs"
           ]
         }
       ]

@@ -1,3 +1,5 @@
+using SimpleWeb.HostWebApi.UsesCases;
+
 namespace SimpleWeb.HostWebApi.Extensions;
 
 internal static class ServiceExtensions
@@ -24,5 +26,8 @@ internal static class ServiceExtensions
         InitializeFunctionalities(builder);
     }
 
-    private static void InitializeFunctionalities(this WebApplicationBuilder builder) { }
+    private static void InitializeFunctionalities(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<Example>();
+    }
 }

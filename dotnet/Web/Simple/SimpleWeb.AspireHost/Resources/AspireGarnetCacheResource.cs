@@ -1,6 +1,6 @@
 namespace SimpleWeb.AspireHost.Resources;
 
-public static class GarnetCacheResource
+public static class AspireGarnetCacheResource
 {
     internal static IResourceBuilder<GarnetResource> AddGarnetCache(
         this IDistributedApplicationBuilder builder

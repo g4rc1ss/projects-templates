@@ -1,6 +1,6 @@
 namespace SimpleWeb.AspireHost.Resources;
 
-public static class RedisCacheResource
+public static class AspireRedisCacheResource
 {
     internal static IResourceBuilder<RedisResource> AddRedisCache(
         this IDistributedApplicationBuilder builder

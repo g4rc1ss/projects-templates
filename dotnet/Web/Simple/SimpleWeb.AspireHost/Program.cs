@@ -6,7 +6,7 @@ using SimpleWeb.AspireHost.Resources;
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
 #if (UsePostgres)
-IResourceBuilder<PostgresDatabaseResource> postgres = builder.AddAspirePostgres();
+IResourceBuilder<PostgresServerResource> postgres = builder.AddAspirePostgres();
 #endif
 #if (UseMongoDB)
 IResourceBuilder<MongoDBServerResource> mongodb = builder.AddAspireMongo();

@@ -1,13 +1,13 @@
 namespace SimpleWeb.AspireHost.Resources;
 
-public static class MongodbResource
+public static class AspireMongodbResource
 {
     internal static IResourceBuilder<MongoDBServerResource> AddAspireMongo(
         this IDistributedApplicationBuilder builder
     )
     {
         return builder
-            .AddMongoDB("mongo")
+            .AddMongoDB("Mongo")
             // .WithDataVolume("MongoVM", isReadOnly: false)
             .WithLifetime(ContainerLifetime.Session)
             .WithMongoExpress();

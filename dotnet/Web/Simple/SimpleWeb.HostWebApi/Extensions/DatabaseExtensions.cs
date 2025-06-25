@@ -1,6 +1,7 @@
 ﻿#if (SqlDatabase || NoSqlDatabase)
 using SimpleWeb.HostWebApi.Database.Repository;
 #endif
+
 #if (UseLitedb)
 using LiteDB;
 #endif
@@ -21,7 +22,7 @@ public static class DatabaseExtensions
         builder.Services.AddHostedService<MigrationHostedService>();
 
 #if (UsePostgres)
-        builder.AddNpgsqlDbContext<DatabaseContext>(
+        builder.AddNpgsqlDbContext<PostgresContext>(
             "Postgres",
             sqlSettings =>
             {
@@ -29,19 +30,22 @@ public static class DatabaseExtensions
                 sqlSettings.DisableMetrics = settings.DisableTracing;
             }
         );
+        builder.Services.AddScoped<ISqlitePoc, SqlitePoc>();
 #endif
 
 #if (UseSqlite)
-        builder.AddSqliteDbContext<DatabaseContext>();
+        builder.AddSqliteDbContext<SqliteContext>();
+        builder.Services.AddScoped<IPostgresPoc, PostgresPoc>();
 #endif
 
-        builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
 #endif
+
 #if (UseLitedb)
         builder.Services.AddTransient<ILitedbPoc, LitedbPoc>();
         string? litedbConnection = builder.Configuration.GetConnectionString("Litedb");
         builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(litedbConnection));
 #endif
+
 #if (UseMongodb)
         builder.Services.AddScoped<IMongoPoc, MongoPoc>();
         builder.AddMongoDBClient("Mongo");

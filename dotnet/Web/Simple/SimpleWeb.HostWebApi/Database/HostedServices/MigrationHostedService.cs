@@ -1,4 +1,6 @@
+#if (SqlDatabase)
 using Microsoft.EntityFrameworkCore;
+#endif
 
 namespace SimpleWeb.HostWebApi.Database.HostedServices;
 
@@ -7,8 +9,14 @@ public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedS
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         using IServiceScope scope = serviceProvider.CreateScope();
-        DatabaseContext context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-        await context.Database.MigrateAsync(cancellationToken: cancellationToken);
+#if (UsePostgres)
+        PostgresContext postgresContext = scope.ServiceProvider.GetRequiredService<PostgresContext>();
+        await postgresContext.Database.MigrateAsync(cancellationToken: cancellationToken);
+#endif
+#if (UseSqlite)
+        SqliteContext postgresContext = scope.ServiceProvider.GetRequiredService<SqliteContext>();
+        await postgresContext.Database.MigrateAsync(cancellationToken: cancellationToken);
+#endif
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
