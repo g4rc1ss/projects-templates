@@ -21,7 +21,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
 
         Container container = cosmosClient
             .GetDatabase("Database")
-            .GetContainer(nameof(CosmosDbEntity));
+            .GetContainer("Container");
 
         FeedIterator<CosmosDbEntity>? iterator = container
             .GetItemLinqQueryable<CosmosDbEntity>()
@@ -47,7 +47,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
     {
         Container container = cosmosClient
             .GetDatabase("Database")
-            .GetContainer(nameof(CosmosDbEntity));
+            .GetContainer("Container");
 
         ItemResponse<CosmosDbEntity> response = await container.CreateItemAsync(
             cosmosEntity,
@@ -65,7 +65,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
     {
         Container container = cosmosClient
             .GetDatabase("Database")
-            .GetContainer(nameof(CosmosDbEntity));
+            .GetContainer("Container");
 
         await container.UpsertItemAsync(cosmosEntity, cancellationToken: cancellationToken);
     }
@@ -77,7 +77,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
     {
         Container container = cosmosClient
             .GetDatabase("Database")
-            .GetContainer(nameof(CosmosDbEntity));
+            .GetContainer("Container");
 
         await container.DeleteItemAsync<CosmosDbEntity>(
             cosmosEntity.Id,

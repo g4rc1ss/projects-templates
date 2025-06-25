@@ -4,16 +4,16 @@ namespace CompletedWeb.AspireHost.Resources;
 
 public static class AspireAzureStorageResource
 {
-    internal static IResourceBuilder<AzureStorageResource> AddAspireAzBlobStorage(
+    internal static IResourceBuilder<AzureBlobStorageResource> AddAspireAzBlobStorage(
         this IDistributedApplicationBuilder builder
     )
     {
-        IResourceBuilder<Aspire.Hosting.Azure.AzureStorageResource> blobStorage = builder
+        IResourceBuilder<AzureBlobStorageResource> blobStorage = builder
             .AddAzureStorage("AzureBlobStorage")
-            .RunAsEmulator();
+            .RunAsEmulator()
+            .AddBlobs("AzureBlobs");
 
         blobStorage
-            .AddBlobs("AzureBlobs")
             .AddBlobContainer("AzureBlobContainer", "blob");
 
         return blobStorage;
@@ -21,7 +21,7 @@ public static class AspireAzureStorageResource
 
     internal static IResourceBuilder<T> WithAspireAzBlobStorage<T>(
         this IResourceBuilder<T> builder,
-        IResourceBuilder<AzureBlobStorageContainerResource> blobStorage
+        IResourceBuilder<AzureBlobStorageResource> blobStorage
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
