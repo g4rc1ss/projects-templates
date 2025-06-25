@@ -1,6 +1,6 @@
 namespace CompletedWeb.AspireHost.Resources;
 
-public static class PostgresResource
+public static class AspirePostgresResource
 {
     internal static IResourceBuilder<PostgresDatabaseResource> AddAspirePostgres(
         this IDistributedApplicationBuilder builder

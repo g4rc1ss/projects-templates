@@ -1,6 +1,6 @@
 namespace CompletedWeb.AspireHost.Resources;
 
-public static class MongodbResource
+public static class AspireMongodbResource
 {
     internal static IResourceBuilder<MongoDBServerResource> AddAspireMongo(
         this IDistributedApplicationBuilder builder

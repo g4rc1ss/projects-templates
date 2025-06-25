@@ -1,6 +1,6 @@
 namespace CompletedWeb.AspireHost.Resources;
 
-public static class RabbitResource
+public static class AspireRabbitResource
 {
     internal static IResourceBuilder<RabbitMQServerResource> AddAspireRabbitMq(
         this IDistributedApplicationBuilder builder

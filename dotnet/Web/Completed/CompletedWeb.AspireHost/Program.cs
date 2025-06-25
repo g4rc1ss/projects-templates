@@ -18,10 +18,10 @@ IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder.AddAspireSqlServ
 IResourceBuilder<MongoDBServerResource> mongodb = builder.AddAspireMongo();
 #endif
 #if (UseAzureCosmos)
-IResourceBuilder<AzureCosmosDBDatabaseResource> cosmosdb = builder.AddAspireAzureCosmos();
+IResourceBuilder<AzureCosmosDBResource> cosmosdb = builder.AddAspireAzureCosmos();
 #endif
 #if (UseAzServiceBus)
-IResourceBuilder<AzureServiceBusResource> azureServiceBus = builder.AddAspireAzureServiceBus();
+IResourceBuilder<AzureServiceBusQueueResource> azureServiceBus = builder.AddAspireAzureServiceBus();
 #endif
 #if (UseRabbitMQ)
 IResourceBuilder<RabbitMQServerResource> rabbitMq = builder.AddAspireRabbitMq();
@@ -33,7 +33,7 @@ IResourceBuilder<RedisResource> redis = builder.AddRedisCache();
 IResourceBuilder<GarnetResource> garnet = builder.AddGarnetCache();
 #endif
 #if (UseAzureBlobStorage)
-IResourceBuilder<AzureBlobStorageResource> blobStorage = builder.AddAspireAzBlobStorage();
+IResourceBuilder<AzureBlobStorageContainerResource> blobStorage = builder.AddAspireAzBlobStorage();
 #endif
 
 builder.AddProject<CompletedWeb_HostWebApi>("Host")

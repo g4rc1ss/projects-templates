@@ -1,6 +1,6 @@
 namespace CompletedWeb.AspireHost.Resources;
 
-public static class SqlServerResource
+public static class AspireSqlServerResource
 {
     internal static IResourceBuilder<SqlServerDatabaseResource> AddAspireSqlServer(
         this IDistributedApplicationBuilder builder

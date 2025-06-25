@@ -502,55 +502,55 @@
         {
           "condition": "(!UsePostgres)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/PostgresResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspirePostgresResource.cs"
           ]
         },
         {
           "condition": "(!UseSqlServer && !UseAzureSql)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/SqlServerResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireSqlServerResource.cs"
           ]
         },
         {
           "condition": "(!UseMongodb)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/MongodbResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireMongodbResource.cs"
           ]
         },
         {
           "condition": "(!UseAzureCosmos)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/AzureCosmosResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireAzureCosmosResource.cs"
           ]
         },
         {
           "condition": "(!UseRedis)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/RedisCacheResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireRedisCacheResource.cs"
           ]
         },
         {
           "condition": "(!UseGarnet)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/GarnetCacheResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireGarnetCacheResource.cs"
           ]
         },
         {
           "condition": "(!UseRabbitMQ)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/RabbitResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireRabbitResource.cs"
           ]
         },
         {
           "condition": "(!UseAzureBlobStorage)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/AzureStorageResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireAzureStorageResource.cs"
           ]
         },
         {
           "condition": "(!UseAzServiceBus)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/AzureServiceBusResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireAzureServiceBusResource.cs"
           ]
         }
       ]

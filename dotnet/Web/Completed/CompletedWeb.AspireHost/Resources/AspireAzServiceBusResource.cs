@@ -2,18 +2,21 @@ using Aspire.Hosting.Azure;
 
 namespace CompletedWeb.AspireHost.Resources;
 
-public static class AzServiceBusResource
+public static class AspireAzServiceBusResource
 {
-    internal static IResourceBuilder<AzureServiceBusResource> AddAspireAzureServiceBus(
+    internal static IResourceBuilder<AzureServiceBusQueueResource> AddAspireAzureServiceBus(
         this IDistributedApplicationBuilder builder
     )
     {
-        return builder.AddAzureServiceBus("AzureServiceBus").RunAsEmulator();
+        return builder
+            .AddAzureServiceBus("ServiceBus")
+            .RunAsEmulator()
+            .AddServiceBusQueue("AzureServiceBus", "ServiceBusQueue");
     }
 
     internal static IResourceBuilder<T> WithAspireAzServiceBus<T>(
         this IResourceBuilder<T> builder,
-        IResourceBuilder<AzureServiceBusResource> azureServiceBus
+        IResourceBuilder<AzureServiceBusQueueResource> azureServiceBus
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {

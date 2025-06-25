@@ -167,55 +167,55 @@
         {
           "condition": "(!UsePostgres)",
           "exclude": [
-            "Resources/PostgresResource.cs"
+            "Resources/AspirePostgresResource.cs"
           ]
         },
         {
           "condition": "(!UseSqlServer && !UseAzureSql)",
           "exclude": [
-            "Resources/SqlServerResource.cs"
+            "Resources/AspireSqlServerResource.cs"
           ]
         },
         {
           "condition": "(!UseMongodb)",
           "exclude": [
-            "Resources/MongodbResource.cs"
+            "Resources/AspireMongodbResource.cs"
           ]
         },
         {
           "condition": "(!UseAzureCosmos)",
           "exclude": [
-            "Resources/AzureCosmosResource.cs"
+            "Resources/AspireAzureCosmosResource.cs"
           ]
         },
         {
           "condition": "(!UseRedis)",
           "exclude": [
-            "Resources/RedisCacheResource.cs"
+            "Resources/AspireRedisCacheResource.cs"
           ]
         },
         {
           "condition": "(!UseGarnet)",
           "exclude": [
-            "Resources/GarnetCacheResource.cs"
+            "Resources/AspireGarnetCacheResource.cs"
           ]
         },
         {
           "condition": "(!UseRabbitMQ)",
           "exclude": [
-            "Resources/RabbitResource.cs"
+            "Resources/AspireRabbitResource.cs"
           ]
         },
         {
           "condition": "(!UseAzureBlobStorage)",
           "exclude": [
-            "Resources/AzureStorageResource.cs"
+            "Resources/AspireAzureStorageResource.cs"
           ]
         },
         {
           "condition": "(!UseAzServiceBus)",
           "exclude": [
-            "Resources/AzureServiceBusResource.cs"
+            "Resources/AspireAzureServiceBusResource.cs"
           ]
         }
       ]
