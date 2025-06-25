@@ -33,7 +33,7 @@ public static class InfraDatabaseExtensions
         
 #endif
 #if (UsePostgres)
-        builder.AddNpgsqlDbContext<DatabaseContext>(
+        builder.AddNpgsqlDbContext<PostgresContext>(
             "Postgres",
             sqlSettings =>
             {

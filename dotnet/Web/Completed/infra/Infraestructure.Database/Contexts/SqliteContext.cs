@@ -1,9 +1,9 @@
 using Infraestructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infraestructure.Database;
+namespace Infraestructure.Database.Contexts;
 
-public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
+public class SqliteContext(DbContextOptions<SqliteContext> options) : DbContext(options)
 {
     public DbSet<UserEntity> Users { get; set; }
 
@@ -11,6 +11,6 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     {
         base.OnModelCreating(builder);
 
-        builder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
+        builder.ApplyConfigurationsFromAssembly(typeof(SqliteContext).Assembly);
     }
 }

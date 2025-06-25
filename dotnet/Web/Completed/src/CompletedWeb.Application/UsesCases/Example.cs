@@ -20,8 +20,14 @@ public class Example(
 #if (UseAzureCosmos)
     ICosmosdbPoc cosmosdb,
 #endif
-#if (SqlDatabase)
-    IUserRepository userRepository,
+#if (UsePostgres)
+    IPostgresPoc postgresPoc,
+#endif
+#if (UseSqlite)
+    ISqlitePoc sqlitePoc,
+#endif
+#if (UseSqlServer)
+    ISqlServerPoc sqlServerPoc,
 #endif
 #if (UseIdentity)
     IIdentityUserRepository userRepository,
@@ -42,8 +48,14 @@ public class Example(
 #if (UseAzureCosmos)
         await CosmosAsync();
 #endif
-#if (SqlDatabase)
-        await SqlDatabaseAsync();
+#if (UsePostgres)
+        await PostgresAsync();
+#endif
+#if (UseSqlite)
+        await SqliteAsync();
+#endif
+#if (UseSqlServer)
+        await SqlServerAsync();
 #endif
 #if (UseIdentity)
         await IdentityAsync();
@@ -62,8 +74,8 @@ public class Example(
     {
         await eventNotificator.PublishAsync(new RequestMessage());
     }
+    
 #endif
-
 #if (UseAzureCosmos)
     private async Task CosmosAsync()
     {
@@ -79,19 +91,41 @@ public class Example(
 
         CosmosDbEntity? result = await cosmosdb.GetByIdAsync(entidadCreada.Id);
     }
+    
 #endif
-
-#if (SqlDatabase)
-    private async Task SqlDatabaseAsync()
+#if (UsePostgres)
+    private async Task PostgresAsync()
     {
         UserEntity user = new() { Name = "Nombre" };
-        UserEntity userCreated = await userRepository.CreateAsync(user);
+        UserEntity userCreated = await postgresPoc.CreateAsync(user);
         userCreated.Name = "Nombre Modificado";
 
-        UserEntity? result = await userRepository.GetByIdAsync(userCreated.Id);
+        UserEntity? result = await postgresPoc.GetByIdAsync(userCreated.Id);
     }
+    
 #endif
+#if (UseSqlite)
+    private async Task SqliteAsync()
+    {
+        UserEntity user = new() { Name = "Nombre" };
+        UserEntity userCreated = await sqlitePoc.CreateAsync(user);
+        userCreated.Name = "Nombre Modificado";
 
+        UserEntity? result = await sqlitePoc.GetByIdAsync(userCreated.Id);
+    }
+    
+#endif
+#if (UseSqlServer)
+    private async Task SqlServerAsync()
+    {
+        UserEntity user = new() { Name = "Nombre" };
+        UserEntity userCreated = await sqlServerPoc.CreateAsync(user);
+        userCreated.Name = "Nombre Modificado";
+
+        UserEntity? result = await sqlServerPoc.GetByIdAsync(userCreated.Id);
+    }
+    
+#endif
 #if (UseIdentity)
     private async Task IdentityAsync()
     {
@@ -101,8 +135,8 @@ public class Example(
 
         IdentityUserEntity? result = await userRepository.GetByIdAsync(userCreated.Id.ToString());
     }
+    
 #endif
-
 #if (UseMongodb)
     private async Task MongodbAsync()
     {
@@ -111,8 +145,8 @@ public class Example(
         userCreated.Property = "Modificado";
         MongoDbEntity? result = await mongoPoc.GetByIdAsync(userCreated.Id);
     }
+    
 #endif
-
 #if (!StorageNone)
     private async Task StorageAsync()
     {

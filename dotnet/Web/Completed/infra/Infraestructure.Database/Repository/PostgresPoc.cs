@@ -1,10 +1,11 @@
+using Infraestructure.Database.Contexts;
 using Infraestructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Infraestructure.Database.Repository;
 
-public class SqlUserPoc(DatabaseContext dbContext) : IUserRepository
+public class PostgresPoc(PostgresContext dbContext) : IPostgresPoc
 {
     public UserEntity? Entity { get; set; }
 
@@ -79,4 +80,4 @@ public class SqlUserPoc(DatabaseContext dbContext) : IUserRepository
     }
 }
 
-public interface IUserRepository : IRepository<UserEntity, int>, IManyCommandRepository<UserEntity>;
+public interface IPostgresPoc : IRepository<UserEntity, int>, IManyCommandRepository<UserEntity>;

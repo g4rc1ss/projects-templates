@@ -74,7 +74,7 @@ public static class InfraAuthExtensions
             .AddUserManager<UserManager<IdentityUserEntity>>()
             .AddRoles<IdentityRoleEntity>()
             .AddRoleManager<RoleManager<IdentityRoleEntity>>()
-            .AddEntityFrameworkStores<IdentityDatabaseContext>();
+            .AddEntityFrameworkStores<IdentityContext>();
 #endif
     }
 }

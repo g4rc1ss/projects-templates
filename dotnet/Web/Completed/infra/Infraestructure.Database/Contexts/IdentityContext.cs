@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infraestructure.Database;
+namespace Infraestructure.Database.Contexts;
 
-public class IdentityDatabaseContext(DbContextOptions<IdentityDatabaseContext> options)
+public class IdentityContext(DbContextOptions<IdentityContext> options)
     : IdentityDbContext<IdentityUserEntity, IdentityRoleEntity, int>(options)
 {
     public override DbSet<IdentityUserEntity> Users { get; set; }
@@ -22,6 +22,6 @@ public class IdentityDatabaseContext(DbContextOptions<IdentityDatabaseContext> o
         builder.Entity<IdentityUserRole<int>>().ToTable("UserRoles");
         builder.Entity<IdentityUserToken<int>>().ToTable("UserTokens");
 
-        builder.ApplyConfigurationsFromAssembly(typeof(IdentityDatabaseContext).Assembly);
+        builder.ApplyConfigurationsFromAssembly(typeof(IdentityContext).Assembly);
     }
 }

@@ -124,16 +124,36 @@
             "Entities/IdentityRoleEntity.cs",
             "Entities/IdentityUserEntity.cs",
             "Repository/IdentityUserPoc.cs",
-            "IdentityDatabaseContext.cs"
+            "Contexts/IdentityDatabaseContext.cs"
           ]
         },
         {
           "condition": "(!SqlDatabase)",
           "exclude": [
+            "HostedServices/MigrationHostedService.cs"
             "Entities/UserEntity.cs",
-            "EntityConfiguration/UserEntityConfiguration.cs",
-            "Repository/SqlUserPoc.cs",
-            "DatabaseContext.cs"
+            "EntityConfiguration/UserEntityConfiguration.cs"
+          ]
+        },
+        {
+          "condition": "(!UsePostgres)",
+          "exclude": [
+            "Repository/PostgresPoc.cs",
+            "Contexts/PostgresContext.cs"
+          ]
+        },
+        {
+          "condition": "(!UseSqlite)",
+          "exclude": [
+            "Repository/SqlitePoc.cs",
+            "Contexts/SqliteContext.cs"
+          ]
+        },
+        {
+          "condition": "(!UseSqlServer)",
+          "exclude": [
+            "Repository/SqlServerPoc.cs",
+            "Contexts/SqlServerContext.cs"
           ]
         },
         {

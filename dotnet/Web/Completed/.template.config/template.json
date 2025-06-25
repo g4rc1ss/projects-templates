@@ -442,22 +442,36 @@
             "infra/Infraestructure.Database/Entities/IdentityRoleEntity.cs",
             "infra/Infraestructure.Database/Entities/IdentityUserEntity.cs",
             "infra/Infraestructure.Database/Repository/IdentityUserPoc.cs",
-            "infra/Infraestructure.Database/IdentityDatabaseContext.cs"
+            "infra/Infraestructure.Database/Contexts/IdentityContext.cs"
           ]
         },
         {
           "condition": "(!SqlDatabase)",
           "exclude": [
             "infra/Infraestructure.Database/HostedServices/MigrationHostedService.cs"
+            "infra/Infraestructure.Database/Entities/UserEntity.cs",
+            "infra/Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs"
           ]
         },
         {
-          "condition": "(!SqlDatabase)",
+          "condition": "(!UsePostgres)",
           "exclude": [
-            "infra/Infraestructure.Database/Entities/UserEntity.cs",
-            "infra/Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
-            "infra/Infraestructure.Database/Repository/SqlUserPoc.cs",
-            "infra/Infraestructure.Database/DatabaseContext.cs"
+            "infra/Infraestructure.Database/Repository/PostgresPoc.cs",
+            "infra/Infraestructure.Database/Contexts/PostgresContext.cs"
+          ]
+        },
+        {
+          "condition": "(!UseSqlite)",
+          "exclude": [
+            "infra/Infraestructure.Database/Repository/SqlitePoc.cs",
+            "infra/Infraestructure.Database/Contexts/SqliteContext.cs"
+          ]
+        },
+        {
+          "condition": "(!UseSqlServer)",
+          "exclude": [
+            "infra/Infraestructure.Database/Repository/SqlServerPoc.cs",
+            "infra/Infraestructure.Database/Contexts/SqlServerContext.cs"
           ]
         },
         {
