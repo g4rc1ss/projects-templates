@@ -1,0 +1,224 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "Infraestructure",
+    "Template",
+    "C#"
+  ],
+  "identity": "Aspire",
+  "name": "Asier Infraestructure",
+  "description": "Create Aspire to orchestate the infraestructure",
+  "shortName": "asier.infra.aspire",
+  "sourceName": "CompletedWeb",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "UseIdentity": {
+      "type": "computed",
+      "value": "(false)"
+    },
+    // Storage Config
+    "Storage": {
+      "type": "parameter",
+      "allowMultipleValues": true,
+      "datatype": "choice",
+      "choices": [
+        {
+          "displayName": "Az Blob Storage",
+          "choice": "AzureBlobStorage"
+        }
+      ],
+      "defaultValue": "none",
+      "displayName": "File Storages"
+    },
+    "UseAzureBlobStorage": {
+      "type": "computed",
+      "value": "(Storage == 'AzureBlobStorage')"
+    },
+    // Host Config
+    "UseAspire": {
+      "type": "computed",
+      "value": "(true)"
+    },
+    "UseHost": {
+      "type": "computed",
+      "value": "(false)"
+    },
+    // Database Config
+    "Databases": {
+      "type": "parameter",
+      "datatype": "choice",
+      "allowMultipleValues": true,
+      "choices": [
+        {
+          "choice": "postgresql",
+          "displayName": "PostgreSQL"
+        },
+        {
+          "choice": "azuresql",
+          "displayName": "Azure SQL"
+        },
+        {
+          "choice": "sqlserver",
+          "displayName": "SQL Server"
+        },
+        {
+          "choice": "mongodb",
+          "displayName": "Mongo Database"
+        },
+        {
+          "choice": "cosmosdb",
+          "displayName": "Azure Cosmos DB"
+        }
+      ],
+      "defaultValue": "none"
+    },
+    "UsePostgres": {
+      "type": "computed",
+      "value": "(Databases == 'postgresql')"
+    },
+    "UseSqlServer": {
+      "type": "computed",
+      "value": "(Databases == 'sqlserver')"
+    },
+    "UseAzureSql": {
+      "type": "computed",
+      "value": "(Databases == 'azuresql')"
+    },
+    "UseAzureCosmos": {
+      "type": "computed",
+      "value": "(Databases == 'cosmosdb')"
+    },
+    "UseMongodb": {
+      "type": "computed",
+      "value": "(Databases == 'mongodb')"
+    },
+    // Cache Config
+    "Cache": {
+      "type": "parameter",
+      "allowMultipleValues": true,
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "Redis",
+          "displayName": "Redis"
+        },
+        {
+          "choice": "Garnet",
+          "displayName": "Garnet"
+        }
+      ],
+      "defaultValue": "none",
+      "description": "Cache"
+    },
+    "UseRedis": {
+      "type": "computed",
+      "value": "(Cache == 'redis')"
+    },
+    "UseGarnet": {
+      "type": "computed",
+      "value": "(Cache == 'garnet')"
+    },
+    // EventBus Config
+    "EventBus": {
+      "type": "parameter",
+      "datatype": "choice",
+      "allowMultipleValues": true,
+      "choices": [
+        {
+          "choice": "azureservicebus",
+          "displayName": "Azure Service Bus"
+        },
+        {
+          "choice": "rabbit",
+          "displayName": "Rabbit MQ"
+        }
+      ],
+      "defaultValue": "none",
+      "displayName": "Events"
+    },
+    "UseAzServiceBus": {
+      "type": "computed",
+      "value": "(EventBus == 'azureservicebus')"
+    },
+    "UseRabbitMQ": {
+      "type": "computed",
+      "value": "(EventBus == 'rabbit')"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea/**/*"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!UsePostgres)",
+          "exclude": [
+            "Resources/PostgresResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseSqlServer && !UseAzureSql)",
+          "exclude": [
+            "Resources/SqlServerResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseMongodb)",
+          "exclude": [
+            "Resources/MongodbResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureCosmos)",
+          "exclude": [
+            "Resources/AzureCosmosResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseRedis)",
+          "exclude": [
+            "Resources/RedisCacheResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseGarnet)",
+          "exclude": [
+            "Resources/GarnetCacheResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseRabbitMQ)",
+          "exclude": [
+            "Resources/RabbitResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzureBlobStorage)",
+          "exclude": [
+            "Resources/AzureStorageResource.cs"
+          ]
+        },
+        {
+          "condition": "(!UseAzServiceBus)",
+          "exclude": [
+            "Resources/AzureServiceBusResource.cs"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -39,6 +39,8 @@
     <!--#endif-->
   </ItemGroup>
   <ItemGroup>
+    <!--#if (UseHost)-->
     <ProjectReference Include="..\CompletedWeb.HostWebApi\CompletedWeb.HostWebApi.csproj" />
+    <!--#endif-->
   </ItemGroup>
 </Project>

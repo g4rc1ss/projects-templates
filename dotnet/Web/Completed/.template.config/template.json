@@ -99,6 +99,10 @@
       "datatype": "bool",
       "defaultValue": false
     },
+    "UseHost": {
+      "type": "computed",
+      "value": "(true)"
+    },
     "UseAspire": {
       "type": "computed",
       "value": "(true)"
