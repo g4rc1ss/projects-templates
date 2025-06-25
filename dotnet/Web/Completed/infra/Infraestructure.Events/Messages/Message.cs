@@ -1,4 +1,4 @@
-namespace Infraestructure.Events;
+namespace Infraestructure.Events.Messages;
 
 public record Message<TRequest>(TRequest Request, MessageDiagnosticTraces Traces)
     where TRequest : INotificatorRequest;

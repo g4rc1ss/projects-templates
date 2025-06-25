@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Text.Json;
+using Infraestructure.Events.Messages;
 using RabbitMQ.Client;
 
 namespace Infraestructure.Events.Publisher;

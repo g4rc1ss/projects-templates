@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
+using Infraestructure.Events.Messages;
 using Microsoft.Extensions.Configuration;
 
 namespace Infraestructure.Events.Publisher;

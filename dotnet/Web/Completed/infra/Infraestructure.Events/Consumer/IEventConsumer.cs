@@ -1,3 +1,5 @@
+using Infraestructure.Events.Messages;
+
 namespace Infraestructure.Events.Consumer;
 
 public interface IEventConsumer<TRequest>

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Threading.Channels;
+using Infraestructure.Events.Messages;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infraestructure.Events.Publisher;
