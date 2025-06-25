@@ -10,12 +10,13 @@ public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedS
     {
         using IServiceScope scope = serviceProvider.CreateScope();
 #if (UsePostgres)
-        PostgresContext postgresContext = scope.ServiceProvider.GetRequiredService<PostgresContext>();
+        PostgresContext postgresContext =
+            scope.ServiceProvider.GetRequiredService<PostgresContext>();
         await postgresContext.Database.MigrateAsync(cancellationToken: cancellationToken);
 #endif
 #if (UseSqlite)
-        SqliteContext postgresContext = scope.ServiceProvider.GetRequiredService<SqliteContext>();
-        await postgresContext.Database.MigrateAsync(cancellationToken: cancellationToken);
+        SqliteContext sqliteContext = scope.ServiceProvider.GetRequiredService<SqliteContext>();
+        await sqliteContext.Database.MigrateAsync(cancellationToken: cancellationToken);
 #endif
     }
 

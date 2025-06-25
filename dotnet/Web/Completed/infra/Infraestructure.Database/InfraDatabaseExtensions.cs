@@ -3,17 +3,16 @@
 using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
 #endif
-
 #if (UseLitedb)
 using LiteDB;
 #endif
 #if (SqlDatabase || UseIdentity)
-using OpenTelemetry.Trace;
 using Infraestructure.Database.HostedServices;
 #endif
 #if (UseSqlite)
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Trace;
 #endif
 
 namespace Infraestructure.Database;

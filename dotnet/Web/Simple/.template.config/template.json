@@ -60,10 +60,6 @@
       "allowMultipleValues": true,
       "choices": [
         {
-          "choice": "none",
-          "displayName": "None"
-        },
-        {
           "choice": "postgresql",
           "displayName": "PostgreSQL"
         },

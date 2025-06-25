@@ -12,7 +12,7 @@ builder.WebHost.ConfigureKestrel(options => options.Limits.MaxRequestBodySize = 
 builder.Configuration.AddUserSecrets<Program>().AddEnvironmentVariables();
 
 // Add services to the container.
-builder.InitSimpleWebHostConfig();
+builder.InitWebHostConfig();
 
 #if (UseGrpc)
 builder.Services.AddGrpc();

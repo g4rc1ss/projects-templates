@@ -8,7 +8,7 @@ IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(ar
 #if (UsePostgres)
 IResourceBuilder<PostgresServerResource> postgres = builder.AddAspirePostgres();
 #endif
-#if (UseMongoDB)
+#if (UseMongodb)
 IResourceBuilder<MongoDBServerResource> mongodb = builder.AddAspireMongo();
 #endif
 #if (UseRedis)
@@ -18,11 +18,11 @@ IResourceBuilder<RedisResource> redis = builder.AddRedisCache();
 IResourceBuilder<GarnetResource> garnet = builder.AddGarnetCache();
 #endif
 
-builder.AddProject<SimpleWeb_HostWebApi>("SimpleWeb")
+builder.AddProject<SimpleWeb_HostWebApi>("Host")
 #if (UsePostgres)
 .WithAspirePostgres(postgres)
 #endif
-#if (UseMongoDB)
+#if (UseMongodb)
 .WithAspireMongodb(mongodb)
 #endif
 #if (UseRedis)

@@ -1,7 +1,6 @@
 ﻿#if (SqlDatabase || NoSqlDatabase)
 using SimpleWeb.HostWebApi.Database.Repository;
 #endif
-
 #if (UseLitedb)
 using LiteDB;
 #endif
@@ -9,6 +8,9 @@ using LiteDB;
 using Microsoft.EntityFrameworkCore;
 using SimpleWeb.HostWebApi.Database;
 using SimpleWeb.HostWebApi.Database.HostedServices;
+#endif
+#if (UseSqlite)
+using OpenTelemetry.Trace;
 #endif
 
 namespace SimpleWeb.HostWebApi.Extensions;
@@ -20,26 +22,17 @@ public static class DatabaseExtensions
 #if (SqlDatabase)
         builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
+#endif
 
 #if (UsePostgres)
-        builder.AddNpgsqlDbContext<PostgresContext>(
-            "Postgres",
-            sqlSettings =>
-            {
-                sqlSettings.DisableTracing = settings.DisableTracing;
-                sqlSettings.DisableMetrics = settings.DisableTracing;
-            }
-        );
-        builder.Services.AddScoped<ISqlitePoc, SqlitePoc>();
+        builder.AddNpgsqlDbContext<PostgresContext>("Postgres");
+        builder.Services.AddScoped<IPostgresPoc, PostgresPoc>();
 #endif
 
 #if (UseSqlite)
         builder.AddSqliteDbContext<SqliteContext>();
-        builder.Services.AddScoped<IPostgresPoc, PostgresPoc>();
+        builder.Services.AddScoped<ISqlitePoc, SqlitePoc>();
 #endif
-
-#endif
-
 #if (UseLitedb)
         builder.Services.AddTransient<ILitedbPoc, LitedbPoc>();
         string? litedbConnection = builder.Configuration.GetConnectionString("Litedb");
@@ -66,9 +59,7 @@ public static class DatabaseExtensions
             );
     }
 
-    private static void AddSqliteDbContext<TContext>(
-        this IHostApplicationBuilder builder
-    )
+    private static void AddSqliteDbContext<TContext>(this IHostApplicationBuilder builder)
         where TContext : DbContext
     {
         string? connectionString = builder.Configuration.GetConnectionString("Sqlite");

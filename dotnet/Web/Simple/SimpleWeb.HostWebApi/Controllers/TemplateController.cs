@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-#if (SqlDatabase)
+#if (SqlDatabase || NoSqlDatabase)
 using SimpleWeb.HostWebApi.UsesCases;
 #endif
 
@@ -7,12 +7,11 @@ namespace SimpleWeb.HostWebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class SimpleWebController(
-#if (SqlDatabase)
+public class TemplateController(
+#if (SqlDatabase || NoSqlDatabase)
     Example example,
 #endif
-    ILogger<SimpleWebController> logger
-) : Controller
+    ILogger<TemplateController> logger) : Controller
 {
     [HttpGet]
     public IActionResult Get()
@@ -23,22 +22,37 @@ public class SimpleWebController(
         return Ok();
     }
 
+#if (UsePostgres)
     [HttpGet("Postgres")]
     public async Task<IActionResult> PostgresAsync()
     {
-#if (UsePostgres)
         await example.PostgresAsync();
-#endif
         return Ok();
     }
+#endif
 
-
+#if (UseSqlite)
     [HttpGet("Sqlite")]
     public async Task<IActionResult> SqliteAsync()
     {
-#if (UseSqlite)
         await example.SqliteAsync();
-#endif
         return Ok();
     }
+#endif
+#if (UseMongodb)
+    [HttpGet("Mongodb")]
+    public async Task<IActionResult> MongodbAsync()
+    {
+        await example.MongodbAsync();
+        return Ok();
+    }
+#endif
+#if (UseSqlite)
+    [HttpGet("Litedb")]
+    public async Task<IActionResult> LitedbAsync()
+    {
+        await example.LitedbAsync();
+        return Ok();
+    }
+#endif
 }

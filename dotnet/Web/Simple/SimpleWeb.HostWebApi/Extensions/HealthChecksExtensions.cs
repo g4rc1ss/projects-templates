@@ -1,4 +1,4 @@
- namespace SimpleWeb.HostWebApi.Extensions;
+namespace SimpleWeb.HostWebApi.Extensions;
 
 public static class HealthChecksExtensions
 {

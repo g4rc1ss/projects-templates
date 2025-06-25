@@ -4,7 +4,7 @@ namespace SimpleWeb.HostWebApi.Extensions;
 
 internal static class ServiceExtensions
 {
-    internal static void InitSimpleWebHostConfig(this WebApplicationBuilder builder)
+    internal static void InitWebHostConfig(this WebApplicationBuilder builder)
     {
         builder.AddHealthChecks();
         builder.Services.AddProblemDetails();

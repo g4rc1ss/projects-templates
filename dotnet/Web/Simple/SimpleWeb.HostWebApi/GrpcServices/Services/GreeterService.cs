@@ -1,13 +1,33 @@
 using Grpc.Core;
 using GrpcService1;
+#if (SqlDatabase || NoSqlDatabase)
+using SimpleWeb.HostWebApi.UsesCases;
+#endif
 
 namespace SimpleWeb.HostWebApi.GrpcServices.Services;
 
-public class GreeterService(ILogger<GreeterService> logger) : Greeter.GreeterBase
+public class GreeterService(
+#if (SqlDatabase || NoSqlDatabase)
+    Example example,
+#endif
+    ILogger<GreeterService> logger) : Greeter.GreeterBase
 {
-    public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
+    public override async Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
     {
         logger.LogInformation("SayHello called");
-        return Task.FromResult(new HelloReply { Message = "Hello " + request.Name });
+
+#if (UsePostgres)
+        await example.PostgresAsync();
+#endif
+#if (UseSqlite)
+        await example.SqliteAsync();
+#endif
+#if (UseMongodb)
+        await example.MongodbAsync();
+#endif
+#if (UseLitedb)
+        await example.LitedbAsync();
+#endif
+        return new HelloReply { Message = "Hello " + request.Name };
     }
 }
