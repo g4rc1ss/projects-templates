@@ -2,7 +2,7 @@ using Projects;
 #if (UseAspire)
 using CompletedWeb.AspireHost.Resources;
 #endif
-#if (UseAzServiceBus || UseAzureCosmos || UseAzureBlobStorage)
+#if (UseAzServiceBus || UseAzureBlobStorage)
 using Aspire.Hosting.Azure;
 #endif
 
@@ -11,7 +11,7 @@ IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(ar
 #if (UsePostgres)
 IResourceBuilder<PostgresServerResource> postgres = builder.AddAspirePostgres();
 #endif
-#if (UseSqlServer || UseAzureSql)
+#if (UseSqlServer)
 IResourceBuilder<SqlServerServerResource> sqlServer = builder.AddAspireSqlServer();
 #endif
 #if (UseMongodb)
@@ -40,7 +40,7 @@ builder.AddProject<CompletedWeb_HostWebApi>("Host")
 #if (UsePostgres)
 .WithAspirePostgres(postgres)
 #endif
-#if (UseSqlServer || UseAzureSql)
+#if (UseSqlServer)
 .WithAspireSqlServer(sqlServer)
 #endif
 #if (UseMongodb)

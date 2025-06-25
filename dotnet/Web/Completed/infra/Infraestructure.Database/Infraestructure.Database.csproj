@@ -14,7 +14,7 @@
         <!--#if (UsePostgres)-->
         <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="*"/>
         <!--#endif-->
-        <!--#if (UseSqlServer || UseAzureSql)-->
+        <!--#if (UseSqlServer)-->
         <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="*"/>
         <!--#endif-->
         <!--#if (UseSqlite)-->

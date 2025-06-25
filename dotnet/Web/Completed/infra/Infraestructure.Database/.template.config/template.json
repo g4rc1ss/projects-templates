@@ -33,10 +33,6 @@
           "displayName": "PostgreSQL"
         },
         {
-          "choice": "azuresql",
-          "displayName": "Azure SQL"
-        },
-        {
           "choice": "sqlserver",
           "displayName": "SQL Server"
         },
@@ -57,12 +53,11 @@
           "displayName": "Azure Cosmos DB"
         }
       ],
-      "defaultValue": "postgresql",
-      "isRequired": "Authentication == 'identity'"
+      "defaultValue": "postgresql"
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseSqlite)"
+      "value": "(UsePostgres || UseSqlServer || UseSqlite)"
     },
     "UsePostgres": {
       "type": "computed",
@@ -71,10 +66,6 @@
     "UseSqlServer": {
       "type": "computed",
       "value": "(Databases == 'sqlserver')"
-    },
-    "UseAzureSql": {
-      "type": "computed",
-      "value": "(Databases == 'azuresql')"
     },
     "UseAzureCosmos": {
       "type": "computed",
@@ -95,10 +86,6 @@
     "UseLitedb": {
       "type": "computed",
       "value": "(Databases == 'litedb')"
-    },
-    "DatabaseNone": {
-      "type": "computed",
-      "value": "(Databases == 'none')"
     },
     // Auth Config
     "UseIdentity": {

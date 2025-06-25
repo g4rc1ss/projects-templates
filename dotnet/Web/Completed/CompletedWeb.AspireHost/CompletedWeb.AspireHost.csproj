@@ -30,7 +30,7 @@
     <!--#if (UsePostgres)-->
     <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*"/>
     <!--#endif-->
-    <!--#if (UseSqlServer || UseAzureSql)-->
+    <!--#if (UseSqlServer)-->
     <PackageReference Include="Aspire.Hosting.SqlServer" Version="*"/>
     <!--#endif-->
     <!--#if (UseMongodb)-->

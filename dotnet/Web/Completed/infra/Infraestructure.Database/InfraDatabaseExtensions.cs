@@ -43,7 +43,7 @@ public static class InfraDatabaseExtensions
         );
 
 #endif
-#if (UseAzureSql || UseSqlServer)
+#if (UseSqlServer)
         builder.AddSqlServerDbContext<DatabaseContext>(
             "SqlServer",
             serverSettings =>

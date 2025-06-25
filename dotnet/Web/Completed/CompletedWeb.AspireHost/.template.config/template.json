@@ -56,10 +56,6 @@
           "displayName": "PostgreSQL"
         },
         {
-          "choice": "azuresql",
-          "displayName": "Azure SQL"
-        },
-        {
           "choice": "sqlserver",
           "displayName": "SQL Server"
         },
@@ -81,10 +77,6 @@
     "UseSqlServer": {
       "type": "computed",
       "value": "(Databases == 'sqlserver')"
-    },
-    "UseAzureSql": {
-      "type": "computed",
-      "value": "(Databases == 'azuresql')"
     },
     "UseAzureCosmos": {
       "type": "computed",
@@ -167,7 +159,7 @@
           ]
         },
         {
-          "condition": "(!UseSqlServer && !UseAzureSql)",
+          "condition": "(!UseSqlServer)",
           "exclude": [
             "Resources/AspireSqlServerResource.cs"
           ]

@@ -118,10 +118,6 @@
           "displayName": "PostgreSQL"
         },
         {
-          "choice": "azuresql",
-          "displayName": "Azure SQL"
-        },
-        {
           "choice": "sqlserver",
           "displayName": "SQL Server"
         },
@@ -142,12 +138,11 @@
           "displayName": "Azure Cosmos DB"
         }
       ],
-      "defaultValue": "none",
-      "isRequired": true
+      "defaultValue": "none"
     },
     "SqlDatabase": {
       "type": "computed",
-      "value": "(UsePostgres || UseSqlServer || UseAzureSql || UseSqlite)"
+      "value": "(UsePostgres || UseSqlServer || UseSqlite)"
     },
     "UsePostgres": {
       "type": "computed",
@@ -156,10 +151,6 @@
     "UseSqlServer": {
       "type": "computed",
       "value": "(Databases == 'sqlserver')"
-    },
-    "UseAzureSql": {
-      "type": "computed",
-      "value": "(Databases == 'azuresql')"
     },
     "UseAzureCosmos": {
       "type": "computed",
@@ -183,7 +174,7 @@
     },
     "DatabaseNone": {
       "type": "computed",
-      "value": "(!SqlDatabase && !NoSqlDatabase)"
+      "value": "(!SqlDatabase && !NoSqlDatabase && !UseIdentity)"
     },
     // Auth Config
     "Authentication": {
@@ -504,7 +495,7 @@
           ]
         },
         {
-          "condition": "(!UseSqlServer && !UseAzureSql)",
+          "condition": "(!UseSqlServer)",
           "exclude": [
             "CompletedWeb.AspireHost/Resources/AspireSqlServerResource.cs"
           ]
