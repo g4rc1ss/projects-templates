@@ -18,6 +18,10 @@
     "type": "project"
   },
   "symbols": {
+    "UseHost": {
+      "type": "computed",
+      "value": "(false)"
+    },
     // Database Config
     "Databases": {
       "type": "parameter",

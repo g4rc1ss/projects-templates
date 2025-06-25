@@ -18,6 +18,10 @@
     "type": "project"
   },
   "symbols": {
+    "UseHost": {
+      "type": "computed",
+      "value": "(false)"
+    },
     "Authentication": {
       "type": "parameter",
       "datatype": "choice",

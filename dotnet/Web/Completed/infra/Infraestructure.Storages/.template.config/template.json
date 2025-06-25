@@ -18,6 +18,10 @@
     "type": "project"
   },
   "symbols": {
+    "UseHost": {
+      "type": "computed",
+      "value": "(false)"
+    },
     "Storage": {
       "type": "parameter",
       "datatype": "choice",

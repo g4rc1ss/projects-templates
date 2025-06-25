@@ -10,7 +10,7 @@
   "name": "Asier Infraestructure",
   "description": "Create Aspire to orchestate the infraestructure",
   "shortName": "asier.infra.aspire",
-  "sourceName": "CompletedWeb",
+  "sourceName": "CompletedWeb.AspireHost",
   "language": "C#",
   "preferNameDirectory": true,
   "tags": {
