@@ -19,41 +19,66 @@ public static class DatabaseExtensions
 #if (SqlDatabase)
         builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
-        string? connectionString = builder.Configuration.GetConnectionString(
-            nameof(DatabaseContext)
+
+#if (UsePostgres)
+        builder.AddNpgsqlDbContext<DatabaseContext>(
+            "Postgres",
+            sqlSettings =>
+            {
+                sqlSettings.DisableTracing = settings.DisableTracing;
+                sqlSettings.DisableMetrics = settings.DisableTracing;
+            }
         );
-        ArgumentNullException.ThrowIfNull(connectionString);
+#endif
 
-        builder.Services.AddDbContextPool<DatabaseContext>(dbContextBuilder =>
-        {
-#if (UsePostgres)
-            dbContextBuilder.UseNpgsql(connectionString);
-#endif
 #if (UseSqlite)
-            dbContextBuilder.UseSqlite(connectionString);
+        builder.AddSqliteDbContext<DatabaseContext>();
 #endif
-        });
-
-        builder.Services.AddDbContextFactory<DatabaseContext>(dbContextBuilder =>
-        {
-#if (UsePostgres)
-            dbContextBuilder.UseNpgsql(connectionString);
-#endif
-#if (UseSqlite)
-            dbContextBuilder.UseSqlite(connectionString);
-#endif
-        });
 
         builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
 #endif
 #if (UseLitedb)
         builder.Services.AddTransient<ILitedbPoc, LitedbPoc>();
-        string? litedbConnection = builder.Configuration.GetConnectionString("litedb");
+        string? litedbConnection = builder.Configuration.GetConnectionString("Litedb");
         builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(litedbConnection));
 #endif
 #if (UseMongodb)
         builder.Services.AddScoped<IMongoPoc, MongoPoc>();
-        builder.AddMongoDBClient("mongo");
+        builder.AddMongoDBClient("Mongo");
 #endif
     }
+
+#if (UseSqlite)
+    private static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
+    {
+        builder
+            .Services.AddOpenTelemetry()
+            .WithTracing(providerBuilder =>
+                providerBuilder.AddEntityFrameworkCoreInstrumentation(options =>
+                {
+                    // Guardamos las consultas generadas por EF
+                    options.SetDbStatementForText = true;
+                })
+            );
+    }
+
+    private static void AddSqliteDbContext<TContext>(
+        this IHostApplicationBuilder builder
+    )
+        where TContext : DbContext
+    {
+        string? connectionString = builder.Configuration.GetConnectionString("Sqlite");
+        ArgumentNullException.ThrowIfNull(connectionString);
+
+        builder.ConfigureOpenTelemetry();
+
+        builder.Services.AddDbContext<TContext>(
+            dbContextBuilder =>
+            {
+                dbContextBuilder.UseSqlite(connectionString);
+            },
+            ServiceLifetime.Transient
+        );
+    }
+#endif
 }

@@ -15,26 +15,21 @@ namespace CompletedWeb.Application.UsesCases;
 
 public class Example(
 #if (!EventBusNone)
-    IEventNotificator eventNotificator
+    IEventNotificator eventNotificator,
 #endif
 #if (UseAzureCosmos)
-    ,
-    ICosmosdbPoc cosmosdb
+    ICosmosdbPoc cosmosdb,
 #endif
 #if (SqlDatabase && !UseIdentity)
-    ,
-    IUserRepository userRepository
+    IUserRepository userRepository,
 #endif
 #if (UseIdentity)
-    ,
-    IIdentityUserRepository userRepository
+    IIdentityUserRepository userRepository,
 #endif
 #if (UseMongodb)
-    ,
-    IMongoPoc mongoPoc
+    IMongoPoc mongoPoc,
 #endif
 #if (!StorageNone)
-    ,
     IFileStorage storage
 #endif
 ) : IExample
