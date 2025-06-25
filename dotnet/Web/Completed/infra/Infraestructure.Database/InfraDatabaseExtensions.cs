@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using LiteDB;
 #endif
 #if (SqlDatabase)
+using Infraestructure.Database.Contexts;
 using Infraestructure.Database.HostedServices;
 #endif
 #if (UseSqlite)
@@ -33,6 +34,7 @@ public static class InfraDatabaseExtensions
         
 #endif
 #if (UsePostgres)
+        builder.Services.AddScoped<IPostgresPoc, PostgresPoc>();
         builder.AddNpgsqlDbContext<PostgresContext>(
             "Postgres",
             sqlSettings =>
@@ -44,7 +46,8 @@ public static class InfraDatabaseExtensions
 
 #endif
 #if (UseSqlServer)
-        builder.AddSqlServerDbContext<DatabaseContext>(
+        builder.Services.AddScoped<ISqlServerPoc, SqlServerPoc>();
+        builder.AddSqlServerDbContext<SqlServerContext>(
             "SqlServer",
             serverSettings =>
             {
@@ -54,7 +57,8 @@ public static class InfraDatabaseExtensions
 
 #endif
 #if (UseSqlite)
-        builder.AddSqliteDbContext<DatabaseContext>(settings);
+        builder.Services.AddScoped<ISqlitePoc, SqlitePoc>();
+        builder.AddSqliteDbContext<SqliteContext>(settings);
 
 #endif
 #if (UseAzureCosmos)

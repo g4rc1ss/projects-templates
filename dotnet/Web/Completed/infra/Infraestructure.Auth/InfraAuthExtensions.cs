@@ -8,7 +8,7 @@ using Infraestructure.Auth.JwtManager.Repository;
 #endif
 
 #if (UseIdentity)
-using Infraestructure.Database;
+using Infraestructure.Database.Contexts;
 using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 #endif

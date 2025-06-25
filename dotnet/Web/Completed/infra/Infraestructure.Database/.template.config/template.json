@@ -130,7 +130,7 @@
         {
           "condition": "(!SqlDatabase)",
           "exclude": [
-            "HostedServices/MigrationHostedService.cs"
+            "HostedServices/MigrationHostedService.cs",
             "Entities/UserEntity.cs",
             "EntityConfiguration/UserEntityConfiguration.cs"
           ]
