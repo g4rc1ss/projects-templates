@@ -6,10 +6,7 @@ namespace CompletedWeb.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TemplateController(
-    ILogger<TemplateController> logger,
-    IExample example
-) : Controller
+public class TemplateController(ILogger<TemplateController> logger, IExample example) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)

@@ -15,7 +15,7 @@ using Infraestructure.Auth;
 #if (!StorageNone)
 using Infraestructure.Storages;
 #endif
-#if (!DatabaseNone || UseIdentity)
+#if (!DatabaseNone)
 using Infraestructure.Database;
 #endif
 #if (!EventBusNone)
@@ -40,7 +40,7 @@ internal static class ServiceExtensions
         builder.AddAuthenticationProtocol();
 #endif
 
-#if (!DatabaseNone || UseIdentity)
+#if (!DatabaseNone)
         builder.AddDatabaseConfig();
 #endif
 #if (!EventBusNone)

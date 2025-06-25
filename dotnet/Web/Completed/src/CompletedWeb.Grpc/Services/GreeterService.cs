@@ -5,9 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CompletedWeb.Grpc.Services;
 
-public class GreeterService(
-    ILogger<GreeterService> logger,
-    IExample example) : Greeter.GreeterBase
+public class GreeterService(ILogger<GreeterService> logger, IExample example) : Greeter.GreeterBase
 {
     public override async Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
     {

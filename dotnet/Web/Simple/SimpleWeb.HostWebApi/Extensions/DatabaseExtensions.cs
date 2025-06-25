@@ -22,23 +22,24 @@ public static class DatabaseExtensions
 #if (SqlDatabase)
         builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
+        
 #endif
-
 #if (UsePostgres)
         builder.AddNpgsqlDbContext<PostgresContext>("Postgres");
         builder.Services.AddScoped<IPostgresPoc, PostgresPoc>();
+        
 #endif
-
 #if (UseSqlite)
         builder.AddSqliteDbContext<SqliteContext>();
         builder.Services.AddScoped<ISqlitePoc, SqlitePoc>();
+        
 #endif
 #if (UseLitedb)
         builder.Services.AddTransient<ILitedbPoc, LitedbPoc>();
         string? litedbConnection = builder.Configuration.GetConnectionString("Litedb");
         builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(litedbConnection));
+        
 #endif
-
 #if (UseMongodb)
         builder.Services.AddScoped<IMongoPoc, MongoPoc>();
         builder.AddMongoDBClient("Mongo");

@@ -40,7 +40,7 @@
     <!--#if (!AuthNone)-->
     <ProjectReference Include="..\infra\Infraestructure.Auth\Infraestructure.Auth.csproj" />
     <!--#endif-->
-    <!--#if (!DatabaseNone || (UseIdentity))-->
+    <!--#if (!DatabaseNone)-->
     <ProjectReference Include="..\infra\Infraestructure.Database\Infraestructure.Database.csproj" />
     <!--#endif-->
     <!--#if (!EventBusNone)-->

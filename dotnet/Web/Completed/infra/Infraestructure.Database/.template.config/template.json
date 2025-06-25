@@ -25,12 +25,9 @@
     // Database Config
     "Databases": {
       "type": "parameter",
+      "allowMultipleValues": true,
       "datatype": "choice",
       "choices": [
-        {
-          "choice": "none",
-          "displayName": "None"
-        },
         {
           "choice": "postgresql",
           "displayName": "PostgreSQL"
@@ -60,7 +57,8 @@
           "displayName": "Azure Cosmos DB"
         }
       ],
-      "defaultValue": "postgresql"
+      "defaultValue": "postgresql",
+      "isRequired": "Authentication == 'identity'"
     },
     "SqlDatabase": {
       "type": "computed",
@@ -68,7 +66,7 @@
     },
     "UsePostgres": {
       "type": "computed",
-      "value": "(Databases == 'postgresql' || ((DatabaseNone || NoSqlDatabase) && UseIdentity))"
+      "value": "(Databases == 'postgresql')"
     },
     "UseSqlServer": {
       "type": "computed",
@@ -128,7 +126,7 @@
       ],
       "modifiers": [
         {
-          "condition": "(!SqlDatabase && !UseIdentity)",
+          "condition": "(!SqlDatabase)",
           "exclude": [
             "HostedServices/MigrationHostedService.cs"
           ]
@@ -143,7 +141,7 @@
           ]
         },
         {
-          "condition": "(!SqlDatabase || UseIdentity)",
+          "condition": "(!SqlDatabase)",
           "exclude": [
             "Entities/UserEntity.cs",
             "EntityConfiguration/UserEntityConfiguration.cs",

@@ -20,7 +20,7 @@ public class Example(
 #if (UseAzureCosmos)
     ICosmosdbPoc cosmosdb,
 #endif
-#if (SqlDatabase && !UseIdentity)
+#if (SqlDatabase)
     IUserRepository userRepository,
 #endif
 #if (UseIdentity)
@@ -42,7 +42,7 @@ public class Example(
 #if (UseAzureCosmos)
         await CosmosAsync();
 #endif
-#if (SqlDatabase && !UseIdentity)
+#if (SqlDatabase)
         await SqlDatabaseAsync();
 #endif
 #if (UseIdentity)
@@ -78,11 +78,10 @@ public class Example(
         await cosmosdb.UpdateAsync(entidadCreada);
 
         CosmosDbEntity? result = await cosmosdb.GetByIdAsync(entidadCreada.Id);
-
     }
 #endif
 
-#if (SqlDatabase && !UseIdentity)
+#if (SqlDatabase)
     private async Task SqlDatabaseAsync()
     {
         UserEntity user = new() { Name = "Nombre" };

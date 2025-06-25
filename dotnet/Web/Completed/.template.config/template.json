@@ -111,11 +111,8 @@
     "Databases": {
       "type": "parameter",
       "datatype": "choice",
+      "allowMultipleValues": true,
       "choices": [
-        {
-          "choice": "none",
-          "displayName": "None"
-        },
         {
           "choice": "postgresql",
           "displayName": "PostgreSQL"
@@ -145,7 +142,8 @@
           "displayName": "Azure Cosmos DB"
         }
       ],
-      "defaultValue": "postgresql"
+      "defaultValue": "none",
+      "isRequired": true
     },
     "SqlDatabase": {
       "type": "computed",
@@ -153,7 +151,7 @@
     },
     "UsePostgres": {
       "type": "computed",
-      "value": "(Databases == 'postgresql' || ((DatabaseNone || NoSqlDatabase) && UseIdentity))"
+      "value": "(Databases == 'postgresql')"
     },
     "UseSqlServer": {
       "type": "computed",
@@ -185,7 +183,7 @@
     },
     "DatabaseNone": {
       "type": "computed",
-      "value": "(Databases == 'none')"
+      "value": "(!SqlDatabase && !NoSqlDatabase)"
     },
     // Auth Config
     "Authentication": {
@@ -457,13 +455,13 @@
           ]
         },
         {
-          "condition": "(!SqlDatabase && !UseIdentity)",
+          "condition": "(!SqlDatabase)",
           "exclude": [
             "infra/Infraestructure.Database/HostedServices/MigrationHostedService.cs"
           ]
         },
         {
-          "condition": "(!SqlDatabase || UseIdentity)",
+          "condition": "(!SqlDatabase)",
           "exclude": [
             "infra/Infraestructure.Database/Entities/UserEntity.cs",
             "infra/Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs",
@@ -486,7 +484,7 @@
           ]
         },
         {
-          "condition": "DatabaseNone && (!UseIdentity)",
+          "condition": "DatabaseNone",
           "exclude": [
             "**/infra/Infraestructure.Database/**/*"
           ]

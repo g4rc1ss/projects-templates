@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Hosting;
-#if (SqlDatabase || UseIdentity || NoSqlDatabase)
+#if (SqlDatabase || NoSqlDatabase)
 using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
 #endif
 #if (UseLitedb)
 using LiteDB;
 #endif
-#if (SqlDatabase || UseIdentity)
+#if (SqlDatabase)
 using Infraestructure.Database.HostedServices;
 #endif
 #if (UseSqlite)
@@ -27,16 +27,13 @@ public static class InfraDatabaseExtensions
         DatabaseSettings settings = new();
         configureSettings?.Invoke(settings);
 
-#if (SqlDatabase || UseIdentity)
+#if (SqlDatabase)
         builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
-
-#if (UsePostgres)
-#if (UseIdentity)
-        builder.AddNpgsqlDbContext<IdentityDatabaseContext>(
-#else
-        builder.AddNpgsqlDbContext<DatabaseContext>(
+        
 #endif
+#if (UsePostgres)
+        builder.AddNpgsqlDbContext<DatabaseContext>(
             "Postgres",
             sqlSettings =>
             {
@@ -44,37 +41,22 @@ public static class InfraDatabaseExtensions
                 sqlSettings.DisableMetrics = settings.DisableTracing;
             }
         );
-#endif
 
-#if (UseAzureSql || UseSqlServer)
-#if (UseIdentity)
-        builder.AddSqlServerDbContext<IdentityDatabaseContext>(
-#else
-        builder.AddSqlServerDbContext<DatabaseContext>(
 #endif
+#if (UseAzureSql || UseSqlServer)
+        builder.AddSqlServerDbContext<DatabaseContext>(
             "SqlServer",
             serverSettings =>
             {
                 serverSettings.DisableTracing = settings.DisableTracing;
             }
         );
-#endif
 
+#endif
 #if (UseSqlite)
-#if (UseIdentity)
-        builder.AddSqliteDbContext<IdentityDatabaseContext>();
-#else
-        builder.AddSqliteDbContext<DatabaseContext>();
-#endif
-#endif
+        builder.AddSqliteDbContext<DatabaseContext>(settings);
 
-#if (UseIdentity)
-        builder.Services.AddScoped<IIdentityUserRepository, IdentityUserPoc>();
-#else
-        builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
 #endif
-#endif
-
 #if (UseAzureCosmos)
         builder.Services.AddScoped<ICosmosdbPoc, CosmosdbPoc>();
         builder.AddAzureCosmosClient(
@@ -84,14 +66,14 @@ public static class InfraDatabaseExtensions
                 cosmosSettings.DisableTracing = settings.DisableTracing;
             }
         );
-#endif
 
+#endif
 #if (UseLitedb)
         builder.Services.AddTransient<ILitedbPoc, LitedbPoc>();
         string? litedbConnection = builder.Configuration.GetConnectionString("Litedb");
         builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(litedbConnection));
-#endif
 
+#endif
 #if (UseMongodb)
         builder.Services.AddScoped<IMongoPoc, MongoPoc>();
         builder.AddMongoDBClient(
