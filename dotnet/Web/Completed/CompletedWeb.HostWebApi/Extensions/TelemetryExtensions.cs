@@ -1,6 +1,5 @@
 ﻿using OpenTelemetry;
 using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
 namespace CompletedWeb.HostWebApi.Extensions;
@@ -23,7 +22,6 @@ public static class TelemetryExtensions
 
         builder
             .Services.AddOpenTelemetry()
-            .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
             .WithMetrics(metric =>
                 metric
                     .AddMeter(builder.Environment.ApplicationName)
