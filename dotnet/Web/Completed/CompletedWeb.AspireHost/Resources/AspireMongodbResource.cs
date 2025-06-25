@@ -7,7 +7,7 @@ public static class AspireMongodbResource
     )
     {
         return builder
-            .AddMongoDB("mongo")
+            .AddMongoDB("Mongo")
             // .WithDataVolume("MongoVM", isReadOnly: false)
             .WithLifetime(ContainerLifetime.Session)
             .WithMongoExpress();

@@ -1,4 +1,6 @@
-﻿#if (UseAzureCosmos)
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+#if (UseAzureCosmos)
 using Infraestructure.Database.Entities;
 using Infraestructure.Database.Repository;
 #endif
@@ -8,9 +10,8 @@ using Infraestructure.Events.Publisher;
 #endif
 #if (!StorageNone)
 using Infraestructure.Storages;
+using Microsoft.AspNetCore.Http;
 #endif
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace CompletedWeb.API.Controllers;
 
@@ -50,12 +51,15 @@ public class TemplateController(
     }
 #endif
 
-
 #if (UseAzureCosmos)
     [HttpGet("Cosmos")]
     public async Task<IActionResult> CosmosAsync()
     {
-        CosmosDbEntity cosmosEntity = new() { Id = Guid.NewGuid().ToString(), Property = "Propiedad" };
+        CosmosDbEntity cosmosEntity = new()
+        {
+            Id = Guid.NewGuid().ToString(),
+            Property = "Propiedad",
+        };
 
         CosmosDbEntity entidadCreada = await cosmosdb.CreateAsync(cosmosEntity);
         entidadCreada.Property = "Propiedad Modificada";
@@ -69,11 +73,13 @@ public class TemplateController(
 
 #if (!StorageNone)
     [HttpGet("Storage")]
-    public async Task<IActionResult> StorageAsync()
+    public async Task<IActionResult> StorageAsync(IFormFile file)
     {
-        byte[] contenido = "Este es un contenido de prueba a guardar"u8.ToArray();
-        await storage.UploadFileAsync(contenido, "/blob", "nombreBlob");
-        Stream result = await storage.DownloadFileAsync("/blob", "nombreBlob");
+        string idDocumento = Guid.NewGuid().ToString();
+        string path = $"{idDocumento}/{file.FileName}";
+
+        await storage.UploadFileAsync(file.OpenReadStream(), "blob", path);
+        Stream result = await storage.DownloadFileAsync("blob", path);
         return Ok();
     }
 #endif

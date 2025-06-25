@@ -33,50 +33,43 @@ public static class InfraDatabaseExtensions
         }
         builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
-#if (UseIdentity)
-        string? connectionString = builder.Configuration.GetConnectionString(
-            nameof(IdentityDatabaseContext)
-        );
-#else
-        string? connectionString = builder.Configuration.GetConnectionString(
-            nameof(DatabaseContext)
-        );
-#endif
-        ArgumentNullException.ThrowIfNull(connectionString);
 
-#if (UseIdentity)
-        builder.Services.AddDbContextPool<IdentityDatabaseContext>(dbContextBuilder =>
-#else
-        builder.Services.AddDbContextPool<DatabaseContext>(dbContextBuilder =>
-#endif
-        {
 #if (UsePostgres)
-            dbContextBuilder.UseNpgsql(connectionString);
-#elif (UseSqlServer)
-            dbContextBuilder.UseSqlServer(connectionString);
-#elif (UseAzureSql)
-            dbContextBuilder.UseAzureSql(connectionString);
-#elif (UseSqlite)
-            dbContextBuilder.UseSqlite(connectionString);
+    #if (UseIdentity)
+        builder.AddNpgsqlDbContext<IdentityDatabaseContext>(
+    #else
+        builder.AddNpgsqlDbContext<DatabaseContext>(
+    #endif
+            "Postgres",
+            sqlSettings =>
+            {
+                sqlSettings.DisableTracing = settings.DisableTracing;
+                sqlSettings.DisableMetrics = settings.DisableTracing;
+            }
+        );
 #endif
-        });
 
-#if (UseIdentity)
-        builder.Services.AddDbContextFactory<IdentityDatabaseContext>(dbContextBuilder =>
-#else
-        builder.Services.AddDbContextFactory<DatabaseContext>(dbContextBuilder =>
+#if (UseAzureSql || UseSqlServer)
+    #if (UseIdentity)
+        builder.AddSqlServerDbContext<IdentityDatabaseContext>(
+    #else
+        builder.AddSqlServerDbContext<DatabaseContext>(
+    #endif
+            "SqlServer",
+            serverSettings =>
+            {
+                serverSettings.DisableTracing = settings.DisableTracing;
+            }
+        );
 #endif
-        {
-#if (UsePostgres)
-            dbContextBuilder.UseNpgsql(connectionString);
-#elif (UseSqlServer)
-            dbContextBuilder.UseSqlServer(connectionString);
-#elif (UseAzureSql)
-            dbContextBuilder.UseAzureSql(connectionString);
-#elif (UseSqlite)
-            dbContextBuilder.UseSqlite(connectionString);
+
+#if (UseSqlite)
+    #if (UseIdentity)
+        builder.AddSqliteDbContext<IdentityDatabaseContext>();
+    #else
+        builder.AddSqliteDbContext<DatabaseContext>();
+    #endif
 #endif
-        });
 
 #if (UseIdentity)
         builder.Services.AddScoped<IIdentityUserRepository, IdentityUserPoc>();
@@ -84,6 +77,7 @@ public static class InfraDatabaseExtensions
         builder.Services.AddScoped<IUserRepository, SqlUserPoc>();
 #endif
 #endif
+
 #if (UseAzureCosmos)
         builder.Services.AddScoped<ICosmosdbPoc, CosmosdbPoc>();
         builder.AddAzureCosmosClient(
@@ -97,14 +91,14 @@ public static class InfraDatabaseExtensions
 
 #if (UseLitedb)
         builder.Services.AddTransient<ILitedbPoc, LitedbPoc>();
-        string? litedbConnection = builder.Configuration.GetConnectionString("litedb");
+        string? litedbConnection = builder.Configuration.GetConnectionString("Litedb");
         builder.Services.AddSingleton<ILiteDatabase>(new LiteDatabase(litedbConnection));
 #endif
 
 #if (UseMongodb)
         builder.Services.AddScoped<IMongoPoc, MongoPoc>();
         builder.AddMongoDBClient(
-            "mongo",
+            "Mongo",
             dbSettings =>
             {
                 dbSettings.DisableTracing = dbSettings.DisableTracing;
@@ -125,6 +119,18 @@ public static class InfraDatabaseExtensions
                     options.SetDbStatementForText = true;
                 })
             );
+    }
+
+    private static void AddSqliteDbContext<TContext>(this IHostApplicationBuilder builder)
+        where TContext : DbContext
+    {
+        string? connectionString = builder.Configuration.GetConnectionString("Sqlite");
+        ArgumentNullException.ThrowIfNull(connectionString);
+
+        builder.Services.AddDbContext<TContext>(dbContextBuilder =>
+        {
+            dbContextBuilder.UseSqlite(connectionString);
+        }, ServiceLifetime.Transient);
     }
 #endif
 }

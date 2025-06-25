@@ -6,11 +6,13 @@ public static class AspireRabbitResource
         this IDistributedApplicationBuilder builder
     )
     {
-        return builder
+        IResourceBuilder<RabbitMQServerResource> rabbit = builder
             .AddRabbitMQ("RabbitMQ")
             .WithDataVolume("rabbitMQVM", isReadOnly: false)
             .WithLifetime(ContainerLifetime.Session)
             .WithManagementPlugin();
+
+        return rabbit;
     }
 
     internal static IResourceBuilder<T> WithAspireRabbitMq<T>(

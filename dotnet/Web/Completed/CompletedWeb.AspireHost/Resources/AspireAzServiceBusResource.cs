@@ -12,8 +12,7 @@ public static class AspireAzServiceBusResource
             .AddAzureServiceBus("AzureServiceBus")
             .RunAsEmulator();
 
-        azServiceBus
-            .AddServiceBusQueue("ServiceBusQueue", "ServiceBusQueue");
+        azServiceBus.AddServiceBusQueue("ServiceBusQueue", "ServiceBusQueue");
 
         return azServiceBus;
     }

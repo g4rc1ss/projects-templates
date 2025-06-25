@@ -9,12 +9,11 @@ public static class AspireAzureStorageResource
     )
     {
         IResourceBuilder<AzureBlobStorageResource> blobStorage = builder
-            .AddAzureStorage("AzureBlobStorage")
+            .AddAzureStorage("AzureStorage")
             .RunAsEmulator()
-            .AddBlobs("AzureBlobs");
+            .AddBlobs("AzureBlobStorage");
 
-        blobStorage
-            .AddBlobContainer("AzureBlobContainer", "blob");
+        blobStorage.AddBlobContainer("AzureBlobContainer", "blob");
 
         return blobStorage;
     }

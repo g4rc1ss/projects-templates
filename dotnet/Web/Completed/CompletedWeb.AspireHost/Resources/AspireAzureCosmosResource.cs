@@ -7,7 +7,7 @@ public static class AspireAzureCosmosResource
     )
     {
         IResourceBuilder<AzureCosmosDBResource> cosmosdb = builder
-            .AddAzureCosmosDB("CosmosDatabase")
+            .AddAzureCosmosDB("Cosmos")
             .RunAsEmulator();
 
         cosmosdb

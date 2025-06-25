@@ -2,27 +2,30 @@ namespace CompletedWeb.AspireHost.Resources;
 
 public static class AspireSqlServerResource
 {
-    internal static IResourceBuilder<SqlServerDatabaseResource> AddAspireSqlServer(
+    internal static IResourceBuilder<SqlServerServerResource> AddAspireSqlServer(
         this IDistributedApplicationBuilder builder
     )
     {
-        return builder
-            .AddSqlServer("SQLServer")
+        IResourceBuilder<SqlServerServerResource> sqlServer = builder
+            .AddSqlServer("SqlServer")
             .WithDataVolume("SqlServerVM", isReadOnly: false)
-            .WithLifetime(ContainerLifetime.Session)
-            .AddDatabase("MicrosoftDB", "MicrosoftDatabase");
+            .WithLifetime(ContainerLifetime.Session);
+
+        sqlServer.AddDatabase("SqlServerDatabase", "MicrosoftDatabase");
+
+        return sqlServer;
     }
 
     internal static IResourceBuilder<T> WithAspireSqlServer<T>(
         this IResourceBuilder<T> builder,
-        IResourceBuilder<SqlServerDatabaseResource> sqlServer
+        IResourceBuilder<SqlServerServerResource> sqlServer
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
 #if (UseIdentity)
-        return builder.WithReference(sqlServer, "IdentityDatabaseContext").WaitFor(sqlServer);
+        return builder.WithReference(sqlServer).WaitFor(sqlServer);
 #else
-        return builder.WithReference(sqlServer, "DatabaseContext").WaitFor(sqlServer);
+        return builder.WithReference(sqlServer).WaitFor(sqlServer);
 #endif
     }
 }

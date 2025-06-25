@@ -19,9 +19,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
             return Entity;
         }
 
-        Container container = cosmosClient
-            .GetDatabase("Database")
-            .GetContainer("Container");
+        Container container = cosmosClient.GetDatabase("Database").GetContainer("Container");
 
         FeedIterator<CosmosDbEntity>? iterator = container
             .GetItemLinqQueryable<CosmosDbEntity>()
@@ -45,9 +43,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
         CancellationToken cancellationToken = default
     )
     {
-        Container container = cosmosClient
-            .GetDatabase("Database")
-            .GetContainer("Container");
+        Container container = cosmosClient.GetDatabase("Database").GetContainer("Container");
 
         ItemResponse<CosmosDbEntity> response = await container.CreateItemAsync(
             cosmosEntity,
@@ -63,9 +59,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
         CancellationToken cancellationToken = default
     )
     {
-        Container container = cosmosClient
-            .GetDatabase("Database")
-            .GetContainer("Container");
+        Container container = cosmosClient.GetDatabase("Database").GetContainer("Container");
 
         await container.UpsertItemAsync(cosmosEntity, cancellationToken: cancellationToken);
     }
@@ -75,9 +69,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
         CancellationToken cancellationToken = default
     )
     {
-        Container container = cosmosClient
-            .GetDatabase("Database")
-            .GetContainer("Container");
+        Container container = cosmosClient.GetDatabase("Database").GetContainer("Container");
 
         await container.DeleteItemAsync<CosmosDbEntity>(
             cosmosEntity.Id,
