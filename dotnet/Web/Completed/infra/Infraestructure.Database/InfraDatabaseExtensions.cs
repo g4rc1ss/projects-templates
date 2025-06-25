@@ -2,7 +2,6 @@
 #if (SqlDatabase || UseIdentity || NoSqlDatabase)
 using Infraestructure.Database.Repository;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 #endif
 
 #if (UseLitedb)
@@ -11,6 +10,9 @@ using LiteDB;
 #if (SqlDatabase || UseIdentity)
 using OpenTelemetry.Trace;
 using Infraestructure.Database.HostedServices;
+#endif
+#if (UseSqlite)
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 #endif
 

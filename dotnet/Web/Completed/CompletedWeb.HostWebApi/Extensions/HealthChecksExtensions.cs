@@ -1,4 +1,4 @@
-#if (SqlDatabase)
+#if (UseSqlite)
 using Infraestructure.Database;
 #endif
 
