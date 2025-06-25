@@ -459,7 +459,7 @@
         {
           "condition": "(!SqlDatabase && !UseIdentity)",
           "exclude": [
-            "infra/Infraestructure.Database/MigrationHostedService.cs"
+            "infra/Infraestructure.Database/HostedServices/MigrationHostedService.cs"
           ]
         },
         {
