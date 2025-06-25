@@ -5,7 +5,7 @@ namespace CompletedWeb.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CompletedWebController(ILogger<CompletedWebController> logger) : Controller
+public class TemplateController(ILogger<TemplateController> logger) : Controller
 {
     [HttpGet]
     public IActionResult Get()

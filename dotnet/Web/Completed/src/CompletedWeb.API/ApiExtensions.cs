@@ -6,7 +6,7 @@ namespace CompletedWeb.API;
 
 public static class ApiExtensions
 {
-    public static void InitCompletedWebApi(this IHostApplicationBuilder builder)
+    public static void InitWebApi(this IHostApplicationBuilder builder)
     {
         builder.Services.AddControllers().AddApplicationPart(typeof(ApiExtensions).Assembly);
 

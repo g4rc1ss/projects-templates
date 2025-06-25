@@ -7,12 +7,12 @@ namespace CompletedWeb.Grpc;
 
 public static class GrpcExtensions
 {
-    public static void InitCompletedWebGrpc(this WebApplicationBuilder builder)
+    public static void InitWebGrpc(this WebApplicationBuilder builder)
     {
         builder.Services.AddBusinessServices();
     }
 
-    public static void MapCompletedWebGrpc(this IEndpointRouteBuilder routeBuilder)
+    public static void MapWebGrpc(this IEndpointRouteBuilder routeBuilder)
     {
         routeBuilder.MapGrpcService<GreeterService>();
     }

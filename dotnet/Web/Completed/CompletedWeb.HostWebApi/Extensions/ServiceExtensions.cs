@@ -6,9 +6,7 @@ using CompletedWeb.API;
 using CompletedWeb.Grpc;
 #endif
 #endif
-#if (UseCache)
-using Infraestructure.Caching;
-#endif
+
 #if (!AuthNone)
 using Infraestructure.Auth;
 #endif
@@ -26,7 +24,7 @@ namespace CompletedWeb.HostWebApi.Extensions;
 
 internal static class ServiceExtensions
 {
-    internal static void InitCompletedWebHostConfig(this WebApplicationBuilder builder)
+    internal static void InitHostWebConfig(this WebApplicationBuilder builder)
     {
         builder.AddHealthChecks();
         builder.Services.AddProblemDetails();
@@ -34,7 +32,7 @@ internal static class ServiceExtensions
 
         builder.ConfigureOpenTelemetry();
         builder.Services.AddHttpClient();
-        builder.Services.ConfigureDataProtectionProvider(builder.Configuration);
+        builder.ConfigureDataProtectionProvider();
 
 #if (!AuthNone)
         builder.AddAuthenticationProtocol();
@@ -49,8 +47,10 @@ internal static class ServiceExtensions
 #if (!StorageNone)
         builder.AddStorages();
 #endif
-#if (UseCache)
-        builder.AddCaching();
+#if (UseMemoryCache)
+        builder.Services.AddDistributedMemoryCache();
+#elif (UseRedis || UseGarnet)
+        builder.AddRedisDistributedCache("Cache");
 #endif
 
         InitializeFunctionalities(builder);
@@ -60,10 +60,10 @@ internal static class ServiceExtensions
     {
 #if (UseLayerArchitecture)
 #if (UseApi)
-        builder.InitCompletedWebApi();
+        builder.InitWebApi();
 #endif
 #if (UseGrpc)
-        builder.InitCompletedWebGrpc();
+        builder.InitWebGrpc();
 #endif
 #endif
     }

@@ -19,7 +19,7 @@ builder.WebHost.ConfigureKestrel(options => options.Limits.MaxRequestBodySize = 
 builder.Configuration.AddUserSecrets<Program>().AddEnvironmentVariables();
 
 // Add services to the container.
-builder.InitCompletedWebHostConfig();
+builder.InitHostWebConfig();
 
 #if (UseGrpc)
 builder.Services.AddGrpc();
@@ -76,7 +76,7 @@ app.MapControllers();
 
 #if (UseGrpc)
 #if (UseLayerArchitecture)
-app.MapCompletedWebGrpc();
+app.MapWebGrpc();
 #endif
 app.MapGrpcHealthChecksService();
 #endif

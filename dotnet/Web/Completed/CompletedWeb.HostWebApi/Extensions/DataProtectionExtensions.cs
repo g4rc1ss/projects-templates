@@ -5,13 +5,13 @@ namespace CompletedWeb.HostWebApi.Extensions;
 internal static class DataProtectionExtensions
 {
     internal static void ConfigureDataProtectionProvider(
-        this IServiceCollection services,
-        IConfiguration configuration
+        this IHostApplicationBuilder builder
     )
     {
-        services
+        builder
+            .Services
             .AddDataProtection()
             // .PersistKeysToFileSystem(new DirectoryInfo("folder"))
-            .SetApplicationName("CompletedWeb.Host");
+            .SetApplicationName(builder.Environment.ApplicationName);
     }
 }

@@ -36,7 +36,7 @@ IResourceBuilder<GarnetResource> garnet = builder.AddGarnetCache();
 IResourceBuilder<AzureBlobStorageResource> blobStorage = builder.AddAspireAzBlobStorage();
 #endif
 
-builder.AddProject<CompletedWeb_HostWebApi>("CompletedWeb")
+builder.AddProject<CompletedWeb_HostWebApi>("Host")
 #if (UsePostgres)
 .WithAspirePostgres(postgres)
 #endif
