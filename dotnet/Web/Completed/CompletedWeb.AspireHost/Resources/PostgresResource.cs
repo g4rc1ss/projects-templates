@@ -14,7 +14,7 @@ public static class PostgresResource
             .WithPgWeb()
             .WithDataVolume("postgresVM", isReadOnly: false)
             .WithLifetime(ContainerLifetime.Session)
-            .AddDatabase("PostgresDB", "CompletedWeb");
+            .AddDatabase("PostgresDB", "PostgresDatabase");
     }
 
     internal static IResourceBuilder<T> WithAspirePostgres<T>(

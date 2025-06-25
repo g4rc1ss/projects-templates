@@ -8,7 +8,10 @@ public static class AzureCosmosResource
         this IDistributedApplicationBuilder builder
     )
     {
-        return builder.AddAzureCosmosDB("Cosmos").RunAsEmulator().AddCosmosDatabase("Database");
+        return builder
+            .AddAzureCosmosDB("Cosmos")
+            .RunAsEmulator()
+            .AddCosmosDatabase("CosmosDatabase");
     }
 
     internal static IResourceBuilder<T> WithAspireAzureCosmos<T>(

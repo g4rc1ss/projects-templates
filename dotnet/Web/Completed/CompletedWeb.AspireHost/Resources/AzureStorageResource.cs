@@ -8,7 +8,7 @@ public static class AzureStorageResource
         this IDistributedApplicationBuilder builder
     )
     {
-        return builder.AddAzureStorage("AzureBlobStorage").RunAsEmulator().AddBlobs("blob");
+        return builder.AddAzureStorage("AzureStorage").RunAsEmulator().AddBlobs("AzureBlobStorage");
     }
 
     internal static IResourceBuilder<T> WithAspireAzBlobStorage<T>(

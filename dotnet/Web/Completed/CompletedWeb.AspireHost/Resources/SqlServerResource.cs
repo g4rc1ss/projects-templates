@@ -10,7 +10,7 @@ public static class SqlServerResource
             .AddSqlServer("SQLServer")
             .WithDataVolume("SqlServerVM", isReadOnly: false)
             .WithLifetime(ContainerLifetime.Session)
-            .AddDatabase("CompletedWebDatabase", "CompletedWeb");
+            .AddDatabase("MicrosoftDB", "MicrosoftDatabase");
     }
 
     internal static IResourceBuilder<T> WithAspireSqlServer<T>(
