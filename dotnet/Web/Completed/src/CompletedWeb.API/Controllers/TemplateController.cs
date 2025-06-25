@@ -113,7 +113,7 @@ public class TemplateController(
     [HttpGet("mongodb")]
     public async Task<IActionResult> MongodbAsync()
     {
-        MongoDbEntity entity = new() { Id = Guid.NewGuid().ToString(), Property = "Creado", };
+        MongoDbEntity entity = new() { Id = Guid.NewGuid().ToString(), Property = "Creado" };
         MongoDbEntity userCreated = await mongoPoc.CreateAsync(entity);
         userCreated.Property = "Modificado";
         MongoDbEntity? result = await mongoPoc.GetByIdAsync(userCreated.Id);
