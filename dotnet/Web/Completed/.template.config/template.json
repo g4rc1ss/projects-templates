@@ -550,7 +550,7 @@
         {
           "condition": "(!UseAzServiceBus)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/AspireAzureServiceBusResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireAzServiceBusResource.cs"
           ]
         }
       ]

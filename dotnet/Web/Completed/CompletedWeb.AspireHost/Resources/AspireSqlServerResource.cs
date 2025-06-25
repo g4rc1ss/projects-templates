@@ -22,10 +22,6 @@ public static class AspireSqlServerResource
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
-#if (UseIdentity)
         return builder.WithReference(sqlServer).WaitFor(sqlServer);
-#else
-        return builder.WithReference(sqlServer).WaitFor(sqlServer);
-#endif
     }
 }

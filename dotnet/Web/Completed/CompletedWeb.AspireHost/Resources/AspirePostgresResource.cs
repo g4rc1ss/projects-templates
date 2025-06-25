@@ -24,10 +24,6 @@ public static class AspirePostgresResource
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
-#if (UseIdentity)
-        return builder.WithReference(postgres, "IdentityDatabaseContext").WaitFor(postgres);
-#else
-        return builder.WithReference(postgres, "DatabaseContext").WaitFor(postgres);
-#endif
+        return builder.WithReference(postgres).WaitFor(postgres);
     }
 }

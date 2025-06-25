@@ -35,11 +35,11 @@ public static class InfraDatabaseExtensions
         builder.Services.AddHostedService<MigrationHostedService>();
 
 #if (UsePostgres)
-    #if (UseIdentity)
+#if (UseIdentity)
         builder.AddNpgsqlDbContext<IdentityDatabaseContext>(
-    #else
+#else
         builder.AddNpgsqlDbContext<DatabaseContext>(
-    #endif
+#endif
             "Postgres",
             sqlSettings =>
             {
@@ -50,11 +50,11 @@ public static class InfraDatabaseExtensions
 #endif
 
 #if (UseAzureSql || UseSqlServer)
-    #if (UseIdentity)
+#if (UseIdentity)
         builder.AddSqlServerDbContext<IdentityDatabaseContext>(
-    #else
+#else
         builder.AddSqlServerDbContext<DatabaseContext>(
-    #endif
+#endif
             "SqlServer",
             serverSettings =>
             {
@@ -64,11 +64,11 @@ public static class InfraDatabaseExtensions
 #endif
 
 #if (UseSqlite)
-    #if (UseIdentity)
+#if (UseIdentity)
         builder.AddSqliteDbContext<IdentityDatabaseContext>();
-    #else
+#else
         builder.AddSqliteDbContext<DatabaseContext>();
-    #endif
+#endif
 #endif
 
 #if (UseIdentity)
@@ -120,17 +120,22 @@ public static class InfraDatabaseExtensions
                 })
             );
     }
+#endif
 
+#if (UseSqlite)
     private static void AddSqliteDbContext<TContext>(this IHostApplicationBuilder builder)
         where TContext : DbContext
     {
         string? connectionString = builder.Configuration.GetConnectionString("Sqlite");
         ArgumentNullException.ThrowIfNull(connectionString);
 
-        builder.Services.AddDbContext<TContext>(dbContextBuilder =>
-        {
-            dbContextBuilder.UseSqlite(connectionString);
-        }, ServiceLifetime.Transient);
+        builder.Services.AddDbContext<TContext>(
+            dbContextBuilder =>
+            {
+                dbContextBuilder.UseSqlite(connectionString);
+            },
+            ServiceLifetime.Transient
+        );
     }
 #endif
 }
