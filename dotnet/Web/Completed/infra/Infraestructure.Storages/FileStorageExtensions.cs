@@ -2,7 +2,7 @@ namespace Infraestructure.Storages;
 
 public static class FileStorageExtensions
 {
-    public static Task UploadFileAsync(
+    public static async Task UploadFileAsync(
         this IFileStorage storage,
         byte[] content,
         string path,
@@ -11,6 +11,6 @@ public static class FileStorageExtensions
     )
     {
         using MemoryStream memory = new(content);
-        return storage.UploadFileAsync(memory, path, name, cancellationToken);
+        await storage.UploadFileAsync(memory, path, name, cancellationToken);
     }
 }

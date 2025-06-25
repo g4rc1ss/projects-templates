@@ -29,10 +29,6 @@ public static class InfraDatabaseExtensions
         configureSettings?.Invoke(settings);
 
 #if (SqlDatabase || UseIdentity)
-        if (!settings.DisableTracing)
-        {
-            builder.ConfigureOpenTelemetry();
-        }
         builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
 
@@ -109,7 +105,7 @@ public static class InfraDatabaseExtensions
 #endif
     }
 
-#if (SqlDatabase || UseIdentity)
+#if (UseSqlite)
     private static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
         builder
@@ -122,14 +118,20 @@ public static class InfraDatabaseExtensions
                 })
             );
     }
-#endif
 
-#if (UseSqlite)
-    private static void AddSqliteDbContext<TContext>(this IHostApplicationBuilder builder)
+    private static void AddSqliteDbContext<TContext>(
+        this IHostApplicationBuilder builder,
+        DatabaseSettings settings
+    )
         where TContext : DbContext
     {
         string? connectionString = builder.Configuration.GetConnectionString("Sqlite");
         ArgumentNullException.ThrowIfNull(connectionString);
+
+        if (!settings.DisableTracing)
+        {
+            builder.ConfigureOpenTelemetry();
+        }
 
         builder.Services.AddDbContext<TContext>(
             dbContextBuilder =>
