@@ -417,7 +417,7 @@
         {
           "condition": "!UseMemoryEvents",
           "exclude": [
-            "infra/Infraestructure.Events/Handlers/**/*",
+            "infra/Infraestructure.Events/Consumer/**/*",
             "infra/Infraestructure.Events/Publisher/MemoryEventNotificator.cs"
           ]
         },
