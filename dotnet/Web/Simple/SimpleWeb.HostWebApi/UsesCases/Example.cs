@@ -16,49 +16,66 @@ public class Example(
     IMongoPoc mongoPoc,
 #endif
 #if (UseLitedb)
-    ILitedbPoc litedbPoc
+    ILitedbPoc litedbPoc,
 #endif
-)
+    ILogger<Example> logger)
 {
+    public async Task ExecuteAsync()
+    {
+        logger.LogInformation("Executing example");
+#if (UseSqlite)
+        await SqliteAsync();
+#endif
+#if (UsePostgres)
+        await PostgresAsync();
+#endif
+#if (UseMongodb)
+        await MongodbAsync();
+#endif
+#if (UseLitedb)
+        await LitedbAsync();
+#endif
+    }
+
 #if (UseSqlite)
     public async Task SqliteAsync()
     {
-        UserEntity user = new() { Name = "Nombre" };
-        UserEntity userCreated = await sqlitePoc.CreateAsync(user);
-        userCreated.Name = "Nombre Modificado";
+        WeatherForecastEntity weather = new() { Name = "Nombre" };
+        WeatherForecastEntity weatherCreated = await sqlitePoc.CreateAsync(weather);
+        weatherCreated.Name = "Nombre Modificado";
 
-        UserEntity? result = await sqlitePoc.GetByIdAsync(userCreated.Id);
+        WeatherForecastEntity? result = await sqlitePoc.GetByIdAsync(weatherCreated.Id);
     }
 #endif
-    
+
 #if (UsePostgres)
     public async Task PostgresAsync()
     {
-        UserEntity user = new() { Name = "Nombre" };
-        UserEntity userCreated = await postgresPoc.CreateAsync(user);
-        userCreated.Name = "Nombre Modificado";
+        WeatherForecastEntity weather = new() { Name = "Nombre" };
+        WeatherForecastEntity weatherCreated = await postgresPoc.CreateAsync(weather);
+        weatherCreated.Name = "Nombre Modificado";
 
-        UserEntity? result = await postgresPoc.GetByIdAsync(userCreated.Id);
+        WeatherForecastEntity? result = await postgresPoc.GetByIdAsync(weatherCreated.Id);
     }
 #endif
-    
+
 #if (UseMongodb)
     public async Task MongodbAsync()
     {
         MongoDbEntity entity = new() { Id = Guid.NewGuid().ToString(), Property = "Creado" };
-        MongoDbEntity userCreated = await mongoPoc.CreateAsync(entity);
-        userCreated.Property = "Modificado";
-        MongoDbEntity? result = await mongoPoc.GetByIdAsync(userCreated.Id);
+        MongoDbEntity weatherCreated = await mongoPoc.CreateAsync(entity);
+        weatherCreated.Property = "Modificado";
+        MongoDbEntity? result = await mongoPoc.GetByIdAsync(weatherCreated.Id);
     }
 #endif
-    
+
 #if (UseLitedb)
     public async Task LitedbAsync()
     {
         LiteDbEntity entity = new() { Id = Guid.NewGuid().ToString(), Property = "Creado" };
-        LiteDbEntity userCreated = await litedbPoc.CreateAsync(entity);
-        userCreated.Property = "Modificado";
-        LiteDbEntity? result = await litedbPoc.GetByIdAsync(userCreated.Id);
+        LiteDbEntity weatherCreated = await litedbPoc.CreateAsync(entity);
+        weatherCreated.Property = "Modificado";
+        LiteDbEntity? result = await litedbPoc.GetByIdAsync(weatherCreated.Id);
     }
 #endif
 }

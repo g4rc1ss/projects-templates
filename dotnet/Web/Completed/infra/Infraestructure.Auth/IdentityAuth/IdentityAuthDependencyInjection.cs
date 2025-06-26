@@ -10,6 +10,8 @@ public static class IdentityAuthDependencyInjection
     public static void AddIdentityAuth<TContext>(this IHostApplicationBuilder builder)
         where TContext : IdentityAuthContext
     {
+        builder.Services.AddSingleton<IEmailSender<IdentityUserEntity>, EmailSender>();
+
         builder
             .Services.AddIdentityApiEndpoints<IdentityUserEntity>(options =>
             {
@@ -22,7 +24,7 @@ public static class IdentityAuthDependencyInjection
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
 
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
             })
             .AddUserManager<UserManager<IdentityUserEntity>>()
             .AddRoles<IdentityRoleEntity>()

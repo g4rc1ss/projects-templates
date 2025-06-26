@@ -6,10 +6,10 @@ namespace SimpleWeb.HostWebApi.Database.Repository;
 
 public class PostgresPoc(PostgresContext dbContext) : IPostgresPoc
 {
-    public UserEntity? Entity { get; set; }
+    public WeatherForecastEntity? Entity { get; set; }
 
-    public async Task<UserEntity?> GetByIdAsync(
-        int userId,
+    public async Task<WeatherForecastEntity?> GetByIdAsync(
+        int id,
         CancellationToken cancellationToken = default
     )
     {
@@ -18,65 +18,76 @@ public class PostgresPoc(PostgresContext dbContext) : IPostgresPoc
             return Entity;
         }
 
-        UserEntity user = await dbContext.Users.FirstAsync(
-            entity => entity.Id == userId,
+        WeatherForecastEntity weatherForecast = await dbContext.WeatherForecast.FirstAsync(
+            entity => entity.Id == id,
             cancellationToken
         );
 
-        Entity = user;
+        Entity = weatherForecast;
 
-        return user;
+        return weatherForecast;
     }
 
-    public async Task<UserEntity> CreateAsync(
-        UserEntity entity,
+    public async Task<WeatherForecastEntity> CreateAsync(
+        WeatherForecastEntity entity,
         CancellationToken cancellationToken = default
     )
     {
-        EntityEntry<UserEntity> user = await dbContext.Users.AddAsync(entity, cancellationToken);
+        EntityEntry<WeatherForecastEntity> weather = await dbContext.WeatherForecast.AddAsync(
+            entity,
+            cancellationToken
+        );
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return user.Entity;
+        return weather.Entity;
     }
 
     public async Task CreateManyAsync(
-        IEnumerable<UserEntity> entities,
+        IEnumerable<WeatherForecastEntity> entities,
         CancellationToken cancellationToken = default
     )
     {
-        await dbContext.Users.AddRangeAsync(entities, cancellationToken);
+        await dbContext.WeatherForecast.AddRangeAsync(entities, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task UpdateAsync(UserEntity entity, CancellationToken cancellationToken = default)
+    public async Task UpdateAsync(
+        WeatherForecastEntity entity,
+        CancellationToken cancellationToken = default
+    )
     {
-        dbContext.Users.Update(entity);
+        dbContext.WeatherForecast.Update(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task UpdateManyAsync(
-        IEnumerable<UserEntity> entities,
+        IEnumerable<WeatherForecastEntity> entities,
         CancellationToken cancellationToken = default
     )
     {
-        dbContext.Users.UpdateRange(entities);
+        dbContext.WeatherForecast.UpdateRange(entities);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task DeleteAsync(UserEntity entity, CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(
+        WeatherForecastEntity entity,
+        CancellationToken cancellationToken = default
+    )
     {
-        dbContext.Users.Remove(entity);
+        dbContext.WeatherForecast.Remove(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task DeleteManyAsync(
-        IEnumerable<UserEntity> entities,
+        IEnumerable<WeatherForecastEntity> entities,
         CancellationToken cancellationToken = default
     )
     {
-        dbContext.Users.RemoveRange(entities);
+        dbContext.WeatherForecast.RemoveRange(entities);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 }
 
-public interface IPostgresPoc : IRepository<UserEntity, int>, IManyCommandRepository<UserEntity>;
+public interface IPostgresPoc
+    : IRepository<WeatherForecastEntity, int>,
+        IManyCommandRepository<WeatherForecastEntity>;
