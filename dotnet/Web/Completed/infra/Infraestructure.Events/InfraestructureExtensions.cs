@@ -26,7 +26,8 @@ public static class InfraEventsExtensions
 #if (UseMemoryEvents)
         builder.Services.AddScoped<IEventNotificator, MemoryEventNotificator>();
 
-        IEnumerable<Assembly> assemblies = settings.Assemblies.Concat([typeof(InfraEventsExtensions).Assembly]);
+        IEnumerable<Assembly> assemblies = [typeof(InfraEventsExtensions).Assembly];
+        assemblies = assemblies.Concat(settings.Assemblies ?? []);
         builder.AddConsumerServices(assemblies);
 
         if (!settings.DisableTracing)
@@ -136,7 +137,11 @@ public static class InfraEventsExtensions
     {
         builder
             .Services.AddOpenTelemetry()
-            .WithTracing(providerBuilder => providerBuilder.AddSource(EventsConst.CONSUMER_NAME));
+            .WithTracing(providerBuilder =>
+                providerBuilder
+                    .AddSource(EventsConst.CONSUMER_NAME)
+                    .AddSource(EventsConst.PUBLISHER_NAME)
+            );
     }
 #endif
 }

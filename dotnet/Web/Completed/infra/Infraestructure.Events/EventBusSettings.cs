@@ -6,8 +6,8 @@ namespace Infraestructure.Events;
 
 public class EventBusSettings
 {
-    public bool DisableTracing { get; init; }
+    public bool DisableTracing { get; set; }
 #if (UseMemoryEvents)
-    public IEnumerable<Assembly> Assemblies { get; init; }
+    public IEnumerable<Assembly>? Assemblies { get; set; }
 #endif
 };

@@ -13,6 +13,13 @@ public class MemoryEventNotificator(IServiceProvider serviceProvider) : IEventNo
     )
         where TRequest : INotificatorRequest
     {
+        using ActivitySource? tracingConsumer = new(EventsConst.PUBLISHER_NAME);
+        using Activity? activity = tracingConsumer.CreateActivity(
+            $"Publishing event",
+            ActivityKind.Producer
+        );
+        activity?.Start();
+        
         Channel<Message<TRequest>> channel = serviceProvider.GetRequiredService<
             Channel<Message<TRequest>>
         >();
