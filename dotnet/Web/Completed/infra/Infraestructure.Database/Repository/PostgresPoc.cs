@@ -34,7 +34,10 @@ public class PostgresPoc(PostgresContext dbContext) : IPostgresPoc
         CancellationToken cancellationToken = default
     )
     {
-        EntityEntry<WeatherForecastEntity> user = await dbContext.WeatherForecast.AddAsync(entity, cancellationToken);
+        EntityEntry<WeatherForecastEntity> user = await dbContext.WeatherForecast.AddAsync(
+            entity,
+            cancellationToken
+        );
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return user.Entity;
@@ -49,7 +52,10 @@ public class PostgresPoc(PostgresContext dbContext) : IPostgresPoc
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task UpdateAsync(WeatherForecastEntity entity, CancellationToken cancellationToken = default)
+    public async Task UpdateAsync(
+        WeatherForecastEntity entity,
+        CancellationToken cancellationToken = default
+    )
     {
         dbContext.WeatherForecast.Update(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -64,7 +70,10 @@ public class PostgresPoc(PostgresContext dbContext) : IPostgresPoc
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task DeleteAsync(WeatherForecastEntity entity, CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(
+        WeatherForecastEntity entity,
+        CancellationToken cancellationToken = default
+    )
     {
         dbContext.WeatherForecast.Remove(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -80,4 +89,6 @@ public class PostgresPoc(PostgresContext dbContext) : IPostgresPoc
     }
 }
 
-public interface IPostgresPoc : IRepository<WeatherForecastEntity, int>, IManyCommandRepository<WeatherForecastEntity>;
+public interface IPostgresPoc
+    : IRepository<WeatherForecastEntity, int>,
+        IManyCommandRepository<WeatherForecastEntity>;

@@ -111,8 +111,8 @@
           "condition": "(!SqlDatabase)",
           "exclude": [
             "HostedServices/MigrationHostedService.cs",
-            "Entities/UserEntity.cs",
-            "EntityConfiguration/UserEntityConfiguration.cs"
+            "Entities/WeatherForecastEntity.cs",
+            "EntityConfiguration/WeatherForecastEntityConfiguration.cs"
           ]
         },
         {

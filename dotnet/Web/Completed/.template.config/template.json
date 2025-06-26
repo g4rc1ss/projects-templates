@@ -446,8 +446,8 @@
           "condition": "(!SqlDatabase)",
           "exclude": [
             "infra/Infraestructure.Database/HostedServices/MigrationHostedService.cs",
-            "infra/Infraestructure.Database/Entities/UserEntity.cs",
-            "infra/Infraestructure.Database/EntityConfiguration/UserEntityConfiguration.cs"
+            "infra/Infraestructure.Database/Entities/WeatherForecastEntity.cs",
+            "infra/Infraestructure.Database/EntityConfiguration/WeatherForecastEntityConfiguration.cs"
           ]
         },
         {

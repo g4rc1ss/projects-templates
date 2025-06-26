@@ -94,7 +94,9 @@ public class Example(
     private async Task PostgresAsync()
     {
         WeatherForecastEntity weatherForecast = new() { Name = "Nombre" };
-        WeatherForecastEntity weatherForecastCreated = await postgresPoc.CreateAsync(weatherForecast);
+        WeatherForecastEntity weatherForecastCreated = await postgresPoc.CreateAsync(
+            weatherForecast
+        );
         weatherForecastCreated.Name = "Nombre Modificado";
 
         WeatherForecastEntity? result = await postgresPoc.GetByIdAsync(weatherForecastCreated.Id);
@@ -116,7 +118,9 @@ public class Example(
     private async Task SqlServerAsync()
     {
         WeatherForecastEntity weatherForecast = new() { Name = "Nombre" };
-        WeatherForecastEntity weatherForecastCreated = await sqlServerPoc.CreateAsync(weatherForecast);
+        WeatherForecastEntity weatherForecastCreated = await sqlServerPoc.CreateAsync(
+            weatherForecast
+        );
         weatherForecastCreated.Name = "Nombre Modificado";
 
         WeatherForecastEntity? result = await sqlServerPoc.GetByIdAsync(weatherForecastCreated.Id);

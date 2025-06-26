@@ -34,7 +34,10 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
         CancellationToken cancellationToken = default
     )
     {
-        EntityEntry<WeatherForecastEntity> user = await dbContext.Users.AddAsync(entity, cancellationToken);
+        EntityEntry<WeatherForecastEntity> user = await dbContext.Users.AddAsync(
+            entity,
+            cancellationToken
+        );
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return user.Entity;
@@ -49,7 +52,10 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task UpdateAsync(WeatherForecastEntity entity, CancellationToken cancellationToken = default)
+    public async Task UpdateAsync(
+        WeatherForecastEntity entity,
+        CancellationToken cancellationToken = default
+    )
     {
         dbContext.Users.Update(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -64,7 +70,10 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task DeleteAsync(WeatherForecastEntity entity, CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(
+        WeatherForecastEntity entity,
+        CancellationToken cancellationToken = default
+    )
     {
         dbContext.Users.Remove(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -80,4 +89,6 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
     }
 }
 
-public interface ISqlServerPoc : IRepository<WeatherForecastEntity, int>, IManyCommandRepository<WeatherForecastEntity>;
+public interface ISqlServerPoc
+    : IRepository<WeatherForecastEntity, int>,
+        IManyCommandRepository<WeatherForecastEntity>;
