@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 #if (UseMemoryEvents)
 using Infraestructure.Events.Consumer;
+using Infraestructure.Events.Messages;
 using System.Threading.Channels;
 using System.Reflection;
 #endif
@@ -24,13 +25,15 @@ public static class InfraEventsExtensions
 
 #if (UseMemoryEvents)
         builder.Services.AddScoped<IEventNotificator, MemoryEventNotificator>();
-        builder.AddConsumerServices([typeof(InfraEventsExtensions).Assembly]);
+
+        IEnumerable<Assembly> assemblies = settings.Assemblies.Concat([typeof(InfraEventsExtensions).Assembly]);
+        builder.AddConsumerServices(assemblies);
 
         if (!settings.DisableTracing)
         {
             builder.ConfigureOpenTelemetry();
         }
-        
+
 #endif
 #if (UseAzServiceBus)
         builder.Services.AddScoped<IEventNotificator, AzureEventNotificator>();
@@ -41,7 +44,7 @@ public static class InfraEventsExtensions
                 busSettings.DisableTracing = settings.DisableTracing;
             }
         );
-        
+
 #endif
 #if (UseRabbitMQ)
         builder.Services.AddScoped<IEventNotificator, RabbitEventNotificator>();
