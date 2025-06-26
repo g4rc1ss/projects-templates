@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 #if (UseIdentity)
-using Infraestructure.Database.Entities;
+using Infraestructure.Auth.IdentityAuth;
 #endif
 #if (UseJwt)
 using System.Security.Claims;
