@@ -1,11 +1,10 @@
-using Infraestructure.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infraestructure.Database.Contexts;
+namespace Infraestructure.Auth.IdentityAuth;
 
-public class IdentityContext(DbContextOptions<IdentityContext> options)
+public class IdentityAuthContext(DbContextOptions<IdentityAuthContext> options)
     : IdentityDbContext<IdentityUserEntity, IdentityRoleEntity, int>(options)
 {
     public override DbSet<IdentityUserEntity> Users { get; set; }
@@ -22,6 +21,6 @@ public class IdentityContext(DbContextOptions<IdentityContext> options)
         builder.Entity<IdentityUserRole<int>>().ToTable("UserRoles");
         builder.Entity<IdentityUserToken<int>>().ToTable("UserTokens");
 
-        builder.ApplyConfigurationsFromAssembly(typeof(IdentityContext).Assembly);
+        builder.ApplyConfigurationsFromAssembly(typeof(IdentityAuthContext).Assembly);
     }
 }

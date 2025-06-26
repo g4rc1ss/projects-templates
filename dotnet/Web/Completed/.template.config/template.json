@@ -174,7 +174,7 @@
     },
     "DatabaseNone": {
       "type": "computed",
-      "value": "(!SqlDatabase && !NoSqlDatabase && !UseIdentity)"
+      "value": "(!SqlDatabase && !NoSqlDatabase)"
     },
     // Auth Config
     "Authentication": {
@@ -435,16 +435,13 @@
             "infra/Infraestructure.Auth/JwtManager/**/*"
           ]
         },
-        // Database
         {
           "condition": "(!UseIdentity)",
           "exclude": [
-            "infra/Infraestructure.Database/Entities/IdentityRoleEntity.cs",
-            "infra/Infraestructure.Database/Entities/IdentityUserEntity.cs",
-            "infra/Infraestructure.Database/Repository/IdentityUserPoc.cs",
-            "infra/Infraestructure.Database/Contexts/IdentityContext.cs"
+            "infra/Infraestructure.Auth/IdentityAuth/**/*"
           ]
         },
+        // Database
         {
           "condition": "(!SqlDatabase)",
           "exclude": [

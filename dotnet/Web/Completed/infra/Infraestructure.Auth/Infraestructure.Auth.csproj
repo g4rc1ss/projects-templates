@@ -9,12 +9,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <!--#if (UseIdentity)-->
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+        <!--#endif-->
     </ItemGroup>
-    
+
     <ItemGroup>
         <!--#if (UseJwt)-->
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3"/>
+        <!--#endif-->
+        <!--#if (UseIdentity)-->
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>
         <!--#endif-->
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="*"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
@@ -22,9 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!--#if (UseIdentity)-->
-      <ProjectReference Include="..\Infraestructure.Database\Infraestructure.Database.csproj" />
-        <!--#endif-->
     </ItemGroup>
 
 </Project>

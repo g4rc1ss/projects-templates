@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace Infraestructure.Database.Entities;
+namespace Infraestructure.Auth.IdentityAuth;
 
 public class IdentityUserEntity : IdentityUser<int> { }

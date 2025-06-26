@@ -86,17 +86,6 @@
     "UseLitedb": {
       "type": "computed",
       "value": "(Databases == 'litedb')"
-    },
-    // Auth Config
-    "UseIdentity": {
-      "type": "parameter",
-      "displayName": "Use Identity",
-      "datatype": "bool",
-      "defaultValue": false
-    },
-    "AuthNone": {
-      "type": "computed",
-      "value": "(!UseIdentity)"
     }
   },
   "sources": [
@@ -116,15 +105,6 @@
           "condition": "(!SqlDatabase)",
           "exclude": [
             "HostedServices/MigrationHostedService.cs"
-          ]
-        },
-        {
-          "condition": "(!UseIdentity)",
-          "exclude": [
-            "Entities/IdentityRoleEntity.cs",
-            "Entities/IdentityUserEntity.cs",
-            "Repository/IdentityUserPoc.cs",
-            "Contexts/IdentityDatabaseContext.cs"
           ]
         },
         {

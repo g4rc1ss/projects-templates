@@ -29,9 +29,6 @@ public class Example(
 #if (UseSqlServer)
     ISqlServerPoc sqlServerPoc,
 #endif
-#if (UseIdentity)
-    IIdentityUserRepository userRepository,
-#endif
 #if (UseMongodb)
     IMongoPoc mongoPoc,
 #endif
@@ -57,9 +54,6 @@ public class Example(
 #if (UseSqlServer)
         await SqlServerAsync();
 #endif
-#if (UseIdentity)
-        await IdentityAsync();
-#endif
 #if (UseMongodb)
         await MongodbAsync();
 #endif
@@ -74,7 +68,7 @@ public class Example(
     {
         await eventNotificator.PublishAsync(new RequestMessage());
     }
-    
+
 #endif
 #if (UseAzureCosmos)
     private async Task CosmosAsync()
@@ -91,7 +85,7 @@ public class Example(
 
         CosmosDbEntity? result = await cosmosdb.GetByIdAsync(entidadCreada.Id);
     }
-    
+
 #endif
 #if (UsePostgres)
     private async Task PostgresAsync()
@@ -102,7 +96,7 @@ public class Example(
 
         UserEntity? result = await postgresPoc.GetByIdAsync(userCreated.Id);
     }
-    
+
 #endif
 #if (UseSqlite)
     private async Task SqliteAsync()
@@ -113,7 +107,7 @@ public class Example(
 
         UserEntity? result = await sqlitePoc.GetByIdAsync(userCreated.Id);
     }
-    
+
 #endif
 #if (UseSqlServer)
     private async Task SqlServerAsync()
@@ -124,18 +118,7 @@ public class Example(
 
         UserEntity? result = await sqlServerPoc.GetByIdAsync(userCreated.Id);
     }
-    
-#endif
-#if (UseIdentity)
-    private async Task IdentityAsync()
-    {
-        IdentityUserEntity user = new() { UserName = "Nombre" };
-        IdentityUserEntity userCreated = await userRepository.CreateAsync(user);
-        userCreated.UserName = "Nombre Modificado";
 
-        IdentityUserEntity? result = await userRepository.GetByIdAsync(userCreated.Id.ToString());
-    }
-    
 #endif
 #if (UseMongodb)
     private async Task MongodbAsync()
@@ -145,7 +128,7 @@ public class Example(
         userCreated.Property = "Modificado";
         MongoDbEntity? result = await mongoPoc.GetByIdAsync(userCreated.Id);
     }
-    
+
 #endif
 #if (!StorageNone)
     private async Task StorageAsync()

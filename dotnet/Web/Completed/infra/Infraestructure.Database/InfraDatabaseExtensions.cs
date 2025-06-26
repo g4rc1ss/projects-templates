@@ -31,7 +31,7 @@ public static class InfraDatabaseExtensions
 #if (SqlDatabase)
         builder.Services.AddSingleton<MigrationHostedService>();
         builder.Services.AddHostedService<MigrationHostedService>();
-        
+
 #endif
 #if (UsePostgres)
         builder.Services.AddScoped<IPostgresPoc, PostgresPoc>();
