@@ -1,3 +1,4 @@
+using Infraestructure.Auth.IdentityAuth.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -6,7 +7,8 @@ namespace Infraestructure.Auth.IdentityAuth;
 
 public static class IdentityAuthDependencyInjection
 {
-    public static void AddIdentityAuth(this IHostApplicationBuilder builder)
+    public static void AddIdentityAuth<TContext>(this IHostApplicationBuilder builder)
+        where TContext : IdentityAuthContext
     {
         builder
             .Services.AddIdentityApiEndpoints<IdentityUserEntity>(options =>
@@ -25,6 +27,6 @@ public static class IdentityAuthDependencyInjection
             .AddUserManager<UserManager<IdentityUserEntity>>()
             .AddRoles<IdentityRoleEntity>()
             .AddRoleManager<RoleManager<IdentityRoleEntity>>()
-            .AddEntityFrameworkStores<IdentityAuthContext>();
+            .AddEntityFrameworkStores<TContext>();
     }
 }

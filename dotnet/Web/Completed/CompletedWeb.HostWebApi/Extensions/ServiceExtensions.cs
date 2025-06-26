@@ -9,8 +9,12 @@ using CompletedWeb.Grpc;
 #if (!UseCache)
 using Infraestructure.Caching;
 #endif
-#if (!AuthNone)
-using Infraestructure.Auth;
+#if (UseIdentity)
+using Infraestructure.Database.Contexts;
+using Infraestructure.Auth.IdentityAuth;
+#endif
+#if (UseJwt)
+using Infraestructure.Auth.JwtManager;
 #endif
 #if (!StorageNone)
 using Infraestructure.Storages;
@@ -36,23 +40,29 @@ internal static class ServiceExtensions
         builder.Services.AddHttpClient();
         builder.ConfigureDataProtectionProvider();
 
-#if (!AuthNone)
-        builder.AddAuthenticationProtocol();
+#if (UseIdentity)
+        // builder.AddIdentityAuth<>();
 #endif
+#if (UseJwt)
+        builder.AddJwt();
 
+#endif
 #if (!DatabaseNone)
         builder.AddDatabaseConfig();
+
 #endif
 #if (!EventBusNone)
         builder.AddEventsServices();
+
 #endif
 #if (!StorageNone)
         builder.AddStorages();
+
 #endif
 #if (!UseCache)
         builder.AddCaching();
-#endif
 
+#endif
         InitializeFunctionalities(builder);
     }
 
