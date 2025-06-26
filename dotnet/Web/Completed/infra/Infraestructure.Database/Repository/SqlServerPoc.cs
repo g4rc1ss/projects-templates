@@ -19,7 +19,7 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
             return Entity;
         }
 
-        WeatherForecastEntity weatherForecast = await dbContext.Users.FirstAsync(
+        WeatherForecastEntity weatherForecast = await dbContext.WeatherForecast.FirstAsync(
             entity => entity.Id == id,
             cancellationToken
         );
@@ -34,7 +34,7 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
         CancellationToken cancellationToken = default
     )
     {
-        EntityEntry<WeatherForecastEntity> user = await dbContext.Users.AddAsync(
+        EntityEntry<WeatherForecastEntity> user = await dbContext.WeatherForecast.AddAsync(
             entity,
             cancellationToken
         );
@@ -48,7 +48,7 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
         CancellationToken cancellationToken = default
     )
     {
-        await dbContext.Users.AddRangeAsync(entities, cancellationToken);
+        await dbContext.WeatherForecast.AddRangeAsync(entities, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
@@ -57,7 +57,7 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
         CancellationToken cancellationToken = default
     )
     {
-        dbContext.Users.Update(entity);
+        dbContext.WeatherForecast.Update(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
@@ -66,7 +66,7 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
         CancellationToken cancellationToken = default
     )
     {
-        dbContext.Users.UpdateRange(entities);
+        dbContext.WeatherForecast.UpdateRange(entities);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
@@ -75,7 +75,7 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
         CancellationToken cancellationToken = default
     )
     {
-        dbContext.Users.Remove(entity);
+        dbContext.WeatherForecast.Remove(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
@@ -84,7 +84,7 @@ public class SqlServerPoc(SqlServerContext dbContext) : ISqlServerPoc
         CancellationToken cancellationToken = default
     )
     {
-        dbContext.Users.RemoveRange(entities);
+        dbContext.WeatherForecast.RemoveRange(entities);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 }

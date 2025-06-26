@@ -9,10 +9,6 @@ using CompletedWeb.Grpc;
 #if (!UseCache)
 using Infraestructure.Caching;
 #endif
-#if (UseIdentity)
-using Infraestructure.Database.Contexts;
-using Infraestructure.Auth.IdentityAuth;
-#endif
 #if (UseJwt)
 using Infraestructure.Auth.JwtManager;
 #endif
