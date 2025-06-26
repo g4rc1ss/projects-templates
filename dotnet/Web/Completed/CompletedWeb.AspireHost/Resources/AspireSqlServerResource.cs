@@ -6,8 +6,10 @@ public static class AspireSqlServerResource
         this IDistributedApplicationBuilder builder
     )
     {
+        IResourceBuilder<ParameterResource> password = builder.AddParameter("password", "123456");
+        
         IResourceBuilder<SqlServerServerResource> sqlServer = builder
-            .AddSqlServer("SqlServer")
+            .AddSqlServer("SqlServer", password)
             .WithDataVolume("SqlServerVM", isReadOnly: false)
             .WithLifetime(ContainerLifetime.Session);
 
