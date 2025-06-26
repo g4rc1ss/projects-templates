@@ -12,7 +12,7 @@ public static class AspirePostgresResource
         IResourceBuilder<PostgresServerResource> postgres = builder
             .AddPostgres("Postgres", username, password, 5432)
             .WithPgWeb()
-            .WithDataVolume("postgresVM", isReadOnly: false)
+            // .WithDataVolume("postgresVM", isReadOnly: false)
             .WithLifetime(ContainerLifetime.Session);
         postgres.AddDatabase("PostgresDB", "PostgresDatabase");
         return postgres;
