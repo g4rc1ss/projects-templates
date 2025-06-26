@@ -76,7 +76,7 @@
           "displayName": "LiteDB"
         }
       ],
-      "defaultValue": "postgresql"
+      "defaultValue": "none"
     },
     "SqlDatabase": {
       "type": "computed",
@@ -174,8 +174,8 @@
         {
           "condition": "(!SqlDatabase)",
           "exclude": [
-            "SimpleWeb.HostWebApi/Database/Entities/UserEntity.cs",
-            "SimpleWeb.HostWebApi/Database/EntityConfiguration/UserEntityConfiguration.cs",
+            "SimpleWeb.HostWebApi/Database/Entities/WeatherForecastEntity.cs",
+            "SimpleWeb.HostWebApi/Database/EntityConfiguration/WeatherForecastEntityConfiguration.cs",
             "SimpleWeb.HostWebApi/Database/HostedServices/MigrationHostedService.cs"
           ]
         },
