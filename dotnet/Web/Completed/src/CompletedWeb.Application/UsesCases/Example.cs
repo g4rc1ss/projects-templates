@@ -93,33 +93,33 @@ public class Example(
 #if (UsePostgres)
     private async Task PostgresAsync()
     {
-        UserEntity user = new() { Name = "Nombre" };
-        UserEntity userCreated = await postgresPoc.CreateAsync(user);
-        userCreated.Name = "Nombre Modificado";
+        WeatherForecastEntity weatherForecast = new() { Name = "Nombre" };
+        WeatherForecastEntity weatherForecastCreated = await postgresPoc.CreateAsync(weatherForecast);
+        weatherForecastCreated.Name = "Nombre Modificado";
 
-        UserEntity? result = await postgresPoc.GetByIdAsync(userCreated.Id);
+        WeatherForecastEntity? result = await postgresPoc.GetByIdAsync(weatherForecastCreated.Id);
     }
 
 #endif
 #if (UseSqlite)
     private async Task SqliteAsync()
     {
-        UserEntity user = new() { Name = "Nombre" };
-        UserEntity userCreated = await sqlitePoc.CreateAsync(user);
-        userCreated.Name = "Nombre Modificado";
+        WeatherForecastEntity weatherForecast = new() { Name = "Nombre" };
+        WeatherForecastEntity weatherForecastCreated = await sqlitePoc.CreateAsync(weatherForecast);
+        weatherForecastCreated.Name = "Nombre Modificado";
 
-        UserEntity? result = await sqlitePoc.GetByIdAsync(userCreated.Id);
+        WeatherForecastEntity? result = await sqlitePoc.GetByIdAsync(weatherForecastCreated.Id);
     }
 
 #endif
 #if (UseSqlServer)
     private async Task SqlServerAsync()
     {
-        UserEntity user = new() { Name = "Nombre" };
-        UserEntity userCreated = await sqlServerPoc.CreateAsync(user);
-        userCreated.Name = "Nombre Modificado";
+        WeatherForecastEntity weatherForecast = new() { Name = "Nombre" };
+        WeatherForecastEntity weatherForecastCreated = await sqlServerPoc.CreateAsync(weatherForecast);
+        weatherForecastCreated.Name = "Nombre Modificado";
 
-        UserEntity? result = await sqlServerPoc.GetByIdAsync(userCreated.Id);
+        WeatherForecastEntity? result = await sqlServerPoc.GetByIdAsync(weatherForecastCreated.Id);
     }
 
 #endif
@@ -127,9 +127,9 @@ public class Example(
     private async Task MongodbAsync()
     {
         MongoDbEntity entity = new() { Id = Guid.NewGuid().ToString(), Property = "Creado" };
-        MongoDbEntity userCreated = await mongoPoc.CreateAsync(entity);
-        userCreated.Property = "Modificado";
-        MongoDbEntity? result = await mongoPoc.GetByIdAsync(userCreated.Id);
+        MongoDbEntity weatherForecastCreated = await mongoPoc.CreateAsync(entity);
+        weatherForecastCreated.Property = "Modificado";
+        MongoDbEntity? result = await mongoPoc.GetByIdAsync(weatherForecastCreated.Id);
     }
 
 #endif

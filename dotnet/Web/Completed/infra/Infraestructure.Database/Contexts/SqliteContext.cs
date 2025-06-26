@@ -5,7 +5,7 @@ namespace Infraestructure.Database.Contexts;
 
 public class SqliteContext(DbContextOptions<SqliteContext> options) : DbContext(options)
 {
-    public DbSet<UserEntity> Users { get; set; }
+    public DbSet<WeatherForecastEntity> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

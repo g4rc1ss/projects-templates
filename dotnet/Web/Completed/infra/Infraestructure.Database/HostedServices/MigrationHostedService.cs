@@ -27,7 +27,6 @@ public class MigrationHostedService(IServiceProvider serviceProvider) : IHostedS
         SqlServerContext sqlServerContext =
             scope.ServiceProvider.GetRequiredService<SqlServerContext>();
         await sqlServerContext.Database.MigrateAsync(cancellationToken: cancellationToken);
-
 #endif
     }
 
