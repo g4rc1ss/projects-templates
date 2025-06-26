@@ -30,7 +30,7 @@ public static class InfraEventsExtensions
         {
             builder.ConfigureOpenTelemetry();
         }
-        
+
 #endif
 #if (UseAzServiceBus)
         builder.Services.AddScoped<IEventNotificator, AzureEventNotificator>();
@@ -41,7 +41,7 @@ public static class InfraEventsExtensions
                 busSettings.DisableTracing = settings.DisableTracing;
             }
         );
-        
+
 #endif
 #if (UseRabbitMQ)
         builder.Services.AddScoped<IEventNotificator, RabbitEventNotificator>();

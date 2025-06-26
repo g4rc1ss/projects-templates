@@ -5,7 +5,11 @@ namespace Infraestructure.Auth.IdentityAuth;
 
 public class EmailSender : IEmailSender<IdentityUserEntity>
 {
-    public Task SendConfirmationLinkAsync(IdentityUserEntity user, string email, string confirmationLink)
+    public Task SendConfirmationLinkAsync(
+        IdentityUserEntity user,
+        string email,
+        string confirmationLink
+    )
     {
         throw new NotImplementedException();
     }
