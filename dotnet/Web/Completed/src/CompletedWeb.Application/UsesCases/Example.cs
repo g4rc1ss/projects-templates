@@ -1,4 +1,5 @@
 using CompletedWeb.Application.Contracts;
+using Microsoft.Extensions.Logging;
 #if (SqlDatabase || NoSqlDatabase)
 using Infraestructure.Database.Entities;
 using Infraestructure.Database.Repository;
@@ -33,12 +34,14 @@ public class Example(
     IMongoPoc mongoPoc,
 #endif
 #if (!StorageNone)
-    IFileStorage storage
+    IFileStorage storage,
 #endif
+    ILogger<Example> logger
 ) : IExample
 {
     public async Task<Result> ExecuteAsync(CancellationToken cancellationToken = default)
     {
+        logger.LogInformation("Executing example");
 #if (!EventBusNone)
         await EventsAsync();
 #endif

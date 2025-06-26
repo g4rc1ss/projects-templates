@@ -2,12 +2,9 @@
 #if (UseJwt)
 using Infraestructure.Auth.JwtManager;
 #endif
+
 #if (UseIdentity)
-
-#endif
-
-#if (UseIdentity || UseJwt)
-using Microsoft.Extensions.DependencyInjection;
+using Infraestructure.Auth.IdentityAuth;
 #endif
 
 namespace Infraestructure.Auth;
@@ -19,9 +16,8 @@ public static class InfraAuthExtensions
 #if (UseJwt)
         builder.AddJwt();
 #endif
-
 #if (UseIdentity)
-
+        builder.AddIdentityAuth();
 #endif
     }
 }
