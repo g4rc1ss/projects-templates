@@ -6,7 +6,7 @@ using CompletedWeb.API;
 using CompletedWeb.Grpc;
 #endif
 #endif
-#if (!UseCache)
+#if (UseCache)
 using Infraestructure.Caching;
 #endif
 #if (UseJwt)
@@ -55,7 +55,7 @@ internal static class ServiceExtensions
         builder.AddStorages();
 
 #endif
-#if (!UseCache)
+#if (UseCache)
         builder.AddCaching();
 
 #endif

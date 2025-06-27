@@ -77,8 +77,10 @@ public class Example(
     {
         Dictionary<string, string>? additionalProperties = [];
 #if (UseAzServiceBus)
-        string? queueName = configuration.GetSection("ServiceBusConfig")["QueueName"];
+        string? queueName = configuration.GetSection("AzServiceBusConfig")["QueueName"];
+        ArgumentNullException.ThrowIfNull(queueName);
         additionalProperties.Add("AzQueueName", queueName);
+
 #endif
 #if (UseRabbitMQ)
         additionalProperties.Add("routingKey", "Template.mensajePrueba");
