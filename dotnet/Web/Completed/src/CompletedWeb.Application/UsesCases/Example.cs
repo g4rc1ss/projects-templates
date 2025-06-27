@@ -69,7 +69,7 @@ public class Example(
 #if (!StorageNone)
         await StorageAsync();
 #endif
-        return Result.Success();
+        return new Result();
     }
 
 #if (!EventBusNone)

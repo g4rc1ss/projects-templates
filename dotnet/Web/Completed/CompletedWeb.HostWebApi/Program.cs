@@ -4,12 +4,11 @@
 using CompletedWeb.Grpc;
 #endif
 #endif
-
 #if (UseApi)
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using CompletedWeb.HostWebApi.Configurations;
-using CompletedWeb.HostWebApi.FilterControllers;
 using CompletedWeb.HostWebApi.OpenAPI;
+#if (!AuthNone)
+using Infraestructure.Auth;
+#endif
 #endif
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -27,12 +26,6 @@ builder.Services.AddGrpcReflection();
 #endif
 
 #if (UseApi)
-builder.Services.AddControllers(options =>
-{
-    options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer()));
-    options.Filters.Add<ResultResponseFilter>();
-});
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();
 builder.Services.AddSingleton<SwaggerAuthMiddleware>();
@@ -68,19 +61,20 @@ app.UseHttpsRedirection();
 #if (!AuthNone)
 app.UseAuthentication();
 app.UseAuthorization();
+
+#endif
+#if (UseGrpc)
+app.MapGrpcHealthChecksService();
 #endif
 #if (UseApi)
 app.MapHealthChecks("/health");
-app.MapControllers();
+#if (!AuthNone)
+
+app.MapAuthEndpoints();
+#endif
 #endif
 
-#if (UseGrpc)
-#if (UseLayerArchitecture)
-app.MapWebGrpc();
-#endif
-app.MapGrpcHealthChecksService();
-#endif
-app.MapRouteServices();
+app.MapHostEndpointsServices();
 
 await app.RunAsync();
 
