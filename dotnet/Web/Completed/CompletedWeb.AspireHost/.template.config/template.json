@@ -191,7 +191,8 @@
         {
           "condition": "(!UseRabbitMQ)",
           "exclude": [
-            "Resources/AspireRabbitResource.cs"
+            "Resources/AspireRabbitResource.cs",
+            "Configs/RabbitMq/**/*"
           ]
         },
         {

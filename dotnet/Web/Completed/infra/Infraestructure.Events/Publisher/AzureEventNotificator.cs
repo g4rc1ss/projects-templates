@@ -2,20 +2,21 @@ using System.Diagnostics;
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using Infraestructure.Events.Messages;
-using Microsoft.Extensions.Configuration;
 
 namespace Infraestructure.Events.Publisher;
 
-public class AzureEventNotificator(ServiceBusClient serviceBusClient, IConfiguration configuration)
-    : IEventNotificator
+public class AzureEventNotificator(ServiceBusClient serviceBusClient) : IEventNotificator
 {
     public async Task PublishAsync<TRequest>(
         TRequest request,
+        Dictionary<string, string> additionalProperties,
         CancellationToken cancellationToken = default
     )
         where TRequest : INotificatorRequest
     {
-        string? queuename = configuration.GetSection("ServiceBusConfig")["QueueName"];
+        string? queuename = request.AdditionalProperties?["queueName"];
+        ArgumentNullException.ThrowIfNull(queuename);
+
         ServiceBusSender? sender = serviceBusClient.CreateSender(queuename);
 
         MessageDiagnosticTraces traces = new()

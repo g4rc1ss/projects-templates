@@ -9,6 +9,7 @@ public class RabbitEventNotificator(IConnection connection) : IEventNotificator
 {
     public async Task PublishAsync<TRequest>(
         TRequest request,
+        Dictionary<string, string> additionalProperties,
         CancellationToken cancellationToken = default
     )
         where TRequest : INotificatorRequest
@@ -26,9 +27,15 @@ public class RabbitEventNotificator(IConnection connection) : IEventNotificator
 
         Message<TRequest> message = new(request, traces);
 
+        string? exchange = request.AdditionalProperties?["exchange"];
+        ArgumentNullException.ThrowIfNull(exchange);
+
+        string? routingKey = request.AdditionalProperties?["routingKey"];
+        ArgumentNullException.ThrowIfNull(routingKey);
+
         model.BasicPublish(
-            exchange: "",
-            routingKey: "",
+            exchange: exchange,
+            routingKey: routingKey,
             basicProperties: properties,
             body: JsonSerializer.SerializeToUtf8Bytes(message)
         );

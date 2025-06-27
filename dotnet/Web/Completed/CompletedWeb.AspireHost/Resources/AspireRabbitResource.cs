@@ -6,11 +6,22 @@ public static class AspireRabbitResource
         this IDistributedApplicationBuilder builder
     )
     {
+        IResourceBuilder<ParameterResource> rabbitUsername = builder.AddParameter(
+            "rabbitUser",
+            "guest"
+        );
+        IResourceBuilder<ParameterResource> rabbitPassword = builder.AddParameter(
+            "rabbitPass",
+            "ERnyEKvg5mY1ByTDjHyey6"
+        );
+
         IResourceBuilder<RabbitMQServerResource> rabbit = builder
-            .AddRabbitMQ("RabbitMQ")
+            .AddRabbitMQ("RabbitMQ", rabbitUsername, rabbitPassword)
             .WithDataVolume("rabbitMQVM", isReadOnly: false)
+            .WithBindMount("./Configs/RabbitMq/definitions.json", "/etc/rabbitmq/definitions.json")
+            .WithBindMount("./Configs/RabbitMq/rabbitmq.conf", "/etc/rabbitmq/rabbitmq.conf")
             .WithLifetime(ContainerLifetime.Session)
-            .WithManagementPlugin();
+            .WithManagementPlugin(58887);
 
         return rabbit;
     }

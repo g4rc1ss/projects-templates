@@ -538,7 +538,8 @@
         {
           "condition": "(!UseRabbitMQ)",
           "exclude": [
-            "CompletedWeb.AspireHost/Resources/AspireRabbitResource.cs"
+            "CompletedWeb.AspireHost/Resources/AspireRabbitResource.cs",
+            "CompletedWeb.AspireHost/Configs/RabbitMq/**/*"
           ]
         },
         {

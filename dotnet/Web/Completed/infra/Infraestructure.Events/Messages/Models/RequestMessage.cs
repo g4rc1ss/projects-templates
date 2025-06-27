@@ -1,3 +1,4 @@
 namespace Infraestructure.Events.Messages.Models;
 
-public record RequestMessage : INotificatorRequest;
+public record RequestMessage(IDictionary<string, string>? AdditionalProperties = null)
+    : INotificatorRequest;

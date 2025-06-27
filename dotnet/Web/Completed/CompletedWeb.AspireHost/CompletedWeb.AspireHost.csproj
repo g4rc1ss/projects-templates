@@ -45,4 +45,15 @@
     <ProjectReference Include="..\CompletedWeb.HostWebApi\CompletedWeb.HostWebApi.csproj" />
     <!--#endif-->
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configs\" />
+    <!--#if (UseRabbitMQ)-->
+    <None Update="Configs\RabbitMq\rabbitmq.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\RabbitMq\definitions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <!--#endif-->
+  </ItemGroup>
 </Project>

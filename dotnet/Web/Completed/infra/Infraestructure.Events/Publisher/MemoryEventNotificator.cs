@@ -9,6 +9,7 @@ public class MemoryEventNotificator(IServiceProvider serviceProvider) : IEventNo
 {
     public async Task PublishAsync<TRequest>(
         TRequest request,
+        Dictionary<string, string> additionalProperties,
         CancellationToken cancellationToken = default
     )
         where TRequest : INotificatorRequest
@@ -19,7 +20,7 @@ public class MemoryEventNotificator(IServiceProvider serviceProvider) : IEventNo
             ActivityKind.Producer
         );
         activity?.Start();
-        
+
         Channel<Message<TRequest>> channel = serviceProvider.GetRequiredService<
             Channel<Message<TRequest>>
         >();

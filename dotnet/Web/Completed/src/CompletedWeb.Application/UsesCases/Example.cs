@@ -1,5 +1,8 @@
 using CompletedWeb.Application.Contracts;
 using Microsoft.Extensions.Logging;
+#if (UseAzServiceBus)
+using Microsoft.Extensions.Configuration;
+#endif
 #if (SqlDatabase || NoSqlDatabase)
 using Infraestructure.Database.Entities;
 using Infraestructure.Database.Repository;
@@ -17,6 +20,9 @@ namespace CompletedWeb.Application.UsesCases;
 public class Example(
 #if (!EventBusNone)
     IEventNotificator eventNotificator,
+#endif
+#if (UseAzServiceBus)
+    IConfiguration configuration,
 #endif
 #if (UseAzureCosmos)
     ICosmosdbPoc cosmosdb,
@@ -69,7 +75,17 @@ public class Example(
 #if (!EventBusNone)
     private async Task EventsAsync()
     {
-        await eventNotificator.PublishAsync(new RequestMessage());
+        Dictionary<string, string>? additionalProperties = [];
+#if (UseAzServiceBus)
+        string? queueName = configuration.GetSection("ServiceBusConfig")["QueueName"];
+        additionalProperties.Add("AzQueueName", queueName);
+#endif
+#if (UseRabbitMQ)
+        additionalProperties.Add("routingKey", "Template.mensajePrueba");
+        additionalProperties.Add("exchange", "subscription.exchange");
+#endif
+        RequestMessage message = new();
+        await eventNotificator.PublishAsync(message, additionalProperties);
     }
 
 #endif
