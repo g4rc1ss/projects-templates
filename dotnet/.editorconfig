@@ -307,3 +307,8 @@ csharp_style_unused_value_expression_statement_preference = discard_variable:non
 
 # Disable IDE0290 - Use primary constructor
 csharp_style_prefer_primary_constructors = false
+
+[**Migrations**]
+dotnet_diagnostic.IDE0005.severity = none
+dotnet_diagnostic.IDE0130.severity = none
+csharp_style_namespace_declarations = file_scoped:none

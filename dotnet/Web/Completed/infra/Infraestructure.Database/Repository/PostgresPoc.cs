@@ -19,10 +19,18 @@ public class PostgresPoc(PostgresContext dbContext) : IPostgresPoc
             return Entity;
         }
 
-        WeatherForecastEntity weatherForecast = await dbContext.WeatherForecast.FirstAsync(
-            entity => entity.Id == id,
-            cancellationToken
-        );
+        Weather prueba = await dbContext
+            .Database.SqlQueryRaw<Weather>(
+                """
+                SELECT w."Id", w."Name"
+                FROM "WeatherForecast" AS w
+                WHERE w."Id" = {0}
+                """,
+                id
+            )
+            .FirstAsync(cancellationToken);
+
+        WeatherForecastEntity weatherForecast = new() { Id = prueba.Id, Name = prueba.Name };
 
         Entity = weatherForecast;
 
@@ -87,6 +95,12 @@ public class PostgresPoc(PostgresContext dbContext) : IPostgresPoc
         dbContext.WeatherForecast.RemoveRange(entities);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
+}
+
+public class Weather
+{
+    public int Id { get; set; }
+    public string? Name { get; set; }
 }
 
 public interface IPostgresPoc
