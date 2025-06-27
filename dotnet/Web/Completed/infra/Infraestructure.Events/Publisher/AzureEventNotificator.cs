@@ -14,8 +14,7 @@ public class AzureEventNotificator(ServiceBusClient serviceBusClient) : IEventNo
     )
         where TRequest : INotificatorRequest
     {
-        string? queuename = request.AdditionalProperties?["queueName"];
-        ArgumentNullException.ThrowIfNull(queuename);
+        string queuename = additionalProperties["queueName"];
 
         ServiceBusSender? sender = serviceBusClient.CreateSender(queuename);
 

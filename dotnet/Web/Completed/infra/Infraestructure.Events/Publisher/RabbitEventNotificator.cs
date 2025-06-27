@@ -27,11 +27,8 @@ public class RabbitEventNotificator(IConnection connection) : IEventNotificator
 
         Message<TRequest> message = new(request, traces);
 
-        string? exchange = request.AdditionalProperties?["exchange"];
-        ArgumentNullException.ThrowIfNull(exchange);
-
-        string? routingKey = request.AdditionalProperties?["routingKey"];
-        ArgumentNullException.ThrowIfNull(routingKey);
+        string? exchange = additionalProperties["exchange"];
+        string? routingKey = additionalProperties["routingKey"];
 
         model.BasicPublish(
             exchange: exchange,
