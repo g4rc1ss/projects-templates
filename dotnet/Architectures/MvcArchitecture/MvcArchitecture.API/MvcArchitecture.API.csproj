@@ -10,5 +10,6 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="*"/>
+        <PackageReference Include="Garciss.ROP.ApiExtensions" Version="*"/>
     </ItemGroup>
 </Project>
