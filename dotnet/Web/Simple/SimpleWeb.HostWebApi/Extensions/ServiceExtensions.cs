@@ -13,6 +13,7 @@ internal static class ServiceExtensions
         builder.ConfigureOpenTelemetry();
         
         builder.Services.AddHttpClient();
+        builder.Services.AddHttpContextAccessor();
         
         builder.ConfigureDataProtectionProvider();
 
