@@ -19,13 +19,6 @@ builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
 #endif
 
-#if (UseMvc)
-builder.Services.AddControllers(options =>
-{
-    options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseTransformer()));
-});
-#endif
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();
 
@@ -46,7 +39,6 @@ if (!app.Environment.IsProduction())
 app.UseHttpsRedirection();
 
 app.MapHealthChecks("/health");
-app.MapControllers();
 
 #if (UseGrpc)
 app.MapGrpcHealthChecksService();

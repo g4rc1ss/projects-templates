@@ -1,3 +1,4 @@
+using SimpleWeb.HostWebApi.Endpoints;
 #if (UseGrpc)
 using SimpleWeb.HostWebApi.GrpcServices.Services;
 #endif
@@ -11,5 +12,9 @@ public static class RouteExtensions
 #if (UseGrpc)
         endpoints.MapGrpcService<GreeterService>();
 #endif
+        RouteGroupBuilder apiGroup = endpoints.MapGroup("api");
+
+        apiGroup.MapGroup("template")
+            .MapGetTemplate();
     }
 }

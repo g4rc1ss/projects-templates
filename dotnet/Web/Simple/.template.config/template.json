@@ -20,29 +20,6 @@
     "editorTreatAs": "solution"
   },
   "symbols": {
-    "Api": {
-      "displayName": "API",
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "displayName": "MVC",
-          "choice": "mvc"
-        },
-        {
-          "displayName": "Minimal API",
-          "choice": "minimalapi"
-        }
-      ]
-    },
-    "UseMvc": {
-      "type": "computed",
-      "value": "Api == 'mvc'"
-    },
-    "UseMinimalApi": {
-      "type": "computed",
-      "value": "Api == 'minimalapi'"
-    },
     "UseGrpc": {
       "displayName": "GRPC",
       "type": "parameter",
@@ -212,12 +189,6 @@
           "exclude": [
             "SimpleWeb.HostWebApi/Database/**/*",
             "SimpleWeb.HostWebApi/Extensions/DatabaseExtensions.cs"
-          ]
-        },
-        {
-          "condition": "(!UseMvc)",
-          "exclude": [
-            "SimpleWeb.HostWebApi/Controllers/**/*"
           ]
         },
         {

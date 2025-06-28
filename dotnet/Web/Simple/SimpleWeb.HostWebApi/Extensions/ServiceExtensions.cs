@@ -11,7 +11,9 @@ internal static class ServiceExtensions
         builder.Services.AddOptions();
 
         builder.ConfigureOpenTelemetry();
+        
         builder.Services.AddHttpClient();
+        
         builder.ConfigureDataProtectionProvider();
 
 #if (!DatabaseNone)
