@@ -17,16 +17,6 @@ public static class EndpointsExtensions
 
 #if (UseApi && UseLayerArchitecture)
 #endif
-        endpoints
-            .MapGroup("api")
-            .AddEndpointFilter(
-                async (context, next) =>
-                {
-                    object? value = await next(context);
-
-                    return value;
-                }
-            )
-            .MapWebApi();
+        endpoints.MapGroup("api").MapWebApi();
     }
 }

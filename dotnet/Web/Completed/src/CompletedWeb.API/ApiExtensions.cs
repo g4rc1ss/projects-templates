@@ -1,6 +1,7 @@
 ﻿using CompletedWeb.API.Endpoints.TemplateEndpoints;
 using CompletedWeb.API.Endpoints.ValidateEnpoints;
 using CompletedWeb.Application;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Hosting;
 
@@ -15,8 +16,9 @@ public static class ApiExtensions
 
     public static IEndpointRouteBuilder MapWebApi(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapValidateEndpoints();
-        endpoints.MapTemplateEndpoints();
+        endpoints.MapGroup("validate").MapPostPocValidate();
+
+        endpoints.MapGroup("template").MapGetTemplate();
 
         return endpoints;
     }

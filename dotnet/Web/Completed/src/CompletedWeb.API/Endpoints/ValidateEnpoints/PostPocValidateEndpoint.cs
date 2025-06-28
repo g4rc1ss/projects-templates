@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace CompletedWeb.API.Endpoints.ValidateEnpoints.PocValidate;
+namespace CompletedWeb.API.Endpoints.ValidateEnpoints;
 
 public static class PostPocValidateEndpoint
 {
