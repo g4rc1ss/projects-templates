@@ -1,6 +1,6 @@
 #if (UseApi && UseLayerArchitecture)
-#endif
 using CompletedWeb.API;
+#endif
 #if (UseGrpc && UseLayerArchitecture)
 using CompletedWeb.Grpc;
 #endif
@@ -16,7 +16,7 @@ public static class EndpointsExtensions
 #endif
 
 #if (UseApi && UseLayerArchitecture)
+        endpoints.MapGroup("api").AddEndpointFilter<EndpointValidatorFilter>().MapWebApi();
 #endif
-        endpoints.MapGroup("api").MapWebApi();
     }
 }

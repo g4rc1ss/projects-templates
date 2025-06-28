@@ -5,8 +5,6 @@ using CompletedWeb.Grpc;
 #endif
 #endif
 #if (UseApi)
-using System.Diagnostics;
-using Microsoft.AspNetCore.Http.Features;
 using CompletedWeb.HostWebApi.OpenAPI;
 #if (!AuthNone)
 using Infraestructure.Auth;

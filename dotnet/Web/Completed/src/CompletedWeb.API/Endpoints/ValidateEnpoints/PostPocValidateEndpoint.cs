@@ -12,13 +12,16 @@ public static class PostPocValidateEndpoint
 {
     public static void MapPostPocValidate(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("", HandlerAsync);
-    }
+        endpoints
+            .MapPost(
+                "",
+                ([FromBody] Request request) =>
+                {
+                    Result result = new([new Error("prueba", "prueba.message")]);
 
-    private static Task<IResult> HandlerAsync([FromBody] Request request)
-    {
-        Result result = new([new Error("prueba", "prueba.message")]);
-
-        return Task.FromResult(result.ToResults());
+                    return Task.FromResult(result.ToResults());
+                }
+            )
+            .ProducesValidationProblem();
     }
 }

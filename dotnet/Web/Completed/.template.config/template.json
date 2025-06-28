@@ -332,7 +332,8 @@
         {
           "condition": "(!UseApi)",
           "exclude": [
-            "src/CompletedWeb.API/**/*"
+            "src/CompletedWeb.API/**/*",
+            "CompletedWeb.HostWebApi/Extensions/EndpointValidatorFilter.cs"
           ],
           "rename": {
           }

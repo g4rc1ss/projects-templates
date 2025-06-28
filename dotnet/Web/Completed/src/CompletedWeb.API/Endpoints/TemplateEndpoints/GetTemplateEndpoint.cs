@@ -11,22 +11,26 @@ public static class GetTemplateEndpoint
 {
     public static IEndpointRouteBuilder MapGetTemplate(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet("", HandlerAsync).WithName("GetTemplate").WithDisplayName("Get Template");
+        endpoints
+            .MapGet(
+                "",
+                async (
+                    [FromServices] ILoggerFactory loggerFactory,
+                    [FromServices] IExample example,
+                    CancellationToken cancellationToken
+                ) =>
+                {
+                    ILogger logger = loggerFactory.CreateLogger(nameof(GetTemplateEndpoint));
+                    logger.LogInformation("Handler called");
+
+                    await example.ExecuteAsync(cancellationToken);
+
+                    return Results.Ok();
+                }
+            )
+            .WithName("GetTemplate")
+            .WithDisplayName("Get Template");
 
         return endpoints;
-    }
-
-    private static async Task<IResult> HandlerAsync(
-        [FromServices] ILoggerFactory loggerFactory,
-        [FromServices] IExample example,
-        CancellationToken cancellationToken
-    )
-    {
-        ILogger logger = loggerFactory.CreateLogger(nameof(GetTemplateEndpoint));
-        logger.LogInformation("Handler called");
-
-        await example.ExecuteAsync(cancellationToken);
-
-        return Results.Ok();
     }
 }
