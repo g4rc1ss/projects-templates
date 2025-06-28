@@ -1,9 +1,7 @@
 using System.Reflection;
+using CompletedWeb.Application.Contracts;
 using CompletedWeb.HostWebApi;
-#if (!UseLayerArchitecture)
-using Shared;
-
-#else
+#if (UseLayerArchitecture)
 using CompletedWeb.Application.Contracts;
 #endif
 

@@ -1,3 +1,5 @@
+using Garciss.ROP;
+
 namespace CompletedWeb.Application.Contracts;
 
 public interface IApplicationContractBase;

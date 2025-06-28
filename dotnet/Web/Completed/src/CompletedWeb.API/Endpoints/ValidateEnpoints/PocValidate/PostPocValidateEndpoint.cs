@@ -1,11 +1,12 @@
 using CompletedWeb.API.Models;
-using CompletedWeb.Application;
+using Garciss.ROP;
+using Garciss.ROP.ApiExtensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace CompletedWeb.API.Endpoints.ValidateEnpoints;
+namespace CompletedWeb.API.Endpoints.ValidateEnpoints.PocValidate;
 
 public static class PostPocValidateEndpoint
 {
@@ -17,16 +18,7 @@ public static class PostPocValidateEndpoint
     private static Task<IResult> HandlerAsync([FromBody] Request request)
     {
         Result result = new([new Error("prueba", "prueba.message")]);
-        result = Result.Success();
-        result = Result.Failure(new Error("", ""));
 
-        Result errorResult = new Error("", "").ToResult();
-
-        if (result.IsSuccess)
-        {
-            return Task.FromResult(Results.Ok());
-        }
-
-        return Task.FromResult(Results.BadRequest(result.Errors));
+        return Task.FromResult(result.ToResults());
     }
 }

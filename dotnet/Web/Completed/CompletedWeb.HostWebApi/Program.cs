@@ -5,6 +5,8 @@ using CompletedWeb.Grpc;
 #endif
 #endif
 #if (UseApi)
+using System.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
 using CompletedWeb.HostWebApi.OpenAPI;
 #if (!AuthNone)
 using Infraestructure.Auth;
@@ -19,6 +21,20 @@ builder.Configuration.AddUserSecrets<Program>().AddEnvironmentVariables();
 
 // Add services to the container.
 builder.InitHostWebConfig();
+
+#if (UseApi)
+builder.Services.AddProblemDetails(options =>
+{
+    options.CustomizeProblemDetails = context =>
+    {
+        context.ProblemDetails.Instance =
+            $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
+        context.ProblemDetails.Extensions.TryAdd("RequestId", context.HttpContext.TraceIdentifier);
+        Activity? activity = context.HttpContext.Features.Get<IHttpActivityFeature>()?.Activity;
+        context.ProblemDetails.Extensions.TryAdd("TraceId", activity?.Id);
+    };
+});
+#endif
 
 #if (UseGrpc)
 builder.Services.AddGrpc();

@@ -351,12 +351,6 @@
             "src/**/*"
           ]
         },
-        {
-          "condition": "UseLayerArchitecture",
-          "exclude": [
-            "Shared/*"
-          ]
-        },
         // Cache
         {
           "condition": "(!UseCache)",

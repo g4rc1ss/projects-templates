@@ -1,4 +1,5 @@
 using CompletedWeb.Application.Contracts;
+using Garciss.ROP;
 using Microsoft.Extensions.Logging;
 #if (UseAzServiceBus)
 using Microsoft.Extensions.Configuration;
@@ -48,28 +49,38 @@ public class Example(
     public async Task<Result> ExecuteAsync(CancellationToken cancellationToken = default)
     {
         logger.LogInformation("Executing example");
+
+        try
+        {
 #if (!EventBusNone)
-        await EventsAsync();
+            await EventsAsync();
 #endif
 #if (UseAzureCosmos)
-        await CosmosAsync();
+            await CosmosAsync();
 #endif
 #if (UsePostgres)
-        await PostgresAsync();
+            await PostgresAsync();
 #endif
 #if (UseSqlite)
-        await SqliteAsync();
+            await SqliteAsync();
 #endif
 #if (UseSqlServer)
-        await SqlServerAsync();
+            await SqlServerAsync();
 #endif
 #if (UseMongodb)
-        await MongodbAsync();
+            await MongodbAsync();
 #endif
 #if (!StorageNone)
-        await StorageAsync();
+            await StorageAsync();
 #endif
-        return new Result();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return Result.Failure(new Error("Example.Failure", "Examples failure"));
+        }
+
+        return Result.Success();
     }
 
 #if (!EventBusNone)
@@ -165,6 +176,11 @@ public class Example(
         Stream result = await storage.DownloadFileAsync("blob", path);
     }
 #endif
+
+    public Task<Result> ExecuteAsync(bool request, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public interface IExample : IApplicationContract;

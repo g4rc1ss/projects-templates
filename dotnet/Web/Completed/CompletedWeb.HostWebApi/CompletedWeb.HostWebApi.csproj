@@ -47,7 +47,6 @@
     <ProjectReference Include="..\infra\Infraestructure.Storages\Infraestructure.Storages.csproj" />
     <!--#endif-->
     <!--#if (!UseLayerArchitecture)-->
-    <ProjectReference Include="..\Shared\Shared.csproj" />
     <!--#endif-->
     <!--#if (UseLayerArchitecture && UseApi)-->
     <ProjectReference Include="..\src\CompletedWeb.API\CompletedWeb.API.csproj" />

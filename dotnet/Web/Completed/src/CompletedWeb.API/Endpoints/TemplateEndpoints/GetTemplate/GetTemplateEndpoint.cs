@@ -5,13 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 
-namespace CompletedWeb.API.Endpoints.TemplateEndpoints;
+namespace CompletedWeb.API.Endpoints.TemplateEndpoints.GetTemplate;
 
 public static class GetTemplateEndpoint
 {
-    public static void MapGetTemplateEndpoint(this IEndpointRouteBuilder endpoints)
+    public static IEndpointRouteBuilder MapGetTemplateEndpoint(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet("", HandlerAsync);
+        endpoints.MapGet("", HandlerAsync).WithName("GetTemplate").WithDisplayName("Get Template");
+
+        return endpoints;
     }
 
     private static async Task<IResult> HandlerAsync(
