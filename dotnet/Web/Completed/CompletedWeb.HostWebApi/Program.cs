@@ -30,8 +30,6 @@ builder.Services.AddProblemDetails(options =>
         context.ProblemDetails.Instance =
             $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
         context.ProblemDetails.Extensions.TryAdd("RequestId", context.HttpContext.TraceIdentifier);
-        Activity? activity = context.HttpContext.Features.Get<IHttpActivityFeature>()?.Activity;
-        context.ProblemDetails.Extensions.TryAdd("TraceId", activity?.Id);
     };
 });
 #endif

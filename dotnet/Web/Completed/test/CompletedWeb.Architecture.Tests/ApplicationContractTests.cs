@@ -1,15 +1,13 @@
 using System.Reflection;
-using CompletedWeb.Application.Contracts;
 using CompletedWeb.HostWebApi;
-#if (UseLayerArchitecture)
-using CompletedWeb.Application.Contracts;
-#endif
 
 namespace CompletedWeb.Architecture.Tests;
 
 public class ApplicationContractTests
 {
     private readonly IEnumerable<Assembly> _applicationAssemblies;
+
+    private const string APPLICATION_CONTRACT_NAME = "IApplicationContractBase";
 
     /// <summary>
     /// Carga inicial buscando los assembly que contengan en el nombre "Application"
@@ -125,7 +123,7 @@ public class ApplicationContractTests
         {
             bool applicationInterfaces = interfaceType
                 .GetInterfaces()
-                .Any(x => x.Name.Contains(nameof(IApplicationContractBase)));
+                .Any(x => x.Name.Contains(APPLICATION_CONTRACT_NAME));
 
             if (!applicationInterfaces)
             {
