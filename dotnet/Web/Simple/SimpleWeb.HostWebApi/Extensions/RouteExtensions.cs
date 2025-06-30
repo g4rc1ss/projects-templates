@@ -14,7 +14,6 @@ public static class RouteExtensions
 #endif
         RouteGroupBuilder apiGroup = endpoints.MapGroup("api");
 
-        apiGroup.MapGroup("template")
-            .MapGetTemplate();
+        apiGroup.MapGroup("template").MapGetTemplate();
     }
 }

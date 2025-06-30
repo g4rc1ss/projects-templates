@@ -24,7 +24,7 @@ internal static class TemplateEndpoints
         if (httpContext.ToString() is null) { }
 
         await example.ExecuteAsync();
-
+        
         return Results.Ok();
     }
 }

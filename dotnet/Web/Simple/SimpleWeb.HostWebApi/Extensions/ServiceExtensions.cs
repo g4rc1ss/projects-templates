@@ -11,10 +11,10 @@ internal static class ServiceExtensions
         builder.Services.AddOptions();
 
         builder.ConfigureOpenTelemetry();
-        
+
         builder.Services.AddHttpClient();
         builder.Services.AddHttpContextAccessor();
-        
+
         builder.ConfigureDataProtectionProvider();
 
 #if (!DatabaseNone)
