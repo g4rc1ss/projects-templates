@@ -49,4 +49,11 @@ public class RabbitMqWorker(
         _channel?.BasicAck(eventArgs.DeliveryTag, false);
         activityAck?.Stop();
     }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+        _channel?.Dispose();
+        GC.SuppressFinalize(this);
+    }
 }

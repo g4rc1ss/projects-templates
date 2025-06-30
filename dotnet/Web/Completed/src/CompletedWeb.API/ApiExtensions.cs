@@ -19,8 +19,7 @@ public static class ApiExtensions
     {
         endpoints.MapGroup("validate").WithTags("Validate").MapPostPocValidate();
 
-        endpoints.MapGroup("template").WithTags("Template")
-            .MapGetTemplate();
+        endpoints.MapGroup("template").WithTags("Template").MapGetTemplate();
 
         return endpoints;
     }
