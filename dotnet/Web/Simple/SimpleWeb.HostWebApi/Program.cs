@@ -19,6 +19,16 @@ builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
 #endif
 
+builder.Services.AddProblemDetails(options =>
+{
+    options.CustomizeProblemDetails = context =>
+    {
+        context.ProblemDetails.Instance =
+            $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
+        context.ProblemDetails.Extensions.TryAdd("RequestId", context.HttpContext.TraceIdentifier);
+    };
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.InitAndConfigureSwagger();
 
