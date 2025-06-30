@@ -28,8 +28,9 @@ public static class GetTemplateEndpoint
                     return Results.Ok();
                 }
             )
+            // .RequireAuthorization()
             .WithName("GetTemplate")
-            .WithDisplayName("Get Template");
+            .WithDescription("Minimal api Template");
 
         return endpoints;
     }
