@@ -10,10 +10,12 @@ using Serilog.Events;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder();
 
-builder.Services.AddSerilog((configuration) =>
-{
-    configuration.WriteTo.File("./logs.txt", LogEventLevel.Information);
-});
+builder.Services.AddSerilog(
+    (configuration) =>
+    {
+        configuration.WriteTo.File("./logs.txt", LogEventLevel.Information);
+    }
+);
 
 ParseResult parse = builder.CompileCommands(args);
 
