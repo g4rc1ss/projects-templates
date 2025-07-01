@@ -26,7 +26,7 @@ public sealed class ApiServiceFixture : IAsyncLifetime
             clientBuilder.AddStandardResilienceHandler();
         });
 
-        DistributedApplication app = await appHost.BuildAsync().WaitAsync(_defaultTimeout);
+        using DistributedApplication app = await appHost.BuildAsync().WaitAsync(_defaultTimeout);
         Application = app;
 
         await app.StartAsync().WaitAsync(_defaultTimeout);
