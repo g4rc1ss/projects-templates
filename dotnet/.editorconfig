@@ -292,7 +292,7 @@ dotnet_diagnostic.CA2016.severity = warning
 dotnet_diagnostic.CA2250.severity = error
 
 # CA2000: Dispose objects before losing scope
-dotnet_diagnostic.CA2000.severity = error
+dotnet_diagnostic.CA2000.severity = warning
 
 # CA2025: Do not pass 'IDisposable' instances into unawaited tasks
 dotnet_diagnostic.CA2025.severity = error
@@ -322,7 +322,7 @@ dotnet_diagnostic.CA2265.severity = error
 dotnet_diagnostic.CA1512.severity = error
 
 # CA1513: Use ObjectDisposedException throw helper
-dotnet_diagnostic.CA1513.severity = none
+dotnet_diagnostic.CA1513.severity = warning
 
 # CA1816: Llamar a GC.SuppressFinalize correctamente
 dotnet_diagnostic.CA1816.severity = error

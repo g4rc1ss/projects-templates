@@ -22,7 +22,7 @@ public class Example(
 {
     public async Task ExecuteAsync()
     {
-        logger.LogInformation("Executing example");
+        Log.ExecutingTemplateLog(logger);
 #if (UseSqlite)
         await SqliteAsync();
 #endif
@@ -78,4 +78,10 @@ public class Example(
         LiteDbEntity? result = await litedbPoc.GetByIdAsync(weatherCreated.Id);
     }
 #endif
+}
+
+internal static partial class Log
+{
+    [LoggerMessage(LogLevel.Information, "Executing example")]
+    internal static partial void ExecutingTemplateLog(ILogger logger);
 }

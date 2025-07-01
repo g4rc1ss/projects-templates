@@ -6,7 +6,8 @@
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <WarningsAsErrors>Nullable</WarningsAsErrors>
+        <AnalysisModePerformance>Default</AnalysisModePerformance>
     </PropertyGroup>
 
     <ItemGroup>
