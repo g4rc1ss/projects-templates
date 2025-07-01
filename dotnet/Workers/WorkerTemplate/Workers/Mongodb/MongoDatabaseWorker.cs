@@ -17,7 +17,7 @@ public class MongoDatabaseWorker(ILogger<Worker> logger, IMongoClient mongoClien
 
         Entity entity = new() { Id = Guid.NewGuid().ToString(), Property = "Propiedad de Mongo" };
         await collection.InsertOneAsync(entity, new InsertOneOptions(), stoppingToken);
-        logger.LogInformation("Documento {documentId} insertado", entity.Id);
+        logger.LogInformation("Documento {DocumentId} insertado", entity.Id);
 
         IAsyncCursor<Entity>? result = await collection.FindAsync(
             x => x.Id == entity.Id,
@@ -27,7 +27,7 @@ public class MongoDatabaseWorker(ILogger<Worker> logger, IMongoClient mongoClien
         while (await result.MoveNextAsync(stoppingToken))
         {
             logger.LogInformation(
-                "Documento encontrado con la propiedad {property}",
+                "Documento encontrado con la propiedad {Property}",
                 result.Current.First().Property
             );
         }

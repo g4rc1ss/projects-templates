@@ -390,6 +390,8 @@ dotnet_diagnostic.CA1855.severity = error
 # CA1871: No pasar una estructura anulable a 'ArgumentNullException.ThrowIfNull'
 dotnet_diagnostic.CA1871.severity = error
 
+dotnet_diagnostic.ca1707.severity = none
+
 
 [**Migrations**]
 dotnet_diagnostic.IDE0005.severity = none

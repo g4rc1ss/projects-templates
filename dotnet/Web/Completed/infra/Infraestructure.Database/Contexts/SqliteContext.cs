@@ -7,10 +7,10 @@ public class SqliteContext(DbContextOptions<SqliteContext> options) : DbContext(
 {
     public DbSet<WeatherForecastEntity> Users { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(builder);
+        base.OnModelCreating(modelBuilder);
 
-        builder.ApplyConfigurationsFromAssembly(typeof(SqliteContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(SqliteContext).Assembly);
     }
 }

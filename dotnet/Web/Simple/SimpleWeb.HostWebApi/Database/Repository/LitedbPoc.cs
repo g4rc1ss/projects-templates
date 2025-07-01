@@ -21,7 +21,7 @@ public class LitedbPoc(ILogger<LitedbPoc> logger, ILiteDatabase litedb) : ILited
 
         LiteDbEntity litedbEntity = collection.Query().Where(x => x.Id == id).First();
 
-        logger.LogInformation("Devolvemos la entidad {documentId}", litedbEntity.Id);
+        logger.LogInformation("Devolvemos la entidad {DocumentId}", litedbEntity.Id);
 
         Entity = litedbEntity;
         return Entity;

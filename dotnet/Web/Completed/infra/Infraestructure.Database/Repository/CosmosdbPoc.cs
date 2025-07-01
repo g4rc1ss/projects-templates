@@ -29,7 +29,7 @@ public class CosmosdbPoc(ILogger<CosmosdbPoc> logger, CosmosClient cosmosClient)
         while (iterator.HasMoreResults)
         {
             FeedResponse<CosmosDbEntity> result = await iterator.ReadNextAsync(cancellationToken);
-            logger.LogInformation("Devolvemos la entidad {documentId}", result.First().Id);
+            logger.LogInformation("Devolvemos la entidad {DocumentId}", result.First().Id);
 
             Entity = result.First();
             return Entity;

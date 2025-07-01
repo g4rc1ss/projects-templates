@@ -7,10 +7,10 @@ public class SqlServerContext(DbContextOptions<SqlServerContext> options) : DbCo
 {
     public DbSet<WeatherForecastEntity> WeatherForecast { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(builder);
+        base.OnModelCreating(modelBuilder);
 
-        builder.ApplyConfigurationsFromAssembly(typeof(SqlServerContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(SqlServerContext).Assembly);
     }
 }

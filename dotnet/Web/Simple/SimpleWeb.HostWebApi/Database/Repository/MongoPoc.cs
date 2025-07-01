@@ -28,7 +28,7 @@ public class MongoPoc(ILogger<MongoPoc> logger, IMongoClient mongoClient) : IMon
 
         while (await cursor.MoveNextAsync(cancellationToken))
         {
-            logger.LogInformation("Devolvemos la entidad {documentId}", cursor.Current.First().Id);
+            logger.LogInformation("Devolvemos la entidad {DocumentId}", cursor.Current.First().Id);
 
             Entity = cursor.Current.First();
             return Entity;
