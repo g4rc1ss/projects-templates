@@ -12,8 +12,12 @@ using Serilog.Events;
 
 namespace FrontDesktop;
 
-public class App : Application
+public class App : Application, IDisposable
 {
+    private bool _disposed;
+
+    private IHost? Host { get; set; }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -21,7 +25,8 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        HostApplicationBuilder builder = Host.CreateApplicationBuilder();
+        HostApplicationBuilder builder =
+            Microsoft.Extensions.Hosting.Host.CreateApplicationBuilder();
 
         builder.Services.AddSerilog(
             (configuration) =>
@@ -31,13 +36,15 @@ public class App : Application
         );
 
         builder.Configuration.AddUserSecrets<App>();
+        builder.Services.AddHttpClient();
 
         builder.Services.AddTransient<MainViewModel>();
 
-        IHost app = builder.Build();
-        MainViewModel mainViewModel = app.Services.GetRequiredService<MainViewModel>();
+        Host?.Dispose();
+        Host = builder.Build();
+        MainViewModel mainViewModel = Host.Services.GetRequiredService<MainViewModel>();
 
-        IEnumerable<IHostedService> hostedServices = app.Services.GetServices<IHostedService>();
+        IEnumerable<IHostedService> hostedServices = Host.Services.GetServices<IHostedService>();
         foreach (IHostedService hostedService in hostedServices)
         {
             hostedService.StartAsync(CancellationToken.None).Wait();
@@ -57,6 +64,23 @@ public class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    public virtual void Dispose()
+    {
+        if (_disposed)
+        {
+            return;
+        }
+
+        _disposed = true;
+
+        Host?.Dispose();
+    }
+
+    protected virtual void ThrowIfDisposed()
+    {
+        ObjectDisposedException.ThrowIf(_disposed, this);
     }
 
     private void DisableAvaloniaDataAnnotationValidation()

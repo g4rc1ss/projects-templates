@@ -25,7 +25,7 @@ public class AzureBlobStorage(ILogger<AzureBlobStorage> logger, BlobServiceClien
             return response.Value.Content;
         }
 
-        logger.LogError("Blob {name} does not exist", name);
+        logger.LogError("Blob {Name} does not exist", name);
         throw new FileNotFoundException($"The blob {name} doesn't exist");
     }
 
@@ -52,7 +52,7 @@ public class AzureBlobStorage(ILogger<AzureBlobStorage> logger, BlobServiceClien
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Error uploading file {name}", name);
+            logger.LogError(e, "Error uploading file {Name}", name);
             throw new Exception($"Error uploading file {name}", e);
         }
     }

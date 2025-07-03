@@ -21,7 +21,7 @@ public class MongoPoc(ILogger<MongoPoc> logger, IMongoClient mongoClient) : IMon
             .GetDatabase("Poc")
             .GetCollection<MongoDbEntity>("Entity");
 
-        IAsyncCursor<MongoDbEntity> cursor = await collection.FindAsync(
+        using IAsyncCursor<MongoDbEntity> cursor = await collection.FindAsync(
             x => x.Id == id,
             cancellationToken: cancellationToken
         );

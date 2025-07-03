@@ -19,7 +19,7 @@ builder.Services.AddSerilog(
 
 ParseResult parse = builder.CompileCommands(args);
 
-IHost app = builder.Build();
+using IHost app = builder.Build();
 
 IEnumerable<IHostedService> hostedServices = app.Services.GetRequiredService<
     IEnumerable<IHostedService>

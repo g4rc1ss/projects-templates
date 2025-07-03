@@ -173,7 +173,7 @@ public class Example(
         string path = $"{idDocumento}/nombre-archivo";
 
         await storage.UploadFileAsync("contenidoArchivo"u8.ToArray(), "blob", path);
-        Stream result = await storage.DownloadFileAsync("blob", path);
+        await using Stream result = await storage.DownloadFileAsync("blob", path);
     }
 #endif
 

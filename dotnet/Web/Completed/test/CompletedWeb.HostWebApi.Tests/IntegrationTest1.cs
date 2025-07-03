@@ -6,10 +6,10 @@ public class IntegrationTest1(ApiServiceFixture fixture) : IClassFixture<ApiServ
     public async Task GetWebResourceRootReturnsOkStatusCodeAsync()
     {
         // Arrange
-        using HttpClient httpClient = fixture.Application!.CreateHttpClient("CompletedWeb");
+        using HttpClient httpClient = fixture.Application!.CreateHttpClient("Host");
 
         // Act
-        HttpResponseMessage response = await httpClient.GetAsync("/health");
+        using HttpResponseMessage response = await httpClient.GetAsync("/health");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
