@@ -392,6 +392,8 @@ dotnet_diagnostic.CA1871.severity = error
 
 dotnet_diagnostic.CA1707.severity = none
 
+
+# ----------------------- IDisposable ----------------------- #
 # Dispose created
 dotnet_diagnostic.IDISP001.severity = error
 
@@ -405,19 +407,19 @@ dotnet_diagnostic.IDISP003.severity = error
 dotnet_diagnostic.IDISP004.severity = error
 
 # Return type should indicate that the value should be disposed
-dotnet_diagnostic.IDISP005.severity = error
+dotnet_diagnostic.IDISP005.severity = none
 
 # Implement IDisposable
-dotnet_diagnostic.IDISP006.severity = error
+dotnet_diagnostic.IDISP006.severity = suggestion
 
 # Don't dispose injected
-dotnet_diagnostic.IDISP007.severity = error
+dotnet_diagnostic.IDISP007.severity = none
 
 # Don't assign member with injected and created disposables
-dotnet_diagnostic.IDISP008.severity = error
+dotnet_diagnostic.IDISP008.severity = none
 
 # Add IDisposable interface
-dotnet_diagnostic.IDISP009.severity = error
+dotnet_diagnostic.IDISP009.severity = none
 
 # Call base.Dispose(disposing)
 dotnet_diagnostic.IDISP010.severity = error
@@ -426,7 +428,7 @@ dotnet_diagnostic.IDISP010.severity = error
 dotnet_diagnostic.IDISP011.severity = error
 
 # Property should not return created disposable
-dotnet_diagnostic.IDISP012.severity = error
+dotnet_diagnostic.IDISP012.severity = none
 
 # Await in using
 dotnet_diagnostic.IDISP013.severity = error
@@ -465,10 +467,10 @@ dotnet_diagnostic.IDISP023.severity = error
 dotnet_diagnostic.IDISP024.severity = error
 
 # Class with no virtual dispose method should be sealed
-dotnet_diagnostic.IDISP025.severity = error
+dotnet_diagnostic.IDISP025.severity = none
 
 # Class with no virtual DisposeAsyncCore method should be sealed
-dotnet_diagnostic.IDISP026.severity = error
+dotnet_diagnostic.IDISP026.severity = none
 
 [**Migrations**]
 dotnet_diagnostic.IDE0005.severity = none
