@@ -363,7 +363,7 @@ dotnet_diagnostic.CA1819.severity = warning
 # CA1820: Comprobar si las cadenas están vacías mediante la longitud de cadena
 dotnet_diagnostic.CA1820.severity = error
 
-# CA1829: Usar la propiedad Length/Count en lugar del método Enumerable.Count
+# CA1829: Usar la propiedad Length/Count en lugar de Enumerable.Count
 dotnet_diagnostic.CA1829.severity = error
 
 # CA1828: No usar CountAsync si se puede usar AnyAsync
@@ -378,7 +378,7 @@ dotnet_diagnostic.CA1845.severity = suggestion
 # CA1846: Preferencia de AsSpan sobre Substring
 dotnet_diagnostic.CA1846.severity = suggestion
 
-# CA1849: Llamada a métodos asincrónicos en un método asincrónico
+# CA1849: Llamada a métodos asincrónicos en uno asincrónico
 dotnet_diagnostic.CA1849.severity = error
 
 # CA1851: Posibles enumeraciones múltiples de la colección IEnumerable
