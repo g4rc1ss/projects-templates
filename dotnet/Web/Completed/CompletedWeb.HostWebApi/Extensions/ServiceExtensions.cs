@@ -12,6 +12,10 @@ using Infraestructure.Caching;
 #if (UseJwt)
 using Infraestructure.Auth.JwtManager;
 #endif
+#if (UseApiKey)
+using Infraestructure.Auth.ApiKey;
+#endif
+
 #if (!StorageNone)
 using Infraestructure.Storages;
 #endif
@@ -38,6 +42,9 @@ internal static class ServiceExtensions
 
 #if (UseIdentity)
         // builder.AddIdentityAuth<>();
+#endif
+#if (UseApiKey)
+        builder.AddApiKey();
 #endif
 #if (UseJwt)
         builder.AddJwt();

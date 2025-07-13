@@ -9,9 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <!--#if (UseIdentity)-->
         <FrameworkReference Include="Microsoft.AspNetCore.App"/>
-        <!--#endif-->
     </ItemGroup>
 
     <ItemGroup>

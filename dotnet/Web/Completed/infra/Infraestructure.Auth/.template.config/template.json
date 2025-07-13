@@ -33,6 +33,10 @@
         {
           "choice": "jwt",
           "displayName": "JWT"
+        },
+        {
+          "choice": "apikey",
+          "displayName": "Api Key"
         }
       ],
       "defaultValue": "identity",
@@ -45,6 +49,14 @@
     "UseJwt": {
       "type": "computed",
       "value": "(Authentication == 'jwt')"
+    },
+    "UseAzureIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'azidentity')"
+    },
+    "UseApiKey": {
+      "type": "computed",
+      "value": "(Authentication == 'apikey')"
     },
     "AuthNone": {
       "type": "computed",

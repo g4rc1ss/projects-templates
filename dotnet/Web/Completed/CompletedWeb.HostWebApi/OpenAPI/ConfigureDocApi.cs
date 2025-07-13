@@ -1,3 +1,6 @@
+#if (UseApiKey)
+using Infraestructure.Auth.ApiKey;
+#endif
 using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
 
@@ -24,10 +27,10 @@ public static class ConfigureDocApi
                         },
 #endif
 #if (UseApiKey)
-                        ["ApiKey"] = new OpenApiSecurityScheme
+                        [Constants.API_KEY_SCHEME] = new OpenApiSecurityScheme
                         {
                             Type = SecuritySchemeType.ApiKey,
-                            Name = "X-API-KEY",
+                            Name = Constants.API_KEY_HEADER_NAME,
                             In = ParameterLocation.Header,
                             Description = "API Key",
                         },
