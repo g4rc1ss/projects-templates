@@ -14,6 +14,8 @@ builder.Configuration.AddUserSecrets<Program>().AddEnvironmentVariables();
 // Add services to the container.
 builder.InitWebHostConfig();
 
+builder.AddDocApi();
+
 #if (UseGrpc)
 builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
@@ -28,9 +30,6 @@ builder.Services.AddProblemDetails(options =>
         context.ProblemDetails.Extensions.TryAdd("RequestId", context.HttpContext.TraceIdentifier);
     };
 });
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.AddDocApi();
 
 WebApplication app = builder.Build();
 
