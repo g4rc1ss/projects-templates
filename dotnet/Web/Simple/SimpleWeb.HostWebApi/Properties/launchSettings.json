@@ -3,7 +3,7 @@
     "SimpleWeb.HostWebApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchUrl": "api-doc",
       "applicationUrl": "https://localhost:7151;http://localhost:5151",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "local"

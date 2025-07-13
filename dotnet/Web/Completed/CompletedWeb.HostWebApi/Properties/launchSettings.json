@@ -4,7 +4,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       //#if(UseApi)
-      "launchUrl": "swagger",
+      "launchUrl": "api-doc",
       //#endif
       "applicationUrl": "https://localhost:7151;http://localhost:5151",
       "environmentVariables": {

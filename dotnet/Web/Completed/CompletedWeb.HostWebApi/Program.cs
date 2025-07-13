@@ -4,6 +4,7 @@
 using CompletedWeb.Grpc;
 #endif
 #endif
+
 #if (UseApi)
 using CompletedWeb.HostWebApi.OpenAPI;
 #if (!AuthNone)
@@ -21,6 +22,8 @@ builder.Configuration.AddUserSecrets<Program>().AddEnvironmentVariables();
 builder.InitHostWebConfig();
 
 #if (UseApi)
+builder.AddDocApi();
+
 builder.Services.AddProblemDetails(options =>
 {
     options.CustomizeProblemDetails = context =>
@@ -37,12 +40,6 @@ builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
 #endif
 
-#if (UseApi)
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.InitAndConfigureSwagger();
-builder.Services.AddSingleton<SwaggerAuthMiddleware>();
-#endif
-
 #if (!KeyVaultNone)
 builder.AddKeyVault();
 #endif
@@ -57,9 +54,7 @@ if (!app.Environment.IsProduction())
 {
 #if (UseApi)
     app.UseDeveloperExceptionPage();
-    app.UseMiddleware<SwaggerAuthMiddleware>();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDocApi();
 #endif
 #if (UseGrpc)
     app.MapGrpcReflectionService();

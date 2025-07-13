@@ -190,6 +190,10 @@
           "displayName": "Microsoft Identity"
         },
         {
+          "choice": "apikey",
+          "displayName": "Api Key"
+        },
+        {
           "choice": "jwt",
           "displayName": "JWT"
         }
@@ -204,6 +208,14 @@
     "UseJwt": {
       "type": "computed",
       "value": "(Authentication == 'jwt')"
+    },
+    "UseAzureIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'azidentity')"
+    },
+    "UseApiKey": {
+      "type": "computed",
+      "value": "(Authentication == 'apikey')"
     },
     "AuthNone": {
       "type": "computed",
@@ -333,7 +345,8 @@
           "condition": "(!UseApi)",
           "exclude": [
             "src/CompletedWeb.API/**/*",
-            "CompletedWeb.HostWebApi/Extensions/EndpointValidatorFilter.cs"
+            "CompletedWeb.HostWebApi/Extensions/EndpointValidatorFilter.cs",
+            "CompletedWeb.HostWebApi/OpenAPI/ConfigureDocApi.cs"
           ],
           "rename": {
           }

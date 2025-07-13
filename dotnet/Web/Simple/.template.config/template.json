@@ -30,6 +30,35 @@
       "type": "computed",
       "value": "(true)"
     },
+    // Auth Config
+    "Authentication": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "none",
+          "description": "None"
+        },
+        {
+          "choice": "apikey",
+          "displayName": "Api Key"
+        }
+      ],
+      "defaultValue": "none",
+      "description": "Tipo de auth para usar"
+    },
+    "UseAzureIdentity": {
+      "type": "computed",
+      "value": "(Authentication == 'azidentity')"
+    },
+    "UseApiKey": {
+      "type": "computed",
+      "value": "(Authentication == 'apikey')"
+    },
+    "AuthNone": {
+      "type": "computed",
+      "value": "(Authentication == 'none')"
+    },
     // Databases
     "Databases": {
       "type": "parameter",

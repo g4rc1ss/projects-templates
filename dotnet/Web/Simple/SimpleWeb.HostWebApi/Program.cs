@@ -30,7 +30,7 @@ builder.Services.AddProblemDetails(options =>
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.InitAndConfigureSwagger();
+builder.AddDocApi();
 
 WebApplication app = builder.Build();
 
@@ -39,8 +39,7 @@ app.UseExceptionHandler();
 if (!app.Environment.IsProduction())
 {
     app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDocApi();
 #if (UseGrpc)
     app.MapGrpcReflectionService();
 #endif
