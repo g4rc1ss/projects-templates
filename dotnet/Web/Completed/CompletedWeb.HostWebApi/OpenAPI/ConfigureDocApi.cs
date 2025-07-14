@@ -71,7 +71,7 @@ public static class ConfigureDocApi
                                     ),
                                     Scopes = new Dictionary<string, string>
                                     {
-                                        { $"{azureAd?.Scope}", "Acceso a datos" },
+                                        { $"api://{azureAd?.ClientId}/{azureAd?.Scope}", "Acceso a datos" },
                                     },
                                     Extensions = new Dictionary<string, IOpenApiExtension>
                                     {

@@ -4,9 +4,9 @@ using Microsoft.Identity.Web;
 
 namespace Infraestructure.Auth.AzureAD;
 
-public static class AzureIdentityAD
+public static class AzureIdentityAd
 {
-    public static void AddAzureAD(this IHostApplicationBuilder builder)
+    public static void AddAzureAd(this IHostApplicationBuilder builder)
     {
         builder
             .Services.AddOptions<AzureAdOptions>()

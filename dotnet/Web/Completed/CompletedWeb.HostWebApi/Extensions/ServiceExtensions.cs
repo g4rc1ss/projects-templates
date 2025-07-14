@@ -46,7 +46,7 @@ internal static class ServiceExtensions
         // builder.AddIdentityAuth<>();
 #endif
 #if (UseAzureAD)
-        builder.AddAzureAD();
+        builder.AddAzureAd();
 #endif
 #if (UseApiKey)
         builder.AddApiKey();
