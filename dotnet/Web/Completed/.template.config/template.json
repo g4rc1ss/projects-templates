@@ -190,6 +190,10 @@
           "displayName": "Microsoft Identity"
         },
         {
+          "choice": "azureidentityad",
+          "displayName": "Azure Identity AD"
+        },
+        {
           "choice": "apikey",
           "displayName": "Api Key"
         },
@@ -441,6 +445,18 @@
           "condition": "!UseJwt",
           "exclude": [
             "infra/Infraestructure.Auth/JwtManager/**/*"
+          ]
+        },
+        {
+          "condition": "!UseAzureAD",
+          "exclude": [
+            "infra/Infraestructure.Auth/AzureAD/**/*"
+          ]
+        },
+        {
+          "condition": "!UseApiKey",
+          "exclude": [
+            "infra/Infraestructure.Auth/ApiKey/**/*"
           ]
         },
         {

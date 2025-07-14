@@ -81,6 +81,18 @@
       ],
       "modifiers": [
         {
+          "condition": "!UseAzureAD",
+          "exclude": [
+            "AzureAD/**/*"
+          ]
+        },
+        {
+          "condition": "!UseApiKey",
+          "exclude": [
+            "ApiKey/**/*"
+          ]
+        },
+        {
           "condition": "!UseJwt",
           "exclude": [
             "JwtManager/**/*"
