@@ -31,6 +31,10 @@
           "displayName": "Microsoft Identity"
         },
         {
+          "choice": "azureidentityad",
+          "displayName": "Azure Identity AD"
+        },
+        {
           "choice": "jwt",
           "displayName": "JWT"
         },
@@ -50,9 +54,9 @@
       "type": "computed",
       "value": "(Authentication == 'jwt')"
     },
-    "UseAzureIdentity": {
+    "UseAzureAD": {
       "type": "computed",
-      "value": "(Authentication == 'azidentity')"
+      "value": "(Authentication == 'azureidentityad')"
     },
     "UseApiKey": {
       "type": "computed",

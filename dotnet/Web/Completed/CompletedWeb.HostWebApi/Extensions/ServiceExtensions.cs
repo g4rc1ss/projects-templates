@@ -15,7 +15,9 @@ using Infraestructure.Auth.JwtManager;
 #if (UseApiKey)
 using Infraestructure.Auth.ApiKey;
 #endif
-
+#if (UseAzureAD)
+using Infraestructure.Auth.AzureAD;
+#endif
 #if (!StorageNone)
 using Infraestructure.Storages;
 #endif
@@ -42,6 +44,9 @@ internal static class ServiceExtensions
 
 #if (UseIdentity)
         // builder.AddIdentityAuth<>();
+#endif
+#if (UseAzureAD)
+        builder.AddAzureAD();
 #endif
 #if (UseApiKey)
         builder.AddApiKey();

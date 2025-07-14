@@ -1,8 +1,16 @@
+using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
 #if (UseApiKey)
 using Infraestructure.Auth.ApiKey;
 #endif
-using Microsoft.OpenApi.Models;
-using Scalar.AspNetCore;
+#if (UseIdentity || UseJwt)
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+#endif
+#if (UseAzureAD)
+using Infraestructure.Auth.AzureAD;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Interfaces;
+#endif
 
 namespace CompletedWeb.HostWebApi.OpenAPI;
 
@@ -15,15 +23,27 @@ public static class ConfigureDocApi
             options.AddDocumentTransformer(
                 (document, _, _) =>
                 {
+#if (UseAzureAD)
+                    AzureAdOptions? azureAd = builder
+                        .Configuration.GetSection("AzureAd")
+                        .Get<AzureAdOptions>();
+#endif
+
                     Dictionary<string, OpenApiSecurityScheme> requirements = new()
                     {
 #if (UseIdentity || UseJwt)
                         ["Bearer"] = new OpenApiSecurityScheme
                         {
-                            Type = SecuritySchemeType.Http,
-                            Scheme = "bearer",
+                            BearerFormat = "JWT",
+                            Name = "JWT Authentication",
                             In = ParameterLocation.Header,
-                            BearerFormat = "Json Web Token",
+                            Type = SecuritySchemeType.Http,
+                            Scheme = JwtBearerDefaults.AuthenticationScheme,
+                            Reference = new OpenApiReference
+                            {
+                                Id = JwtBearerDefaults.AuthenticationScheme,
+                                Type = ReferenceType.SecurityScheme,
+                            },
                         },
 #endif
 #if (UseApiKey)
@@ -35,8 +55,8 @@ public static class ConfigureDocApi
                             Description = "API Key",
                         },
 #endif
-#if (UseAzureIdentity)
-                        ["Microsoft Login"] = new OpenApiSecurityScheme()
+#if (UseAzureAD)
+                        ["Microsoft Login AD"] = new OpenApiSecurityScheme()
                         {
                             Type = SecuritySchemeType.OAuth2,
                             Flows = new OpenApiOAuthFlows
@@ -44,14 +64,14 @@ public static class ConfigureDocApi
                                 AuthorizationCode = new OpenApiOAuthFlow
                                 {
                                     AuthorizationUrl = new Uri(
-                                        $"https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize"
+                                        $"https://login.microsoftonline.com/{azureAd?.TenantId}/oauth2/v2.0/authorize"
                                     ),
                                     TokenUrl = new Uri(
-                                        $"https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token"
+                                        $"https://login.microsoftonline.com/{azureAd?.TenantId}/oauth2/v2.0/token"
                                     ),
                                     Scopes = new Dictionary<string, string>
                                     {
-                                        { $"api://{clientId}/data.read", "Acceso a datos" },
+                                        { $"{azureAd?.Scope}", "Acceso a datos" },
                                     },
                                     Extensions = new Dictionary<string, IOpenApiExtension>
                                     {
@@ -74,11 +94,24 @@ public static class ConfigureDocApi
     internal static void UseDocApi(this WebApplication app)
     {
         app.MapOpenApi();
+
+#if (UseAzureAD)
+        AzureAdOptions? azureAd = app.Configuration.GetSection("AzureAd").Get<AzureAdOptions>();
+#endif
         app.MapScalarApiReference(
             "api-doc",
             options =>
             {
                 options.AddPreferredSecuritySchemes();
+#if (UseAzureAD)
+                options.AddAuthorizationCodeFlow(
+                    "Microsoft Login AD",
+                    flow =>
+                    {
+                        flow.ClientId = azureAd?.ClientId;
+                    }
+                );
+#endif
             }
         );
     }

@@ -14,6 +14,9 @@ public static class ApiKeyDependencyInjection
                 options.DefaultAuthenticateScheme = Constants.API_KEY_SCHEME;
                 options.DefaultChallengeScheme = Constants.API_KEY_SCHEME;
             })
-            .AddScheme<ApiKeyAuthOptions, ApiKeyAuthHandler>(Constants.API_KEY_SCHEME, options => { });
+            .AddScheme<ApiKeyAuthOptions, ApiKeyAuthHandler>(
+                Constants.API_KEY_SCHEME,
+                options => { }
+            );
     }
 }

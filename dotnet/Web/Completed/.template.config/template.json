@@ -209,9 +209,9 @@
       "type": "computed",
       "value": "(Authentication == 'jwt')"
     },
-    "UseAzureIdentity": {
+    "UseAzureAD": {
       "type": "computed",
-      "value": "(Authentication == 'azidentity')"
+      "value": "(Authentication == 'azureidentityad')"
     },
     "UseApiKey": {
       "type": "computed",
