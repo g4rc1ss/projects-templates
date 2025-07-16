@@ -12,6 +12,5 @@ public static class InfraestructureExtensions
 
     private static void AddRepositoryServices(this IServiceCollection services)
     {
-        services.AddScoped<IRepository, Repository>();
     }
 }
