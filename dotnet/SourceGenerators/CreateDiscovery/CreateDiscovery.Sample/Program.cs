@@ -3,7 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 ServiceCollection services = new();
 
-// services.AddDependencies();
+services.AddDependencies();
 
 await using ServiceProvider provider = services.BuildServiceProvider();
-provider.GetRequiredService<IExample>();
+IExample example = provider.GetRequiredService<IExample>();
+
+example.Execute();

@@ -2,7 +2,7 @@ using CreateDiscovery.Abstractions;
 
 namespace CreateDiscovery.Sample;
 
-[Discovery]
+[Discovery(Lifetime = LifeTime.SCOPED)]
 public class ExampleService : IExample
 {
     public void Execute()
