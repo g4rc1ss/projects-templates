@@ -10,9 +10,34 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateDiscovery.Abstraction
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{57AFE714-3504-4A8C-83B6-089204B4F0BB}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\.csharpierrc.json = ..\..\.csharpierrc.json
-		..\..\.editorconfig = ..\..\.editorconfig
-		..\..\Directory.build.props = ..\..\Directory.build.props
+        #if (false)
+                .template.config\template.json = .template.config\template.json
+        #endif
+        #if (false)
+                Directory.Build.props = ..\..\Directory.Build.props
+        #else
+                Directory.Build.props = Directory.Build.props
+        #endif
+        #if (false)
+                .csharpierrc.json = ..\..\.csharpierrc.json
+        #else
+                .csharpierrc.json = .csharpierrc.json
+        #endif
+        #if (false)
+                .editorconfig = ..\..\.editorconfig
+        #else
+                .editorconfig = .editorconfig
+        #endif
+        #if (false)
+                RemoveUnusedDuplicatePackages.ps1 = ..\..\RemoveUnusedDuplicatePackages.ps1
+        #else
+                RemoveUnusedDuplicatePackages.ps1 = RemoveUnusedDuplicatePackages.ps1
+        #endif
+        #if (false)
+                Directory.Packages.props = ..\..\Directory.Packages.props
+        #else
+                Directory.Packages.props = Directory.Packages.props
+        #endif
 	EndProjectSection
 EndProject
 Global

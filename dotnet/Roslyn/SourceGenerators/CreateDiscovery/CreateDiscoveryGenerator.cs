@@ -129,19 +129,19 @@ public class CreateDiscoveryGenerator : IIncrementalGenerator
                 )
                 .Value;
 
-            switch (enumValue.Value?.ToString())
+            switch (enumValue.Value)
             {
-                case nameof(LifeTime.SINGLETON):
+                case 2:
                     builder.AppendLine(
                         $"services.AddSingleton<{interfaceDeclaration}, {classDeclaration}>();"
                     );
                     break;
-                case nameof(LifeTime.SCOPED):
+                case 1:
                     builder.AppendLine(
                         $"services.AddScoped<{interfaceDeclaration}, {classDeclaration}>();"
                     );
                     break;
-                case nameof(LifeTime.TRANSIENT):
+                case 0:
                 default:
                     builder.AppendLine(
                         $"services.AddTransient<{interfaceDeclaration}, {classDeclaration}>();"

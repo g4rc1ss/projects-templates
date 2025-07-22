@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Asier",
+  "classifications": [
+    "Source Generators",
+    "architecture",
+    "Template",
+    "csharp"
+  ],
+  "identity": "RoslynSourceGenerators",
+  "name": "Asier Roslyn",
+  "description": "Template para aplicaciones generación de codigo fuente",
+  "shortName": "asier.roslyn.sourcegen",
+  "sourceName": "CreateDiscovery",
+  "language": "C#",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "solution",
+    "editorTreatAs": "solution"
+  },
+  "symbols": {
+
+  },
+  "sources": [
+    {
+      "source": "../../",
+      "target": "./",
+      "include": [
+        "*editorconfig",
+        "*csharpierrc.json",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "RemoveUnusedDuplicatePackages.ps1"
+      ]
+    },
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/*template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*idea/**/*"
+      ],
+      "modifiers": [
+      ]
+    }
+  ],
+  "primaryOutputs": [
+  ],
+  "postActions": [
+  ]
+}

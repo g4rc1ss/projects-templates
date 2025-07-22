@@ -2,7 +2,7 @@ namespace CreateDiscovery.Abstractions;
 
 public enum LifeTime
 {
-    TRANSIENT,
-    SCOPED,
-    SINGLETON,
+    TRANSIENT = 0,
+    SCOPED = 1,
+    SINGLETON = 2,
 }

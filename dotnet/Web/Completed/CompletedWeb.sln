@@ -11,34 +11,34 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{5074454F-D196-4EDD-B6A9-5A0597F6E59B}"
 	ProjectSection(SolutionItems) = preProject
 		#if (false)
-												.template.config\template.json = .template.config\template.json
-								#endif
-								#if (false)
-												Directory.Build.props = ..\..\Directory.Build.props
-								#else
-												Directory.Build.props = Directory.Build.props
-								#endif
-								#if (false)
-												.csharpierrc.json = ..\..\.csharpierrc.json
-								#else
-												.csharpierrc.json = .csharpierrc.json
-								#endif
-								#if (false)
-												.editorconfig = ..\..\.editorconfig
-								#else
-												.editorconfig = .editorconfig
-								#endif
-								#if (false)
-												RemoveUnusedDuplicatePackages.ps1 = ..\..\RemoveUnusedDuplicatePackages.ps1
-								#else
-												RemoveUnusedDuplicatePackages.ps1 = RemoveUnusedDuplicatePackages.ps1
-								#endif
-								#if (false)
-												Directory.Packages.props = ..\..\Directory.Packages.props
-								#else
-												Directory.Packages.props = Directory.Packages.props
-								#endif
-								Dockerfile = Dockerfile
+                        .template.config\template.json = .template.config\template.json
+        #endif
+        #if (false)
+                        Directory.Build.props = ..\..\Directory.Build.props
+        #else
+                        Directory.Build.props = Directory.Build.props
+        #endif
+        #if (false)
+                        .csharpierrc.json = ..\..\.csharpierrc.json
+        #else
+                        .csharpierrc.json = .csharpierrc.json
+        #endif
+        #if (false)
+                        .editorconfig = ..\..\.editorconfig
+        #else
+                        .editorconfig = .editorconfig
+        #endif
+        #if (false)
+                        RemoveUnusedDuplicatePackages.ps1 = ..\..\RemoveUnusedDuplicatePackages.ps1
+        #else
+                        RemoveUnusedDuplicatePackages.ps1 = RemoveUnusedDuplicatePackages.ps1
+        #endif
+        #if (false)
+                        Directory.Packages.props = ..\..\Directory.Packages.props
+        #else
+                        Directory.Packages.props = Directory.Packages.props
+        #endif
+                        Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 #if (!UseLayerArchitecture)

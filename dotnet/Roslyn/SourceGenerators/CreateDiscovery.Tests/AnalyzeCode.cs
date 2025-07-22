@@ -43,7 +43,7 @@ public static class AnalyzeCode
         {
             public static partial void AddDependencies(this IServiceCollection services)
             {
-                services.AddScoped<CreateDiscovery.Sample.IExample, CreateDiscovery.Sample.ExampleService>();
+                services.AddTransient<CreateDiscovery.Sample.IExample, CreateDiscovery.Sample.ExampleService>();
 
             }
         }
