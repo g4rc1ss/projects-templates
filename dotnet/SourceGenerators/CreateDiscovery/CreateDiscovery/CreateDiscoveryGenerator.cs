@@ -124,22 +124,24 @@ public class CreateDiscoveryGenerator : IIncrementalGenerator
                 .First(data => data.AttributeClass?.Name == nameof(DiscoveryAttribute));
 
             TypedConstant enumValue = attribute
-                .NamedArguments.FirstOrDefault(arg => arg.Key == "LifeTime")
+                .NamedArguments.FirstOrDefault(arg =>
+                    arg.Key == nameof(DiscoveryAttribute.Lifetime)
+                )
                 .Value;
 
             switch (enumValue.Value?.ToString())
             {
-                case "SINGLETON":
+                case nameof(LifeTime.SINGLETON):
                     builder.AppendLine(
                         $"services.AddSingleton<{interfaceDeclaration}, {classDeclaration}>();"
                     );
                     break;
-                case "SCOPED":
+                case nameof(LifeTime.SCOPED):
                     builder.AppendLine(
                         $"services.AddScoped<{interfaceDeclaration}, {classDeclaration}>();"
                     );
                     break;
-                case "TRANSIENT":
+                case nameof(LifeTime.TRANSIENT):
                 default:
                     builder.AppendLine(
                         $"services.AddTransient<{interfaceDeclaration}, {classDeclaration}>();"
