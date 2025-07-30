@@ -2,7 +2,7 @@ namespace CompletedWeb.AspireHost.Resources;
 
 public static class AspireSqlServerResource
 {
-    internal static IResourceBuilder<SqlServerServerResource> AddAspireSqlServer(
+    internal static IResourceBuilder<SqlServerDatabaseResource> AddAspireSqlServer(
         this IDistributedApplicationBuilder builder
     )
     {
@@ -12,18 +12,16 @@ public static class AspireSqlServerResource
         );
 
         IResourceBuilder<SqlServerServerResource> sqlServer = builder
-            .AddSqlServer("SqlServer", password, 1433)
+            .AddSqlServer("MSqlServer", password, 1433)
             // .WithDataVolume("SqlServerVM", isReadOnly: false)
             .WithLifetime(ContainerLifetime.Session);
 
-        sqlServer.AddDatabase("SqlServerDatabase", "MicrosoftDatabase");
-
-        return sqlServer;
+        return sqlServer.AddDatabase("SqlServer", "MicrosoftDatabase");
     }
 
     internal static IResourceBuilder<T> WithAspireSqlServer<T>(
         this IResourceBuilder<T> builder,
-        IResourceBuilder<SqlServerServerResource> sqlServer
+        IResourceBuilder<SqlServerDatabaseResource> sqlServer
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {

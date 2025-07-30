@@ -46,7 +46,6 @@
     <!--#endif-->
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Configs\" />
     <!--#if (UseRabbitMQ)-->
     <None Update="Configs\RabbitMq\rabbitmq.conf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

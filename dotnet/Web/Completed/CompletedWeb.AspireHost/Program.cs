@@ -9,10 +9,10 @@ using Aspire.Hosting.Azure;
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
 #if (UsePostgres)
-IResourceBuilder<PostgresServerResource> postgres = builder.AddAspirePostgres();
+IResourceBuilder<PostgresDatabaseResource> postgres = builder.AddAspirePostgres();
 #endif
 #if (UseSqlServer)
-IResourceBuilder<SqlServerServerResource> sqlServer = builder.AddAspireSqlServer();
+IResourceBuilder<SqlServerDatabaseResource> sqlServer = builder.AddAspireSqlServer();
 #endif
 #if (UseMongodb)
 IResourceBuilder<MongoDBServerResource> mongodb = builder.AddAspireMongo();

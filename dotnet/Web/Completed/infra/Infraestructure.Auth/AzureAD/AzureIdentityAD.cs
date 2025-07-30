@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
@@ -13,9 +15,17 @@ public static class AzureIdentityAd
             .Bind(builder.Configuration.GetSection("AzureAd"))
             .ValidateOnStart();
 
-        builder
+        AzureAdOptions? azureAdOptions = builder.Configuration.GetSection("AzureAd").Get<AzureAdOptions>();
+
+        AuthenticationBuilder auth = builder
             .Services.AddAuthorization()
-            .AddAuthentication()
-            .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+            .AddAuthentication();
+
+        if (string.IsNullOrEmpty(azureAdOptions?.ClientId))
+        {
+            return;
+        }
+
+        auth.AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
     }
 }

@@ -2,7 +2,7 @@ namespace CompletedWeb.AspireHost.Resources;
 
 public static class AspirePostgresResource
 {
-    internal static IResourceBuilder<PostgresServerResource> AddAspirePostgres(
+    internal static IResourceBuilder<PostgresDatabaseResource> AddAspirePostgres(
         this IDistributedApplicationBuilder builder
     )
     {
@@ -10,17 +10,17 @@ public static class AspirePostgresResource
         IResourceBuilder<ParameterResource> password = builder.AddParameter("password", "123456");
 
         IResourceBuilder<PostgresServerResource> postgres = builder
-            .AddPostgres("Postgres", username, password, 5432)
+            .AddPostgres("PostgresServer", username, password, 5432)
             .WithPgWeb()
             // .WithDataVolume("postgresVM", isReadOnly: false)
             .WithLifetime(ContainerLifetime.Session);
-        postgres.AddDatabase("PostgresDB", "PostgresDatabase");
-        return postgres;
+
+        return postgres.AddDatabase("Postgres", "PostgresDatabase");
     }
 
     internal static IResourceBuilder<T> WithAspirePostgres<T>(
         this IResourceBuilder<T> builder,
-        IResourceBuilder<PostgresServerResource> postgres
+        IResourceBuilder<PostgresDatabaseResource> postgres
     )
         where T : IResourceWithWaitSupport, IResourceWithEnvironment
     {
