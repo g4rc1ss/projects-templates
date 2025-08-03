@@ -1,4 +1,4 @@
-namespace CompletedWeb.AspireHost.Resources;
+namespace SimpleWeb.AspireHost.Resources;
 
 public static class AspirePostgresResource
 {
