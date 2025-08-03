@@ -9,16 +9,12 @@ public static class TelemetryExtensions
     internal static void ConfigureOpenTelemetry<TBuilder>(this TBuilder builder)
         where TBuilder : IHostApplicationBuilder
     {
-        if (!builder.Environment.IsProduction())
-        {
-            builder.AddDeveloperOpenTelemetry();
-        }
-
         builder.Logging.AddOpenTelemetry(logging =>
         {
             logging.IncludeScopes = true;
             logging.IncludeFormattedMessage = true;
         });
+        builder.Logging.SetMinimumLevel(LogLevel.Warning);
 
         builder
             .Services.AddOpenTelemetry()
@@ -38,12 +34,18 @@ public static class TelemetryExtensions
                     .AddHttpClientInstrumentation()
             );
 
+        if (!builder.Environment.IsProduction())
+        {
+            builder.AddDeveloperOpenTelemetry();
+        }
+
         builder.AddOtelExporter();
     }
 
     private static void AddDeveloperOpenTelemetry(this IHostApplicationBuilder builder)
     {
         builder.Services.AddOpenTelemetry().WithTracing(trace => { }).WithMetrics(metric => { });
+        builder.Logging.SetMinimumLevel(LogLevel.Information);
     }
 
     private static void AddOtelExporter<TBuilder>(this TBuilder builder)

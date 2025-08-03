@@ -13,6 +13,7 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="*"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
+        <PackageReference Include="Scalar.AspNetCore" Version="*"/>
         <!--#if (UseRedis || UseGarnet)-->
         <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="*"/>
         <!--#endif-->

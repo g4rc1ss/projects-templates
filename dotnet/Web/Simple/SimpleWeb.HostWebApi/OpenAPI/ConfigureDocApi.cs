@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
 
 namespace SimpleWeb.HostWebApi.OpenAPI;
 
@@ -32,9 +33,18 @@ public static class ConfigureDocApi
     internal static void UseDocApi(this WebApplication app)
     {
         app.MapOpenApi();
+
+        app.MapScalarApiReference(
+            "api-doc",
+            options =>
+            {
+                options.AddPreferredSecuritySchemes();
+            }
+        );
         app.UseSwaggerUI(options =>
         {
             options.SwaggerEndpoint("/openapi/v1.json", "SimpleWeb API");
+            // options.RoutePrefix = "api-doc";
         });
     }
 }

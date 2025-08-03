@@ -3,6 +3,7 @@ using Scalar.AspNetCore;
 #if (UseApiKey)
 using Infraestructure.Auth.ApiKey;
 #endif
+
 #if (UseIdentity || UseJwt)
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 #endif
@@ -20,8 +21,7 @@ public static class ConfigureDocApi
     {
         builder.Services.AddOpenApi(options =>
         {
-            options.AddDocumentTransformer(
-                (document, _, _) =>
+            options.AddDocumentTransformer((document, _, _) =>
                 {
 #if (UseAzureAD)
                     AzureAdOptions? azureAd = builder
@@ -85,6 +85,22 @@ public static class ConfigureDocApi
                     document.Components ??= new OpenApiComponents();
                     document.Components.SecuritySchemes = requirements;
 
+                    document.SecurityRequirements =
+                    [
+                        new OpenApiSecurityRequirement
+                        {
+#if (UseIdentity || UseJwt)
+                            [requirements["Bearer"]] = Array.Empty<string>(),
+#endif
+#if (UseAzureAD)
+                            [requirements["Microsoft Login AD"]] = Array.Empty<string>(),
+#endif
+#if (UseApiKey)
+                            [requirements["Constants.API_KEY_SCHEME"]] = Array.Empty<string>(),
+#endif
+                        },
+                    ];
+
                     return Task.CompletedTask;
                 }
             );
@@ -95,9 +111,18 @@ public static class ConfigureDocApi
     {
         app.MapOpenApi();
 
+
 #if (UseAzureAD)
         AzureAdOptions? azureAd = app.Configuration.GetSection("AzureAd").Get<AzureAdOptions>();
 #endif
+        app.UseSwaggerUI(options =>
+        {
+            options.SwaggerEndpoint("/openapi/v1.json", "CompletedWeb");
+            // options.RoutePrefix = "api-doc";
+
+            // TODO: Configurar auth con OAuth
+        });
+
         app.MapScalarApiReference(
             "api-doc",
             options =>

@@ -13,6 +13,7 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*"/>
         <!--#if (UseApi)-->
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="*"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
         <PackageReference Include="Scalar.AspNetCore" Version="*"/>
         <!--#endif-->
         <!--#if (SqlDatabase)-->
