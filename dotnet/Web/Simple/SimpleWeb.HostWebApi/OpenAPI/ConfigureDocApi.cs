@@ -15,6 +15,14 @@ public static class ConfigureDocApi
                     document.Components ??= new OpenApiComponents();
                     document.Components.SecuritySchemes = requirements;
 
+                    document.SecurityRequirements =
+                    [
+                        new OpenApiSecurityRequirement
+                        {
+                            // [requirements["Bearer"]] = Array.Empty<string>(),
+                        },
+                    ];
+
                     return Task.CompletedTask;
                 }
             );
