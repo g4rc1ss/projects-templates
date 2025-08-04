@@ -120,7 +120,12 @@ public static class ConfigureDocApi
             options.SwaggerEndpoint("/openapi/v1.json", "CompletedWeb");
             // options.RoutePrefix = "api-doc";
 
-            // TODO: Configurar auth con OAuth
+#if (UseAzureAD)
+            options.OAuthClientId(azureAd?.ClientId);
+            options.OAuthScopes($"api://{azureAd?.ClientId}/{azureAd?.Scope}");
+            options.OAuthUsePkce();
+            options.EnablePersistAuthorization();
+#endif
         });
 
         app.MapScalarApiReference(
