@@ -54,6 +54,11 @@ public static class ConfigureDocApi
                             Name = Constants.API_KEY_HEADER_NAME,
                             In = ParameterLocation.Header,
                             Description = "API Key",
+                            Reference = new OpenApiReference
+                            {
+                                Id = Constants.API_KEY_SCHEME,
+                                Type = ReferenceType.SecurityScheme,
+                            },
                         },
 #endif
 #if (UseAzureAD)
@@ -82,6 +87,11 @@ public static class ConfigureDocApi
                                         { "x-usePkce", new OpenApiString("SHA-256") },
                                     },
                                 },
+                            },
+                            Reference = new OpenApiReference
+                            {
+                                Id = "Microsoft Login AD",
+                                Type = ReferenceType.SecurityScheme,
                             },
                         }
 #endif
