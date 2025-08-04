@@ -15,11 +15,11 @@ public static class AzureIdentityAd
             .Bind(builder.Configuration.GetSection("AzureAd"))
             .ValidateOnStart();
 
-        AzureAdOptions? azureAdOptions = builder.Configuration.GetSection("AzureAd").Get<AzureAdOptions>();
+        AzureAdOptions? azureAdOptions = builder
+            .Configuration.GetSection("AzureAd")
+            .Get<AzureAdOptions>();
 
-        AuthenticationBuilder auth = builder
-            .Services.AddAuthorization()
-            .AddAuthentication();
+        AuthenticationBuilder auth = builder.Services.AddAuthorization().AddAuthentication();
 
         if (string.IsNullOrEmpty(azureAdOptions?.ClientId))
         {

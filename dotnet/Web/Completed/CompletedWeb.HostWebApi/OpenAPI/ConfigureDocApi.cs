@@ -21,7 +21,8 @@ public static class ConfigureDocApi
     {
         builder.Services.AddOpenApi(options =>
         {
-            options.AddDocumentTransformer((document, _, _) =>
+            options.AddDocumentTransformer(
+                (document, _, _) =>
                 {
 #if (UseAzureAD)
                     AzureAdOptions? azureAd = builder
@@ -71,7 +72,10 @@ public static class ConfigureDocApi
                                     ),
                                     Scopes = new Dictionary<string, string>
                                     {
-                                        { $"api://{azureAd?.ClientId}/{azureAd?.Scope}", "Acceso a datos" },
+                                        {
+                                            $"api://{azureAd?.ClientId}/{azureAd?.Scope}",
+                                            "Acceso a datos"
+                                        },
                                     },
                                     Extensions = new Dictionary<string, IOpenApiExtension>
                                     {
@@ -96,7 +100,7 @@ public static class ConfigureDocApi
                             [requirements["Microsoft Login AD"]] = Array.Empty<string>(),
 #endif
 #if (UseApiKey)
-                            [requirements["Constants.API_KEY_SCHEME"]] = Array.Empty<string>(),
+                            [requirements[Constants.API_KEY_SCHEME]] = Array.Empty<string>(),
 #endif
                         },
                     ];
@@ -110,7 +114,6 @@ public static class ConfigureDocApi
     internal static void UseDocApi(this WebApplication app)
     {
         app.MapOpenApi();
-
 
 #if (UseAzureAD)
         AzureAdOptions? azureAd = app.Configuration.GetSection("AzureAd").Get<AzureAdOptions>();
@@ -132,7 +135,17 @@ public static class ConfigureDocApi
             "api-doc",
             options =>
             {
-                options.AddPreferredSecuritySchemes();
+                options.AddPreferredSecuritySchemes(
+#if (UseIdentity || UseJwt)
+                    "Bearer"
+#endif
+#if (UseAzureAD)
+                    "Microsoft Login AD"
+#endif
+#if (UseApiKey)
+                    Constants.API_KEY_SCHEME
+#endif
+                );
 #if (UseAzureAD)
                 options.AddAuthorizationCodeFlow(
                     "Microsoft Login AD",
@@ -140,6 +153,10 @@ public static class ConfigureDocApi
                     {
                         flow.ClientId = azureAd?.ClientId;
                     }
+                );
+                options.AddDefaultScopes(
+                    "Microsoft Login AD",
+                    $"api://{azureAd?.ClientId}/{azureAd?.Scope}"
                 );
 #endif
             }
