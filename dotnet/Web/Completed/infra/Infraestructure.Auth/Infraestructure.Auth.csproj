@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <!--#if (!UseHost)-->
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <!--#endif-->
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -14,7 +14,7 @@
 
     <ItemGroup>
         <!--#if (UseJwt)-->
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="*"/>
         <!--#endif-->
         <!--#if (UseIdentity)-->
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*"/>

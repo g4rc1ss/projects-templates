@@ -1,4 +1,4 @@
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Scalar.AspNetCore;
 #if (UseApiKey)
 using Infraestructure.Auth.ApiKey;
@@ -30,7 +30,7 @@ public static class ConfigureDocApi
                         .Get<AzureAdOptions>();
 #endif
 
-                    Dictionary<string, OpenApiSecurityScheme> requirements = new()
+                    Dictionary<string, IOpenApiSecurityScheme> requirements = new()
                     {
 #if (UseIdentity || UseJwt)
                         ["Bearer"] = new OpenApiSecurityScheme
@@ -99,7 +99,7 @@ public static class ConfigureDocApi
                     document.Components ??= new OpenApiComponents();
                     document.Components.SecuritySchemes = requirements;
 
-                    document.SecurityRequirements =
+                    document.Security =
                     [
                         new OpenApiSecurityRequirement
                         {

@@ -1,5 +1,4 @@
 using System.Reflection;
-using CompletedWeb.HostWebApi;
 
 namespace CompletedWeb.Architecture.Tests;
 

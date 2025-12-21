@@ -14,9 +14,10 @@ public class RabbitEventNotificator(IConnection connection) : IEventNotificator
     )
         where TRequest : INotificatorRequest
     {
-        using IModel? model = connection.CreateModel();
-        IBasicProperties? properties = model.CreateBasicProperties();
-        properties.Persistent = true;
+        await using IChannel? channel = await connection.CreateChannelAsync(
+            cancellationToken: cancellationToken
+        );
+        BasicProperties? properties = new() { Persistent = true };
 
         MessageDiagnosticTraces traces = new()
         {
@@ -30,11 +31,13 @@ public class RabbitEventNotificator(IConnection connection) : IEventNotificator
         string? exchange = additionalProperties["exchange"];
         string? routingKey = additionalProperties["routingKey"];
 
-        model.BasicPublish(
+        await channel.BasicPublishAsync(
             exchange: exchange,
             routingKey: routingKey,
+            mandatory: true,
             basicProperties: properties,
-            body: JsonSerializer.SerializeToUtf8Bytes(message)
+            body: JsonSerializer.SerializeToUtf8Bytes(message),
+            cancellationToken
         );
     }
 }

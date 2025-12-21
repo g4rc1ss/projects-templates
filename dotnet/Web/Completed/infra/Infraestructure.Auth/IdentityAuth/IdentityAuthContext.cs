@@ -8,7 +8,7 @@ namespace Infraestructure.Auth.IdentityAuth;
 public class IdentityAuthContext(DbContextOptions options)
     : IdentityDbContext<IdentityUserEntity, IdentityRoleEntity, int>(options)
 {
-    public override DbSet<IdentityUserEntity> Users { get; set; }
+    public override required DbSet<IdentityUserEntity> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

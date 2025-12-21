@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <!--#if (!UseHost)-->
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <!--#endif-->
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
