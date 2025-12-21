@@ -1,4 +1,4 @@
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Scalar.AspNetCore;
 
 namespace SimpleWeb.HostWebApi.OpenAPI;
@@ -12,11 +12,11 @@ public static class ConfigureDocApi
             options.AddDocumentTransformer(
                 (document, _, _) =>
                 {
-                    Dictionary<string, OpenApiSecurityScheme> requirements = [];
+                    Dictionary<string, IOpenApiSecurityScheme> requirements = [];
                     document.Components ??= new OpenApiComponents();
                     document.Components.SecuritySchemes = requirements;
 
-                    document.SecurityRequirements =
+                    document.Security =
                     [
                         new OpenApiSecurityRequirement
                         {
