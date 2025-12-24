@@ -40,11 +40,6 @@ public static class ConfigureDocApi
                             In = ParameterLocation.Header,
                             Type = SecuritySchemeType.Http,
                             Scheme = JwtBearerDefaults.AuthenticationScheme,
-                            Reference = new OpenApiReference
-                            {
-                                Id = JwtBearerDefaults.AuthenticationScheme,
-                                Type = ReferenceType.SecurityScheme,
-                            },
                         },
 #endif
 #if (UseApiKey)
@@ -54,11 +49,6 @@ public static class ConfigureDocApi
                             Name = Constants.API_KEY_HEADER_NAME,
                             In = ParameterLocation.Header,
                             Description = "API Key",
-                            Reference = new OpenApiReference
-                            {
-                                Id = Constants.API_KEY_SCHEME,
-                                Type = ReferenceType.SecurityScheme,
-                            },
                         },
 #endif
 #if (UseAzureAD)
@@ -84,14 +74,9 @@ public static class ConfigureDocApi
                                     },
                                     Extensions = new Dictionary<string, IOpenApiExtension>
                                     {
-                                        { "x-usePkce", new OpenApiString("SHA-256") },
+                                        { "x-usePkce", new JsonNodeExtension("SHA-256") },
                                     },
                                 },
-                            },
-                            Reference = new OpenApiReference
-                            {
-                                Id = "Microsoft Login AD",
-                                Type = ReferenceType.SecurityScheme,
                             },
                         }
 #endif
@@ -99,21 +84,46 @@ public static class ConfigureDocApi
                     document.Components ??= new OpenApiComponents();
                     document.Components.SecuritySchemes = requirements;
 
-                    document.Security =
-                    [
-                        new OpenApiSecurityRequirement
-                        {
+                    IEnumerable<KeyValuePair<HttpMethod, OpenApiOperation>> operations =
+                        document.Paths.Values.SelectMany(path => path.Operations!);
+                    foreach (KeyValuePair<HttpMethod, OpenApiOperation> operation in operations)
+                    {
+                        operation.Value.Security ??= [];
 #if (UseIdentity || UseJwt)
-                            [requirements["Bearer"]] = Array.Empty<string>(),
+                        operation.Value.Security.Add(
+                            new OpenApiSecurityRequirement
+                            {
+                                [new OpenApiSecuritySchemeReference("Bearer", document)] = [],
+                            }
+                        );
 #endif
 #if (UseAzureAD)
-                            [requirements["Microsoft Login AD"]] = Array.Empty<string>(),
+                        operation.Value.Security.Add(
+                            new OpenApiSecurityRequirement
+                            {
+                                [
+                                    new OpenApiSecuritySchemeReference(
+                                        "Microsoft Login AD",
+                                        document
+                                    )
+                                ] = [],
+                            }
+                        );
 #endif
 #if (UseApiKey)
-                            [requirements[Constants.API_KEY_SCHEME]] = Array.Empty<string>(),
+                        operation.Value.Security.Add(
+                            new OpenApiSecurityRequirement
+                            {
+                                [
+                                    new OpenApiSecuritySchemeReference(
+                                        Constants.API_KEY_SCHEME,
+                                        document
+                                    )
+                                ] = [],
+                            }
+                        );
 #endif
-                        },
-                    ];
+                    }
 
                     return Task.CompletedTask;
                 }

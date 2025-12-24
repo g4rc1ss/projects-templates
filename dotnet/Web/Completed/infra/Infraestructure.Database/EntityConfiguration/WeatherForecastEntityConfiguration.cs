@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infraestructure.Database.EntityConfiguration;
 
-public class WeatherForecasConfiguration : IEntityTypeConfiguration<WeatherForecastEntity>
+public class WeatherForecastEntityConfiguration : IEntityTypeConfiguration<WeatherForecastEntity>
 {
     public void Configure(EntityTypeBuilder<WeatherForecastEntity> builder) { }
 }

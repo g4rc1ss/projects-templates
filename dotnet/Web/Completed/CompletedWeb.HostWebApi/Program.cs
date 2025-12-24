@@ -1,10 +1,4 @@
 ﻿using CompletedWeb.HostWebApi.Extensions;
-#if (UseGrpc)
-#if (UseLayerArchitecture)
-using CompletedWeb.Grpc;
-#endif
-#endif
-
 #if (UseApi)
 using CompletedWeb.HostWebApi.OpenAPI;
 #if (!AuthNone)
